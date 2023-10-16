@@ -9,6 +9,5 @@ int main(void) {
   m = x / 60;
   s = x % 60;
   printf("%02d:%02d:%02d\n", h, m, s);
-
   return 0;
 }

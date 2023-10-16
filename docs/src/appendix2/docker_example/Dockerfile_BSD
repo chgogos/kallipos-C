@@ -1,0 +1,12 @@
+FROM auchida/freebsd:latest
+
+COPY ./cprj /cprj
+
+WORKDIR /cprj
+
+# Ενημέρωση του αποθετηρίου package και εγκατάσταση του gcc
+RUN pkg update && pkg install -y lang/gcc
+
+RUN cc -o types_sizes_widths types_sizes_widths.c -Wall -Werror
+
+CMD ["./types_sizes_widths"]

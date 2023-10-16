@@ -7,6 +7,5 @@ int main(void) {
   scanf("%d", &age);
   scanf("%c", &grade);
   printf("Age=%d Grade=%c\n", age, grade);
-
   return 0;
 }

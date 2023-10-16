@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void printBinary(unsigned int num) {
+void print_binary(unsigned int num) {
   int bits = sizeof(unsigned int) * 8;
   for (int i = bits - 1; i >= 0; i--) {
     unsigned int mask = 1u << i; // Δημιουργία μάσκας με 1 στην τρέχουσα θέση
@@ -12,7 +12,7 @@ void printBinary(unsigned int num) {
 
 int main(void) {
   unsigned int flags = 0;
-  printBinary(flags);     // ...0000
+  print_binary(flags);     // ...0000
   unsigned int flagA = 1; // Bit 0
   unsigned int flagB = 2; // Bit 1
   unsigned int flagC = 4; // Bit 2
@@ -21,15 +21,15 @@ int main(void) {
   flags |= flagA;
   flags |= flagB;
   flags |= flagD;
-  printBinary(flags); // ...1011
+  print_binary(flags); // ...1011
   // Έλεγχος αν ένα flag έχει τεθεί με bitwise AND και μάσκα bits
   printf((flags & flagB) ? "Flag B is set.\n" : "Flag B is not set.\n");
   // Εκκαθάριση ενός flag με bitwise AND και μάσκα bits
   flags &= ~flagA;
-  printBinary(flags); // ...1010
+  print_binary(flags); // ...1010
   // Αλλαγή κατάστασης ενός flag με bitwise XOR και μάσκα bits
   flags ^= flagC;
-  printBinary(flags); // ...1110
+  print_binary(flags); // ...1110
   // Έλεγχος αν ορισμένα flags έχουν τεθεί
   printf((flags & (flagB | flagC)) == (flagB | flagC)
              ? "Flag B, and flag C are set.\n"

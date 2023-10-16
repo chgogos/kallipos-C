@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <string.h>
 
-int main() {
+int main(void) {
   char s[] = "Learn C";
-  for (int i = 1; i <= strlen(s); i++) {
-    printf("|%*s|\n", i + strlen(s), s);
+  for (size_t i = 1; i <= strlen(s); i++) {
+    printf("|%*s|\n", (int)(i + strlen(s)), s);
   }
-  for (int i = 1; i <= strlen(s); i++) {
-    printf("|%.*s|\n", i, "Learn C");
+  for (size_t i = 1; i <= strlen(s); i++) {
+    printf("|%.*s|\n", (int)i, "Learn C");
   }
 }
