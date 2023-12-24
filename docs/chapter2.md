@@ -1,8 +1,8 @@
 # Κεφάλαιο 2
 
-## Εισαγωγικές έννοιες στον προγραμματισμό με τη C
+<h1>Εισαγωγικές έννοιες στον προγραμματισμό με τη C</h1>
 
-### Τύποι δεδομένων και μεταβλητές
+## 2.2 Τύποι δεδομένων και μεταβλητές
 
 ```{.c title="ch2_p1.c" linenums="1"}
 --8<-- "src/ch2_p1.c"
@@ -15,7 +15,10 @@ int (4 bytes)           -2147483648 to 2147483647
 double (8 bytes)        2.225074e-308 to 1.797693e+308
 ```
 
-### Είσοδος / Έξοδος
+## 2.5 Είσοδος / Έξοδος
+
+### 2.5.1 Η συνάρτηση printf()
+
 ```{.c title="ch2_p2.c" linenums="1"}
 --8<-- "src/ch2_p2.c"
 ```
@@ -43,10 +46,12 @@ This string contains the NULL character
 --8<-- "src/ch2_p4.c"
 ```
 
+### 2.5.2 Η συνάρτηση scanf()
 ```{.c title="ch2_p5.c" linenums="1"}
 --8<-- "src/ch2_p5.c"
 ```
 
+### 2.5.3 Ιδιαιτερότητες της scanf() και άλλες συναρτήσεις εισόδου/εξόδου
 ```{.c title="ch2_p6.c" linenums="1"}
 --8<-- "src/ch2_p6.c"
 ```
@@ -55,15 +60,17 @@ This string contains the NULL character
 --8<-- "src/ch2_p7.c"
 ```
 
+#### Διαδοχικές scanf()
 ```{.c title="ch2_p8.c" linenums="1"}
 --8<-- "src/ch2_p8.c"
 ```
 
+#### Οι συναρτήσεις getc() και putc()
 ```{.c title="ch2_p9.c" linenums="1"}
 --8<-- "src/ch2_p9.c"
 ```
 
-## Τελεστές
+### 2.6.2 Αριθμητικοί τελεστές
 ```{.c title="ch2_p10.c" linenums="1"}
 --8<-- "src/ch2_p10.c"
 ```
@@ -72,26 +79,32 @@ This string contains the NULL character
 --8<-- "src/ch2_p11.c"
 ```
 
+### 2.6.3 Συγκριτικοί τελεστές
 ```{.c title="ch2_p12.c" linenums="1"}
 --8<-- "src/ch2_p12.c"
 ```
 
+### 2.6.4 Λογικοί τελεστές
 ```{.c title="ch2_p13.c" linenums="1"}
 --8<-- "src/ch2_p13.c"
 ```
 
+### 2.6.5 Τελεστές χειρισμού δυαδικών ψηφίων
 ```{.c title="ch2_p14.c" linenums="1"}
 --8<-- "src/ch2_p14.c"
 ```
 
+### 2.6.5.1 Μάσκες δυαδικών ψηφίων
 ```{.c title="ch2_p15.c" linenums="1"}
 --8<-- "src/ch2_p15.c"
 ```
 
+### 2.6.6 Τελεστές μετατροπής τύπων
 ```{.c title="ch2_p16.c" linenums="1"}
 --8<-- "src/ch2_p16.c"
 ```
 
+### 2.6.7 Άλλοι τελεστές
 ```{.c title="ch2_p17.c" linenums="1"}
 --8<-- "src/ch2_p17.c"
 ```
@@ -104,7 +117,7 @@ This string contains the NULL character
 --8<-- "src/ch2_p19.c"
 ```
 
-### Κύκλος μεταγλώττισης, σύνδεσης και εκτέλεσης
+## 2.8 Κύκλος μεταγλώττισης, σύνδεσης και εκτέλεσης
 
 ```{.c title="ch2_p20.c" linenums="1"}
 --8<-- "src/ch2_p20.c"
@@ -113,13 +126,19 @@ This string contains the NULL character
 ## Ασκήσεις
 
 ***Άσκηση 1***
-
+```{.c title="ch2_e1.c" linenums="1"}
+--8<-- "src/ch2_e1.c"
+```
 
 ***Άσκηση 2***
-
+```{.c title="ch2_e2.c" linenums="1"}
+--8<-- "src/ch2_e2.c"
+```
 
 ***Άσκηση 3***
-
+```{.c title="ch2_e3.c" linenums="1"}
+--8<-- "src/ch2_e3.c"
+```
 
 ***Άσκηση 4***
 ```{.c title="ch2_e4.c" linenums="1"}
