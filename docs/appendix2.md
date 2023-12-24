@@ -2,20 +2,29 @@
 
 <h1>Μεταγλώττιση και εκτέλεση κώδικα C χρησιμοποιώντας το Docker</h1>
 
-## A.1.1 WSL & GCC & VSCode
+## B.1 Docker
 
-```{.c title="check_wsl.c" linenums="1"}
---8<-- "src/check_wsl.c"
+### B.1.1 Ένα παράδειγμα μεταγλώττισης και εκτέλεσης κώδικα C με το Docker
+
+```{.c title="appendix2/docker_example1/cprj/main.c" linenums="1"}
+--8<-- "src/appendix2/docker_example1/cprj/main.c"
 ```
 
-## A.1.4 w64devkit
-
-```{.mk title="appendix1/Makefile" linenums="1"}
---8<-- "src/appendix1/Makefile"
+```{.docker title="appendix2/docker_example1/Dockerfile" linenums="1"}
+--8<-- "src/appendix2/docker_example1/Dockerfile"
 ```
 
-```{.c title="appendix1/hello.c" linenums="1"}
---8<-- "src/appendix1/hello.c"
+### B.1.2 Παράδειγμα με εγκατάσταση βιβλιοθήκης της C και προσάρτηση καταλόγου
+
+```{.c title="appendix2/docker_example2/cprj/main.c" linenums="1"}
+--8<-- "src/appendix2/docker_example2/cprj/main.c"
 ```
 
+```{.mk title="appendix2/docker_example2/cprj/makefile" linenums="1"}
+--8<-- "src/appendix2/docker_example2/cprj/makefile"
+```
+
+```{.docker title="appendix2/docker_example2/Dockerfile" linenums="1"}
+--8<-- "src/appendix2/docker_example2/Dockerfile"
+```
 
