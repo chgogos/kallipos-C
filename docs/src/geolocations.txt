@@ -1,0 +1,13 @@
+Athens, Greece;37.983810;23.727539;Europe
+Paris, France;48.856613;2.352222;Europe
+Tokyo, Japan;35.689487;139.691711;Asia
+Delhi, India;28.704060;77.102493;Asia
+Cairo, Egypt;30.044420;31.235712;Africa
+Lagos, Nigeria;6.524379;3.379206;Africa
+New York City, USA;40.712776;-74.005974;North America
+Mexico City, Mexico;19.432608;-99.133209;North America
+Rio de Janeiro, Brazil;-22.906847;-43.172897;South America
+Buenos Aires, Argentina;-34.603683;-58.381557;South America
+Sydney, Australia;-33.868820;151.209290;Oceania
+Auckland, New Zealand;-36.848461;174.763336;Oceania
+McMurdo Station;-77.8419;166.6863;Antarctica
