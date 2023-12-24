@@ -125,7 +125,7 @@ This string contains the NULL character
 --8<-- "src/ch2_p20.c"
 ```
 
-## 2.9 Ασκήσεις
+<!-- ## 2.9 Ασκήσεις
 
 ***Άσκηση 1***
 ```{.c title="ch2_e1.c" linenums="1"}
@@ -151,4 +151,4 @@ This string contains the NULL character
 ```{.c title="ch2_e5.c" linenums="1"}
 --8<-- "src/ch2_e5.c"
 ```
-
+ -->

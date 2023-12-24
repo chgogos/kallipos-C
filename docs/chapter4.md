@@ -1,122 +1,94 @@
-# Κεφάλαιο 3
+# Κεφάλαιο 4
 
-<h1>Εντολές ελέγχου και επανάληψης</h1>
+<h1>Συναρτήσεις</h1>
 
-## 3.2 Εντολές επιλογής
+## 4.1 Εισαγωγή στις συναρτήσεις
 
-### 3.2.1 Η εντολή if
-
-```{.c title="ch3_p1.c" linenums="1"}
---8<-- "src/ch3_p1.c"
+```{.c title="ch4_p1.c" linenums="1"}
+--8<-- "src/ch4_p1.c"
 ```
 
-```{.c title="ch3_p2.c" linenums="1"}
---8<-- "src/ch3_p2.c"
+## 4.2 Ορισμοί και κλήσεις συναρτήσεων
+
+```{.c title="ch4_p2.c" linenums="1"}
+--8<-- "src/ch4_p2.c"
 ```
 
-```{.c title="ch3_p2b.c" linenums="1"}
---8<-- "src/ch3_p2b.c"
+## 4.3 Κατηγορίες αποθήκευσης
+
+```{.c title="ch4_p3.c" linenums="1"}
+--8<-- "src/ch4_p3.c"
 ```
 
-```{.c title="ch3_p3.c" linenums="1"}
---8<-- "src/ch3_p3.c"
+```{.c title="ch4_p4_help.c" linenums="1"}
+--8<-- "src/ch4_p4_help.c"
 ```
 
-```{.c title="ch3_p3b.c" linenums="1"}
---8<-- "src/ch3_p3b.c"
+
+```{.c title="ch4_p4_main.c" linenums="1"}
+--8<-- "src/ch4_p4_main.c"
 ```
 
-### 3.2.2 Η εντολή switch
-
-```{.c title="ch3_p4.c" linenums="1"}
---8<-- "src/ch3_p4.c"
+```{.c title="ch4_p5.c" linenums="1"}
+--8<-- "src/ch4_p5.c"
 ```
 
-```{.c title="ch3_p5.c" linenums="1"}
---8<-- "src/ch3_p5.c"
+### 4.3.1 Τοπικές και καθολικές μεταβλητές
+
+```{.c title="ch4_p6.c" linenums="1"}
+--8<-- "src/ch4_p6.c"
+```
+##  4.4 Αναδρομικές συναρτήσεις
+
+```{.c title="ch4_p7.c" linenums="1"}
+--8<-- "src/ch4_p7.c"
 ```
 
-## 3.3 Εντολές επανάληψης
-### 3.3.1 Η εντολή for
+```{.c title="ch4_p8.c" linenums="1"}
+--8<-- "src/ch4_p8.c"
+```
+## 4.5 Η στοίβα κλήσεων
 
-```{.c title="ch3_p6.c" linenums="1"}
---8<-- "src/ch3_p6.c"
+```{.c title="ch4_p9.c" linenums="1"}
+--8<-- "src/ch4_p9.c"
 ```
 
-```{.c title="ch3_p7.c" linenums="1"}
---8<-- "src/ch3_p7.c"
+## 4.5.1 Υπερχείλιση στοίβας
+
+```{.c title="ch4_p10.c" linenums="1"}
+--8<-- "src/ch4_p10.c"
 ```
 
-```{.c title="ch3_p8.c" linenums="1"}
---8<-- "src/ch3_p8.c"
+## 4.6 Οι συναρτήσεις setjmp(), longjmp()
+
+```{.c title="ch4_p11.c" linenums="1"}
+--8<-- "src/ch4_p11.c"
 ```
 
-### 3.3.2 Η εντολή while
-```{.c title="ch3_p9.c" linenums="1"}
---8<-- "src/ch3_p9.c"
+## 4.7 Συναρτήσεις με μεταβλητό πλήθος ορισμάτων
+
+```{.c title="ch4_p12.c" linenums="1"}
+--8<-- "src/ch4_p12.c"
 ```
 
-### 3.3.3 Η εντολή do...while
-```{.c title="ch3_p10.c" linenums="1"}
---8<-- "src/ch3_p10.c"
-```
-
-```{.c title="ch3_p11.c" linenums="1"}
---8<-- "src/ch3_p11.c"
-```
-
-```{.c title="ch3_p12.c" linenums="1"}
---8<-- "src/ch3_p12.c"
-```
-
-### 3.3.4 Οι εντολές break και continue
-```{.c title="ch3_p13.c" linenums="1"}
---8<-- "src/ch3_p13.c"
-```
-
-### 3.3.5 Ένθετοι βρόχοι
-```{.c title="ch3_p14.c" linenums="1"}
---8<-- "src/ch3_p14.c"
-```
-### 3.3.6 Η εντολή goto
-```{.c title="ch3_p15.c" linenums="1"}
---8<-- "src/ch3_p15.c"
-```
-
-```{.c title="ch3_p16.c" linenums="1"}
---8<-- "src/ch3_p16.c"
-```
-
-```{.c title="ch3_p17.c" linenums="1"}
---8<-- "src/ch3_p17.c"
-```
-
-```{.c title="ch3_p17b.c" linenums="1"}
---8<-- "src/ch3_p17b.c"
-```
-
-```{.c title="ch3_p18.c" linenums="1"}
---8<-- "src/ch3_p18.c"
-```
-
-##  3.4 Ασκήσεις
+<!-- ##  4.8 Ασκήσεις
 
 ***Άσκηση 1***
-```{.c title="ch3_e1.c" linenums="1"}
---8<-- "src/ch3_e1.c"
+```{.c title="ch4_e1.c" linenums="1"}
+--8<-- "src/ch4_e1.c"
 ```
 
 ***Άσκηση 2***
-```{.c title="ch3_e2.c" linenums="1"}
---8<-- "src/ch3_e2.c"
+```{.c title="ch4_e2.c" linenums="1"}
+--8<-- "src/ch4_e2.c"
 ```
 
 ***Άσκηση 3***
-```{.c title="ch3_e3.c" linenums="1"}
---8<-- "src/ch3_e3.c"
+```{.c title="ch4_e3.c" linenums="1"}
+--8<-- "src/ch4_e3.c"
 ```
 
 ***Άσκηση 4***
-```{.c title="ch3_e4.c" linenums="1"}
---8<-- "src/ch3_e4.c"
-```
+```{.c title="ch4_e4.c" linenums="1"}
+--8<-- "src/ch4_e4.c"
+``` -->
