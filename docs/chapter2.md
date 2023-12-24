@@ -96,7 +96,7 @@ This string contains the NULL character
 --8<-- "src/ch2_p14.c"
 ```
 
-### 2.6.5.1 Μάσκες δυαδικών ψηφίων
+#### 2.6.5.1 Μάσκες δυαδικών ψηφίων
 ```{.c title="ch2_p15.c" linenums="1"}
 --8<-- "src/ch2_p15.c"
 ```
