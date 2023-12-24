@@ -11,7 +11,7 @@
 xxx
 ```
 
-```{.c title="ch3_p2.c" linenums="1"}
+<!-- ```{.c title="ch3_p2.c" linenums="1"}
 --8<-- "src/ch3_p2.c"
 ```
 
@@ -95,4 +95,4 @@ xxx
 
 ```{.c title="ch3_e4.c" linenums="1"}
 --8<-- "src/ch3_e4.c"
-```
+``` -->

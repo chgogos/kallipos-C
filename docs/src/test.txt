@@ -1,5 +1,0 @@
-Excerpt from the Tao of programming (https://www.mit.edu/~xela/tao.html)
-If the Tao is great, then the operating system is great.
-If the operating system is great, then the compiler is great.
-If the compiler is great, then the application is great.
-The user is pleased, and there is harmony in the world.

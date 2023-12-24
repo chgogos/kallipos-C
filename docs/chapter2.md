@@ -103,7 +103,9 @@ This string contains the NULL character
 ```{.c title="ch2_p19.c" linenums="1"}
 --8<-- "src/ch2_p19.c"
 ```
+
 ### Κύκλος μεταγλώττισης, σύνδεσης και εκτέλεσης
+
 ```{.c title="ch2_p20.c" linenums="1"}
 --8<-- "src/ch2_p20.c"
 ```
