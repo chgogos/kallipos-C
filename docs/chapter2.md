@@ -125,7 +125,7 @@ This string contains the NULL character
 --8<-- "src/ch2_p20.c"
 ```
 
-## Ασκήσεις
+## 2.9 Ασκήσεις
 
 ***Άσκηση 1***
 ```{.c title="ch2_e1.c" linenums="1"}
