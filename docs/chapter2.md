@@ -70,6 +70,8 @@ This string contains the NULL character
 --8<-- "src/ch2_p9.c"
 ```
 
+## 2.6 Τελεστές
+
 ### 2.6.2 Αριθμητικοί τελεστές
 ```{.c title="ch2_p10.c" linenums="1"}
 --8<-- "src/ch2_p10.c"
