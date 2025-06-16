@@ -1,18 +1,75 @@
-site_name: Kallipos C Book
+site_name: Μια σύγχρονη προσέγγιση στη γλώσσα C
 theme:
+  logo: src/images/frontcover.png
+  favicon: src/images/frontcover.ico
+  icon:
+    repo: fontawesome/brands/github
   name: material
-  features:
-    -navigation.tabs
-    -content.code.copy
+  palette:
+
+    # Light mode
+    - media: '(prefers-color-scheme: light)'
+      scheme: default
+      primary: 
+      accent: 
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+
+    # Dark mode
+    - media: '(prefers-color-scheme: dark)'
+      scheme: slate
+      primary: teal
+      accent: 
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
   language: en
+  features:
+    - content.code.copy
+    - toc.follow
+    - navigation.instant.preview
+    - navigation.sections
+    #- navigation.top
+    #- toc.integrate
+    #- navigation.tabs
+    #- navigation.prune
+
+extra_css:
+  - 'css/styles.css'
+  - 'css/extra.css'
 
 markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
+  - footnotes
+  - toc:
+      title: Πίνακας περιεχομένων
+  - markdown_grid_tables
+  - md_in_html
+  - pymdownx.mark
+  - tables
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.details
+  - pymdownx.inlinehilite
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.highlight
+  - pymdownx.tasklist:
+      custom_checkbox: true
   - pymdownx.snippets:
       base_path: ["docs"]
-  - pymdownx.superfences
-  - pymdownx.inlinehilite
-  - pymdownx.highlight
-  - attr_list
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
@@ -21,11 +78,34 @@ markdown_extensions:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
+# repo_url: https://github.com/giannisvlg/kallipos-C
+# repo_name: giannisvlg/kallipos-C
+
+# extra_javascript:
+#   - https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js
 
 plugins:
     - search
     - awesome-pages
+    - glightbox:                    #Zoom image
+       touchNavigation: true
+       loop: false
+       effect: zoom
+       slide_effect: slide
+       width: 100%
+       height: auto
+       zoomable: true
+       draggable: false
+       skip_classes:
+         - custom-skip-class-name
+       # auto_themed: false
+       auto_caption: false
+       caption_position: bottom
+       background: none
+       shadow: true
+       manual: false   
+
 
 copyright: | 
-  Τζάλλας Αλέξανδρος, Γκόγκος Χρήστος, Τσούλος Ιωάννης &copy 2023
+  Τζάλλας Αλέξανδρος, Γκόγκος Χρήστος, Τσούλος Ιωάννης &copy 2025
 

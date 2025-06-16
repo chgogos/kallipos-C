@@ -8,13 +8,13 @@ TARGET=ch13_p2_main
 all:$(TARGET)
 
 $(TARGET):ch13_p2_geom.o ch13_p2_main.o
-	$(CC) $^ -o $@ $(LDLIBS)
+		$(CC) $^ -o $@ $(LDLIBS)
 
 ch13_p2_geom.o:ch13_p2_geom.c ch13_p2_geom.h 
-	$(CC) -c ch13_p2_geom.c -o $@ $(CFLAGS) $(INCLUDE)
+		$(CC) -c ch13_p2_geom.c -o $@ $(CFLAGS) $(INCLUDE)
 
 ch13_p2_main.o:ch13_p2_main.c ch13_p2_geom.h
-	$(CC) -c ch13_p2_main.c -o $@ $(CFLAGS) $(INCLUDE)
+		$(CC) -c ch13_p2_main.c -o $@ $(CFLAGS) $(INCLUDE)
 
 clean:
-	rm -rf $(TARGET) *.o
+		rm -rf $(TARGET) *.o
