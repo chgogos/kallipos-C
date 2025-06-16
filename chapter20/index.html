@@ -1,0 +1,1864 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../chapter19/">
+      
+      
+        <link rel="next" href="../appendix1/">
+      
+      
+      <link rel="icon" href="../src/images/frontcover.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>20. Αλληλεπίδραση της C με την Python - Μια σύγχρονη προσέγγιση στη γλώσσα C</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/styles.css">
+    
+      <link rel="stylesheet" href="../css/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: none; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#20-c-python" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Μια σύγχρονη προσέγγιση στη γλώσσα C" class="md-header__button md-logo" aria-label="Μια σύγχρονη προσέγγιση στη γλώσσα C" data-md-component="logo">
+      
+  <img src="../src/images/frontcover.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Μια σύγχρονη προσέγγιση στη γλώσσα C
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              20. Αλληλεπίδραση της C με την Python
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Μια σύγχρονη προσέγγιση στη γλώσσα C" class="md-nav__button md-logo" aria-label="Μια σύγχρονη προσέγγιση στη γλώσσα C" data-md-component="logo">
+      
+  <img src="../src/images/frontcover.png" alt="logo">
+
+    </a>
+    Μια σύγχρονη προσέγγιση στη γλώσσα C
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Το βιβλίο
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Η πορεία της C μέχρι σήμερα
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Εισαγωγικές έννοιες στον προγραμματισμό με τη C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Εντολές ελέγχου και επανάληψης
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Συναρτήσεις
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Πίνακες
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Δομές και ενώσεις
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. Δείκτες
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. Αλφαριθμητικά
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9. Διαχείριση μνήμης
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10. Υλοποίηση δομών δεδομένων και αλγορίθμων στη C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Είσοδος/Έξοδος
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12. Ο προεπεξεργαστής της C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13. Διαμέριση κώδικα
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14. Ανάπτυξη οδηγούμενη από ελέγχους
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    15. Αποσφαλμάτωση
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    16. Στατική και δυναμική ανάλυση κώδικα
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    17. Βιβλιοθήκες
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    18. Θέματα στυλ στη C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    19. Γραφικό περιβάλλον διεπαφής
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    20. Αλληλεπίδραση της C με την Python
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    20. Αλληλεπίδραση της C με την Python
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Πίνακας περιεχομένων">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Πίνακας περιεχομένων
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#201" class="md-nav__link">
+    <span class="md-ellipsis">
+      20.1 Εισαγωγή
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202-c-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      20.2 Κλήση κώδικα C μέσα από κώδικα Python
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="20.2 Κλήση κώδικα C μέσα από κώδικα Python">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2021-ctypes" class="md-nav__link">
+    <span class="md-ellipsis">
+      20.2.1 Η βιβλιοθήκη ctypes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2022-cffi" class="md-nav__link">
+    <span class="md-ellipsis">
+      20.2.2 Η βιβλιοθήκη CFFI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2023-guis-python-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      20.2.3 Δημιουργία GUIs με Python και "λογικής" με C
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Α. Διαμόρφωση περιβάλλοντος ανάπτυξης κώδικα σε C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Β. Μεταγλώττιση και εκτέλεση κώδικα C χρησιμοποιώντας το Docker
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Γ. Λήψη πληροφοριών για το σύστημα και το μεταγλωττιστή
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Πίνακας περιεχομένων">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Πίνακας περιεχομένων
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#201" class="md-nav__link">
+    <span class="md-ellipsis">
+      20.1 Εισαγωγή
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202-c-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      20.2 Κλήση κώδικα C μέσα από κώδικα Python
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="20.2 Κλήση κώδικα C μέσα από κώδικα Python">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2021-ctypes" class="md-nav__link">
+    <span class="md-ellipsis">
+      20.2.1 Η βιβλιοθήκη ctypes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2022-cffi" class="md-nav__link">
+    <span class="md-ellipsis">
+      20.2.2 Η βιβλιοθήκη CFFI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2023-guis-python-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      20.2.3 Δημιουργία GUIs με Python και "λογικής" με C
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="20-c-python">20. Αλληλεπίδραση της C με την Python</h1>
+<p><i>Σύνοψη</i> Κλήση κώδικα C από κώδικα Python, η βιβλιοθήκη ctypes, η βιβλιοθήκη CFFI, CFFI/ABI, CFFI/API, γραφικό περιβάλλον διεπαφής με Python που συμπληρώνεται με αποτελέσματα που παράγονται από κώδικα C, κλήση κώδικα Python από κώδικα C.  </p>
+<p><i>Προαπαιτούμενη γνώση</i> Τύποι δεδομένων, είσοδος/έξοδος, δομές επιλογής και επανάληψης, συναρτήσεις, πίνακες, δείκτες, αλφαριθμητικά, διαμερισμός κώδικα, βασικές γνώσεις προγραμματισμού σε Python.</p>
+<h2 id="201">20.1 Εισαγωγή</h2>
+<p class="annotate">Μερικές φορές είναι επιθυμητό να κληθεί κώδικας που έχει γραφεί στη γλώσσα C μέσα από προγράμματα Python. Αυτό μπορεί να συμβεί διότι επιθυμούμε να χρησιμοποιήσουμε βιβλιοθήκες της C για τις οποίες δεν υπάρχουν διεπαφές χρήσης τους μέσω της Python ή μπορεί να πρόκειται για κώδικα σε C που έχουμε αναπτύξει οι ίδιοι. Τρεις διαφορετικοί τρόποι για να επιτευχθεί αυτό είναι: α) με την ενσωματωμένη στην Python βιβλιοθήκη ctypes <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>, β) με τη βιβλιοθήκη CFFI <sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup> και γ) με χρήση των native C/C++ extensions <sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup>. Ο τρίτος τρόπος είναι χαμηλότερου επιπέδου, δίνει πολλές δυνατότητες αλλά είναι σχετικά πολύπλοκος, οπότε συνήθως προτιμούνται οι δύο πρώτοι.<br />
+Κίνητρο επέκτασης της Python με C κώδικα μπορεί να αποτελέσει η επιθυμία επιτάχυνσης της «αργής» εκτέλεσης της Python. Η ενσωμάτωση κώδικα C σε προγράμματα Python μπορεί να οδηγήσει σε σημαντικές επιταχύνσεις αλλά και να δώσει τη δυνατότητα αποφυγής του περιορισμού της Python (CPython(1)) που είναι γνωστός ως GIL (Global Interpreter Lock) και επιτρέπει μόνο σε ένα νήμα να εκτελείται σε κάθε χρονική στιγμή. Ωστόσο, ο ενδεδειγμένος τρόπος επιτάχυνσης της Python είναι μέσω βιβλιοθηκών της ίδιας της γλώσσας όπως η numpy, η numba, η multiprocessing και πολλές άλλες. Ένας άλλος τρόπος επιτάχυνσης του κώδικα Python είναι η συγγραφή προγραμμάτων σε Cython (<a href="https://cython.org/" target="_blank">https://cython.org/</a>) που αποτελεί μια γλώσσα υπερσύνολο της Python. Ο Cython κώδικας μεταγλωττίζεται σε C και εκτελείται με υψηλή ταχύτητα.</p>
+<ol>
+<li>CPython είναι ο προκαθορισμένος byte-code διερμηνευτής της Python, που έχει γραφεί σε C.</li>
+</ol>
+<p>Σπανιότερα, μπορεί να προκύψει ανάγκη ενσωμάτωσης κώδικα Python σε κώδικα C. Και αυτό μπορεί να γίνει σχετικά εύκολα, καθώς η Python παρέχει το αρχείο επικεφαλίδας <span class="p-style">Python.h</span>, που περιλαμβάνει όλες τις απαιτούμενες δηλώσεις για την ενσωμάτωση του διερμηνευτή της σε προγράμματα C.<br />
+Αξίζει επίσης να αναφερθεί το λογισμικό SWIG (Simplified Wrapper and Interface Generator, <a href="https://www.swig.org/" target="_blank">https://www.swig.org/</a>) που αποτελεί έναν ακόμη τρόπο διασύνδεσης προγραμμάτων που είναι γραμμένα σε C (ή σε C++) με την Python καθώς και με πολλές άλλες γλώσσες υψηλού επιπέδου (π.χ. Javascript, Perl, PHP, Tcl, Ruby, Java, C#, Go).</p>
+<h2 id="202-c-python">20.2 Κλήση κώδικα C μέσα από κώδικα Python</h2>
+<p>Η Python είναι μια ιδιαίτερα δημοφιλής και ισχυρή γλώσσα προγραμματισμού. Κατά την ανάπτυξη μιας εφαρμογής σε Python μπορεί να παρουσιαστεί το σενάριο όπου μια επιθυμητή λειτουργία έχει ήδη υλοποιηθεί με αξιόπιστο C κώδικα. Για να αποφευχθεί η συγγραφή εκ νέου του κώδικα στην Python, μπορεί να χρησιμοποιηθεί απευθείας ο διαθέσιμος κώδικας C.</p>
+<p class="annotate"><i>Παράδειγμα κώδικα σε C</i> Ως παράδειγμα κώδικα C που θα κληθεί από την Python θα χρησιμοποιηθεί κώδικας που ορίζει και χρησιμοποιεί μια δομή και κάποιες συναρτήσεις. Η δομή αφορά υποθετικούς χρήστες και έχει ως πεδία το <span class="p-style">name</span> (όνομα χρήστη), το <span class="p-style">password</span> (συνθηματικό) και το <span class="p-style">salt</span> (αλάτι, που μεταφορικά σημαίνει κάτι πρόσθετο στα δεδομένα) που ο ρόλος του θα διευκρινιστεί στη συνέχεια. Ο χρήστης θα εισάγει όνομα και συνθηματικό ως λεκτικά και το συνθηματικό θα αποθηκεύεται ως η κατακερματισμένη τιμή της συνένωσης του συνθηματικού και του <span class="p-style">salt</span>, που εδώ είναι μια τυχαία ακέραια τιμή από το 0 μέχρι το 10000. Η τιμή του <span class="p-style">salt</span> επίσης αποθηκεύεται στη δομή και είναι ένας τρόπος έτσι ώστε η τιμή κατακερματισμού που αποθηκεύεται για το συνθηματικό να μην προκύπτει απευθείας από την εφαρμογή της συνάρτησης κατακερματισμού στο συνθηματικό που δίνεται ως λεκτικό. Αυτό συμβαίνει διότι η τιμή κατακερματισμού δημιουργείται για το συνθηματικό με προσαρτημένο στο τέλος του το <span class="p-style">salt</span>. Ένα παράδειγμα εισαγωγής των δεδομένων στη δομή <span class="p-style">user</span> φαίνεται στο Σχήμα 20.1. Η συνάρτηση <span class="p-style">jhash()</span> αποτελεί υλοποίηση της συνάρτησης κατακερματισμού του Jenkins <sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup> και δέχεται ως ορίσματα ένα λεκτικό και το μήκος του και επιστρέφει μια ακέραια τιμή 32 bits(1). Επιπλέον, υπάρχει η συνάρτηση <span class="p-style">jhash_w()</span>, που αποτελεί έναν συντομότερο τρόπο κλήσης της <span class="p-style">jhash()</span>, που δέχεται ως όρισμα μόνο το λεκτικό για το οποίο ζητείται η τιμή κατακερματισμού του. Συναρτήσεις αυτής της μορφής καλούνται συναρτήσεις wrappers (περιτυλίγματα).</p>
+<ol>
+<li>Τυπικά θα χρησιμοποιούνταν μια κρυπτογραφική συνάρτηση κατακερματισμού, αλλά για λόγους απλότητας χρησιμοποιείται η <span class="p-style">jhash()</span>.</li>
+</ol>
+<p><a class="glightbox" href="../src/images/ch20_salt.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="ch20_salt.png" src="../src/images/ch20_salt.png" /></a></p>
+<div style="text-align: center;"><b> Σχήμα 20.1: </b><i>Παράδειγμα αποθήκευσης τιμών στη δομή user.</i></div>
+
+<p>Ο κώδικας C περιλαμβάνεται σε ένα αρχείο επικεφαλίδας (κώδικας 20.1), ένα αρχείο με τους ορισμούς των συναρτήσεων (κώδικας 20.2) και ένα αρχείο οδηγό (κώδικας 20.3) από το οποίο ξεκινά η εκτέλεση. Ο κώδικας των τριών αρχείων παρουσιάζεται στη συνέχεια:</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 20.1: ch20_blackbox.h - δήλωση της δομής user και των συναρτήσεων jhash() και jhash_w().</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdint.h&gt;</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">name</span><span class="p">[</span><span class="mi">21</span><span class="p">];</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">password</span><span class="p">;</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">salt</span><span class="p">;</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="p">}</span><span class="w"> </span><span class="n">user</span><span class="p">;</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9"></a>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="kt">uint32_t</span><span class="w"> </span><span class="nf">jhash</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">len</span><span class="p">);</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="kt">uint32_t</span><span class="w"> </span><span class="nf">jhash_w</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">str</span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 20.2: ch20_blackbox.c - ορισμός συναρτήσεων jhash() και jhash_w().</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-1-10">10</a></span>
+<span class="normal"><a href="#__codelineno-1-11">11</a></span>
+<span class="normal"><a href="#__codelineno-1-12">12</a></span>
+<span class="normal"><a href="#__codelineno-1-13">13</a></span>
+<span class="normal"><a href="#__codelineno-1-14">14</a></span>
+<span class="normal"><a href="#__codelineno-1-15">15</a></span>
+<span class="normal"><a href="#__codelineno-1-16">16</a></span>
+<span class="normal"><a href="#__codelineno-1-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;ch20_blackbox.h&quot;</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3"></a>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="kt">uint32_t</span><span class="w"> </span><span class="nf">jhash</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">len</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">len</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">    </span><span class="n">hash</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">    </span><span class="n">hash</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="n">hash</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="w">    </span><span class="n">hash</span><span class="w"> </span><span class="o">^=</span><span class="w"> </span><span class="p">(</span><span class="n">hash</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">6</span><span class="p">);</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">  </span><span class="n">hash</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="n">hash</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="w">  </span><span class="n">hash</span><span class="w"> </span><span class="o">^=</span><span class="w"> </span><span class="p">(</span><span class="n">hash</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">11</span><span class="p">);</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="w">  </span><span class="n">hash</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="n">hash</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">15</span><span class="p">);</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">hash</span><span class="p">;</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="p">}</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16"></a>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17"></a><span class="kt">uint32_t</span><span class="w"> </span><span class="nf">jhash_w</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">str</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">jhash</span><span class="p">(</span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="n">strlen</span><span class="p">(</span><span class="n">str</span><span class="p">));</span><span class="w"> </span><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 20.3: ch20_main.c - πρόγραμμα οδηγός.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span>
+<span class="normal"><a href="#__codelineno-2-13">13</a></span>
+<span class="normal"><a href="#__codelineno-2-14">14</a></span>
+<span class="normal"><a href="#__codelineno-2-15">15</a></span>
+<span class="normal"><a href="#__codelineno-2-16">16</a></span>
+<span class="normal"><a href="#__codelineno-2-17">17</a></span>
+<span class="normal"><a href="#__codelineno-2-18">18</a></span>
+<span class="normal"><a href="#__codelineno-2-19">19</a></span>
+<span class="normal"><a href="#__codelineno-2-20">20</a></span>
+<span class="normal"><a href="#__codelineno-2-21">21</a></span>
+<span class="normal"><a href="#__codelineno-2-22">22</a></span>
+<span class="normal"><a href="#__codelineno-2-23">23</a></span>
+<span class="normal"><a href="#__codelineno-2-24">24</a></span>
+<span class="normal"><a href="#__codelineno-2-25">25</a></span>
+<span class="normal"><a href="#__codelineno-2-26">26</a></span>
+<span class="normal"><a href="#__codelineno-2-27">27</a></span>
+<span class="normal"><a href="#__codelineno-2-28">28</a></span>
+<span class="normal"><a href="#__codelineno-2-29">29</a></span>
+<span class="normal"><a href="#__codelineno-2-30">30</a></span>
+<span class="normal"><a href="#__codelineno-2-31">31</a></span>
+<span class="normal"><a href="#__codelineno-2-32">32</a></span>
+<span class="normal"><a href="#__codelineno-2-33">33</a></span>
+<span class="normal"><a href="#__codelineno-2-34">34</a></span>
+<span class="normal"><a href="#__codelineno-2-35">35</a></span>
+<span class="normal"><a href="#__codelineno-2-36">36</a></span>
+<span class="normal"><a href="#__codelineno-2-37">37</a></span>
+<span class="normal"><a href="#__codelineno-2-38">38</a></span>
+<span class="normal"><a href="#__codelineno-2-39">39</a></span>
+<span class="normal"><a href="#__codelineno-2-40">40</a></span>
+<span class="normal"><a href="#__codelineno-2-41">41</a></span>
+<span class="normal"><a href="#__codelineno-2-42">42</a></span>
+<span class="normal"><a href="#__codelineno-2-43">43</a></span>
+<span class="normal"><a href="#__codelineno-2-44">44</a></span>
+<span class="normal"><a href="#__codelineno-2-45">45</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;ch20_blackbox.h&quot;</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdbool.h&gt;</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5"></a>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="cp">#define MAX_LENGTH 21 </span><span class="c1">// μέγιστο μήκος λεκτικών</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="cp">#define MAX_USERS 3   </span><span class="c1">// πλήθος χρηστών</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="cp">#define UB 10000 </span><span class="c1">// ανώτατο όριο τυχαίων ακέραιων τιμών</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9"></a>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">names</span><span class="p">[</span><span class="n">MAX_USERS</span><span class="p">][</span><span class="n">MAX_LENGTH</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;daredevil&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;happyhippo&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;nerdalert&quot;</span><span class="p">};</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">passwords</span><span class="p">[</span><span class="n">MAX_USERS</span><span class="p">][</span><span class="n">MAX_LENGTH</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;12345&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;password&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;qwerty&quot;</span><span class="p">};</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="w">  </span><span class="n">srand</span><span class="p">(</span><span class="mi">1729</span><span class="p">);</span><span class="w"> </span><span class="c1">// ορίζουμε ως seed μια σταθερή τιμή για επαναληψιμότητα</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">salts</span><span class="p">[</span><span class="n">MAX_USERS</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">rand</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">UB</span><span class="p">,</span><span class="w"> </span><span class="n">rand</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">UB</span><span class="p">,</span><span class="w"> </span><span class="n">rand</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">UB</span><span class="p">};</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">tmp</span><span class="p">[</span><span class="n">MAX_LENGTH</span><span class="p">];</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16"></a>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17"></a><span class="w">  </span><span class="n">user</span><span class="w"> </span><span class="n">users</span><span class="p">[</span><span class="n">MAX_USERS</span><span class="p">];</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18"></a><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">MAX_USERS</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19"></a><span class="w">    </span><span class="n">strcpy</span><span class="p">(</span><span class="n">users</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">names</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20"></a><span class="w">    </span><span class="n">snprintf</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span><span class="w"> </span><span class="n">MAX_LENGTH</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;%u&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">salts</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21"></a><span class="w">    </span><span class="n">users</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jhash_w</span><span class="p">(</span><span class="n">strcat</span><span class="p">(</span><span class="n">passwords</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="n">tmp</span><span class="p">));</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22"></a><span class="w">    </span><span class="n">users</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">salt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">salts</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;user = %s, password = %u salt = %u</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">users</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">name</span><span class="p">,</span>
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24"></a><span class="w">           </span><span class="n">users</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">password</span><span class="p">,</span><span class="w"> </span><span class="n">users</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">salt</span><span class="p">);</span>
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26"></a>
+</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27"></a><span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">a_user_name</span><span class="p">[</span><span class="n">MAX_LENGTH</span><span class="p">];</span>
+</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28"></a><span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">pwd</span><span class="p">[</span><span class="n">MAX_LENGTH</span><span class="p">];</span>
+</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Enter user name: &quot;</span><span class="p">);</span>
+</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30"></a><span class="w">  </span><span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%20s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a_user_name</span><span class="p">);</span>
+</span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Enter the password of user %s: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a_user_name</span><span class="p">);</span>
+</span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32"></a><span class="w">  </span><span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%20s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">pwd</span><span class="p">);</span>
+</span><span id="__span-2-33"><a id="__codelineno-2-33" name="__codelineno-2-33"></a>
+</span><span id="__span-2-34"><a id="__codelineno-2-34" name="__codelineno-2-34"></a><span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">login</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+</span><span id="__span-2-35"><a id="__codelineno-2-35" name="__codelineno-2-35"></a><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">MAX_USERS</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-36"><a id="__codelineno-2-36" name="__codelineno-2-36"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">users</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">a_user_name</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-2-37"><a id="__codelineno-2-37" name="__codelineno-2-37"></a><span class="w">      </span><span class="k">continue</span><span class="p">;</span>
+</span><span id="__span-2-38"><a id="__codelineno-2-38" name="__codelineno-2-38"></a><span class="w">    </span><span class="n">snprintf</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span><span class="w"> </span><span class="n">MAX_LENGTH</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;%u&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">users</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">salt</span><span class="p">);</span>
+</span><span id="__span-2-39"><a id="__codelineno-2-39" name="__codelineno-2-39"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">users</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">password</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">jhash_w</span><span class="p">(</span><span class="n">strcat</span><span class="p">(</span><span class="n">pwd</span><span class="p">,</span><span class="w"> </span><span class="n">tmp</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-40"><a id="__codelineno-2-40" name="__codelineno-2-40"></a><span class="w">      </span><span class="n">login</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+</span><span id="__span-2-41"><a id="__codelineno-2-41" name="__codelineno-2-41"></a><span class="w">      </span><span class="k">break</span><span class="p">;</span>
+</span><span id="__span-2-42"><a id="__codelineno-2-42" name="__codelineno-2-42"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-2-43"><a id="__codelineno-2-43" name="__codelineno-2-43"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-2-44"><a id="__codelineno-2-44" name="__codelineno-2-44"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;LOGIN %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">login</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;SUCCESS&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s">&quot;FAIL&quot;</span><span class="p">);</span>
+</span><span id="__span-2-45"><a id="__codelineno-2-45" name="__codelineno-2-45"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Το πρόγραμμα οδηγός ch20_main.c δημιουργεί τρεις υποθετικούς χρήστες χρησιμοποιώντας τυχαίες τιμές για τα salts, ζητά να εισαχθεί όνομα χρήστη και συνθηματικού και εμφανίζει μήνυμα σχετικά με το εάν ο συνδυασμός ονόματος χρήστη και συνθηματικού είναι σωστός ή όχι.</p>
+<p>Ακολουθεί η μεταγλώττιση και η εκτέλεση του κώδικα:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>$ gcc ch20_blackbox.c ch20_main.c ‐o ch20_main
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>$ ./ch20_main
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>user = daredevil , password = 3851113929 salt = 6234
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>user = happyhippo , password = 1996416210 salt = 2698
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>user = nerdalert , password = 4242763575 salt = 720
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>Enter user name: daredevil
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>Enter the password of user daredevil: 12345
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>LOGIN SUCCESS
+</span></code></pre></div>
+<p>Στη συνέχεια θα υλοποιηθεί στην Python κώδικας που θα χρησιμοποιεί τη δομή <span class="p-style">user</span> και τις συναρτήσεις <span class="p-style">jhash()</span> και <span class="p-style">jhash_w()</span> του κώδικα της C και θα έχει την ίδια λειτουργικότητα με το πρόγραμμα σε C. Το ίδιο παράδειγμα θα υλοποιηθεί με τη βιβλιοθήκη ctypes και σε δύο ακόμα εκδόσεις (ABI και API) με τη βιβλιοθήκη CFFI.<br />
+Τόσο για το ctypes όσο και για την έκδοση CFFI/ΑΒΙ θα χρειαστεί να δημιουργηθεί η βιβλιοθήκη C που θα περιέχει τις υλοποιήσεις των συναρτήσεων και τη δήλωση της δομής. Αυτό γίνεται με την ακόλουθη εντολή που δημιουργεί τη βιβλιοθήκη <span class="p-style">blackbox</span> στο αρχείο <span class="p-style">libblackbox.so</span> για Linux:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>$ gcc ‐shared ‐o libblackbox.so ch20_blackbox.c ‐fPIC
+</span></code></pre></div>
+<p>Από τη στιγμή που έχει δημιουργηθεί η βιβλιοθήκη blackbox, o κώδικας μπορεί να μεταγλωττιστεί και να εκτελεστεί ως εξής:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>$ gcc ch20_main.c ‐Wl,‐rpath=&#39;${ORIGIN}&#39; ‐L. ‐lblackbox ‐o ch20_main
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>$ ./ch20_main
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>user = daredevil , password = 3851113929 salt = 6234
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>user = happyhippo , password = 1996416210 salt = 2698
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>user = nerdalert , password = 4242763575 salt = 720
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>Enter user name: daredevil
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>Enter the password of user daredevil: 54321
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>LOGIN FAIL
+</span></code></pre></div>
+<p>Η εντολή μεταγλώττισης και σύνδεσης δεν μεταγλωττίζει πλέον τον πηγαίο κώδικα <span class="p-style">ch20_blackbox.c</span>, που ορίζει τις συναρτήσεις <span class="p-style">jhash()</span> και <span class="p-style">jhash_w()</span>, αλλά συνδέει το εκτελέσιμο του τελικού προγράμματος με τον εκτελέσιμο κώδικα που βρίσκεται στη δυναμική βιβλιοθήκη <span class="p-style">libblackbox.so</span> που έχει δημιουργηθεί. Ο διακόπτης <span class="p-style">‐Wl</span> δίνει την οδηγία να περάσουν οι επιλογές που ακολουθούν στον συνδέτη. Η επιλογή <span class="p-style">‐rpath='${ORIGIN}'</span> ορίζει ως βασική διαδρομή στην οποία θα αναζητηθούν βιβλιοθήκες κατά την εκτέλεση, τον κατάλογο από όπου γίνεται η εκτέλεση του προγράμματος. Ο διακόπτης <span class="p-style">‐L</span>. δίνει την οδηγία να αναζητηθούν βιβλιοθήκες στον τρέχοντα κατάλογο. Ο διακόπτης <span class="p-style">‐lblackbox</span> καθορίζει ότι η σύνδεση θα γίνει με μια βιβλιοθήκη με όνομα <span class="p-style">libblackbox</span> (το <span class="p-style">lib</span> στην αρχή του ονόματος εννοείται, οπότε το όνομα είναι μόνο <span class="p-style">blackbox</span>). Αυτό σημαίνει ότι η βιβλιοθήκη θα πρέπει να βρίσκεται σε ένα αρχείο με όνομα <span class="p-style">libblackbox.so</span> για δυναμική βιβλιοθήκη ή με όνομα <span class="p-style">libblackbox.a</span> για στατική βιβλιοθήκη (στο συγκεκριμένο παράδειγμα η βιβλιοθήκη είναι δυναμική).<br />
+Για τους κώδικες Python που θα ακολουθήσουν τα στοιχεία υποθετικών χρηστών έχουν τοποθετηθεί στο αρχείο <span class="p-style">ch20_main_data.py</span> (κώδικας 20.4), έτσι ώστε να μπορεί να γίνει εύκολα import όπου χρειάζεται.</p>
+<div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 20.4: ch20_main_data.py - κώδικας Python που ορίζει δεδομένα υποθετικών χρηστών.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-6-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-6-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-6-10">10</a></span>
+<span class="normal"><a href="#__codelineno-6-11">11</a></span>
+<span class="normal"><a href="#__codelineno-6-12">12</a></span>
+<span class="normal"><a href="#__codelineno-6-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">random</span><span class="w"> </span><span class="kn">import</span> <span class="n">randrange</span><span class="p">,</span> <span class="n">seed</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2"></a>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="n">UB</span> <span class="o">=</span> <span class="mi">10000</span>  <span class="c1"># ανώτατο όριο τυχαίων αριθμών</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="n">seed</span><span class="p">(</span><span class="mi">1729</span><span class="p">)</span>  <span class="c1"># ορίζουμε ως seed μια σταθερή τιμή για επαναληψιμότητα</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="n">raw_data</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6"></a>    <span class="p">(</span><span class="s2">&quot;daredevil&quot;</span><span class="p">,</span> <span class="s2">&quot;12345&quot;</span><span class="p">,</span> <span class="n">randrange</span><span class="p">(</span><span class="n">UB</span><span class="p">)),</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7"></a>    <span class="p">(</span><span class="s2">&quot;happyhippo&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">,</span> <span class="n">randrange</span><span class="p">(</span><span class="n">UB</span><span class="p">)),</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8"></a>    <span class="p">(</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9"></a>        <span class="s2">&quot;nerdalert&quot;</span><span class="p">,</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10"></a>        <span class="s2">&quot;qwerty&quot;</span><span class="p">,</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11"></a>        <span class="n">randrange</span><span class="p">(</span><span class="n">UB</span><span class="p">),</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12"></a>    <span class="p">),</span>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="p">]</span>
+</span></code></pre></div></td></tr></table></div>
+<h3 id="2021-ctypes">20.2.1 Η βιβλιοθήκη ctypes</h3>
+<p>Η ctypes είναι μια εύχρηστη βιβλιοθήκη που επιτρέπει σε προγράμματα Python να προσπελαύνουν δομές και να καλούν συναρτήσεις που έχουν οριστεί σε δυναμικές βιβλιοθήκες της γλώσσας C. Η χρήση της ctypes σε έναν κώδικα Python συνήθως ξεκινά με φόρτωση μιας δυναμικής βιβλιοθήκης και τη δήλωση του τύπου ορισμάτων και του τύπου επιστροφής για τις συναρτήσεις της βιβλιοθήκης που πρόκειται να χρησιμοποιηθούν. Οι συναρτήσεις της βιβλιοθήκης καλούνται με κατάλληλα ορίσματα στον κώδικα Python και επιστρέφουν αποτελέσματα που είναι διαθέσιμα για τη συνέχεια εκτέλεσης του προγράμματος. Επίσης, μπορούν να κατασκευαστούν κλάσεις της Python που προσομοιώνουν τις δομές του κώδικα C. Στον κώδικα 20.5 παρουσιάζεται ένα σχετικό παράδειγμα.</p>
+<div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 20.5: ch20_main_ctypes.py - κώδικας που χρησιμοποιεί τη βιβλιοθήκη ctypes</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-7-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-7-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-7-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-7-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-7-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-7-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-7-10">10</a></span>
+<span class="normal"><a href="#__codelineno-7-11">11</a></span>
+<span class="normal"><a href="#__codelineno-7-12">12</a></span>
+<span class="normal"><a href="#__codelineno-7-13">13</a></span>
+<span class="normal"><a href="#__codelineno-7-14">14</a></span>
+<span class="normal"><a href="#__codelineno-7-15">15</a></span>
+<span class="normal"><a href="#__codelineno-7-16">16</a></span>
+<span class="normal"><a href="#__codelineno-7-17">17</a></span>
+<span class="normal"><a href="#__codelineno-7-18">18</a></span>
+<span class="normal"><a href="#__codelineno-7-19">19</a></span>
+<span class="normal"><a href="#__codelineno-7-20">20</a></span>
+<span class="normal"><a href="#__codelineno-7-21">21</a></span>
+<span class="normal"><a href="#__codelineno-7-22">22</a></span>
+<span class="normal"><a href="#__codelineno-7-23">23</a></span>
+<span class="normal"><a href="#__codelineno-7-24">24</a></span>
+<span class="normal"><a href="#__codelineno-7-25">25</a></span>
+<span class="normal"><a href="#__codelineno-7-26">26</a></span>
+<span class="normal"><a href="#__codelineno-7-27">27</a></span>
+<span class="normal"><a href="#__codelineno-7-28">28</a></span>
+<span class="normal"><a href="#__codelineno-7-29">29</a></span>
+<span class="normal"><a href="#__codelineno-7-30">30</a></span>
+<span class="normal"><a href="#__codelineno-7-31">31</a></span>
+<span class="normal"><a href="#__codelineno-7-32">32</a></span>
+<span class="normal"><a href="#__codelineno-7-33">33</a></span>
+<span class="normal"><a href="#__codelineno-7-34">34</a></span>
+<span class="normal"><a href="#__codelineno-7-35">35</a></span>
+<span class="normal"><a href="#__codelineno-7-36">36</a></span>
+<span class="normal"><a href="#__codelineno-7-37">37</a></span>
+<span class="normal"><a href="#__codelineno-7-38">38</a></span>
+<span class="normal"><a href="#__codelineno-7-39">39</a></span>
+<span class="normal"><a href="#__codelineno-7-40">40</a></span>
+<span class="normal"><a href="#__codelineno-7-41">41</a></span>
+<span class="normal"><a href="#__codelineno-7-42">42</a></span>
+<span class="normal"><a href="#__codelineno-7-43">43</a></span>
+<span class="normal"><a href="#__codelineno-7-44">44</a></span>
+<span class="normal"><a href="#__codelineno-7-45">45</a></span>
+<span class="normal"><a href="#__codelineno-7-46">46</a></span>
+<span class="normal"><a href="#__codelineno-7-47">47</a></span>
+<span class="normal"><a href="#__codelineno-7-48">48</a></span>
+<span class="normal"><a href="#__codelineno-7-49">49</a></span>
+<span class="normal"><a href="#__codelineno-7-50">50</a></span>
+<span class="normal"><a href="#__codelineno-7-51">51</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">ch20_main_data</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">ctypes</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5"></a>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;win&quot;</span><span class="p">):</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7"></a>    <span class="n">clib</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;blackbox.dll&quot;</span><span class="p">))</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="k">elif</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;linux&quot;</span><span class="p">):</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9"></a>    <span class="n">clib</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;libblackbox.so&quot;</span><span class="p">))</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="k">elif</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;darwin&quot;</span><span class="p">):</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11"></a>    <span class="n">clib</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;libblackbox.dylib&quot;</span><span class="p">))</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12"></a><span class="k">else</span><span class="p">:</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unknown OS&quot;</span><span class="p">)</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14"></a>    <span class="n">exit</span><span class="p">()</span>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15"></a>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16"></a><span class="c1"># δήλωση τύπων δεδομένων για ορίσματα και τιμές επιστροφής</span>
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17"></a><span class="n">clib</span><span class="o">.</span><span class="n">jhash</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint32</span><span class="p">]</span>
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18"></a><span class="n">clib</span><span class="o">.</span><span class="n">jhash</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint32</span>
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19"></a><span class="n">clib</span><span class="o">.</span><span class="n">jhash_w</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span><span class="p">]</span>
+</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20"></a><span class="n">clib</span><span class="o">.</span><span class="n">jhash_w</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint32</span>
+</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21"></a>
+</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22"></a>
+</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23"></a><span class="c1"># δήλωση τύπου δεδομένων για τη δομή User</span>
+</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24"></a><span class="k">class</span><span class="w"> </span><span class="nc">User</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">Structure</span><span class="p">):</span>
+</span><span id="__span-7-25"><a id="__codelineno-7-25" name="__codelineno-7-25"></a>    <span class="n">_fields_</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-7-26"><a id="__codelineno-7-26" name="__codelineno-7-26"></a>        <span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span><span class="p">),</span>
+</span><span id="__span-7-27"><a id="__codelineno-7-27" name="__codelineno-7-27"></a>        <span class="p">(</span><span class="s2">&quot;password&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint32</span><span class="p">),</span>
+</span><span id="__span-7-28"><a id="__codelineno-7-28" name="__codelineno-7-28"></a>        <span class="p">(</span><span class="s2">&quot;salt&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint32</span><span class="p">),</span>
+</span><span id="__span-7-29"><a id="__codelineno-7-29" name="__codelineno-7-29"></a>    <span class="p">]</span>
+</span><span id="__span-7-30"><a id="__codelineno-7-30" name="__codelineno-7-30"></a>
+</span><span id="__span-7-31"><a id="__codelineno-7-31" name="__codelineno-7-31"></a>
+</span><span id="__span-7-32"><a id="__codelineno-7-32" name="__codelineno-7-32"></a><span class="n">users</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-7-33"><a id="__codelineno-7-33" name="__codelineno-7-33"></a><span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">password_txt</span><span class="p">,</span> <span class="n">salt</span> <span class="ow">in</span> <span class="n">ch20_main_data</span><span class="o">.</span><span class="n">raw_data</span><span class="p">:</span>
+</span><span id="__span-7-34"><a id="__codelineno-7-34" name="__codelineno-7-34"></a>    <span class="n">byte_string</span> <span class="o">=</span> <span class="p">(</span><span class="n">password_txt</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">salt</span><span class="p">))</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">)</span>
+</span><span id="__span-7-35"><a id="__codelineno-7-35" name="__codelineno-7-35"></a>    <span class="n">password</span> <span class="o">=</span> <span class="n">clib</span><span class="o">.</span><span class="n">jhash</span><span class="p">(</span><span class="n">byte_string</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">byte_string</span><span class="p">))</span>
+</span><span id="__span-7-36"><a id="__codelineno-7-36" name="__codelineno-7-36"></a>    <span class="n">u</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">),</span> <span class="n">password</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint32</span><span class="p">(</span><span class="n">salt</span><span class="p">))</span>
+</span><span id="__span-7-37"><a id="__codelineno-7-37" name="__codelineno-7-37"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;user=</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">, password=</span><span class="si">{</span><span class="n">password</span><span class="si">}</span><span class="s2">, salt=</span><span class="si">{</span><span class="n">salt</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-7-38"><a id="__codelineno-7-38" name="__codelineno-7-38"></a>    <span class="n">users</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+</span><span id="__span-7-39"><a id="__codelineno-7-39" name="__codelineno-7-39"></a>
+</span><span id="__span-7-40"><a id="__codelineno-7-40" name="__codelineno-7-40"></a><span class="n">n</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter user name: &quot;</span><span class="p">)</span>
+</span><span id="__span-7-41"><a id="__codelineno-7-41" name="__codelineno-7-41"></a><span class="n">p</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Enter the password of user </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">: &quot;</span><span class="p">)</span>
+</span><span id="__span-7-42"><a id="__codelineno-7-42" name="__codelineno-7-42"></a><span class="n">login</span> <span class="o">=</span> <span class="kc">False</span>
+</span><span id="__span-7-43"><a id="__codelineno-7-43" name="__codelineno-7-43"></a><span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">users</span><span class="p">:</span>
+</span><span id="__span-7-44"><a id="__codelineno-7-44" name="__codelineno-7-44"></a>    <span class="k">if</span> <span class="n">u</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="n">n</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">):</span>
+</span><span id="__span-7-45"><a id="__codelineno-7-45" name="__codelineno-7-45"></a>        <span class="k">continue</span>
+</span><span id="__span-7-46"><a id="__codelineno-7-46" name="__codelineno-7-46"></a>    <span class="n">sp_txt</span> <span class="o">=</span> <span class="n">p</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">salt</span><span class="p">)</span>
+</span><span id="__span-7-47"><a id="__codelineno-7-47" name="__codelineno-7-47"></a>    <span class="n">c</span> <span class="o">=</span> <span class="n">clib</span><span class="o">.</span><span class="n">jhash_w</span><span class="p">(</span><span class="n">sp_txt</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">))</span>
+</span><span id="__span-7-48"><a id="__codelineno-7-48" name="__codelineno-7-48"></a>    <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="n">u</span><span class="o">.</span><span class="n">password</span><span class="p">:</span>
+</span><span id="__span-7-49"><a id="__codelineno-7-49" name="__codelineno-7-49"></a>        <span class="n">login</span> <span class="o">=</span> <span class="kc">True</span>
+</span><span id="__span-7-50"><a id="__codelineno-7-50" name="__codelineno-7-50"></a>        <span class="k">break</span>
+</span><span id="__span-7-51"><a id="__codelineno-7-51" name="__codelineno-7-51"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LOGIN SUCCESS&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">login</span> <span class="k">else</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LOGIN FAILED&quot;</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Στις γραμμές 6-11 πραγματοποιείται η φόρτωση της C βιβλιοθήκης <span class="p-style">blackbox</span>, για παράδειγμα από το αρχείο <span class="p-style">libblackbox.so</span> σε σύστημα Linux. Το αρχείο της βιβλιοθήκης θα πρέπει να βρίσκεται στον ίδιο κατάλογο με τον κώδικα Python που εκτελείται ή σε κατάλογο που να είναι στο PATH του συστήματος. Στις γραμμές 17-20 ορίζονται οι τύποι δεδομένων ορισμάτων και τιμών επιστροφής για τις συναρτήσεις <span class="p-style">jhash()</span> και <span class="p-style">jhash_w()</span>. Για παράδειγμα, τα ορίσματα της συνάρτησης <span class="p-style">clib.jhash</span> είναι <span class="p-style">ctypes.c_char_p</span> (δείκτης σε χαρακτήρα) και <span class="p-style">ctypes.c_uint32</span> (μη προσημασμένος ακέραιος 32 bits) που αντιστοιχούν στους τύπους δεδομένων της συνάρτησης <span class="p-style">jhash()</span> στη C, <span class="p-style">char*</span> και <span class="p-style">uint32_t</span> αντίστοιχα.<br />
+Στις γραμμές 24-29 ορίζεται η κλάση <span class="p-style">User</span> που αντιστοιχεί στη δομή <span class="p-style">user</span> του προγράμματος C, όπου για κάθε πεδίο της κλάσης ορίζεται ο κατάλληλος τύπος δεδομένων σε συμφωνία με τη δομή της C. Στη γραμμή 36 δημιουργείται σε κάθε επανάληψη ένα αντικείμενο της κλάσης <span class="p-style">User</span> που εισάγεται στη λίστα <span class="p-style">users</span>.<br />
+Στη γραμμή 35 γίνεται η κλήση της συνάρτησης <span class="p-style">jhash()</span> και στη γραμμή 47 γίνεται η κλήση της συνάρτησης <span class="p-style">jhash_w()</span>. Προσοχή πρέπει να δοθεί στα ορίσματά τους, καθώς πρέπει να κωδικοποιηθούν κατάλληλα, έτσι ώστε να ταιριάζουν με τους τύπους δεδομένων που αναμένονται.</p>
+<p>Τελικά, η εκτέλεση του <span class="p-style">ch20_main_ctypes.py</span> γίνεται όπως στη συνέχεια και δίνει την ακόλουθη έξοδο:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>$ python ch20_main_ctypes.py
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>user=daredevil , password=3714596007, salt=736
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>user=happyhippo , password=175962796, salt=6730
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>user=nerdalert , password=3144561193, salt=8213
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>Enter user name: nerdalert
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>Enter the password of user nerdalert: qwerty
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>LOGIN SUCCESS
+</span></code></pre></div>
+<h3 id="2022-cffi">20.2.2 Η βιβλιοθήκη CFFI</h3>
+<p>Η βιβλιοθήκη CFFI (C Foreign Function Interface) είναι μια βιβλιοθήκη που παρέχει μια διεπαφή προς συναρτήσεις της C μέσα από την Python. Ο προγραμματιστής χρειάζεται να παραθέτει εντός του κώδικα Python δηλώσεις συναρτήσεων και δομών δεδομένων απευθείας σε κώδικα C. Η CFFI διαθέτει δύο καταστάσεις λειτουργίας, το ABI (Application Binary Interface) και το API (Application Programming Interface). Στο ABI η πρόσβαση στη βιβλιοθήκη που έχει δημιουργηθεί με τον κώδικα C γίνεται στο δυαδικό επίπεδο, ενώ στο API χρησιμοποιείται ο μεταγλωττιστής της C και πραγματοποιείται ένα ενδιάμεσο βήμα μεταγλώττισης. Το API θεωρείται γενικά προτιμότερο καθώς είναι ταχύτερο και πιο σταθερό.<br />
+Αξίζει να αναφερθεί ότι ενώ η CFFI υποστηρίζει τη C, δεν υποστηρίζει τη C++. Για την C++ υπάρχουν άλλες λύσεις όπως η Python βιβλιοθήκη pybind11 (<a href="https://pybind11.readthedocs.io/en/stable/" target="_blank">https://pybind11.readthedocs.io/en/stable/</a>). Καθώς η CFFI είναι εξωτερική βιβλιοθήκη θα πρέπει πρώτα να εγκατασταθεί. Αυτό γίνεται εύκολα με το pip ως εξής:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>$ pip install cffi
+</span></code></pre></div>
+<p><i>Παράδειγμα χρήσης της CFFI στην κατάσταση λειτουργίας ABI</i>  Στη συνέχεια, στον κώδικα 20.6, υλοποιείται η ίδια λειτουργικότητα όπως και στο παράδειγμα με τη βιβλιοθήκη ctypes. Για το ABI θα χρησιμοποιηθεί η βιβλιοθήκη <span class="p-style">libblackbox.so</span> που δημιουργήθηκε παραπάνω, στο τμήμα 20.2.</p>
+<div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 20.6: ch20_main_cffi_abi.py - κώδικας που χρησιμοποιεί τη βιβλιοθήκη CFFI στην κατάσταση ABI</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-10-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-10-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-10-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-10-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-10-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-10-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-10-10">10</a></span>
+<span class="normal"><a href="#__codelineno-10-11">11</a></span>
+<span class="normal"><a href="#__codelineno-10-12">12</a></span>
+<span class="normal"><a href="#__codelineno-10-13">13</a></span>
+<span class="normal"><a href="#__codelineno-10-14">14</a></span>
+<span class="normal"><a href="#__codelineno-10-15">15</a></span>
+<span class="normal"><a href="#__codelineno-10-16">16</a></span>
+<span class="normal"><a href="#__codelineno-10-17">17</a></span>
+<span class="normal"><a href="#__codelineno-10-18">18</a></span>
+<span class="normal"><a href="#__codelineno-10-19">19</a></span>
+<span class="normal"><a href="#__codelineno-10-20">20</a></span>
+<span class="normal"><a href="#__codelineno-10-21">21</a></span>
+<span class="normal"><a href="#__codelineno-10-22">22</a></span>
+<span class="normal"><a href="#__codelineno-10-23">23</a></span>
+<span class="normal"><a href="#__codelineno-10-24">24</a></span>
+<span class="normal"><a href="#__codelineno-10-25">25</a></span>
+<span class="normal"><a href="#__codelineno-10-26">26</a></span>
+<span class="normal"><a href="#__codelineno-10-27">27</a></span>
+<span class="normal"><a href="#__codelineno-10-28">28</a></span>
+<span class="normal"><a href="#__codelineno-10-29">29</a></span>
+<span class="normal"><a href="#__codelineno-10-30">30</a></span>
+<span class="normal"><a href="#__codelineno-10-31">31</a></span>
+<span class="normal"><a href="#__codelineno-10-32">32</a></span>
+<span class="normal"><a href="#__codelineno-10-33">33</a></span>
+<span class="normal"><a href="#__codelineno-10-34">34</a></span>
+<span class="normal"><a href="#__codelineno-10-35">35</a></span>
+<span class="normal"><a href="#__codelineno-10-36">36</a></span>
+<span class="normal"><a href="#__codelineno-10-37">37</a></span>
+<span class="normal"><a href="#__codelineno-10-38">38</a></span>
+<span class="normal"><a href="#__codelineno-10-39">39</a></span>
+<span class="normal"><a href="#__codelineno-10-40">40</a></span>
+<span class="normal"><a href="#__codelineno-10-41">41</a></span>
+<span class="normal"><a href="#__codelineno-10-42">42</a></span>
+<span class="normal"><a href="#__codelineno-10-43">43</a></span>
+<span class="normal"><a href="#__codelineno-10-44">44</a></span>
+<span class="normal"><a href="#__codelineno-10-45">45</a></span>
+<span class="normal"><a href="#__codelineno-10-46">46</a></span>
+<span class="normal"><a href="#__codelineno-10-47">47</a></span>
+<span class="normal"><a href="#__codelineno-10-48">48</a></span>
+<span class="normal"><a href="#__codelineno-10-49">49</a></span>
+<span class="normal"><a href="#__codelineno-10-50">50</a></span>
+<span class="normal"><a href="#__codelineno-10-51">51</a></span>
+<span class="normal"><a href="#__codelineno-10-52">52</a></span>
+<span class="normal"><a href="#__codelineno-10-53">53</a></span>
+<span class="normal"><a href="#__codelineno-10-54">54</a></span>
+<span class="normal"><a href="#__codelineno-10-55">55</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">ch20_main_data</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">cffi</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5"></a>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="n">ffi</span> <span class="o">=</span> <span class="n">cffi</span><span class="o">.</span><span class="n">FFI</span><span class="p">()</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;win&quot;</span><span class="p">):</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8"></a>    <span class="n">clib</span> <span class="o">=</span> <span class="n">ffi</span><span class="o">.</span><span class="n">dlopen</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;blackbox.dll&quot;</span><span class="p">))</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="k">elif</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;linux&quot;</span><span class="p">):</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10"></a>    <span class="n">clib</span> <span class="o">=</span> <span class="n">ffi</span><span class="o">.</span><span class="n">dlopen</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;libblackbox.so&quot;</span><span class="p">))</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11"></a><span class="k">elif</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;darwin&quot;</span><span class="p">):</span>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12"></a>    <span class="n">clib</span> <span class="o">=</span> <span class="n">ffi</span><span class="o">.</span><span class="n">dlopen</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;libblackbox.dylib&quot;</span><span class="p">))</span>
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13"></a><span class="k">else</span><span class="p">:</span>
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unknown OS&quot;</span><span class="p">)</span>
+</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15"></a>    <span class="n">exit</span><span class="p">()</span>
+</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16"></a>
+</span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17"></a><span class="n">ffi</span><span class="o">.</span><span class="n">cdef</span><span class="p">(</span><span class="s2">&quot;uint32_t jhash(const char *str, size_t len);&quot;</span><span class="p">)</span>
+</span><span id="__span-10-18"><a id="__codelineno-10-18" name="__codelineno-10-18"></a><span class="n">ffi</span><span class="o">.</span><span class="n">cdef</span><span class="p">(</span><span class="s2">&quot;uint32_t jhash_w(const char *str);&quot;</span><span class="p">)</span>
+</span><span id="__span-10-19"><a id="__codelineno-10-19" name="__codelineno-10-19"></a><span class="n">ffi</span><span class="o">.</span><span class="n">cdef</span><span class="p">(</span>
+</span><span id="__span-10-20"><a id="__codelineno-10-20" name="__codelineno-10-20"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="__span-10-21"><a id="__codelineno-10-21" name="__codelineno-10-21"></a><span class="sd">         typedef struct</span>
+</span><span id="__span-10-22"><a id="__codelineno-10-22" name="__codelineno-10-22"></a><span class="sd">        {</span>
+</span><span id="__span-10-23"><a id="__codelineno-10-23" name="__codelineno-10-23"></a><span class="sd">            char name[21];</span>
+</span><span id="__span-10-24"><a id="__codelineno-10-24" name="__codelineno-10-24"></a><span class="sd">            uint32_t password;</span>
+</span><span id="__span-10-25"><a id="__codelineno-10-25" name="__codelineno-10-25"></a><span class="sd">            uint32_t salt;</span>
+</span><span id="__span-10-26"><a id="__codelineno-10-26" name="__codelineno-10-26"></a><span class="sd">        } user;</span>
+</span><span id="__span-10-27"><a id="__codelineno-10-27" name="__codelineno-10-27"></a><span class="sd">         &quot;&quot;&quot;</span>
+</span><span id="__span-10-28"><a id="__codelineno-10-28" name="__codelineno-10-28"></a><span class="p">)</span>
+</span><span id="__span-10-29"><a id="__codelineno-10-29" name="__codelineno-10-29"></a>
+</span><span id="__span-10-30"><a id="__codelineno-10-30" name="__codelineno-10-30"></a><span class="n">users</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-10-31"><a id="__codelineno-10-31" name="__codelineno-10-31"></a><span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">password_txt</span><span class="p">,</span> <span class="n">salt</span> <span class="ow">in</span> <span class="n">ch20_main_data</span><span class="o">.</span><span class="n">raw_data</span><span class="p">:</span>
+</span><span id="__span-10-32"><a id="__codelineno-10-32" name="__codelineno-10-32"></a>    <span class="n">v</span> <span class="o">=</span> <span class="n">ffi</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;user*&quot;</span><span class="p">)</span>
+</span><span id="__span-10-33"><a id="__codelineno-10-33" name="__codelineno-10-33"></a>    <span class="n">v</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">)</span>
+</span><span id="__span-10-34"><a id="__codelineno-10-34" name="__codelineno-10-34"></a>    <span class="n">v</span><span class="o">.</span><span class="n">salt</span> <span class="o">=</span> <span class="n">salt</span>
+</span><span id="__span-10-35"><a id="__codelineno-10-35" name="__codelineno-10-35"></a>    <span class="n">salted_password_txt</span> <span class="o">=</span> <span class="n">password_txt</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">salt</span><span class="p">)</span>
+</span><span id="__span-10-36"><a id="__codelineno-10-36" name="__codelineno-10-36"></a>    <span class="n">s</span> <span class="o">=</span> <span class="n">ffi</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;char[]&quot;</span><span class="p">,</span> <span class="n">salted_password_txt</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">))</span>
+</span><span id="__span-10-37"><a id="__codelineno-10-37" name="__codelineno-10-37"></a>    <span class="n">v</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">clib</span><span class="o">.</span><span class="n">jhash</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">salted_password_txt</span><span class="p">))</span>
+</span><span id="__span-10-38"><a id="__codelineno-10-38" name="__codelineno-10-38"></a>    <span class="nb">print</span><span class="p">(</span>
+</span><span id="__span-10-39"><a id="__codelineno-10-39" name="__codelineno-10-39"></a>        <span class="sa">f</span><span class="s2">&quot;user=</span><span class="si">{</span><span class="n">ffi</span><span class="o">.</span><span class="n">string</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">, password=</span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">password</span><span class="si">}</span><span class="s2">, salt=</span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">salt</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="__span-10-40"><a id="__codelineno-10-40" name="__codelineno-10-40"></a>    <span class="p">)</span>
+</span><span id="__span-10-41"><a id="__codelineno-10-41" name="__codelineno-10-41"></a>    <span class="n">users</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+</span><span id="__span-10-42"><a id="__codelineno-10-42" name="__codelineno-10-42"></a>
+</span><span id="__span-10-43"><a id="__codelineno-10-43" name="__codelineno-10-43"></a><span class="n">n</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter user name: &quot;</span><span class="p">)</span>
+</span><span id="__span-10-44"><a id="__codelineno-10-44" name="__codelineno-10-44"></a><span class="n">p</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Enter the password of user </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">: &quot;</span><span class="p">)</span>
+</span><span id="__span-10-45"><a id="__codelineno-10-45" name="__codelineno-10-45"></a><span class="n">login</span> <span class="o">=</span> <span class="kc">False</span>
+</span><span id="__span-10-46"><a id="__codelineno-10-46" name="__codelineno-10-46"></a><span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">users</span><span class="p">:</span>
+</span><span id="__span-10-47"><a id="__codelineno-10-47" name="__codelineno-10-47"></a>    <span class="k">if</span> <span class="n">ffi</span><span class="o">.</span><span class="n">string</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="n">n</span><span class="p">:</span>
+</span><span id="__span-10-48"><a id="__codelineno-10-48" name="__codelineno-10-48"></a>        <span class="k">continue</span>
+</span><span id="__span-10-49"><a id="__codelineno-10-49" name="__codelineno-10-49"></a>    <span class="n">sp_txt</span> <span class="o">=</span> <span class="n">p</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">salt</span><span class="p">)</span>
+</span><span id="__span-10-50"><a id="__codelineno-10-50" name="__codelineno-10-50"></a>    <span class="n">s</span> <span class="o">=</span> <span class="n">ffi</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;char[]&quot;</span><span class="p">,</span> <span class="n">sp_txt</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">))</span>
+</span><span id="__span-10-51"><a id="__codelineno-10-51" name="__codelineno-10-51"></a>    <span class="n">c</span> <span class="o">=</span> <span class="n">clib</span><span class="o">.</span><span class="n">jhash_w</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</span><span id="__span-10-52"><a id="__codelineno-10-52" name="__codelineno-10-52"></a>    <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="n">v</span><span class="o">.</span><span class="n">password</span><span class="p">:</span>
+</span><span id="__span-10-53"><a id="__codelineno-10-53" name="__codelineno-10-53"></a>        <span class="n">login</span> <span class="o">=</span> <span class="kc">True</span>
+</span><span id="__span-10-54"><a id="__codelineno-10-54" name="__codelineno-10-54"></a>        <span class="k">break</span>
+</span><span id="__span-10-55"><a id="__codelineno-10-55" name="__codelineno-10-55"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LOGIN SUCCESS&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">login</span> <span class="k">else</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LOGIN FAILED&quot;</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Στις γραμμές 6-15 φορτώνεται το αρχείο βιβλιοθήκης, ανάλογα με το λειτουργικό σύστημα (π.χ. για ένα σύστημα Linux είναι το <span class="p-style">libblackbox.so</span>), που πρέπει να βρίσκεται στον ίδιο κατάλογο με τον κώδικα Python που εκτελείται.<br />
+Στις γραμμές 17-18 υπάρχουν οι εντολές που γνωστοποιούν στο CFFI τις δηλώσεις των συναρτήσεων <span class="p-style">jhash()</span> και <span class="p-style">jhash_w()</span>.<br />
+Στις γραμμές 19-28 υπάρχει η δήλωση της δομής <span class="p-style">user</span>. Όπως και στις δηλώσεις των συναρτήσεων, ο κώδικας που χρησιμοποιείται είναι αυτούσιος C κώδικας που μπορεί να αντιγραφεί κατευθείαν από το αρχείο επικεφαλίδας <span class="p-style">ch20_blackbox.h</span>. <br />
+Στη γραμμή 32 χρησιμοποιείται μέσα στα εισαγωγικά ο συμβολισμός δείκτη προς τη δομή <span class="p-style">user</span> και στις επόμενες γραμμές η αναφορά <span class="p-style">v</span> συμπληρώνεται με τιμές χρησιμοποιώντας τον συμβολισμό τελείας (dot notation).<br />
+Στη γραμμή 36 καθορίζεται ο τύπος δεδομένων και το περιεχόμενο που θα περάσει ως πρώτο όρισμα στη συνάρτηση <span class="p-style">jhash()</span>.
+Στη γραμμή 37 καλείται η συνάρτηση <span class="p-style">jhash()</span> και επιστρέφει το αποτέλεσμά της στο πεδίο password της δομής <span class="p-style">user</span>. Στη γραμμή 51 καλείται η συνάρτηση <span class="p-style">jhash_w()</span> και η τιμή που επιστρέφει ελέγχεται για την επιβεβαίωση της ορθότητας του <span class="p-style">password</span> που έχει εισαχθεί.<br />
+Η εκτέλεση του <span class="p-style">ch20_main_cffi_abi.py</span> θα δώσει την ακόλουθη έξοδο:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>$ python ch20_main_cffi_abi.py
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>...
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>Enter user name: happyhippo
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>Enter the password of user happyhippo: password
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>LOGIN SUCCESS
+</span></code></pre></div>
+<p><i>Παράδειγμα χρήσης της CFFI στην κατάσταση λειτουργίας API</i> Σε αυτό το παράδειγμα θα παρουσιαστεί κώδικας που επιτυγχάνει την ίδια λειτουργικότητα με τα δύο προηγούμενα παραδείγματα, όμως αυτήν τη φορά με το CFFI/API. Ο κώδικας Python χωρίζεται σε δύο αρχεία, με το πρώτο (κώδικας 20.7) να δημιουργεί τη βιβλιοθήκη μεταγλωττίζοντας τον C κώδικα και επιτρέποντας τον χειρισμό της ως module της Python. Ο δεύτερος κώδικας Python (κώδικας 20.8) είναι παρόμοιος με τον κώδικα στο παράδειγμα CFFI/ABI, αλλά πλέον είναι συντομότερος.</p>
+<div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 20.7: ch20_main_cffi_api_builder.py - κώδικας δημιουργίας module με συναρτήσεις και δομές C κώδικα.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-12-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-12-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-12-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-12-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-12-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-12-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-12-10">10</a></span>
+<span class="normal"><a href="#__codelineno-12-11">11</a></span>
+<span class="normal"><a href="#__codelineno-12-12">12</a></span>
+<span class="normal"><a href="#__codelineno-12-13">13</a></span>
+<span class="normal"><a href="#__codelineno-12-14">14</a></span>
+<span class="normal"><a href="#__codelineno-12-15">15</a></span>
+<span class="normal"><a href="#__codelineno-12-16">16</a></span>
+<span class="normal"><a href="#__codelineno-12-17">17</a></span>
+<span class="normal"><a href="#__codelineno-12-18">18</a></span>
+<span class="normal"><a href="#__codelineno-12-19">19</a></span>
+<span class="normal"><a href="#__codelineno-12-20">20</a></span>
+<span class="normal"><a href="#__codelineno-12-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">cffi</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2"></a>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="n">ffi</span> <span class="o">=</span> <span class="n">cffi</span><span class="o">.</span><span class="n">FFI</span><span class="p">()</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="n">ffi</span><span class="o">.</span><span class="n">set_source</span><span class="p">(</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5"></a>    <span class="s2">&quot;_jhash&quot;</span><span class="p">,</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6"></a>    <span class="s1">&#39;#include &quot;ch20_blackbox.h&quot;&#39;</span><span class="p">,</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7"></a>    <span class="n">sources</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ch20_blackbox.c&quot;</span><span class="p">],</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="p">)</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="n">ffi</span><span class="o">.</span><span class="n">cdef</span><span class="p">(</span><span class="s2">&quot;uint32_t jhash(const char *str, size_t len);&quot;</span><span class="p">)</span>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="n">ffi</span><span class="o">.</span><span class="n">cdef</span><span class="p">(</span><span class="s2">&quot;uint32_t jhash_w(const char *str);&quot;</span><span class="p">)</span>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="n">ffi</span><span class="o">.</span><span class="n">cdef</span><span class="p">(</span>
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="sd">         typedef struct</span>
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14"></a><span class="sd">        {</span>
+</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15"></a><span class="sd">            char name[21];</span>
+</span><span id="__span-12-16"><a id="__codelineno-12-16" name="__codelineno-12-16"></a><span class="sd">            uint32_t password;</span>
+</span><span id="__span-12-17"><a id="__codelineno-12-17" name="__codelineno-12-17"></a><span class="sd">            uint32_t salt;</span>
+</span><span id="__span-12-18"><a id="__codelineno-12-18" name="__codelineno-12-18"></a><span class="sd">        } user;</span>
+</span><span id="__span-12-19"><a id="__codelineno-12-19" name="__codelineno-12-19"></a><span class="sd">         &quot;&quot;&quot;</span>
+</span><span id="__span-12-20"><a id="__codelineno-12-20" name="__codelineno-12-20"></a><span class="p">)</span>
+</span><span id="__span-12-21"><a id="__codelineno-12-21" name="__codelineno-12-21"></a><span class="n">library</span> <span class="o">=</span> <span class="n">ffi</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Στις γραμμές 4-8 ορίζεται το όνομα του module που θα δημιουργηθεί (<span class="p-style">_jhash</span>), καθορίζεται ποια θα είναι τα αρχεία πηγαίου κώδικα που θα μεταγλωττιστούν και ποιες εντολές συμπερίληψης αρχείων επικεφαλίδων θα χρειαστεί να δοθούν.<br />
+Στις γραμμές 9-20, σε αντιστοιχία με το CFFI/ABI υπάρχουν οι δηλώσεις των συναρτήσεων <span class="p-style">jhash()</span> και <span class="p-style">jhash_w()</span> και της δομής <span class="p-style">user</span>.
+Στη γραμμή 21 υπάρχει η εντολή που εκκινεί τη μεταγλώττιση του C κώδικα, προκειμένου να δημιουργηθεί η βιβλιοθήκη και το module που θα χρησιμοποιηθεί στη συνέχεια.<br />
+Η επιτυχής εκτέλεση του <span class="p-style">ch20_main_cffi_abi_builder.py</span> εμφανίζει τα ακόλουθα μηνύματα:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>$ python ch20_main_cffi_api_builder.py
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>generating ./_jhash.c
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>the current directory is &#39;/.../src&#39;
+</span></code></pre></div>
+<p>Ο κώδικας 20.8 χρησιμοποιεί το module που δημιουργήθηκε έτσι ώστε να επιτευχθεί η ίδια λειτουργικότητα με τα προηγούμενα παραδείγματα.</p>
+<div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 20.8: ch20_main_cffi_api.py - κώδικας που χρησιμοποιεί τη βιβλιοθήκη CFFI στην κατάσταση API.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-14-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-14-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-14-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-14-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-14-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-14-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-14-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-14-10">10</a></span>
+<span class="normal"><a href="#__codelineno-14-11">11</a></span>
+<span class="normal"><a href="#__codelineno-14-12">12</a></span>
+<span class="normal"><a href="#__codelineno-14-13">13</a></span>
+<span class="normal"><a href="#__codelineno-14-14">14</a></span>
+<span class="normal"><a href="#__codelineno-14-15">15</a></span>
+<span class="normal"><a href="#__codelineno-14-16">16</a></span>
+<span class="normal"><a href="#__codelineno-14-17">17</a></span>
+<span class="normal"><a href="#__codelineno-14-18">18</a></span>
+<span class="normal"><a href="#__codelineno-14-19">19</a></span>
+<span class="normal"><a href="#__codelineno-14-20">20</a></span>
+<span class="normal"><a href="#__codelineno-14-21">21</a></span>
+<span class="normal"><a href="#__codelineno-14-22">22</a></span>
+<span class="normal"><a href="#__codelineno-14-23">23</a></span>
+<span class="normal"><a href="#__codelineno-14-24">24</a></span>
+<span class="normal"><a href="#__codelineno-14-25">25</a></span>
+<span class="normal"><a href="#__codelineno-14-26">26</a></span>
+<span class="normal"><a href="#__codelineno-14-27">27</a></span>
+<span class="normal"><a href="#__codelineno-14-28">28</a></span>
+<span class="normal"><a href="#__codelineno-14-29">29</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">ch20_main_data</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">_jhash</span><span class="w"> </span><span class="kn">import</span> <span class="n">lib</span><span class="p">,</span> <span class="n">ffi</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3"></a>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4"></a><span class="n">users</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">password_txt</span><span class="p">,</span> <span class="n">salt</span> <span class="ow">in</span> <span class="n">ch20_main_data</span><span class="o">.</span><span class="n">raw_data</span><span class="p">:</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6"></a>    <span class="n">v</span> <span class="o">=</span> <span class="n">ffi</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;user*&quot;</span><span class="p">)</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7"></a>    <span class="n">v</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">)</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8"></a>    <span class="n">v</span><span class="o">.</span><span class="n">salt</span> <span class="o">=</span> <span class="n">salt</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9"></a>    <span class="n">salted_password_txt</span> <span class="o">=</span> <span class="n">password_txt</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">salt</span><span class="p">)</span>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10"></a>    <span class="n">s</span> <span class="o">=</span> <span class="n">ffi</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;char[]&quot;</span><span class="p">,</span> <span class="n">salted_password_txt</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">))</span>
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11"></a>    <span class="n">v</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">jhash</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">salted_password_txt</span><span class="p">))</span>
+</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12"></a>    <span class="nb">print</span><span class="p">(</span>
+</span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13"></a>        <span class="sa">f</span><span class="s2">&quot;user=</span><span class="si">{</span><span class="n">ffi</span><span class="o">.</span><span class="n">string</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">, password=</span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">password</span><span class="si">}</span><span class="s2">, salt=</span><span class="si">{</span><span class="n">v</span><span class="o">.</span><span class="n">salt</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14"></a>    <span class="p">)</span>
+</span><span id="__span-14-15"><a id="__codelineno-14-15" name="__codelineno-14-15"></a>    <span class="n">users</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+</span><span id="__span-14-16"><a id="__codelineno-14-16" name="__codelineno-14-16"></a>
+</span><span id="__span-14-17"><a id="__codelineno-14-17" name="__codelineno-14-17"></a><span class="n">n</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter user name: &quot;</span><span class="p">)</span>
+</span><span id="__span-14-18"><a id="__codelineno-14-18" name="__codelineno-14-18"></a><span class="n">p</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Enter the password of user </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">: &quot;</span><span class="p">)</span>
+</span><span id="__span-14-19"><a id="__codelineno-14-19" name="__codelineno-14-19"></a><span class="n">login</span> <span class="o">=</span> <span class="kc">False</span>
+</span><span id="__span-14-20"><a id="__codelineno-14-20" name="__codelineno-14-20"></a><span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">users</span><span class="p">:</span>
+</span><span id="__span-14-21"><a id="__codelineno-14-21" name="__codelineno-14-21"></a>    <span class="k">if</span> <span class="n">ffi</span><span class="o">.</span><span class="n">string</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="n">n</span><span class="p">:</span>
+</span><span id="__span-14-22"><a id="__codelineno-14-22" name="__codelineno-14-22"></a>        <span class="k">continue</span>
+</span><span id="__span-14-23"><a id="__codelineno-14-23" name="__codelineno-14-23"></a>    <span class="n">sp_txt</span> <span class="o">=</span> <span class="n">p</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">salt</span><span class="p">)</span>
+</span><span id="__span-14-24"><a id="__codelineno-14-24" name="__codelineno-14-24"></a>    <span class="n">s</span> <span class="o">=</span> <span class="n">ffi</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;char[]&quot;</span><span class="p">,</span> <span class="n">sp_txt</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">))</span>
+</span><span id="__span-14-25"><a id="__codelineno-14-25" name="__codelineno-14-25"></a>    <span class="n">c</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">jhash_w</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</span><span id="__span-14-26"><a id="__codelineno-14-26" name="__codelineno-14-26"></a>    <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="n">v</span><span class="o">.</span><span class="n">password</span><span class="p">:</span>
+</span><span id="__span-14-27"><a id="__codelineno-14-27" name="__codelineno-14-27"></a>        <span class="n">login</span> <span class="o">=</span> <span class="kc">True</span>
+</span><span id="__span-14-28"><a id="__codelineno-14-28" name="__codelineno-14-28"></a>        <span class="k">break</span>
+</span><span id="__span-14-29"><a id="__codelineno-14-29" name="__codelineno-14-29"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LOGIN SUCCESS&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">login</span> <span class="k">else</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LOGIN FAILED&quot;</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Στη γραμμή 2 γίνονται import τα προκαθορισμένα αντικείμενα <span class="p-style">lib</span> και <span class="p-style">ffi</span> του νέου module <span class="p-style">_jhash</span>.
+Στις γραμμές 11 και 25 καλούνται ως μέλη του <span class="p-style">lib</span> οι συναρτήσεις <span class="p-style">jhash()</span> και <span class="p-style">jhash_w()</span>.
+Τελικά, η εκτέλεση του <span class="p-style">ch20_main_cffi_api.py</span> δίνει την ίδια έξοδο όπως και στα προηγούμενα παραδείγματα.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>$ python ch20_main_cffi_api.py
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>...
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>Enter user name: happyhippo
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>Enter the password of user happyhippo: password
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>LOGIN SUCCESS
+</span></code></pre></div>
+<h3 id="2023-guis-python-c">20.2.3 Δημιουργία GUIs με Python και "λογικής" με C</h3>
+<p>Όπως αναφέρθηκε στο Κεφάλαιο 19 η Python μπορεί να χρησιμοποιηθεί για να δημιουργηθεί ένα γραφικό περιβάλλον διεπαφής, ενώ ο κώδικας που παράγει τα αποτελέσματα μπορεί να είναι σε C. Ένα σχετικό παράδειγμα θα παρουσιαστεί στη συνέχεια όπου μια συνάρτηση που έχει γραφεί σε C εκτελεί μια υπολογιστικά χρονοβόρα (υποθετικά) διαδικασία και επιστρέφει έναν πίνακα αποτελεσμάτων. Για την εμφάνιση των αποτελεσμάτων χρησιμοποιείται η Python και με τη χρήση της βιβλιοθήκης Tkinter δημιουργείται ένα παράθυρο με ένα πλήκτρο και χώρο εμφάνισης ενός γραφήματος. Όταν ο χρήστης πατήσει το πλήκτρο, εκτελείται ο κώδικας C και τα αποτελέσματα που επιστρέφει χρησιμοποιούνται για να σχεδιαστεί ένα γράφημα με τη βιβλιοθήκη matplotlib. Στο παράδειγμα αυτό θα χρησιμοποιηθεί η διασύνδεση CFFI/ABI και οι εντολές μεταγλώττισης και εκτέλεσης που θα παρουσιαστούν θα αφορούν τα Windows, αλλά η διαδικασία είναι παρόμοια και σε Linux ή MacOS. Ο κώδικας 20.9 είναι ο κώδικας C του παραδείγματος, ενώ ο κώδικας 20.10 είναι κώδικας Python που καλεί τον κώδικα C και δημιουργεί το παράθυρο της εφαρμογής.</p>
+<p>```{.c title="Κώδικας 20.9: ch20_gui_logic.c - κώδικας σε C που επιστρέφει έναν πίνακα 5 τιμών, προκειμένου να απεικονιστεί
+στη συνέχεια διαγραμματικά." linenums="1"}</p>
+<h1 id="include">include <stdlib.h></h1>
+<p>int *get_values(void) {
+  static int values[5] = {4, 7, 2, 3, 9};
+  return values;
+}</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>Για να δημιουργηθεί η βιβλιοθήκη &lt;span class=&quot;p-style&quot;&gt;gui_logic&lt;/span&gt; θα πρέπει να δοθεί η ακόλουθη εντολή μεταγλώττισης:
+</span></code></pre></div>
+<blockquote>
+<p>gcc ‐shared ‐o gui_logic.dll ch20_gui_logic.c ‐fPIC
+<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>Το αρχείο &lt;span class=&quot;p-style&quot;&gt;gui_logic.dll&lt;/span&gt; που δημιουργείται, χρησιμοποιείται στον κώδικα 20.10 που ακολουθεί:
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>```{.py title=&quot;Κώδικας 20.10: ch20_gui_cffi.py - κώδικας Python που καλεί κώδικα C, κάνοντας χρήση της βιβλιοθήκης CFFI/ABI.&quot; linenums=&quot;1&quot;}
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>import tkinter as tk
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>import os
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>import sys
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>from matplotlib.figure import Figure
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>from cffi import FFI
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>
+</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>ffi = FFI()  # δημιουργία ενός αντικειμένου FFI
+</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>if sys.platform.startswith(&quot;win&quot;):
+</span><span id="__span-17-13"><a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>    clib = ffi.dlopen(os.path.join(os.getcwd(), &quot;gui_logic.dll&quot;))
+</span><span id="__span-17-14"><a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>elif sys.platform.startswith(&quot;linux&quot;):
+</span><span id="__span-17-15"><a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>    clib = ffi.dlopen(os.path.join(os.getcwd(), &quot;libgui_logic.so&quot;))
+</span><span id="__span-17-16"><a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>elif sys.platform.startswith(&quot;darwin&quot;):
+</span><span id="__span-17-17"><a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a>    clib = ffi.dlopen(os.path.join(os.getcwd(), &quot;libgui_logic.dylib&quot;))
+</span><span id="__span-17-18"><a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a>else:
+</span><span id="__span-17-19"><a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a>    print(&quot;Unknown OS&quot;)
+</span><span id="__span-17-20"><a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a>    exit()
+</span><span id="__span-17-21"><a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a>
+</span><span id="__span-17-22"><a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a>ffi.cdef(&quot;int* get_values();&quot;)  # δήλωση του πρωτοτύπου της συνάρτησης C
+</span><span id="__span-17-23"><a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a>
+</span><span id="__span-17-24"><a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a>
+</span><span id="__span-17-25"><a id="__codelineno-17-25" name="__codelineno-17-25" href="#__codelineno-17-25"></a># ανάκτηση τιμών από τη C και μετατροπή τους σε λίστα Python
+</span><span id="__span-17-26"><a id="__codelineno-17-26" name="__codelineno-17-26" href="#__codelineno-17-26"></a>def get_c_values():
+</span><span id="__span-17-27"><a id="__codelineno-17-27" name="__codelineno-17-27" href="#__codelineno-17-27"></a>    c_values = clib.get_values()
+</span><span id="__span-17-28"><a id="__codelineno-17-28" name="__codelineno-17-28" href="#__codelineno-17-28"></a>    return [c_values[i] for i in range(5)]
+</span><span id="__span-17-29"><a id="__codelineno-17-29" name="__codelineno-17-29" href="#__codelineno-17-29"></a>
+</span><span id="__span-17-30"><a id="__codelineno-17-30" name="__codelineno-17-30" href="#__codelineno-17-30"></a>
+</span><span id="__span-17-31"><a id="__codelineno-17-31" name="__codelineno-17-31" href="#__codelineno-17-31"></a># ανανέωση του γραφήματος
+</span><span id="__span-17-32"><a id="__codelineno-17-32" name="__codelineno-17-32" href="#__codelineno-17-32"></a>def update_plot():
+</span><span id="__span-17-33"><a id="__codelineno-17-33" name="__codelineno-17-33" href="#__codelineno-17-33"></a>    data = get_c_values()
+</span><span id="__span-17-34"><a id="__codelineno-17-34" name="__codelineno-17-34" href="#__codelineno-17-34"></a>    ax.clear()
+</span><span id="__span-17-35"><a id="__codelineno-17-35" name="__codelineno-17-35" href="#__codelineno-17-35"></a>    ax.plot(data, marker=&quot;o&quot;)
+</span><span id="__span-17-36"><a id="__codelineno-17-36" name="__codelineno-17-36" href="#__codelineno-17-36"></a>    canvas.draw()
+</span><span id="__span-17-37"><a id="__codelineno-17-37" name="__codelineno-17-37" href="#__codelineno-17-37"></a>
+</span><span id="__span-17-38"><a id="__codelineno-17-38" name="__codelineno-17-38" href="#__codelineno-17-38"></a>
+</span><span id="__span-17-39"><a id="__codelineno-17-39" name="__codelineno-17-39" href="#__codelineno-17-39"></a># δημιουργία του παραθύρου
+</span><span id="__span-17-40"><a id="__codelineno-17-40" name="__codelineno-17-40" href="#__codelineno-17-40"></a>root = tk.Tk()
+</span><span id="__span-17-41"><a id="__codelineno-17-41" name="__codelineno-17-41" href="#__codelineno-17-41"></a>root.title(&quot;CFFI Tkinter App&quot;)
+</span><span id="__span-17-42"><a id="__codelineno-17-42" name="__codelineno-17-42" href="#__codelineno-17-42"></a>
+</span><span id="__span-17-43"><a id="__codelineno-17-43" name="__codelineno-17-43" href="#__codelineno-17-43"></a># δημιουργία του γραφήματος
+</span><span id="__span-17-44"><a id="__codelineno-17-44" name="__codelineno-17-44" href="#__codelineno-17-44"></a>fig = Figure(figsize=(5, 4), dpi=100)
+</span><span id="__span-17-45"><a id="__codelineno-17-45" name="__codelineno-17-45" href="#__codelineno-17-45"></a>ax = fig.add_subplot(111)
+</span><span id="__span-17-46"><a id="__codelineno-17-46" name="__codelineno-17-46" href="#__codelineno-17-46"></a>
+</span><span id="__span-17-47"><a id="__codelineno-17-47" name="__codelineno-17-47" href="#__codelineno-17-47"></a># ενσωμάτωση του γραφήματος στο παράθυρο
+</span><span id="__span-17-48"><a id="__codelineno-17-48" name="__codelineno-17-48" href="#__codelineno-17-48"></a>canvas = FigureCanvasTkAgg(fig, master=root)
+</span><span id="__span-17-49"><a id="__codelineno-17-49" name="__codelineno-17-49" href="#__codelineno-17-49"></a>canvas_widget = canvas.get_tk_widget()
+</span><span id="__span-17-50"><a id="__codelineno-17-50" name="__codelineno-17-50" href="#__codelineno-17-50"></a>canvas_widget.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+</span><span id="__span-17-51"><a id="__codelineno-17-51" name="__codelineno-17-51" href="#__codelineno-17-51"></a>
+</span><span id="__span-17-52"><a id="__codelineno-17-52" name="__codelineno-17-52" href="#__codelineno-17-52"></a># προσθήκη κουμπιού στο παράθυρο
+</span><span id="__span-17-53"><a id="__codelineno-17-53" name="__codelineno-17-53" href="#__codelineno-17-53"></a>button = tk.Button(root, text=&quot;Get C Values&quot;, command=update_plot)
+</span><span id="__span-17-54"><a id="__codelineno-17-54" name="__codelineno-17-54" href="#__codelineno-17-54"></a>button.pack(side=tk.BOTTOM)
+</span><span id="__span-17-55"><a id="__codelineno-17-55" name="__codelineno-17-55" href="#__codelineno-17-55"></a>
+</span><span id="__span-17-56"><a id="__codelineno-17-56" name="__codelineno-17-56" href="#__codelineno-17-56"></a>root.mainloop()
+</span></code></pre></div></p>
+</blockquote>
+<p>Θα πρέπει να έχει προηγηθεί η εγκατάσταση των βιβλιοθηκών της Python, cffi και matplotlib, που μπορεί να γίνει με τις ακόλουθες εντολές:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>&gt; pip install cffi
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>&gt; pip install matplotlib
+</span></code></pre></div>
+<p>Η εκτέλεση του προγράμματος γίνεται με την ακόλουθη εντολή:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>&gt; python ch20_gui_cffi.py
+</span></code></pre></div>
+<p>και εμφανίζεται η οθόνη του Σχήματος 20.2 όταν ο χρήστης πατήσει το πλήκτρο “Get C Values”.</p>
+<!-- <figure markdown="span">
+  ![ch20_gui.png](src/images/ch20_gui.png){ width="600" }
+  <figcaption>GUI που έχει δημιουργηθεί με την Python και που λαμβάνει τιμές από εκτέλεση κώδικα C.</figcaption>
+</figure> -->
+
+<p><a class="glightbox" href="../src/images/ch20_gui.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="ch20_gui.png" src="../src/images/ch20_gui.png" width="800" /></a></p>
+<div style="text-align: center;"><b> Σχήμα 20.2: </b><i>GUI που έχει δημιουργηθεί με την Python και που λαμβάνει τιμές από εκτέλεση κώδικα C.</i></div>
+
+<h2 id="203-python-c">20.3 Κλήση κώδικα Python από κώδικα C</h2>
+<p>Η Python επιτρέπει τη συγγραφή σύντομων προγραμμάτων για τη λύση προβλημάτων. Αυτός μπορεί να είναι ένας λόγος για να επιδιωχθεί η κλήση κώδικα Python από C. Για παράδειγμα η αντιστροφή ενός λεκτικού είναι πολύ απλή υπόθεση στην Python, όπως φαίνεται στον κώδικα 20.11 που ορίζει τη συνάρτηση <span class="p-style">reverse_string()</span>, που επιστρέφει αντεστραμμένο το όρισμα που δέχεται.</p>
+<div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 20.11: ch20_script.py - κώδικας σε Python που θα κληθεί από τη C.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span>
+<span class="normal"><a href="#__codelineno-20-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">reverse_string</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2"></a>    <span class="k">return</span> <span class="n">string</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Έστω ότι επιθυμούμε να καλέσουμε Python εντολές μέσα από τη C. Αυτό μπορεί να γίνει, όπως συμβαίνει στον κώδικα 20.12 που ξεκινά κάνοντας include την επικεφαλίδα <span class="p-style">Python.h</span>, η οποία δίνει πρόσβαση σε όλες τις λειτουργίες του διερμηνευτή της Python.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 20.12: ch20_c_calls_python.c - κώδικας σε C που καλεί Python κώδικα.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-21-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-21-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-21-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-21-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-21-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-21-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-21-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-21-10">10</a></span>
+<span class="normal"><a href="#__codelineno-21-11">11</a></span>
+<span class="normal"><a href="#__codelineno-21-12">12</a></span>
+<span class="normal"><a href="#__codelineno-21-13">13</a></span>
+<span class="normal"><a href="#__codelineno-21-14">14</a></span>
+<span class="normal"><a href="#__codelineno-21-15">15</a></span>
+<span class="normal"><a href="#__codelineno-21-16">16</a></span>
+<span class="normal"><a href="#__codelineno-21-17">17</a></span>
+<span class="normal"><a href="#__codelineno-21-18">18</a></span>
+<span class="normal"><a href="#__codelineno-21-19">19</a></span>
+<span class="normal"><a href="#__codelineno-21-20">20</a></span>
+<span class="normal"><a href="#__codelineno-21-21">21</a></span>
+<span class="normal"><a href="#__codelineno-21-22">22</a></span>
+<span class="normal"><a href="#__codelineno-21-23">23</a></span>
+<span class="normal"><a href="#__codelineno-21-24">24</a></span>
+<span class="normal"><a href="#__codelineno-21-25">25</a></span>
+<span class="normal"><a href="#__codelineno-21-26">26</a></span>
+<span class="normal"><a href="#__codelineno-21-27">27</a></span>
+<span class="normal"><a href="#__codelineno-21-28">28</a></span>
+<span class="normal"><a href="#__codelineno-21-29">29</a></span>
+<span class="normal"><a href="#__codelineno-21-30">30</a></span>
+<span class="normal"><a href="#__codelineno-21-31">31</a></span>
+<span class="normal"><a href="#__codelineno-21-32">32</a></span>
+<span class="normal"><a href="#__codelineno-21-33">33</a></span>
+<span class="normal"><a href="#__codelineno-21-34">34</a></span>
+<span class="normal"><a href="#__codelineno-21-35">35</a></span>
+<span class="normal"><a href="#__codelineno-21-36">36</a></span>
+<span class="normal"><a href="#__codelineno-21-37">37</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Python.h&gt;</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2"></a>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="w">  </span><span class="c1">// Αρχικοποίηση του διερμηνευτή της Python</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5"></a><span class="w">  </span><span class="n">Py_Initialize</span><span class="p">();</span>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="w">  </span><span class="c1">// Εύρεση του Python script στον ίδιο κατάλογο</span>
+</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="w">  </span><span class="n">PyRun_SimpleString</span><span class="p">(</span><span class="s">&quot;import sys&quot;</span><span class="p">);</span>
+</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="w">  </span><span class="n">PyRun_SimpleString</span><span class="p">(</span><span class="s">&quot;sys.path.append(</span><span class="se">\&quot;</span><span class="s">.</span><span class="se">\&quot;</span><span class="s">)&quot;</span><span class="p">);</span>
+</span><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9"></a>
+</span><span id="__span-21-10"><a id="__codelineno-21-10" name="__codelineno-21-10"></a><span class="w">  </span><span class="c1">// Import του module ch20_script και της συνάρτησης reverse_string</span>
+</span><span id="__span-21-11"><a id="__codelineno-21-11" name="__codelineno-21-11"></a><span class="w">  </span><span class="n">PyObject</span><span class="w"> </span><span class="o">*</span><span class="n">moduleName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PyUnicode_FromString</span><span class="p">(</span><span class="s">&quot;ch20_script&quot;</span><span class="p">);</span>
+</span><span id="__span-21-12"><a id="__codelineno-21-12" name="__codelineno-21-12"></a><span class="w">  </span><span class="n">PyObject</span><span class="w"> </span><span class="o">*</span><span class="n">module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PyImport_Import</span><span class="p">(</span><span class="n">moduleName</span><span class="p">);</span>
+</span><span id="__span-21-13"><a id="__codelineno-21-13" name="__codelineno-21-13"></a><span class="w">  </span><span class="n">PyObject</span><span class="w"> </span><span class="o">*</span><span class="n">functionName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PyUnicode_FromString</span><span class="p">(</span><span class="s">&quot;reverse_string&quot;</span><span class="p">);</span>
+</span><span id="__span-21-14"><a id="__codelineno-21-14" name="__codelineno-21-14"></a><span class="w">  </span><span class="n">PyObject</span><span class="w"> </span><span class="o">*</span><span class="n">function</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PyObject_GetAttr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span><span class="w"> </span><span class="n">functionName</span><span class="p">);</span>
+</span><span id="__span-21-15"><a id="__codelineno-21-15" name="__codelineno-21-15"></a>
+</span><span id="__span-21-16"><a id="__codelineno-21-16" name="__codelineno-21-16"></a><span class="w">  </span><span class="c1">// Δημιουργία ορισμάτων και κλήση της συνάρτησης Python</span>
+</span><span id="__span-21-17"><a id="__codelineno-21-17" name="__codelineno-21-17"></a><span class="w">  </span><span class="n">PyObject</span><span class="w"> </span><span class="o">*</span><span class="n">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PyTuple_New</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span><span id="__span-21-18"><a id="__codelineno-21-18" name="__codelineno-21-18"></a><span class="w">  </span><span class="n">PyTuple_SetItem</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">PyUnicode_FromString</span><span class="p">(</span><span class="s">&quot;Hello, world!&quot;</span><span class="p">));</span>
+</span><span id="__span-21-19"><a id="__codelineno-21-19" name="__codelineno-21-19"></a><span class="w">  </span><span class="n">PyObject</span><span class="w"> </span><span class="o">*</span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PyObject_CallObject</span><span class="p">(</span><span class="n">function</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">);</span>
+</span><span id="__span-21-20"><a id="__codelineno-21-20" name="__codelineno-21-20"></a>
+</span><span id="__span-21-21"><a id="__codelineno-21-21" name="__codelineno-21-21"></a><span class="w">  </span><span class="c1">// Λήψη του ανεστραμμένου λεκτικού από το αποτέλεσμα που επιστρέφει η Python</span>
+</span><span id="__span-21-22"><a id="__codelineno-21-22" name="__codelineno-21-22"></a><span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">reversedString</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PyUnicode_AsUTF8</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+</span><span id="__span-21-23"><a id="__codelineno-21-23" name="__codelineno-21-23"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">reversedString</span><span class="p">);</span>
+</span><span id="__span-21-24"><a id="__codelineno-21-24" name="__codelineno-21-24"></a>
+</span><span id="__span-21-25"><a id="__codelineno-21-25" name="__codelineno-21-25"></a><span class="w">  </span><span class="c1">// Απελευθέρωση μνήμης</span>
+</span><span id="__span-21-26"><a id="__codelineno-21-26" name="__codelineno-21-26"></a><span class="w">  </span><span class="n">Py_DECREF</span><span class="p">(</span><span class="n">moduleName</span><span class="p">);</span>
+</span><span id="__span-21-27"><a id="__codelineno-21-27" name="__codelineno-21-27"></a><span class="w">  </span><span class="n">Py_DECREF</span><span class="p">(</span><span class="n">module</span><span class="p">);</span>
+</span><span id="__span-21-28"><a id="__codelineno-21-28" name="__codelineno-21-28"></a><span class="w">  </span><span class="n">Py_DECREF</span><span class="p">(</span><span class="n">functionName</span><span class="p">);</span>
+</span><span id="__span-21-29"><a id="__codelineno-21-29" name="__codelineno-21-29"></a><span class="w">  </span><span class="n">Py_DECREF</span><span class="p">(</span><span class="n">function</span><span class="p">);</span>
+</span><span id="__span-21-30"><a id="__codelineno-21-30" name="__codelineno-21-30"></a><span class="w">  </span><span class="n">Py_DECREF</span><span class="p">(</span><span class="n">args</span><span class="p">);</span>
+</span><span id="__span-21-31"><a id="__codelineno-21-31" name="__codelineno-21-31"></a><span class="w">  </span><span class="n">Py_DECREF</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+</span><span id="__span-21-32"><a id="__codelineno-21-32" name="__codelineno-21-32"></a>
+</span><span id="__span-21-33"><a id="__codelineno-21-33" name="__codelineno-21-33"></a><span class="w">  </span><span class="c1">// Τερματισμός του διερμηνευτή της Python</span>
+</span><span id="__span-21-34"><a id="__codelineno-21-34" name="__codelineno-21-34"></a><span class="w">  </span><span class="n">Py_Finalize</span><span class="p">();</span>
+</span><span id="__span-21-35"><a id="__codelineno-21-35" name="__codelineno-21-35"></a>
+</span><span id="__span-21-36"><a id="__codelineno-21-36" name="__codelineno-21-36"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-21-37"><a id="__codelineno-21-37" name="__codelineno-21-37"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Στη γραμμή 5 αρχικοποιείται ο διερμηνευτής της Python και δεσμεύονται πόροι που θα αποδεσμευθούν στο τέλος του προγράμματος.<br />
+Στις γραμμές 7-8 ορίζεται ότι η αναζήτηση του κώδικα Python που βρίσκεται σε ένα αρχείο <span class="p-style">.py</span> θα γίνεται στον ίδιο κατάλογο με το τρέχον αρχείο κώδικα.<br />
+Στις γραμμές 11-14 φορτώνεται το module <span class="p-style">ch20_script.py</span> και η συνάρτησή του, <span class="p-style">reverse_string()</span>.<br />
+Στις γραμμές 17-18 δημιουργείται το όρισμα που θα περάσει στη συνάρτηση.<br />
+Στη γραμμή 19 καλείται η συνάρτηση με το όρισμα που προετοιμάστηκε και επιστρέφεται το αποτέλεσμα στη μεταβλητή <span class="p-style">result</span> ως ένας δείκτης προς <span class="p-style">PyObject</span>.<br />
+Στη γραμμή 22 μετατρέπεται το αποτέλεσμα σε τιμή που μπορεί να εκτυπωθεί από τη συνάρτηση <span class="p-style">printf()</span>.<br />
+Τέλος, στις γραμμές 26-31 απελευθερώνονται πόροι που έχουν δεσμευθεί νωρίτερα.<br />
+Η μεταγλώττιση και σύνδεση του κώδικα C θα πρέπει να προσδιορίζει τη θέση όπου θα βρεθεί το αρχείο επικεφαλίδας <span class="p-style">Python.h</span> με τον διακόπτη <span class="p-style">‐I</span>, καθώς και τη βιβλιοθήκη που δίνει πρόσβαση στον διερμηνευτή της Python με τον διακόπτη <span class="p-style">‐l</span>.  </p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>$ gcc ‐o ch20_c_calls_python ch20_c_calls_python.c ‐I/usr/include/python3.10
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>↪ ‐lpython3.10
+</span></code></pre></div>
+<p>Η εκτέλεση του προγράμματος δίνει ως αποτελέσματα το κείμενο <span class="p-style">!dlrow ,olleH</span>.
+Περισσότερες πληροφορίες για την ενσωμάτωση κώδικα Python μέσα σε κώδικα C μπορούν να αναζητηθούν στο <sup id="fnref:5"><a class="footnote-ref" href="#fn:5">5</a></sup>.</p>
+<h2 id="204">20.4 Ασκήσεις</h2>
+<p><strong><em>Άσκηση 1</em></strong><br />
+Χρησιμοποιήστε τη συνάρτηση <span class="p-style">rand()</span> της τυπικής βιβλιοθήκης της C για να δημιουργήσετε μια λίστα 10 τυχαίων τιμών στο διάστημα [0,1) που θα εκτυπωθεί από κώδικα Python με τη βιβλιοθήκη <span class="p-style">ctypes</span>.</p>
+<p><strong><em>Άσκηση 2</em></strong><br />
+Θεωρήστε ότι πετάτε βελάκια σε ένα τετράγωνο 2 x 2 εκατοστών που στο κέντρο του υπάρχει τοποθετημένος ένας κύκλος με διάμετρο 2 εκατοστά. Το εμβαδόν του τετραγώνου είναι 4 τετραγωνικά εκατοστά, ενώ ο κύκλος έχει εμβαδόν <span class="p-style">𝜋</span> τετραγωνικά εκατοστά. Η πιθανότητα να προσγειωθεί ένα βελάκι εντός του κύκλου είναι ο λόγος του εμβαδού του κύκλου προς το εμβαδόν του τετραγώνου. Αν πετάξετε έναν μεγάλο αριθμό από βελάκια και υπολογίσετε το πλήθος από τα βελάκια που πέφτουν μέσα στον κύκλο έναντι του συνολικού πλήθους ρίψεων, η τιμή αυτή θα πρέπει να είναι <span class="p-style">𝜋</span>/4. Χρησιμοποιήστε τον παραπάνω τρόπο για να υπολογίσετε μια προσέγγιση του <span class="p-style">𝜋</span> στην Python για ένα εκατομμύριο βελάκια. Υπολογίστε την επιτάχυνση του χρόνου εκτέλεσης αν χρησιμοποιηθεί λύση που καλεί κώδικα C με το CFFI/API για την πραγματοποίηση των υπολογισμών.</p>
+<p class="annotate"><strong><em>Άσκηση 3</em></strong><br />
+Γράψτε ένα πρόγραμμα σε Python που να εμφανίζει ένα GUI μέσω του οποίου θα ζητά από τον χρήστη να εισάγει έναν αριθμό. Το πρόγραμμα να εμφανίζει τις ρίζες του αριθμού από την τετραγωνική μέχρι και τη ρίζα δέκατης τάξης. Για τον υπολογισμό των ριζών να χρησιμοποιηθεί ο C κώδικας 20.13, που υπολογίζει τη ρίζα ενός αριθμού με βάση την τάξη που ζητείται(1). Χρησιμοποιήστε CFFI/API για τη διασύνδεση του Python και του C κώδικα.</p>
+<ol>
+<li>Η μέθοδος που χρησιμοποιείται είναι η μέθοδος Newton-Raphson που περιγράφεται στο <a href="https://en.wikipedia.org/wiki/Nth_root#Computing_principal_roots" target="_blank">https://en.wikipedia.org/wiki/Nth_root#Computing_principal_roots</a>  </li>
+</ol>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 20.13: ch20_e3.c - συνάρτηση υπολογισμού της n-οστής ρίζας ενός αριθμού με τη μέθοδο Newton-Raphson.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-23-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-23-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-23-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-23-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-23-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-23-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-23-10">10</a></span>
+<span class="normal"><a href="#__codelineno-23-11">11</a></span>
+<span class="normal"><a href="#__codelineno-23-12">12</a></span>
+<span class="normal"><a href="#__codelineno-23-13">13</a></span>
+<span class="normal"><a href="#__codelineno-23-14">14</a></span>
+<span class="normal"><a href="#__codelineno-23-15">15</a></span>
+<span class="normal"><a href="#__codelineno-23-16">16</a></span>
+<span class="normal"><a href="#__codelineno-23-17">17</a></span>
+<span class="normal"><a href="#__codelineno-23-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;math.h&gt;</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2"></a>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3"></a><span class="kt">double</span><span class="w"> </span><span class="nf">nth_root</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5"></a><span class="w">    </span><span class="c1">// Δεν υπάρχει πραγματική ρίζα για αρνητικό x όταν ο n είναι άρτιος</span>
+</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">NAN</span><span class="p">;</span><span class="w"> </span><span class="c1">// Not A Number, ορίζεται στο math.h</span>
+</span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-23-8"><a id="__codelineno-23-8" name="__codelineno-23-8"></a>
+</span><span id="__span-23-9"><a id="__codelineno-23-9" name="__codelineno-23-9"></a><span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">guess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+</span><span id="__span-23-10"><a id="__codelineno-23-10" name="__codelineno-23-10"></a><span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">epsilon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.000001</span><span class="p">;</span><span class="w"> </span><span class="c1">// Όριο ακρίβειας</span>
+</span><span id="__span-23-11"><a id="__codelineno-23-11" name="__codelineno-23-11"></a><span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">delta</span><span class="p">;</span>
+</span><span id="__span-23-12"><a id="__codelineno-23-12" name="__codelineno-23-12"></a><span class="w">  </span><span class="k">do</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-13"><a id="__codelineno-23-13" name="__codelineno-23-13"></a><span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">nx_minus_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pow</span><span class="p">(</span><span class="n">guess</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+</span><span id="__span-23-14"><a id="__codelineno-23-14" name="__codelineno-23-14"></a><span class="w">    </span><span class="n">delta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">nx_minus_1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">guess</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">nx_minus_1</span><span class="p">);</span>
+</span><span id="__span-23-15"><a id="__codelineno-23-15" name="__codelineno-23-15"></a><span class="w">    </span><span class="n">guess</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">delta</span><span class="p">;</span>
+</span><span id="__span-23-16"><a id="__codelineno-23-16" name="__codelineno-23-16"></a><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">epsilon</span><span class="p">);</span>
+</span><span id="__span-23-17"><a id="__codelineno-23-17" name="__codelineno-23-17"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">guess</span><span class="p">;</span>
+</span><span id="__span-23-18"><a id="__codelineno-23-18" name="__codelineno-23-18"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p><strong><em>Άσκηση 4</em></strong><br />
+Δίνεται ο κώδικας 20.14, σε Python, που ορίζει τη συνάρτηση <span class="p-style">fibonacci(n)</span>, η οποία επιστρέφει το n-οστό όρο της ακολουθίας Fibonacci. Καλέστε τη συνάρτηση μέσα από κώδικα C, προκειμένου να εμφανιστούν οι 10 πρώτοι όροι της ακολουθίας.</p>
+<div class="language-py highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 20.14: ch20_e4.py - συνάρτηση σε Python που επιστρέφει μια λίστα με τους n πρώτους όρους της ακολουθίας Fibonacci.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1">1</a></span>
+<span class="normal"><a href="#__codelineno-24-2">2</a></span>
+<span class="normal"><a href="#__codelineno-24-3">3</a></span>
+<span class="normal"><a href="#__codelineno-24-4">4</a></span>
+<span class="normal"><a href="#__codelineno-24-5">5</a></span>
+<span class="normal"><a href="#__codelineno-24-6">6</a></span>
+<span class="normal"><a href="#__codelineno-24-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2"></a>    <span class="n">sequence</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3"></a>    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4"></a>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5"></a>        <span class="n">sequence</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span><span id="__span-24-6"><a id="__codelineno-24-6" name="__codelineno-24-6"></a>        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</span><span id="__span-24-7"><a id="__codelineno-24-7" name="__codelineno-24-7"></a>    <span class="k">return</span> <span class="n">sequence</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p><i>ctypes — A foreign function library for Python.</i> <a href="https://docs.python.org/3/library/ctypes.html" target="_blank">https://docs.python.org/3/library/ctypes.html</a>. Accessed: 2023-06-01.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p><i>CFFI documentation.</i> <a href="https://cffi.readthedocs.io/en/latest/" target="_blank">https://cffi.readthedocs.io/en/latest/</a>. Accessed: 2023-06-01.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p><i>Extending Python with C or C++.</i> <a href="https://docs.python.org/3/extending/extending.html" target="_blank">https://docs.python.org/3/extending/extending.html</a>. Accessed: 2023-06-01.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p>Bob Jenkins. <i>The Hash.</i> <a href="http://www.burtleburtle.net/bob/hash/doobs.html" target="_blank">http://www.burtleburtle.net/bob/hash/doobs.html</a>. Accessed:2023-06-01.&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:5">
+<p><i>Embedding Python in Another Application.</i> <a href="https://docs.python.org/3/extending/embedding.html" target="_blank">https://docs.python.org/3/extending/embedding.html</a>. Accessed: 2023-06-01.&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Τζάλλας Αλέξανδρος, Γκόγκος Χρήστος, Τσούλος Ιωάννης &copy 2025 - το βιβλίο μεταφέρθηκε στο MkDocs από τον Γιάννη Βούλγαρη 🙏.
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "toc.follow", "navigation.instant.preview", "navigation.sections"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": false, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

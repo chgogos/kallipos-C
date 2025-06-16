@@ -1,0 +1,1679 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../chapter15/">
+      
+      
+        <link rel="next" href="../chapter17/">
+      
+      
+      <link rel="icon" href="../src/images/frontcover.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>16. Στατική και δυναμική ανάλυση κώδικα - Μια σύγχρονη προσέγγιση στη γλώσσα C</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/styles.css">
+    
+      <link rel="stylesheet" href="../css/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: none; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#16" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Μια σύγχρονη προσέγγιση στη γλώσσα C" class="md-header__button md-logo" aria-label="Μια σύγχρονη προσέγγιση στη γλώσσα C" data-md-component="logo">
+      
+  <img src="../src/images/frontcover.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Μια σύγχρονη προσέγγιση στη γλώσσα C
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              16. Στατική και δυναμική ανάλυση κώδικα
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Μια σύγχρονη προσέγγιση στη γλώσσα C" class="md-nav__button md-logo" aria-label="Μια σύγχρονη προσέγγιση στη γλώσσα C" data-md-component="logo">
+      
+  <img src="../src/images/frontcover.png" alt="logo">
+
+    </a>
+    Μια σύγχρονη προσέγγιση στη γλώσσα C
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Το βιβλίο
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Η πορεία της C μέχρι σήμερα
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Εισαγωγικές έννοιες στον προγραμματισμό με τη C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Εντολές ελέγχου και επανάληψης
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Συναρτήσεις
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Πίνακες
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Δομές και ενώσεις
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. Δείκτες
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. Αλφαριθμητικά
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9. Διαχείριση μνήμης
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10. Υλοποίηση δομών δεδομένων και αλγορίθμων στη C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Είσοδος/Έξοδος
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12. Ο προεπεξεργαστής της C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13. Διαμέριση κώδικα
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14. Ανάπτυξη οδηγούμενη από ελέγχους
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    15. Αποσφαλμάτωση
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    16. Στατική και δυναμική ανάλυση κώδικα
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    16. Στατική και δυναμική ανάλυση κώδικα
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Πίνακας περιεχομένων">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Πίνακας περιεχομένων
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#161" class="md-nav__link">
+    <span class="md-ellipsis">
+      16.1 Εισαγωγή
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#162" class="md-nav__link">
+    <span class="md-ellipsis">
+      16.2 Στατική ανάλυση κώδικα
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16.2 Στατική ανάλυση κώδικα">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1621-cppcheck" class="md-nav__link">
+    <span class="md-ellipsis">
+      16.2.1 Cppcheck
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#163" class="md-nav__link">
+    <span class="md-ellipsis">
+      16.3 Δυναμική ανάλυση κώδικα
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16.3 Δυναμική ανάλυση κώδικα">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1631-valgrind" class="md-nav__link">
+    <span class="md-ellipsis">
+      16.3.1 Valgrind
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16.3.1 Valgrind">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#16311-valgrind" class="md-nav__link">
+    <span class="md-ellipsis">
+      16.3.1.1 Ανάλυση χρόνου εκτέλεσης με το Valgrind
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16312-valgrind" class="md-nav__link">
+    <span class="md-ellipsis">
+      16.3.1.2 Ανάλυση χρήσης μνήμης με το Valgrind
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#164" class="md-nav__link">
+    <span class="md-ellipsis">
+      16.4 Ασκήσεις
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    17. Βιβλιοθήκες
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    18. Θέματα στυλ στη C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    19. Γραφικό περιβάλλον διεπαφής
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    20. Αλληλεπίδραση της C με την Python
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Α. Διαμόρφωση περιβάλλοντος ανάπτυξης κώδικα σε C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Β. Μεταγλώττιση και εκτέλεση κώδικα C χρησιμοποιώντας το Docker
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Γ. Λήψη πληροφοριών για το σύστημα και το μεταγλωττιστή
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Πίνακας περιεχομένων">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Πίνακας περιεχομένων
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#161" class="md-nav__link">
+    <span class="md-ellipsis">
+      16.1 Εισαγωγή
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#162" class="md-nav__link">
+    <span class="md-ellipsis">
+      16.2 Στατική ανάλυση κώδικα
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16.2 Στατική ανάλυση κώδικα">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1621-cppcheck" class="md-nav__link">
+    <span class="md-ellipsis">
+      16.2.1 Cppcheck
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#163" class="md-nav__link">
+    <span class="md-ellipsis">
+      16.3 Δυναμική ανάλυση κώδικα
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16.3 Δυναμική ανάλυση κώδικα">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1631-valgrind" class="md-nav__link">
+    <span class="md-ellipsis">
+      16.3.1 Valgrind
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="16.3.1 Valgrind">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#16311-valgrind" class="md-nav__link">
+    <span class="md-ellipsis">
+      16.3.1.1 Ανάλυση χρόνου εκτέλεσης με το Valgrind
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16312-valgrind" class="md-nav__link">
+    <span class="md-ellipsis">
+      16.3.1.2 Ανάλυση χρήσης μνήμης με το Valgrind
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#164" class="md-nav__link">
+    <span class="md-ellipsis">
+      16.4 Ασκήσεις
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="16">16. Στατική και δυναμική ανάλυση κώδικα</h1>
+<p><i> Σύνοψη</i> Στατική ανάλυση κώδικα, το λογισμικό Cppcheck, παραδείγματα με το Cppcheck, δυναμική ανάλυση κώδικα, το λογισμικό Valgrind, παραδείγματα με το Valgrind και το εργαλείο memcheck, άλλα εργαλεία του Valgrind όπως τα callgrind και massif.  </p>
+<p><i>Προαπαιτούμενη γνώση</i> Τύποι δεδομένων, είσοδος/έξοδος, δομές επιλογής και επανάληψης, συναρτήσεις, πίνακες, δείκτες, αλφαριθμητικά.</p>
+<h2 id="161">16.1 Εισαγωγή</h2>
+<p>Η στατική ανάλυση κώδικα και η δυναμική ανάλυση κώδικα είναι σημαντικά στάδια κατά την ανάπτυξη λογισμικού. Η στατική ανάλυση εστιάζει στον έγκυρο εντοπισμό πιθανών προβληματικών καταστάσεων και στη βελτίωση της ποιότητας του κώδικα. Από την άλλη μεριά, η δυναμική ανάλυση παρακολουθεί την εκτέλεση του προγράμματος και βοηθά στην απόκτηση διαίσθησης για τη συμπεριφορά του κώδικα όταν εκτελείται.</p>
+<h2 id="162">16.2 Στατική ανάλυση κώδικα</h2>
+<p>Η στατική ανάλυση εξετάζει τον κώδικα χωρίς να τον εκτελεί. Ο κύριος σκοπός της είναι η ανίχνευση σφαλμάτων, προβληματικών καταστάσεων, θεμάτων ποιότητας κώδικα και θεμάτων στυλ νωρίς στην ανάπτυξη του κώδικα. Βοηθά στη βελτίωση της αξιοπιστίας και διευκολύνει τη  συντήρηση του κώδικα. Ειδικότερα, η στατική ανάλυση κώδικα εστιάζει στους ακόλουθους τομείς:</p>
+<ol>
+<li>
+<p>Ανίχνευση σφαλμάτων: Εντοπίζει συνηθισμένα προγραμματιστικά λάθη, όπως αποαναφορές <span class="p-style">NULL</span> δεικτών, υπερχειλίσεις προσωρινών χώρων αποθήκευσης (buffer overflows), διαρροές μνήμης (memory leakages) και άλλα.</p>
+</li>
+<li>
+<p>Ποιότητα κώδικα: Επιβάλλει στάνταρντ κώδικα, οδηγίες στυλ και βέλτιστες πρακτικές. Εντοπίζει προβλήματα όπως μεταβλητές και συναρτήσεις που δεν χρησιμοποιούνται, ασυνέπειες μορφοποίησης κώδικα, προβληματική ανάθεση ονομάτων σε μεταβλητές και συναρτήσεις, και άλλα.</p>
+</li>
+<li>
+<p>Βελτιστοποίηση απόδοσης: Εντοπίζει σημεία κώδικα που δημιουργούν προβλήματα ταχύτητας εκτέλεσης.</p>
+</li>
+</ol>
+<p>Μερικά από τα πλέον διαδεδομένα λογισμικά στατικής ανάλυσης κώδικα στη C είναι τα:</p>
+<ul>
+<li>
+<p>Cppcheck: Το Cppcheck είναι ένα ευρέως χρησιμοποιούμενο εργαλείο στατικής ανάλυσης κώδικα για τη C και τη C++. Εντοπίζει διάφορους τύπους σφαλμάτων, όπως αποαναφορές <span class="p-style">NULL</span> δεικτών, μεταβλητές ή συναρτήσεις που δεν χρησιμοποιούνται και άλλα. Το Cppcheck μπορεί να χρησιμοποιηθεί από τη γραμμή εντολών, να κληθεί μέσα από IDEs ή από build συστήματα. Επιπλέον, υπάρχει και το cppcheck-gui που επιτρέπει τη χρήση του Cppcheck μέσω ενός γραφικού περιβάλλοντος.</p>
+</li>
+<li>
+<p>Clang-Tidy: Το Clang-Tidy είναι ένα εργαλείο στατικής ανάλυσης κώδικα που αποτελεί τμήμα της υποδομής του μεταγλωττιστή Clang. Προσφέρει ένα εύρος ελέγχων για C και C++ κώδικα.</p>
+</li>
+<li>
+<p>Splint: Το Splint είναι ένα εργαλείο στατικής ανάλυσης, ανοικτού κώδικα, που έχει αναπτυχθεί συγκεκριμένα για την C. Εστιάζει στην ανίχνευση πιθανών ευπαθειών ασφάλειας, όπως υπερχειλίσεις προσωρινών χώρων αποθήκευσης και κλήσεις συστήματος χωρίς ελέγχους. Το Splint εμφανίζει αναλυτικές προειδοποιήσεις (warnings) για προβληματικές καταστάσεις και μπορεί να ρυθμιστεί έτσι ώστε να επιβάλει συγκεκριμένα στάνταρντ κώδικα στη συγγραφή των προγραμμάτων.</p>
+</li>
+<li>
+<p>Coverity: Το Coverity είναι ένα εμπορικό εργαλείο στατικής ανάλυσης που υποστηρίζει τη C και τη C++. Εντοπίζει ελαττώματα στον κώδικα και παρέχει συμβουλές για τη βελτίωση της ποιότητάς του. Παρέχει ένα εκτεταμένο σύνολο ελέγχων που περιλαμβάνει ελέγχους ευπαθειών ασφάλειας, ελέγχους διαρροών πόρων και άλλους ελέγχους.</p>
+</li>
+<li>
+<p>PVS-Studio: Το PVS-Studio είναι εμπορικό λογισμικό στατικής ανάλυσης κώδικα για τη C και τη C++. Ανιχνεύει ένα ευρύ φάσμα προβληματικών καταστάσεων όπως αποαναφορές <span class="p-style">NULL</span> δεικτών, μη αρχικοποιημένες μεταβλητές, μη-αποδοτικό κώδικα και άλλα. Εμφανίζει αναλυτικές αναφορές για τα προβλήματα που εντοπίζει και μπορεί να ενσωματωθεί σε IDEs έτσι ώστε να διευκολύνει τον προγραμματιστή.</p>
+</li>
+</ul>
+<p>Στη συνέχεια θα περιγραφούν ορισμένες βασικές δυνατότητες του Cppcheck. Ωστόσο, συχνά είναι αποτελεσματικότερο να χρησιμοποιείται ένας συνδυασμός εργαλείων στατικής ανάλυσης έναντι μόνο ενός έτσι ώστε να επιτυγχάνεται πληρέστερη ανάλυση και βελτίωση της ποιότητας του κώδικα.</p>
+<h3 id="1621-cppcheck">16.2.1 Cppcheck</h3>
+<p>Το Cppcheck δεν εντοπίζει συντακτικά λάθη, αλλά προσπαθεί να βρει λάθη που δεν βρίσκει ο μεταγλωττιστής, δίνοντας έμφαση στην αποφυγή ανάδειξης καταστάσεων που δεν είναι στην πραγματικότητα προβληματικές (αποφυγή ψευδώς θετικών λαθών). Στο εγχειρίδιο του Cppcheck <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> αναφέρεται ότι υπάρχουν πολλά λάθη που δεν ανιχνεύει και ότι ο προσεκτικός έλεγχος (testing) και η παρακολούθηση εκτέλεσης του κώδικα με ταυτόχρονη καταμέτρηση κρίσιμων μεγεθών (instrumentation) μπορεί να εντοπίσει περισσότερα λάθη από το Cppcheck.<br />
+Η εγκατάσταση του Cppcheck είναι εύκολη και περιγράφεται στη σελίδα του λογισμικού <a href="https://cppcheck.sourceforge.io/" target="_blank">https://cppcheck.sourceforge.io/</a>. Το Cppcheck μπορεί να ελέγξει ένα αρχείο πηγαίου κώδικα ή όλα τα αρχεία πηγαίου κώδικα σε έναν κατάλογο, αποκλείοντας από τον έλεγχο, εφόσον απαιτείται, κάποια αρχεία. Στη συνέχεια θα παρουσιαστούν 6 περιπτώσεις χρήσης του Cppcheck.</p>
+<p><i> 1. Πρόσβαση εκτός των ορίων πίνακα</i>  Ένα πρόβλημα που είναι σε θέση να εντοπίσει το Cppcheck είναι η πρόσβαση εκτός των ορίων πινάκων. Στο παράδειγμα του κώδικα 16.1, ενώ ο πίνακας <span class="p-style">a</span> είναι δέκα θέσεων, στην τελευταία επανάληψη του βρόχου επανάληψης γίνεται πρόσβαση στην ενδέκατη θέση.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 16.1: ch16_p1.c - πρόσβαση εκτός ορίων πίνακα.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span>
+<span class="normal"><a href="#__codelineno-0-3">3</a></span>
+<span class="normal"><a href="#__codelineno-0-4">4</a></span>
+<span class="normal"><a href="#__codelineno-0-5">5</a></span>
+<span class="normal"><a href="#__codelineno-0-6">6</a></span>
+<span class="normal"><a href="#__codelineno-0-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="w">    </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Ενώ η μεταγλώττιση του κώδικα ολοκληρώνεται χωρίς προβλήματα, το Cppcheck εντοπίζει το πρόβλημα και εμφανίζει το ακόλουθο αρκετά κατανοητό μήνυμα:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$ cppcheck ch16_p1.c
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Checking ch16_p1.c ...
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>ch16_p1.c:4:6: error: Array &#39;a[10]&#39; accessed at index 10, which is out of bounds.
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    ↪ [arrayIndexOutOfBounds]
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    a[i] = i;
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>     ^
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>ch16_p1.c:3:21: note: Assuming that condition &#39;i&lt;=10&#39; is not redundant
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    for (int i = 0; i &lt;= 10; i++) {
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>                      ^
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>ch16_p1.c:4:6: note: Array index out of bounds
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    a[i] = i;
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>     ^
+</span></code></pre></div>
+<p><i> 2. Χρήση μη αρχικοποιημένων μεταβλητών</i> Η C επιτρέπει να δηλωθεί μια μεταβλητή, αλλά να μην αρχικοποιηθεί. Σε αυτήν την περίπτωση, αν χρησιμοποιηθεί η μεταβλητή, τότε η τιμή της θα είναι απροσδιόριστη και μπορεί να προκληθούν προβλήματα στην ορθή εκτέλεση του κώδικα. Στο ακόλουθο παράδειγμα (κώδικας 16.2) χρησιμοποιείται η μη αρχικοποιημένη μεταβλητή <span class="p-style">b</span>:</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 16.2: ch16_p2.c - χρήση μη αρχικοποιημένης μεταβλητής.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
+<span class="normal"><a href="#__codelineno-2-2">2</a></span>
+<span class="normal"><a href="#__codelineno-2-3">3</a></span>
+<span class="normal"><a href="#__codelineno-2-4">4</a></span>
+<span class="normal"><a href="#__codelineno-2-5">5</a></span>
+<span class="normal"><a href="#__codelineno-2-6">6</a></span>
+<span class="normal"><a href="#__codelineno-2-7">7</a></span>
+<span class="normal"><a href="#__codelineno-2-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">  </span><span class="n">a</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;a=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">);</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Το Cppcheck εντοπίζει το πρόβλημα και εμφανίζει το μήνυμα “Uninitialized variable”. Αξίζει να σημειωθεί ότι στο συγκεκριμένο παράδειγμα αντίστοιχο μήνυμα θα εμφάνιζε και ο μεταγλωττιστής gcc αν είχε χρησιμοποιηθεί ο διακόπτης <span class="p-style">‐Wall</span> κατά τη μεταγλώττιση.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>$ cppcheck ch16_p2.c
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>Checking ch16_p2.c ...
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>ch16_p2.c:5:8: error: Uninitialized variable: b [uninitvar]
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    a += b;
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>         ^
+</span></code></pre></div>
+<p><i> 3. Μείωση εμβέλειας μεταβλητών και εντοπισμός μεταβλητών που δεν χρησιμοποιούνται</i> Ιδανικά, κάθε μεταβλητή θα πρέπει να έχει τη μικρότερη δυνατή εμβέλεια. Το Cppcheck μπορεί να εντοπίσει περιπτώσεις που αυτό δεν τηρείται. Επίσης, μπορεί να προειδοποιήσει για ύπαρξη μεταβλητών που δεν χρησιμοποιούνται. Τα δύο αυτά προβλήματα υπάρχουν στον κώδικα 16.3, όπου η μεταβλητή a μπορεί να έχει μικρότερη εμβέλεια, εφόσον δηλωθεί μέσα στο μπλοκ της if, και η μεταβλητή b μπορεί να αφαιρεθεί από τον κώδικα καθώς δεν χρησιμοποιείται.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 16.3: ch16_p3.c - μεταβλητή με μεγαλύτερη από την απαιτούμενη εμβέλεια και μεταβλητή που δεν χρησιμοποιείται.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-4-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">73</span><span class="p">;</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">);</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Η εκτέλεση του Cppcheck με τον διακόπτη ‐‐enable=style θα δώσει τα ακόλουθα αποτελέσματα:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>$ cppcheck ‐‐enable=style ch16_p3.c
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>Checking ch16_p3.c ...
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>ch16_p3.c:4:7: style: The scope of the variable &#39;a&#39; can be reduced. [variableScope]
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>  int a = 42;
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>      ^
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>ch16_p3.c:6:11: style: Variable &#39;b&#39; is assigned a value that is never used.
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    ↪ [unreadVariable]
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    int b = 73;
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>          ^
+</span></code></pre></div>
+<p><i> 4. Εντοπισμός συναρτήσεων που δεν χρησιμοποιούνται</i> Μια συνάρτηση μπορεί να υπάρχει στον κώδικα αλλά να μην καλείται, όπως συμβαίνει με τη συνάρτηση <span class="p-style">bar()</span> στον κώδικα 16.4.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 16.4: ch16_p4.c - εντοπισμός συνάρτησης που δεν καλείται.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
+<span class="normal"><a href="#__codelineno-6-2">2</a></span>
+<span class="normal"><a href="#__codelineno-6-3">3</a></span>
+<span class="normal"><a href="#__codelineno-6-4">4</a></span>
+<span class="normal"><a href="#__codelineno-6-5">5</a></span>
+<span class="normal"><a href="#__codelineno-6-6">6</a></span>
+<span class="normal"><a href="#__codelineno-6-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2"></a>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="kt">int</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4"></a>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="kt">int</span><span class="w"> </span><span class="nf">bar</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">73</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6"></a>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">foo</span><span class="p">());</span><span class="w"> </span><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Το Cppcheck εφόσον κληθεί με τον διακόπτη ‐‐enable=unusedFunction εντοπίζει τη συνάρτηση που δεν καλείται και εμφανίζει το ακόλουθο μήνυμα:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>$ cppcheck ‐‐enable=unusedFunction ch16_p4.c
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>Checking ch16_p4.c ...
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>ch16_p4.c:5:0: style: The function &#39;bar&#39; is never used. [unusedFunction]
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>int bar(void) { return 73; }
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>^
+</span></code></pre></div>
+<p><i>5. Διαρροή μνήμης</i> Διαρροή μνήμης (memory leakage) προκύπτει όταν δεσμεύεται δυναμικά μια ποσότητα μνήμης που δεν αποδεσμεύεται ποτέ. Τυπικά, για κάθε κλήση της <span class="p-style">malloc()</span> (ή <span class="p-style">calloc()</span>) θα πρέπει να υπάρχει μια κλήση της <span class="p-style">free()</span> που να αποδεσμεύει τη μνήμη. Στον κώδικα 16.5, η συνάρτηση <span class="p-style">foo()</span> δεσμεύει μνήμη για <span class="p-style">n</span> αριθμούς double κάθε φορά που καλείται, αλλά η μνήμη αυτή δεν αποδεσμεύεται με συνέπεια να προκύπτει διαρροή μνήμης.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 16.5: ch16_p5.c - διαρροή μνήμης.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span>
+<span class="normal"><a href="#__codelineno-8-11">11</a></span>
+<span class="normal"><a href="#__codelineno-8-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3"></a>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="kt">void</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Memory allocated of %lu bytes</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="p">}</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8"></a>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="w">  </span><span class="n">foo</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="w">  </span><span class="n">foo</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Το Cppcheck εντοπίζει το πρόβλημα και εμφανίζει το ακόλουθο μήνυμα:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>$ cppcheck ch16_p5.c
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>Checking ch16_p5.c ...
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>ch16_p5.c:7:1: error: Memory leak: a [memleak]
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>}
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>^
+</span></code></pre></div>
+<p><i>6. Αποαναφορά NULL δείκτη</i> Αν ένας δείκτης έχει αρχικοποιηθεί με την τιμή <span class="p-style">NULL</span>, αυτό υποδηλώνει ότι δεν έχει λάβει ακόμα τιμή που θα επέτρεπε την ορθή αποαναφορά του. Οπότε, αν επιχειρηθεί αποαναφορά τότε κατά την εκτέλεση το πρόγραμμα θα καταρρεύσει προκαλώντας segmentation fault. Στον κώδικα 16.6, ο δείκτης <span class="p-style">p</span> αρχικοποιείται στην τιμή <span class="p-style">NULL</span> και μετά γίνεται εσφαλμένα αποαναφορά του, προκειμένου να ανατεθεί τιμή στη θέση μνήμης που δείχνει.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 16.6: ch16_p6.c - αποαναφορά NULL δείκτη.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
+<span class="normal"><a href="#__codelineno-10-2">2</a></span>
+<span class="normal"><a href="#__codelineno-10-3">3</a></span>
+<span class="normal"><a href="#__codelineno-10-4">4</a></span>
+<span class="normal"><a href="#__codelineno-10-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="w">  </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Το Cppcheck εντοπίζει το πρόβλημα και εμφανίζει το μήνυμα που ακολουθεί:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>$ cppcheck ch16_p6.c
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>Checking ch16_p6.c ...
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>ch16_p6.c:4:4: error: Null pointer dereference: p [nullPointer]
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    *p = 42;
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>     ^
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>ch16_p6.c:3:12: note: Assignment &#39;p=NULL&#39;, assigned value is 0
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>    int *p = NULL;
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>             ^
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>ch16_p6.c:4:4: note: Null pointer dereference
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>    *p = 42;
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>     ^
+</span></code></pre></div>
+<h2 id="163">16.3 Δυναμική ανάλυση κώδικα</h2>
+<p>Η δυναμική ανάλυση κώδικα είναι μια τεχνική ελέγχου λογισμικού, που εμπεριέχει την παρατήρηση και ανάλυση της συμπεριφοράς ενός προγράμματος κατά την εκτέλεσή του. Η δυναμική ανάλυση λειτουργεί συμπληρωματικά με τη στατική ανάλυση, καθώς μπορεί να αποκαλύψει λάθη κατά την εκτέλεση όπως διαρροές μνήμης, αποαναφορές <span class="p-style">NULL</span> δεικτών, υπερχειλίσεις χώρων προσωρινής αποθήκευσης, σε σενάρια που η στατική ανάλυση δεν είναι σε θέση να εντοπίσει. Επιπλέον, με τη δυναμική ανάλυση κώδικα αποκτάται καλύτερη κατανόηση σχετικά με τη συμπεριφορά του προγράμματος κάτω από διαφορετικές εισόδους και περιβάλλοντα εκτέλεσης.<br />
+Υπάρχουν διάφορα εργαλεία δυναμικής ανάλυσης κώδικα για τη C. Τα γνωστότερα από αυτά είναι τα ακόλουθα: </p>
+<ul>
+<li>
+<p>Valgrind: Το Valgrind είναι ένα δημοφιλές εργαλείο δυναμικής ανάλυσης που βοηθά στην ανίχνευση διαρροών μνήμης, υπερχειλίσεων και άλλων προβλημάτων σχετικών με τη μνήμη, ενώ έχει και πολλές άλλες δυνατότητες. Επιτρέπει την παρακολούθηση της εκτέλεσης και τη μέτρηση διαφόρων μεγεθών (instrumentation) του προγράμματος με διάφορα εργαλεία όπως τα memcheck, callgrind, massif και cachegrind. Στη συνέχεια θα παρουσιαστούν μερικά παραδείγματα με το Valgrind. Μια ιδιαιτερότητα του Valgrind είναι ότι μπορεί να λειτουργήσει μόνο σε Linux και όχι σε Windows ή MacOS.  </p>
+</li>
+<li>
+<p>GNU Debugger (GDB): Το GDB είναι ένας ισχυρό λογισμικό που επιτρέπει την ανάλυση και την αποσφαλμάτωση του κώδικα κατά τον χρόνο εκτέλεσης. Βοηθά στην κατανόηση της συμπεριφοράς του κώδικα και στην αναγνώριση προβληματικών καταστάσεων. Στο Κεφάλαιο 15 έγινε περιγραφή βασικών δυνατοτήτων του GDB.  </p>
+</li>
+<li>
+<p>Address Sanitizer (ASan): Το ASan είναι ένα εργαλείο που περιέχεται στους μεταγλωττιστές GCC και Clang. Εντοπίζει σφάλματα μνήμης όπως υπερχειλίσεις, απόπειρες χρήσης δυναμικής μνήμης μετά την απελευθέρωσή της και άλλα. Λειτουργεί δημιουργώντας μηχανισμούς μέτρησης μεγεθών κατά τη μεταγλώττιση που χρησιμοποιούνται στον χρόνο εκτέλεσης για τον εντοπισμό σφαλμάτων.  </p>
+</li>
+<li>
+<p>American Fuzzy Lop (AFL): Το AFL είναι ένα λογισμικό τύπου fuzzer που πραγματοποιεί δυναμική ανάλυση δημιουργώντας και μεταλλάσσοντας διάφορες εισόδους προκειμένου να αποκαλύψει δύσκολες στον εντοπισμό ευπάθειες προγραμμάτων. Χρησιμοποιείται για ελέγχους ασφάλειας και μπορεί να εντοπίσει σφάλματα που προκαλούν καταρρεύσεις, αλλοίωση μνήμης (memory corruption) και άλλα.  </p>
+</li>
+</ul>
+<h3 id="1631-valgrind">16.3.1 Valgrind</h3>
+<p>Το Valgrind είναι μια συλλογή εργαλείων αποσφαλμάτωσης (debugging) και εκτίμησης απόδοσης (profiling) κώδικα που στοχεύουν στη δημιουργία ορθών και αποδοτικών προγραμμάτων. Το δημοφιλέστερο από τα εργαλεία του Valgrind είναι το memcheck που εντοπίζει κοινά σφάλματα χειρισμού μνήμης στη C που μπορούν να οδηγήσουν σε μη επιθυμητή συμπεριφορά (τερματισμό προγράμματος, μη αναμενόμενα αποτελέσματα). Το memcheck είναι το προκαθορισμένο εργαλείο του valgrind και ενεργοποιείται αυτόματα αν δεν ενεργοποιηθεί κάποιο άλλο εργαλείο με τον διακόπτη <span class="p-style">‐‐tool</span>. Στη συνέχεια ακολουθεί μια παραλλαγή του κώδικα 16.5 που παρουσίαζε διαρροή μνήμης και που το Cppcheck ήταν σε θέση να εντοπίσει. Στον νέο κώδικα (κώδικας 16.7), το Cppcheck δεν εντοπίζει πλέον τη διαρροή μνήμης, ενώ το Valgrind, όπως θα δούμε, την εντοπίζει.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 16.7: ch16_p7.c - διαρροή μνήμης που ανιχνεύεται από το Valgrind, αλλά όχι από το Cppcheck.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-12-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-12-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-12-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-12-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-12-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-12-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-12-10">10</a></span>
+<span class="normal"><a href="#__codelineno-12-11">11</a></span>
+<span class="normal"><a href="#__codelineno-12-12">12</a></span>
+<span class="normal"><a href="#__codelineno-12-13">13</a></span>
+<span class="normal"><a href="#__codelineno-12-14">14</a></span>
+<span class="normal"><a href="#__codelineno-12-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3"></a>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="kt">void</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Memory allocated for %lu bytes</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="w">    </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="p">}</span>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11"></a>
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="w">  </span><span class="n">foo</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14"></a><span class="w">  </span><span class="n">foo</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Η εκτέλεση του Valgrind χρησιμοποιεί το εκτελέσιμο πρόγραμμα που δημιουργεί ο μεταγλωττιστής και συνίσταται η μεταγλώττιση να γίνεται με τον διακόπτη <span class="p-style">‐g</span> (συμπερίληψη πληροφοριών εκσφαλμάτωσης στο εκτελέσιμο για καλύτερα μηνύματα) και να μη χρησιμοποιείται ελτιστοποίηση κώδικα υψηλότερη από <span class="p-style">‐Ο1</span>. Τα μηνύματα που επιστρέφει το Valgrind δείχνουν ότι δεσμεύεται πρώτα μνήμη 80 bytes και μετά μνήμη 800 bytes, που μετά δεν απελευθερώνονται. Το σχετικό μήνυμα αναφέρει ότι 880 bytes είναι οριστικά χαμένα (definitely lost). Η τιμή 22 που εμφανίζεται στην αρχή κάθε σειράς της εξόδου είναι ένας αναγνωριστικός αριθμός διεργασίας που λαμβάνει το πρόγραμμα κατά την εκτέλεσή του και θα είναι διαφορετικός για κάθε νέα εκτέλεση. Η εκτέλεση του Valgrind γίνεται όπως στη συνέχεια (πρώτα μεταγλώττιση, μετά κλήση του Valgrind με όρισμα το εκτελέσιμο αρχείο):</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>$ gcc ‐o ch16_p7 ‐g ch16_p7.c
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>$ valgrind ./ch16_p7
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>==22== Memcheck , a memory error detector
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>==22== Copyright (C) 2002‐2022, and GNU GPL&#39;d, by Julian Seward et al.
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>==22== Using Valgrind ‐3.21.0 and LibVEX; rerun with ‐h for copyright info
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>==22== Command: ./ch16_p7
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>==22==
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>Memory allocated for 80 bytes
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>Memory allocated for 800 bytes
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>==22==
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>==22== HEAP SUMMARY:
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>==22==      in use at exit: 880 bytes in 2 blocks
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>==22==   total heap usage: 2 allocs, 0 frees, 880 bytes allocated
+</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>==22==
+</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>==22== LEAK SUMMARY:
+</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>==22==    definitely lost: 880 bytes in 2 blocks
+</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>==22==    indirectly lost: 0 bytes in 0 blocks
+</span><span id="__span-13-18"><a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>==22==      possibly lost: 0 bytes in 0 blocks
+</span><span id="__span-13-19"><a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>==22==    still reachable: 0 bytes in 0 blocks
+</span><span id="__span-13-20"><a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>==22==          suppressed: 0 bytes in 0 blocks
+</span><span id="__span-13-21"><a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>==22== Rerun with ‐‐leak‐check=full to see details of leaked memory
+</span><span id="__span-13-22"><a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>==22==
+</span><span id="__span-13-23"><a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>==22== For lists of detected and suppressed errors, rerun with: ‐s
+</span><span id="__span-13-24"><a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a>==22== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+</span></code></pre></div>
+Αν χρησιμοποιηθεί ο διακόπτης <span class="p-style">‐‐leak‐check=full</span> κατά την κλήση του Valgrind, όπως προτρέπει και το μήνυμα στην 4η γραμμή από το τέλος της προηγούμενης εξόδου, τότε θα εμφανιστούν επιπλέον μηνύματα με τις γραμμές κώδικα που προκαλούν τη διαρροή μνήμης. Το σχετικό απόσπασμα από την έξοδο του Valgrind φαίνεται στη συνέχεια.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>$ valgrind ‐‐leak‐check=full ./ch16_p7
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>...
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>==25== 80 bytes in 1 blocks are definitely lost in loss record 1 of 2
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>==25==      at 0x48D943C: malloc (in
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>    ↪ /usr/libexec/valgrind/vgpreload_memcheck ‐arm64‐linux.so)
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>==25==      by 0x1087CB: foo (ch16_p7.c:5)
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>==25==      by 0x10883F: main (ch16_p7.c:13)
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>==25==
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>==25== 800 bytes in 1 blocks are definitely lost in loss record 2 of 2
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>==25==      at 0x48D943C: malloc (in
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>    ↪ /usr/libexec/valgrind/vgpreload_memcheck ‐arm64‐linux.so)
+</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>==25==      by 0x1087CB: foo (ch16_p7.c:5)
+</span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>==25==      by 0x108847: main (ch16_p7.c:14)
+</span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>...
+</span></code></pre></div>
+<p>Το Valgrind παρακολουθεί την εκτέλεση του προγράμματος, συνάγει συμπεράσματα για πιθανά προβλήματα και εμφανίζει σχετικά μηνύματα. Ακολουθεί ένα ακόμα παράδειγμα (κώδικας 16.8) όπου δυναμικά δεσμεύεται και αποδεσμεύεται ένας πίνακας, αλλά η απόφαση για τις εντολές που θα εκτελεστούν στη συνέχεια εξαρτάται από την τιμή ενός στοιχείου του πίνακα ( <span class="p-style">A[5]</span> ) που δεν έχει αρχικοποιηθεί. Το Valgrind μπορεί και σε αυτήν την περίπτωση να εντοπίσει το λάθος.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 16.8: ch16_p8.c - επιλογή διαδρομής εκτέλεσης στο πρόγραμμα βάσει μη αρχικοποιημένης τιμής.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-15-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-15-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-15-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-15-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-15-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-15-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-15-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-15-10">10</a></span>
+<span class="normal"><a href="#__codelineno-15-11">11</a></span>
+<span class="normal"><a href="#__codelineno-15-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3"></a>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;A</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8"></a><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;B</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-15-10"><a id="__codelineno-15-10" name="__codelineno-15-10"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-15-11"><a id="__codelineno-15-11" name="__codelineno-15-11"></a><span class="w">  </span><span class="n">free</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+</span><span id="__span-15-12"><a id="__codelineno-15-12" name="__codelineno-15-12"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Το μήνυμα που εμφανίζει το Valgrind είναι “Conditional jump or move depends on uninitialised value”, μαζί με τη γραμμή κώδικα που εντοπίζεται το πρόβλημα. Αυτό απλά σημαίνει ότι το Valgrind εντόπισε πως στη γραμμή 6 του κώδικα η επιλογή για την εκτέλεση του ενός μπλοκ κώδικα ή του άλλου, εξαρτάται από μια τιμή που δεν έχει αρχικοποιηθεί.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>$ gcc ‐g ‐o ch16_p8 ch16_p8.c
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>$ valgrind ./ch16_p8
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>==32== Memcheck , a memory error detector
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>==32== Copyright (C) 2002‐2022, and GNU GPL&#39;d, by Julian Seward et al.
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>==32== Using Valgrind ‐3.21.0 and LibVEX; rerun with ‐h for copyright info
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>==32== Command: ./ch16_p8
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>==32==
+</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>==32== Conditional jump or move depends on uninitialised value(s)
+</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>==32==      at 0x108828: main (ch16_p8.c:6)
+</span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>==32==
+</span><span id="__span-16-11"><a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>B
+</span><span id="__span-16-12"><a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a>==32==
+</span><span id="__span-16-13"><a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a>==32== HEAP SUMMARY:
+</span><span id="__span-16-14"><a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a>==32==      in use at exit: 0 bytes in 0 blocks
+</span><span id="__span-16-15"><a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a>==32==  total heap usage: 1 allocs, 1 frees, 40 bytes allocated
+</span><span id="__span-16-16"><a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a>==32==
+</span><span id="__span-16-17"><a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a>==32== All heap blocks were freed ‐‐ no leaks are possible
+</span><span id="__span-16-18"><a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a>==32==
+</span><span id="__span-16-19"><a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a>==32== Use ‐‐track‐origins=yes to see where uninitialised values come from
+</span><span id="__span-16-20"><a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a>==32== For lists of detected and suppressed errors, rerun with: ‐s
+</span><span id="__span-16-21"><a id="__codelineno-16-21" name="__codelineno-16-21" href="#__codelineno-16-21"></a>==32== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+</span></code></pre></div>
+<p>Περισσότερες πληροφορίες για το Valgrind και το εργαλείο memcheck μπορούν να βρεθούν στην ιστοσελίδα του λογισμικού (<a href="https://valgrind.org/" target="_blank">https://valgrind.org/</a>), στο εγχειρίδιο χρήσης του <sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>, στα άρθα <sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup> και <sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup> και σε πολλές άλλες πηγές στο διαδίκτυο, καθώς το Valgrind είναι ιδιαίτερα δημοφιλές, ενώ αναπτύσσεται ενεργά για πάνω από 20 έτη.</p>
+<h4 id="16311-valgrind">16.3.1.1 Ανάλυση χρόνου εκτέλεσης με το Valgrind</h4>
+<p>Το Valgrind μπορεί να χρησιμοποιηθεί για να αναλύσει τον χρόνο εκτέλεσης κάθε συνάρτησης μετρώντας το πλήθος των εντολών μηχανής που εκτελούνται. Η διαδικασία γίνεται σε δύο βήματα, πρώτα εκτελείται το Valgrind και δημιουργείται ένα αρχείο με όνομα <span class="p-style">callgrind.out.pid</span>, όπου <span class="p-style">pid</span> είναι το αναγνωριστικό της διεργασίας που εκτελέστηκε. Στη συνέχεια καλείται το εργαλείο <span class="p-style">callgrind_annotate</span>, με όρισμα αυτό το αρχείο. Ακολουθεί ένα παράδειγμα (κώδικας 16.9) όπου επιχειρείται η ταξινόμηση πινάκων με τον αλγόριθμο ταξινόμησης με εισαγωγή. Οι πίνακες (3 πίνακες με 100000, 10000 και 1000 θέσεις, αντίστοιχα) δημιουργούνται δυναμικά, γεμίζουν με τυχαίες τιμές και στη συνέχεια ταξινομούνται με τη συνάρτηση <span class="p-style">insertion_sort()</span> (ταξινόμηση με εισαγωγή).</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 16.9: ch16_p9.c - ταξινόμηση πινάκων τυχαίων τιμών, καταμέτρηση εντολών μηχανής που εκτελούνται με το Valgrind.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-17-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-17-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-17-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-17-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-17-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-17-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-17-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-17-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-17-10">10</a></span>
+<span class="normal"><a href="#__codelineno-17-11">11</a></span>
+<span class="normal"><a href="#__codelineno-17-12">12</a></span>
+<span class="normal"><a href="#__codelineno-17-13">13</a></span>
+<span class="normal"><a href="#__codelineno-17-14">14</a></span>
+<span class="normal"><a href="#__codelineno-17-15">15</a></span>
+<span class="normal"><a href="#__codelineno-17-16">16</a></span>
+<span class="normal"><a href="#__codelineno-17-17">17</a></span>
+<span class="normal"><a href="#__codelineno-17-18">18</a></span>
+<span class="normal"><a href="#__codelineno-17-19">19</a></span>
+<span class="normal"><a href="#__codelineno-17-20">20</a></span>
+<span class="normal"><a href="#__codelineno-17-21">21</a></span>
+<span class="normal"><a href="#__codelineno-17-22">22</a></span>
+<span class="normal"><a href="#__codelineno-17-23">23</a></span>
+<span class="normal"><a href="#__codelineno-17-24">24</a></span>
+<span class="normal"><a href="#__codelineno-17-25">25</a></span>
+<span class="normal"><a href="#__codelineno-17-26">26</a></span>
+<span class="normal"><a href="#__codelineno-17-27">27</a></span>
+<span class="normal"><a href="#__codelineno-17-28">28</a></span>
+<span class="normal"><a href="#__codelineno-17-29">29</a></span>
+<span class="normal"><a href="#__codelineno-17-30">30</a></span>
+<span class="normal"><a href="#__codelineno-17-31">31</a></span>
+<span class="normal"><a href="#__codelineno-17-32">32</a></span>
+<span class="normal"><a href="#__codelineno-17-33">33</a></span>
+<span class="normal"><a href="#__codelineno-17-34">34</a></span>
+<span class="normal"><a href="#__codelineno-17-35">35</a></span>
+<span class="normal"><a href="#__codelineno-17-36">36</a></span>
+<span class="normal"><a href="#__codelineno-17-37">37</a></span>
+<span class="normal"><a href="#__codelineno-17-38">38</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;assert.h&gt;</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;time.h&gt;</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5"></a>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6"></a><span class="c1">// ταξινόμηση με εισαγωγή</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7"></a><span class="kt">void</span><span class="w"> </span><span class="nf">insertion_sort</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">arr</span><span class="p">[],</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">;</span>
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9"></a><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10"></a><span class="w">    </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11"></a><span class="w">    </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12"></a><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-13"><a id="__codelineno-17-13" name="__codelineno-17-13"></a><span class="w">      </span><span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+</span><span id="__span-17-14"><a id="__codelineno-17-14" name="__codelineno-17-14"></a><span class="w">      </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-17-15"><a id="__codelineno-17-15" name="__codelineno-17-15"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-17-16"><a id="__codelineno-17-16" name="__codelineno-17-16"></a><span class="w">    </span><span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">key</span><span class="p">;</span>
+</span><span id="__span-17-17"><a id="__codelineno-17-17" name="__codelineno-17-17"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-17-18"><a id="__codelineno-17-18" name="__codelineno-17-18"></a><span class="p">}</span>
+</span><span id="__span-17-19"><a id="__codelineno-17-19" name="__codelineno-17-19"></a>
+</span><span id="__span-17-20"><a id="__codelineno-17-20" name="__codelineno-17-20"></a><span class="c1">// εκτύπωση των δύο πρώτων και των δύο τελευταίων στοιχείων του πίνακα</span>
+</span><span id="__span-17-21"><a id="__codelineno-17-21" name="__codelineno-17-21"></a><span class="kt">void</span><span class="w"> </span><span class="nf">print_array</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">arr</span><span class="p">[],</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-22"><a id="__codelineno-17-22" name="__codelineno-17-22"></a><span class="w">  </span><span class="n">assert</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span><span class="w"> </span><span class="c1">// ο πίνακας πρέπει να έχει τουλάχιστον 4 στοιχεία</span>
+</span><span id="__span-17-23"><a id="__codelineno-17-23" name="__codelineno-17-23"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d %d ... %d %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">]);</span>
+</span><span id="__span-17-24"><a id="__codelineno-17-24" name="__codelineno-17-24"></a><span class="p">}</span>
+</span><span id="__span-17-25"><a id="__codelineno-17-25" name="__codelineno-17-25"></a>
+</span><span id="__span-17-26"><a id="__codelineno-17-26" name="__codelineno-17-26"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-27"><a id="__codelineno-17-27" name="__codelineno-17-27"></a><span class="w">  </span><span class="n">srand</span><span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">));</span>
+</span><span id="__span-17-28"><a id="__codelineno-17-28" name="__codelineno-17-28"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">10000</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">};</span>
+</span><span id="__span-17-29"><a id="__codelineno-17-29" name="__codelineno-17-29"></a><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-30"><a id="__codelineno-17-30" name="__codelineno-17-30"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">N</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
+</span><span id="__span-17-31"><a id="__codelineno-17-31" name="__codelineno-17-31"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">[</span><span class="n">k</span><span class="p">];</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-32"><a id="__codelineno-17-32" name="__codelineno-17-32"></a><span class="w">      </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span>
+</span><span id="__span-17-33"><a id="__codelineno-17-33" name="__codelineno-17-33"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-17-34"><a id="__codelineno-17-34" name="__codelineno-17-34"></a><span class="w">    </span><span class="n">insertion_sort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
+</span><span id="__span-17-35"><a id="__codelineno-17-35" name="__codelineno-17-35"></a><span class="w">    </span><span class="n">print_array</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
+</span><span id="__span-17-36"><a id="__codelineno-17-36" name="__codelineno-17-36"></a><span class="w">    </span><span class="n">free</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+</span><span id="__span-17-37"><a id="__codelineno-17-37" name="__codelineno-17-37"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-17-38"><a id="__codelineno-17-38" name="__codelineno-17-38"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Το πρώτο βήμα της διαδικασίας δημιουργεί το αρχείο <span class="p-style">callgrind.out.75</span> σε αυτήν την εκτέλεση. Οι εντολές και η έξοδος του Valgrind φαίνονται στη συνέχεια.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>$ gcc ‐g ch16_p9.c ‐o ch16_p9
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>$ valgrind ‐‐tool=callgrind ./ch16_p9
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>==75== Callgrind , a call‐graph generating cache profiler
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>==75== Copyright (C) 2002‐2017, and GNU GPL&#39;d, by Josef Weidendorfer et al.
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>==75== Using Valgrind ‐3.21.0 and LibVEX; rerun with ‐h for copyright info
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>==75== Command: ./ch16_p9
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>==75==
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>==75== For interactive control , run &#39;callgrind_control ‐h&#39;.
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>4 17 ... 999972 999983
+</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>100 118 ... 999804 999913
+</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>273 791 ... 998243 999911
+</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>==75==
+</span><span id="__span-18-13"><a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>==75== Events       : Ir
+</span><span id="__span-18-14"><a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>==75== Collected    : 63186286821
+</span><span id="__span-18-15"><a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>==75==
+</span><span id="__span-18-16"><a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a>==75== I    refs:       63,186,286,821
+</span></code></pre></div>
+<p>Το δεύτερο βήμα της διαδικασίας χρησιμοποιεί το αρχείο που παράχθηκε και εμφανίζει πλήθη εντολών μηχανής που εκτελέστηκαν προκειμένου να επιτευχθεί η λειτουργικότητα των επιμέρους εντολών του προγράμματος. Λόγω του μεγάλου μεγέθους της εξόδου παρουσιάζονται στη συνέχεια μόνο επιλεγμένες γραμμές της εξόδου. Οι αριθμοί που εμφανίζονται στην αρχή των γραμμών είναι το πλήθος των εντολών μηχανής που εκτελέστηκαν για να ολοκληρωθεί το τμήμα κώδικα που ακολουθεί στην ίδια γραμμή.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>$ callgrind_annotate callgrind.out.75
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>Profile data file &#39;callgrind.out.75&#39; (creator: callgrind ‐3.21.0)
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>...
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>63,181,458,721 (99.99%) ch16_p9.c:insertion_sort &#39;2 [ch16_p9]
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>...
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>63,185,010,995 (100.0%) events annotated
+</span></code></pre></div>
+<p>Περισσότερες πληροφορίες για τη χρήση του εργαλείου callgrind μπορούν να εντοπιστούν στο άρθρο <sup id="fnref:5"><a class="footnote-ref" href="#fn:5">5</a></sup>. Αξίζει να σημειωθεί ότι υπάρχουν εξειδικευμένα λογισμικά παρακολούθησης προγραμμάτων κατά την εκτέλεσή τους, με σκοπό να εντοπιστούν ευκαιρίες βελτίωσης απόδοσής και όχι για να εντοπιστούν σφάλματα ή ευπάθειες διαφόρων τύπων. Η διαδικασία αυτή λέγεται profiling. Δημοφιλή τέτοια λογισμικά είναι το gprof, το gprofng και το perf.</p>
+<h4 id="16312-valgrind">16.3.1.2 Ανάλυση χρήσης μνήμης με το Valgrind</h4>
+<p>Ένα άλλο χρήσιμο εργαλείο του Valgrind είναι το massif, που είναι ένας heap profiler, δηλαδή καταγράφει πληροφορίες για τη μνήμη που δεσμεύεται και απελευθερώνεται στον σωρό (heap), κατά την εκτέλεση του προγράμματος.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>$ valgrind ‐‐tool=massif ./ch16_p9
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>==73== Massif, a heap profiler
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>==73== Copyright (C) 2003‐2017, and GNU GPL&#39;d, by Nicholas Nethercote
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>==73== Using Valgrind ‐3.21.0 and LibVEX; rerun with ‐h for copyright info
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>==73== Command: ./ch16_p9
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>==73==
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>40 40 ... 999984 999992
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>144 411 ... 999967 999995
+</span><span id="__span-20-9"><a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>1642 1784 ... 997991 999016
+</span><span id="__span-20-10"><a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a>==73==
+</span></code></pre></div>
+<p>Η ανωτέρω εντολή δημιουργεί ένα αρχείο με όνομα <span class="p-style">massif.out.pid</span>, όπου <span class="p-style">pid</span> είναι το αναγνωριστικό της διεργασίας που δημιουργήθηκε. Η ερμηνεία των δεδομένων που περιέχει το αρχείο γίνεται με το πρόγραμμα ms_print όπως φαίνεται στη συνέχεια:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>$ ms_print massif.out.73
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>...
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>Number of snapshots: 8
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>    Detailed snapshots: [2 (peak)]
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐---
+</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>n            time(i)         total(B)    useful‐heap(B)  extra‐heap(B)  stacks(B)
+</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐---
+</span><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>0                 0                0                 0              0          0
+</span><span id="__span-21-10"><a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a>1            55,966          400,008           400,000              8          0
+</span><span id="__span-21-11"><a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a>2    62,355,587,563          400,008           400,000              8          0
+</span><span id="__span-21-12"><a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a>100.00% (400,000B) (heap allocation functions) malloc/new/new[], ‐‐alloc‐fns, etc.
+</span><span id="__span-21-13"><a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a>‐&gt;100.00% (400,000B) 0x108B2B: main (ch16_p9.c:25)
+</span><span id="__span-21-14"><a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a>
+</span><span id="__span-21-15"><a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a>‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐---
+</span><span id="__span-21-16"><a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a>n           time(i)         total(B)    useful‐heap(B)  extra‐heap(B)   stacks(B)
+</span><span id="__span-21-17"><a id="__codelineno-21-17" name="__codelineno-21-17" href="#__codelineno-21-17"></a>‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐---
+</span><span id="__span-21-18"><a id="__codelineno-21-18" name="__codelineno-21-18" href="#__codelineno-21-18"></a>3    62,355,587,563               0                 0              0           0
+</span><span id="__span-21-19"><a id="__codelineno-21-19" name="__codelineno-21-19" href="#__codelineno-21-19"></a>4    62,355,587,611          40,008            40,000              8           0
+</span><span id="__span-21-20"><a id="__codelineno-21-20" name="__codelineno-21-20" href="#__codelineno-21-20"></a>5    62,989,504,205               0                 0              0           0
+</span><span id="__span-21-21"><a id="__codelineno-21-21" name="__codelineno-21-21" href="#__codelineno-21-21"></a>6    62,989,504,253           4,008             4,000              8           0
+</span><span id="__span-21-22"><a id="__codelineno-21-22" name="__codelineno-21-22" href="#__codelineno-21-22"></a>7    62,995,892,447               0                 0              0           0
+</span><span id="__span-21-23"><a id="__codelineno-21-23" name="__codelineno-21-23" href="#__codelineno-21-23"></a>...
+</span></code></pre></div>
+<p>Οι δυναμικές δεσμεύσεις και αποδεσμεύσεις μνήμης από τον κώδικα 16.9 για 100000, 10000 και 1000 ακεραίους, φαίνονται στην παραπάνω έξοδο να προκαλούν δέσμευση μνήμης 400000, 40000 και 4000 bytes αντίστοιχα. Περισσότερες πληροφορίες για τη χρήση του εργαλείου massif μπορούν να εντοπιστούν στο άρθρο <sup id="fnref:6"><a class="footnote-ref" href="#fn:6">6</a></sup>.</p>
+<h2 id="164">16.4 Ασκήσεις</h2>
+<p><strong><em>Άσκηση 1</em></strong><br />
+Γράψτε ένα πρόγραμμα, με όνομα <span class="p-style">ch16_e1.c</span>, που να διαβάζει ένα κείμενο ως είσοδο από τον χρήστη, χωρίς να ελέγχει το μέγεθος της εισόδου, προκαλώντας πιθανά υπερχείλιση στον πίνακα που θα αποθηκεύει την είσοδο. Χρησιμοποιήστε το Cppcheck για την ανίχνευση της ευπάθειας και προτείνετε έναν τρόπο έτσι ώστε να επιλύεται το πρόβλημα. Χρησιμοποιήστε την ακόλουθη εντολή έτσι ώστε να εμφανίζονται μηνύματα τύπου <span class="p-style">invalidscanf</span>.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>$ cppcheck ‐‐enable=all ch16_e1.c ‐‐suppress=missingIncludeSystem
+</span></code></pre></div>
+<p><strong><em>Άσκηση 2</em></strong><br />
+Εξετάστε το ακόλουθο πρόγραμμα (κώδικας 16.10) με το Cppcheck. Διορθώστε το πρόβλημα που εντοπίζει το Cppcheck.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 16.10: ch16_e2.c - κώδικας με πρόβλημα που μπορεί να εντοπιστεί με το Cppcheck.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-23-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-23-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-23-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-23-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-23-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-23-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-23-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3"></a>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5"></a><span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6"></a><span class="w">  </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;a&#39;</span><span class="p">;</span>
+</span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7"></a><span class="w">  </span><span class="n">free</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+</span><span id="__span-23-8"><a id="__codelineno-23-8" name="__codelineno-23-8"></a><span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="p">;</span>
+</span><span id="__span-23-9"><a id="__codelineno-23-9" name="__codelineno-23-9"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%c</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">);</span>
+</span><span id="__span-23-10"><a id="__codelineno-23-10" name="__codelineno-23-10"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p><strong><em>Άσκηση 3</em></strong><br />
+Eξετάστε το ακόλουθο πρόγραμμα (κώδικας 16.11) πρώτα με το Cppcheck και μετά με το Valgrind. Διαπιστώστε ότι το Cppcheck δεν εμφανίζει κάποιο μήνυμα, ενώ το Valgrind εντοπίζει το πρόβλημα: “Invalid read of size 1”. Ποιο είναι το πρόβλημα στον κώδικα;</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 16.11: ch16_e3.c - κώδικας με πρόβλημα που ανιχνεύεται από το Valgrind.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-24-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-24-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-24-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-24-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-24-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-24-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-24-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-24-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3"></a>
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5"></a><span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span><span id="__span-24-6"><a id="__codelineno-24-6" name="__codelineno-24-6"></a><span class="w">  </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;a&#39;</span><span class="p">;</span>
+</span><span id="__span-24-7"><a id="__codelineno-24-7" name="__codelineno-24-7"></a><span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+</span><span id="__span-24-8"><a id="__codelineno-24-8" name="__codelineno-24-8"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%c</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">);</span>
+</span><span id="__span-24-9"><a id="__codelineno-24-9" name="__codelineno-24-9"></a><span class="w">  </span><span class="n">free</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+</span><span id="__span-24-10"><a id="__codelineno-24-10" name="__codelineno-24-10"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p><strong><em>Άσκηση 4</em></strong><br />
+Εξετάστε το ακόλουθο πρόγραμμα (κώδικας 16.12) πρώτα με το Cppcheck και μετά με το Valgrind. Διαπιστώστε ότι το Cppcheck εμφανίζει μήνυμα memleak, ενώ το Valgrind δεν εντοπίζει κάποιο πρόβλημα. Γιατί πιστεύετε ότι συμβαίνει αυτό;</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 16.12: ch16_e4.c - κώδικας για τον οποίο το Cppcheck εντοπίζει πρόβλημα διαρροής μνήμης.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-25-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-25-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-25-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-25-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-25-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-25-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-25-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-25-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-25-10">10</a></span>
+<span class="normal"><a href="#__codelineno-25-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2"></a>
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+</span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5"></a><span class="w">  </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+</span><span id="__span-25-6"><a id="__codelineno-25-6" name="__codelineno-25-6"></a><span class="w">  </span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">)</span><span class="o">++</span><span class="p">;</span>
+</span><span id="__span-25-7"><a id="__codelineno-25-7" name="__codelineno-25-7"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">42</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-25-8"><a id="__codelineno-25-8" name="__codelineno-25-8"></a><span class="w">    </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+</span><span id="__span-25-9"><a id="__codelineno-25-9" name="__codelineno-25-9"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-25-10"><a id="__codelineno-25-10" name="__codelineno-25-10"></a><span class="w">  </span><span class="n">free</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+</span><span id="__span-25-11"><a id="__codelineno-25-11" name="__codelineno-25-11"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p><i>Cppcheck 2.11 manual.</i> <a href="https://cppcheck.sourceforge.io/manual.pdf" target="_blank">https://cppcheck.sourceforge.io/manual.pdf</a>. [Online; accessed 2023-July-12].&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p><i>Valgrind manual.</i> <a href="https://valgrind.org/docs/manual/manual.html" target="_blank">https://valgrind.org/docs/manual/manual.html</a>. [Online; accessed 2023-July-12].&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>Paul Floyd. “Valgrind Part 1 - Introduction”. Στο: <i>Overload</i> 20.108 (April 2012), σσ. 14–15.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p>Paul Floyd. “Valgrind Part 2 - Basic Memcheck”. Στο: <i>Overload</i> 20.109 ( June 2012), σσ. 24–29.&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:5">
+<p>Paul Floyd. “Valgrind Part 4 - Cachegrind and Callgrind”. Στο: <i>Overload</i> 20.111 (October 2012), σσ. 4–7.&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:6">
+<p>Paul Floyd. “Valgrind Part 5 - Massif ”. Στο: <i>Overload</i> 20.112 (December 2012), σσ. 20–24.&#160;<a class="footnote-backref" href="#fnref:6" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Τζάλλας Αλέξανδρος, Γκόγκος Χρήστος, Τσούλος Ιωάννης &copy 2025 - το βιβλίο μεταφέρθηκε στο MkDocs από τον Γιάννη Βούλγαρη 🙏.
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "toc.follow", "navigation.instant.preview", "navigation.sections"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": false, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

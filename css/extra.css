@@ -1,0 +1,12 @@
+.flex {
+    display: flex;
+    gap: 10px; /* Space between images */
+  }
+  .flex div {
+    flex: 1;
+  }
+  .flex img {
+    width: 100%;
+    height: auto;
+  }
+  

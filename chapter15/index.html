@@ -1,0 +1,1813 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../chapter14/">
+      
+      
+        <link rel="next" href="../chapter16/">
+      
+      
+      <link rel="icon" href="../src/images/frontcover.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>15. Αποσφαλμάτωση - Μια σύγχρονη προσέγγιση στη γλώσσα C</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/styles.css">
+    
+      <link rel="stylesheet" href="../css/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: none; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#15" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Μια σύγχρονη προσέγγιση στη γλώσσα C" class="md-header__button md-logo" aria-label="Μια σύγχρονη προσέγγιση στη γλώσσα C" data-md-component="logo">
+      
+  <img src="../src/images/frontcover.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Μια σύγχρονη προσέγγιση στη γλώσσα C
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              15. Αποσφαλμάτωση
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Μια σύγχρονη προσέγγιση στη γλώσσα C" class="md-nav__button md-logo" aria-label="Μια σύγχρονη προσέγγιση στη γλώσσα C" data-md-component="logo">
+      
+  <img src="../src/images/frontcover.png" alt="logo">
+
+    </a>
+    Μια σύγχρονη προσέγγιση στη γλώσσα C
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Το βιβλίο
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Η πορεία της C μέχρι σήμερα
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Εισαγωγικές έννοιες στον προγραμματισμό με τη C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Εντολές ελέγχου και επανάληψης
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Συναρτήσεις
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Πίνακες
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Δομές και ενώσεις
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. Δείκτες
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. Αλφαριθμητικά
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9. Διαχείριση μνήμης
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10. Υλοποίηση δομών δεδομένων και αλγορίθμων στη C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Είσοδος/Έξοδος
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12. Ο προεπεξεργαστής της C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13. Διαμέριση κώδικα
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14. Ανάπτυξη οδηγούμενη από ελέγχους
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    15. Αποσφαλμάτωση
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    15. Αποσφαλμάτωση
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Πίνακας περιεχομένων">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Πίνακας περιεχομένων
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#151" class="md-nav__link">
+    <span class="md-ellipsis">
+      15.1 Εισαγωγή περί αποσφαλμάτωσης
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#152-assertions" class="md-nav__link">
+    <span class="md-ellipsis">
+      15.2 Assertions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15.2 Assertions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1521-assertions" class="md-nav__link">
+    <span class="md-ellipsis">
+      15.2.1 Στατικά assertions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1522-assertions" class="md-nav__link">
+    <span class="md-ellipsis">
+      15.2.2 Assertions χρόνου εκτέλεσης
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#153-printf" class="md-nav__link">
+    <span class="md-ellipsis">
+      15.3 Αποσφαλμάτωση με printf()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#154-debugger" class="md-nav__link">
+    <span class="md-ellipsis">
+      15.4 Αποσφαλμάτωση με debugger
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15.4 Αποσφαλμάτωση με debugger">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1541-gdb" class="md-nav__link">
+    <span class="md-ellipsis">
+      15.4.1 Βασικές δυνατότητες του GDB
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1542" class="md-nav__link">
+    <span class="md-ellipsis">
+      15.4.2 Ένα μη αναμενόμενο αποτέλεσμα
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1543" class="md-nav__link">
+    <span class="md-ellipsis">
+      15.4.3 Εκτός ορίων
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#155" class="md-nav__link">
+    <span class="md-ellipsis">
+      15.5 Ασκήσεις
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    16. Στατική και δυναμική ανάλυση κώδικα
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    17. Βιβλιοθήκες
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    18. Θέματα στυλ στη C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    19. Γραφικό περιβάλλον διεπαφής
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    20. Αλληλεπίδραση της C με την Python
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Α. Διαμόρφωση περιβάλλοντος ανάπτυξης κώδικα σε C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Β. Μεταγλώττιση και εκτέλεση κώδικα C χρησιμοποιώντας το Docker
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Γ. Λήψη πληροφοριών για το σύστημα και το μεταγλωττιστή
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Πίνακας περιεχομένων">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Πίνακας περιεχομένων
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#151" class="md-nav__link">
+    <span class="md-ellipsis">
+      15.1 Εισαγωγή περί αποσφαλμάτωσης
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#152-assertions" class="md-nav__link">
+    <span class="md-ellipsis">
+      15.2 Assertions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15.2 Assertions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1521-assertions" class="md-nav__link">
+    <span class="md-ellipsis">
+      15.2.1 Στατικά assertions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1522-assertions" class="md-nav__link">
+    <span class="md-ellipsis">
+      15.2.2 Assertions χρόνου εκτέλεσης
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#153-printf" class="md-nav__link">
+    <span class="md-ellipsis">
+      15.3 Αποσφαλμάτωση με printf()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#154-debugger" class="md-nav__link">
+    <span class="md-ellipsis">
+      15.4 Αποσφαλμάτωση με debugger
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="15.4 Αποσφαλμάτωση με debugger">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1541-gdb" class="md-nav__link">
+    <span class="md-ellipsis">
+      15.4.1 Βασικές δυνατότητες του GDB
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1542" class="md-nav__link">
+    <span class="md-ellipsis">
+      15.4.2 Ένα μη αναμενόμενο αποτέλεσμα
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1543" class="md-nav__link">
+    <span class="md-ellipsis">
+      15.4.3 Εκτός ορίων
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#155" class="md-nav__link">
+    <span class="md-ellipsis">
+      15.5 Ασκήσεις
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="15">15. Αποσφαλμάτωση</h1>
+<p><i>Σύνοψη</i> Αποσφαλμάτωση κώδικα, στατικά assertions, assertions χρόνου εκτέλεσης, αποσφαλμάτωση με <span class="p-style">printf()</span>, το GDB, βασικές δυνατότητες και παραδείγματα χρήσης του GDB.</p>
+<p><i>Προαπαιτούμενη γνώση</i> Τύποι δεδομένων, είσοδος/έξοδος, δομές επιλογής και επανάληψης, συναρτήσεις, πίνακες, δείκτες, αλφαριθμητικά.</p>
+<h2 id="151">15.1 Εισαγωγή περί αποσφαλμάτωσης</h2>
+<p class="annotate">Η αποσφαλμάτωση ενός προγράμματος είναι η διαδικασία κατά την οποία γίνεται προσπάθεια διόρθωσης κώδικα που επιδεικνύει συμπεριφορά διαφορετική από την επιθυμητή. Σε αυτό το κεφάλαιο θα παρουσιαστούν τρεις τρόποι με τους οποίους μπορεί να υποβοηθηθεί η αποσφαλμάτωση κώδικα, πρώτα με χρήση assertions, μετά με χρήση απλών εντολών εμφάνισης αποτελεσμάτων κατά την εκτέλεση του προγράμματος και τέλος με
+χρήση του λογισμικού GDB (1).<br /></p>
+<ol>
+<li><a href="https://www.sourceware.org/gdb/" target="_blank">https://www.sourceware.org/gdb/</a></li>
+</ol>
+<p>Με δεδομένο ότι η αποσφαλμάτωση είναι μια δύσκολη διαδικασία που δεν διδάσκεται τυπικά όπως άλλα αντικείμενα της επιστήμης υπολογιστών (π.χ. αλγόριθμοι, δομές δεδομένων, γλώσσες προγραμματισμού, βάσεις δεδομένων κ.λπ.) είναι σημαντικό να επισημανθεί ότι η χρήση και μόνο εργαλείων δεν οδηγεί στην απόκτηση ικανότητας αποτελεσματικής αποσφαλμάτωσης. Όπως αναφέρει και ο Devon H. O’Dell στο άρθρο του “The Debugging Mindset” <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>, οι προγραμματιστές θα πρέπει να συνηθίσουν να χρησιμοποιούν την αποσφαλμάτωση ως έναν τρόπο εξάσκησης στη δεξιότητα της επίλυσης προβλημάτων. Αυτό μπορεί να υποβοηθηθεί από εργαλεία όπως αυτά που θα περιγραφούν στη συνέχεια, αλλά πρέπει να υποστηριχθεί από επιμονή, συνέπεια στην προσπάθεια εμβάθυνσης σε δύσκολες έννοιες και ανάπτυξη της περιέργειας για τον τρόπο με τον οποίο λειτουργεί η εκάστοτε γλώσσα προγραμματισμού και ο υπολογιστής. Ενδιαφέρουσα και διασκεδαστική είναι και η προσέγγιση στην αποσφαλμάτωση που περιγράφει η Julian Evans στο “A Debugging Manifesto” <sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>.</p>
+<h2 id="152-assertions">15.2 Assertions</h2>
+<p>Ένα assertion (διαβεβαίωση) είναι ένας μηχανισμός με τον οποίο ελέγχεται ότι μια συνθήκη ικανοποιείται σε ένα συγκεκριμένο σημείο του κώδικα. Γενικά πρόκειται για ελέγχους καταστάσεων που δεν θα έπρεπε να προκύπτουν και οι οποίες αν για κάποιον λόγο εμφανιστούν, ο κώδικας που ακολουθεί είναι πιθανό να παρουσιάσει μη ορθή συμπεριφορά. Για να χρησιμοποιηθούν assertions σε έναν κώδικα θα πρέπει να συμπεριληφθεί το αρχείο επικεφαλίδας <span class="p-style">assert.h</span>. Υπάρχουν δύο ειδών assertions, τα στατικά τα οποία ελέγχονται κατά τη μεταγλώττιση με τη μακροεντολή <span class="p-style">static_assert()</span> και τα assertions χρόνου εκτέλεσης που ελέγχονται με τη μακροεντολή <span class="p-style">assert()</span>.</p>
+<h3 id="1521-assertions">15.2.1 Στατικά assertions</h3>
+<p>Η μακροεντολή static_assert() μπορεί να χρησιμοποιηθεί με τον ακόλουθο τρόπο:</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>static_assert(integer ‐constant ‐expression , string);
+</span></code></pre></div>
+Η ακέραια έκφραση (<span class="p-style">integer‐constant‐expression</span>) πρέπει να είναι σταθερή και αν λάβει τιμή που δεν είναι μηδέν, τότε προκύπτει σφάλμα μεταγλώττισης με διαγνωστικό μήνυμα το κείμενο της δεύτερης παραμέτρου. Τα στατικά assertions εισήχθησαν με την C11 και αφορούν ελέγχους που μπορούν να εντοπιστούν κατά τη μεταγλώττιση. Για τον λόγο αυτό η ακέραια έκφραση που ελέγχεται θα πρέπει να είναι σταθερή. Αξίζει να σημειωθεί ότι η μακροεντολή <span class="p-style">static_assert()</span> καλεί τη <span class="p-style">_Static_assert()</span> (το <span class="p-style">_Static_assert</span> είναι keyword στη C11) με τις ίδιες παραμέτρους, οπότε το <span class="p-style">_Static_assert()</span> μπορεί να χρησιμοποιηθεί εναλλακτικά στη θέση του <span class="p-style">static_assert()</span>.<br />
+Στον κώδικα 15.1 παρουσιάζεται ένα παράδειγμα στο οποίο ελέγχεται η ακέραια τιμή που λαμβάνει μια συμβολική σταθερά που ορίζεται σε ένα <span class="p-style">enum</span>.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 15.1: ch15_p1.c - παράδειγμα χρήσης του static_assert().</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-1-10">10</a></span>
+<span class="normal"><a href="#__codelineno-1-11">11</a></span>
+<span class="normal"><a href="#__codelineno-1-12">12</a></span>
+<span class="normal"><a href="#__codelineno-1-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;assert.h&gt;</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3"></a>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="k">enum</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">  </span><span class="n">RED</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="c1">// change default value of RED (from 0 to 1)</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">  </span><span class="n">ORANGE</span><span class="p">,</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">  </span><span class="n">GREEN</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="p">};</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9"></a>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">  </span><span class="k">static_assert</span><span class="p">(</span><span class="n">GREEN</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;I expect GREEN to be 2&quot;</span><span class="p">);</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Λόγω του ότι υπάρχει ασυμφωνία στην ακέραια τιμή στην οποία αντιστοιχεί το στοιχείο <span class="p-style">GREEN</span> (λαμβάνει την τιμή 3, ενώ το <span class="p-style">static_assert()</span> υποθέτει ότι η τιμή του θα έπρεπε να είναι 2), ο μεταγλωττιστής θα εμφανίσει το ακόλουθο μήνυμα λάθους:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$ gcc ch15_p1.c
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>In file included from ch15_p1.c:1:
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>ch15_p1.c: In function &#39;main&#39;:
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>ch15_p1.c:10:3: error: static assertion failed: &quot;I expect GREEN to be 2&quot;
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>   10 | static_assert(GREEN == 2, &quot;I expect GREEN to be 2&quot;);
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>      | ^~~~~~~~~~~~~
+</span></code></pre></div>
+<p>Ένα ακόμη παράδειγμα με στατικό assertion παρουσιάζεται στον κώδικα 15.2 που ελέγχει ότι το μέγεθος του τύπου <span class="p-style">int</span> στο υπολογιστικό σύστημα όπου γίνεται η μεταγλώττιση είναι 4 bytes.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 15.2: ch15_p2.c - έλεγχος ότι ο τύπος int καταλαμβάνει 4 bytes.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
+<span class="normal"><a href="#__codelineno-3-2">2</a></span>
+<span class="normal"><a href="#__codelineno-3-3">3</a></span>
+<span class="normal"><a href="#__codelineno-3-4">4</a></span>
+<span class="normal"><a href="#__codelineno-3-5">5</a></span>
+<span class="normal"><a href="#__codelineno-3-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;assert.h&gt;</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2"></a>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">  </span><span class="k">static_assert</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;int should be 4 bytes&quot;</span><span class="p">);</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Αν το μέγεθος τύπου <span class="p-style">int</span> είναι όντως 4 bytes (όπως τυπικά συμβαίνει στα συστήματα αρχιτεκτονικής 64bits), τότε η μεταγλώττιση θα ολοκληρωθεί χωρίς την επιστροφή κάποιου μηνύματος όπως στη συνέχεια:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>$ gcc ch15_p2.c
+</span></code></pre></div>
+<p>Αν όμως η μεταγλώττιση γίνει σε ένα σύστημα με αρχιτεκτονική 32bits, όπου τυπικά το μέγεθος των <span class="p-style">int</span> είναι 2 bytes, θα εμφανιστεί το ακόλουθο (ή παρόμοιο) μήνυμα:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>$ gcc ch15_p2.c
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>ch15_p2b.c:4:29: note: expression evaluates to &#39;2 == 4&#39;
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  static_assert(sizeof(int) == 4, &quot;int should be 4 bytes&quot;);
+</span></code></pre></div>
+<h3 id="1522-assertions">15.2.2 Assertions χρόνου εκτέλεσης</h3>
+<p>Τα assertions χρόνου εκτέλεσης γράφονται με τη χρήση της μακροεντολής <span class="p-style">assert()</span> η οποία καλείται ως εξής:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>assert(expression);
+</span></code></pre></div>
+<p>Αν η έκφραση <span class="p-style">expression</span> είναι ίση με το μηδέν, τότε εμφανίζεται ένα μήνυμα με το όνομα του αρχείου πηγαίου κώδικα, τον αριθμό γραμμής εντολής και τη συνάρτηση μέσα στην οποία βρίσκεται το assertion και το πρόγραμμα τερματίζει. Το σκεπτικό είναι ότι με αυτόν τον τρόπο μπορούν να ελέγχονται τα ορίσματα που περνούν σε συναρτήσεις έτσι ώστε οι συναρτήσεις που καλούνται με μη έγκυρες τιμές να τερματίζουν την εκτέλεση του προγράμματος και ο προγραμματιστής να ενημερώνεται για το πρόβλημα.<br />
+Τα assertions χρόνου εκτέλεσης συνήθως χρησιμοποιούνται για βασικούς ελέγχους όπως η αποφυγή τιμών που δεν έχουν νόημα για τη συνέχεια της εκτέλεσης, όπως για παράδειγμα ο έλεγχος του εάν ένας δείκτης είναι <span class="p-style">NULL</span> και πρόκειται να γίνει αποαναφορά του, το εάν μια μεταβλητή δεικτοδότησης σε στοιχείο πίνακα λαμβάνει τιμή εντός των ορίων μεγέθους του πίνακα (από 0 μέχρι Ν-1) πριν χρησιμοποιηθεί και άλλα. Στο παράδειγμα που ακολουθεί στον κώδικα 15.3, το assertion διασφαλίζει ότι η τιμή που εισάγεται ως αριθμός ημέρας του Ιανουαρίου θα είναι έγκυρη τιμή (δηλαδή από 1 έως και 31). Στον ίδιο κώδικα χρησιμοποιείται το «κόλπο» της προσθήκης με το <span class="p-style">&amp;&amp;</span> (λογικό τελεστή σύζευξης) ενός αλφαριθμητικού στην έκφραση που εξετάζεται. Το αλφαριθμητικό αυτό θα εμφανίζεται στο διαγνωστικό μήνυμα εφόσον ενεργοποιείται το assertion. Ο λόγος για τον οποίο συμβαίνει αυτό είναι διότι τα λεκτικά αποτιμώνται ως μη μηδενικά (true), οπότε η προσθήκη με το <span class="p-style">&amp;&amp;</span> όρων δεν έχει επίδραση στην τιμή της λογικής έκφρασης. Άρα, το αποτέλεσμα είναι ότι όταν εμφανιστεί το διαγνωστικό μήνυμα από το <span class="p-style">assert()</span> θα εμφανιστεί και το αλφαριθμητικό που έχει προστεθεί στο τέλος της γραμμής 8 του κώδικα.</p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 15.3: ch15_p3.c - έλεγχος ότι ο αριθμός ημέρας που εισάγει ο χρήστης είναι από 1 μέχρι και 31.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-7-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-7-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-7-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-7-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-7-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-7-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-7-10">10</a></span>
+<span class="normal"><a href="#__codelineno-7-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;assert.h&gt;</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3"></a>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">d</span><span class="p">;</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Input a month day for January: &quot;</span><span class="p">);</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="w">  </span><span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">d</span><span class="p">);</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="w">  </span><span class="n">assert</span><span class="p">((</span><span class="n">d</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">31</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s">&quot;month day should be from 1 to 31&quot;</span><span class="p">);</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;You entered day %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">);</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+Το αποτέλεσμα της εκτέλεσης του παραπάνω κώδικα με είσοδο μια μη έγκυρη τιμή (π.χ. 32) είναι το ακόλουθο:</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Input a month day for January: 32
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>Assertion failed: (d &gt;= 1 &amp;&amp; d &lt;= 31) &amp;&amp; &quot;month day should be from 1 to 31&quot;, file
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    ↪ ch15_p3.c, line 8
+</span></code></pre></div>
+Ο έλεγχος των assertions χρόνου εκτέλεσης μπορεί να απενεργοποιηθεί με την ακόλουθη εντολή του προεπεξεργαστή:</p>
+<p><div class="language-c highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="cp">#define NDEBUG</span>
+</span></code></pre></div>
+Συνεπώς, ο κώδικας μπορεί να περιέχει assertions χρόνου εκτέλεσης που θα είναι χρήσιμα κατά την ανάπτυξη και τη διόρθωσή του και την παραπάνω εντολή σε σχόλια, έτσι ώστε να μην είναι ενεργή. Πριν δημιουργηθεί το τελικό εκτελέσιμο, το οποίο θα χρησιμοποιηθεί από τον χρήστη του προγράμματος, μπορεί να ενεργοποιηθεί η παραπάνω εντολή, αφαιρώντας τους χαρακτήρες που την καθιστούσαν σχόλιο, έτσι ώστε το τελικό εκτελέσιμο να μην λαμβάνει υπόψη τα assertions χρόνου εκτέλεσης. Θα πρέπει να σημειωθεί ότι κάτι τέτοιο μπορεί να είναι επικίνδυνο καθώς μη έγκυρες είσοδοι, εξάντληση διαθέσιμης μνήμης, σφάλματα σε άνοιγμα αρχείων κ.λπ. ενδεχόμενα δεν θα εξετάζονται στο εκτελέσιμο που θα παραδοθεί στον χρήστη.</p>
+<h2 id="153-printf">15.3 Αποσφαλμάτωση με printf()</h2>
+<p>O Brian Kernighan στο βιβλίο του “Unix for programmers” του 1979, αναφέρει ότι «ο πλέον αποδοτικός τρόπος αποσφαλμάτωσης είναι η προσεκτική σκέψη σε συνδυασμό με συνετά τοποθετημένες εντολές εκτύπωσης». Τα τελευταία χρόνια η τεχνική της αποσφαλμάτωσης με εντολές print ή log έχει γίνει γνωστή ως caveman debugging (αποσφαλμάτωση του ανθρώπου των σπηλαίων) και θεωρείται ως ένας χρήσιμος μεν αλλά απλοϊκός και σχετικά χονδροειδής τρόπος αποσφαλμάτωσης. Ωστόσο, η ευκολία χρήσης κλήσεων της <span class="p-style">printf()</span>, που αποκαλύπτουν τιμές μεταβλητών και εκφράσεων σε κρίσιμα σημεία της εκτέλεσης του προγράμματος εξακολουθεί να είναι ένας αποτελεσματικός τρόπος εντοπισμού λαθών και κατανόησης του προγράμματος.<br />
+Οι ακόλουθες μακροεντολές μπορούν να βοηθήσουν στην εμφάνιση χρήσιμων μηνυμάτων: <span class="p-style">__FILE__, __LINE__, __func__</span>. Η <span class="p-style">__FILE__</span> επιστρέφει το όνομα αρχείου στο οποίο βρίσκεται ο πηγαίος κώδικας, η <span class="p-style">__LINE__</span> τη γραμμή στην οποία εντοπίζεται η κλήση της <span class="p-style">printf()</span> που την περιέχει και η <span class="p-style">__func__</span> τη συνάρτηση μέσα από την οποία καλείται η <span class="p-style">printf()</span>. Ο κώδικας 15.4 παρουσιάζει ένα απλό παράδειγμα όπου καλείται μια συνάρτηση και εμφανίζονται πληροφορίες που επιστρέφουν οι μακροεντολές που αναφέρθηκαν.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 15.4: ch15_p4.c - απλή μέθοδος αποσφαλμάτωσης με χρήση της printf() και ειδικών μακροεντολων που επιστρέφουν πληροφορίες για τη γραμμή κώδικα που εκτελείται.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-10-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-10-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-10-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-10-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-10-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-10-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-10-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2"></a>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="kt">void</span><span class="w"> </span><span class="nf">fun</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;File:%s Function:%s Line:%d a=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">__FILE__</span><span class="p">,</span><span class="w"> </span><span class="n">__func__</span><span class="p">,</span><span class="w"> </span><span class="n">__LINE__</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">);</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="p">}</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6"></a>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="w">  </span><span class="n">fun</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Κατά την εκτέλεση του προγράμματος θα εμφανιστεί η ακόλουθη έξοδος:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>File:ch15_p4.c Function:fun Line:4 a=42
+</span></code></pre></div>
+<h2 id="154-debugger">15.4 Αποσφαλμάτωση με debugger</h2>
+<p>Η χρήση ενός λογισμικού αποσφαλμάτωσης (debugger) μπορεί να βοηθήσει στη διόρθωση δύσκολων στον εντοπισμό σφαλμάτων. Επιτρέπει την εκτέλεση του κώδικα εντολή προς εντολή και την παρακολούθηση τόσο της κατάστασης της στοίβας χρόνου εκτέλεσης (δηλαδή, ποια συνάρτηση έχει κληθεί από ποια συνάρτηση), όσο και των τιμών των ενεργών μεταβλητών. Επιπλέον, ο debugger επιτρέπει τον ορισμό breakpoints (σημείων διακοπής εκτέλεσης) και watches (εκφράσεις παρακολούθησης). Τα breakpoints είναι σημεία στον κώδικα στα οποία επιθυμούμε να σταματήσει προσωρινά η εκτέλεση και είναι χρήσιμα έτσι ώστε να βρεθούμε γρήγορα στις εντολές του προγράμματος που παρουσιάζουν ενδιαφέρον. Θα πρέπει να σημειωθεί ότι υπάρχει η δυνατότητα ένα breakpoint να είναι υπό συνθήκη (conditional breakpoint). Αυτό σημαίνει ότι φθάνοντας η εκτέλεση σε ένα breakpoint υπό συνθήκη, θα σταματήσει προσωρινά η εκτέλεση του προγράμματος μόνο στη περίπτωση που η συνθήκη θα είναι αληθής. Από την άλλη μεριά, τα watches είναι εκφράσεις που είναι επιθυμητό να παρακολουθούνται κατά την εκτέλεση του προγράμματος. Αν μια έκφραση που παρακολουθείται αλλάξει, τότε η εκτέλεση του κώδικα θα κάνει παύση στην εντολή που προκαλεί αυτή την αλλαγή και θα εκτυπωθεί η παλιά και η νέα τιμή της έκφρασης.<br />
+Το λογισμικό αποσφαλμάτωσης που θα παρουσιαστεί στη συνέχεια είναι το GDB (GNU Debugger), το οποίο είναι ένα λογισμικό που λειτουργεί σε περιβάλλον γραμμής εντολών. Συνήθως συμπεριλαμβάνεται στην εγκατάσταση του μεταγλωττιστή της C και εγκαθίσταται μαζί με αυτόν. Για να μπορεί να γίνει χρήση του GDB και να εμφανίζονται τα ονόματα αναγνωριστικών (π.χ. ονόματα μεταβλητών, ονόματα συναρτήσεων) που χρησιμοποιούνται στον πηγαίο κώδικα, θα πρέπει η μεταγλώττιση να γίνει χρησιμοποιώντας τον διακόπτη <span class="p-style">‐g</span> (που σημαίνει συμπερίληψη συμβόλων αποσφαλμάτωσης). Εναλλακτικά, συχνά χρησιμοποιείται ο διακόπτης <span class="p-style">‐g3</span> που σημαίνει ότι θα εμφανίζονται περισσότερες πληροφορίες αποσφαλμάτωσης, όπως για παράδειγμα είναι οι αναπτύξεις μακροεντολών (macro expansions). Υπάρχουν πολλές ακόμα επιλογές για τον συγκεκριμένο διακόπτη που μπορούν να διερευνηθούν για την περίπτωση του μεταγλωττιστή gcc στο <a href="https://gcc.gnu.org/onlinedocs/gcc/Debugging-Options.html" target="_blank">https://gcc.gnu.org/onlinedocs/gcc/Debugging-Options.html</a><br />
+Οι βασικές εντολές του GDB είναι οι ακόλουθες:</p>
+<ol>
+<li><span class="p-style">start</span> - Εκκίνηση της εκτέλεσης του προγράμματος.</li>
+<li><span class="p-style">run</span> - Εκτέλεση του προγράμματος μέχρι να συναντήσει ένα breakpoint.</li>
+<li><span class="p-style">where</span> - Εμφάνιση της στοίβας κλήσεων (call stack).</li>
+<li><span class="p-style">list</span> - Εμφάνιση των γραμμών του πηγαίου κώδικα γύρω από το σημείο εκτέλεσης.</li>
+<li><span class="p-style">break &lt;file:line#&gt;</span> - Ορισμός ενός breakpoint στη γραμμή #.</li>
+<li><span class="p-style">break &lt;file:line#&gt; if &lt;expression&gt;</span> - Ορισμός ενός breakpoint υπό συνθήκη στη γραμμή #.</li>
+<li><span class="p-style">watch &lt;expression&gt;</span> - Ορισμός ενός watch για μια έκφραση.</li>
+<li><span class="p-style">continue</span> ή <span class="p-style">c</span> - Συνέχεια εκτέλεσης μέχρι να συναντήσει ένα breakpoint.</li>
+<li><span class="p-style">step</span> ή <span class="p-style">s</span> - Μετάβαση στην επόμενη εντολή του κώδικα, είσοδος μέσα στη συνάρτηση αν η επόμενη εντολή είναι κλήση συνάρτησης (step into).</li>
+<li><span class="p-style">next</span> ή <span class="p-style">n</span> - Μετάβαση στην επόμενη εντολή του κώδικα, χωρίς την είσοδο μέσα σε συναρτήσεις (step over).</li>
+<li><span class="p-style">finish</span> ή <span class="p-style">fin</span> - Επιστροφή από την τρέχουσα συνάρτηση (step out).</li>
+<li><span class="p-style">info args</span> - Εκτύπωση των ορισμάτων γραμμής εκτέλεσης.</li>
+<li><span class="p-style">info locals</span> - Εκτύπωση των τοπικών μεταβλητών.</li>
+<li><span class="p-style">print &lt;expression&gt;</span> ή <span class="p-style">p <expression></span> - Εκτύπωση της τιμής μιας έκφρασης.</li>
+<li><span class="p-style">quit</span> - Έξοδος από το περιβάλλον του GDB. </li>
+</ol>
+<p>Υπάρχουν διαθέσιμες πολλές πηγές στις οποίες περιγράφονται αναλυτικά οι δυνατότητες του GDB όπως είναι το “Debugging with GDB: the GNU Source-Level Debugger for GDB” <sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup> και το “Beej’s Quick Guide to GDB” <sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup>.</p>
+<h3 id="1541-gdb">15.4.1 Βασικές δυνατότητες του GDB</h3>
+<p>Για το πρώτο παράδειγμα με το GDB θα χρησιμοποιηθεί ένα πρόγραμμα που δέχεται κατά την εκτέλεσή του ορίσματα γραμμής εντολών, πραγματοποιεί κλήσεις συναρτήσεων, χρησιμοποιεί πίνακες, δομές και δείκτες. Ο στόχος στη συγκεκριμένη περίπτωση δεν είναι να εντοπιστεί ένα σφάλμα στον κώδικα, αλλά να παρουσιαστούν ορισμένες βασικές δυνατότητες του GDB. Το πρόγραμμα (κώδικας 15.5) δημιουργεί ένα πλήθος από σημεία του καρτεσιανού επιπέδου με τυχαίες συντεταγμένες. Το πλήθος καθορίζεται ως όρισμα γραμμής εντολών κατά την εκτέλεση του προγράμματος. Στη συνέχεια, υπολογίζει και εμφανίζει την Ευκλείδια απόσταση κάθε σημείου από την αρχή των αξόνων (σημείο 0,0).</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 15.5: ch15_p5.c - υπολογισμός αποστάσεων τυχαίων σημείων από την αρχή των αξόνων.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-12-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-12-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-12-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-12-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-12-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-12-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-12-10">10</a></span>
+<span class="normal"><a href="#__codelineno-12-11">11</a></span>
+<span class="normal"><a href="#__codelineno-12-12">12</a></span>
+<span class="normal"><a href="#__codelineno-12-13">13</a></span>
+<span class="normal"><a href="#__codelineno-12-14">14</a></span>
+<span class="normal"><a href="#__codelineno-12-15">15</a></span>
+<span class="normal"><a href="#__codelineno-12-16">16</a></span>
+<span class="normal"><a href="#__codelineno-12-17">17</a></span>
+<span class="normal"><a href="#__codelineno-12-18">18</a></span>
+<span class="normal"><a href="#__codelineno-12-19">19</a></span>
+<span class="normal"><a href="#__codelineno-12-20">20</a></span>
+<span class="normal"><a href="#__codelineno-12-21">21</a></span>
+<span class="normal"><a href="#__codelineno-12-22">22</a></span>
+<span class="normal"><a href="#__codelineno-12-23">23</a></span>
+<span class="normal"><a href="#__codelineno-12-24">24</a></span>
+<span class="normal"><a href="#__codelineno-12-25">25</a></span>
+<span class="normal"><a href="#__codelineno-12-26">26</a></span>
+<span class="normal"><a href="#__codelineno-12-27">27</a></span>
+<span class="normal"><a href="#__codelineno-12-28">28</a></span>
+<span class="normal"><a href="#__codelineno-12-29">29</a></span>
+<span class="normal"><a href="#__codelineno-12-30">30</a></span>
+<span class="normal"><a href="#__codelineno-12-31">31</a></span>
+<span class="normal"><a href="#__codelineno-12-32">32</a></span>
+<span class="normal"><a href="#__codelineno-12-33">33</a></span>
+<span class="normal"><a href="#__codelineno-12-34">34</a></span>
+<span class="normal"><a href="#__codelineno-12-35">35</a></span>
+<span class="normal"><a href="#__codelineno-12-36">36</a></span>
+<span class="normal"><a href="#__codelineno-12-37">37</a></span>
+<span class="normal"><a href="#__codelineno-12-38">38</a></span>
+<span class="normal"><a href="#__codelineno-12-39">39</a></span>
+<span class="normal"><a href="#__codelineno-12-40">40</a></span>
+<span class="normal"><a href="#__codelineno-12-41">41</a></span>
+<span class="normal"><a href="#__codelineno-12-42">42</a></span>
+<span class="normal"><a href="#__codelineno-12-43">43</a></span>
+<span class="normal"><a href="#__codelineno-12-44">44</a></span>
+<span class="normal"><a href="#__codelineno-12-45">45</a></span>
+<span class="normal"><a href="#__codelineno-12-46">46</a></span>
+<span class="normal"><a href="#__codelineno-12-47">47</a></span>
+<span class="normal"><a href="#__codelineno-12-48">48</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;math.h&gt;</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4"></a>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="k">struct</span><span class="w"> </span><span class="nc">point</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="p">};</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9"></a>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="kt">double</span><span class="w"> </span><span class="nf">distance</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">point</span><span class="w"> </span><span class="o">*</span><span class="n">p1</span><span class="p">,</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">point</span><span class="w"> </span><span class="o">*</span><span class="n">p2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="n">pow</span><span class="p">(</span><span class="n">p1</span><span class="o">-&gt;</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">p2</span><span class="o">-&gt;</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">pow</span><span class="p">(</span><span class="n">p1</span><span class="o">-&gt;</span><span class="n">y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">p2</span><span class="o">-&gt;</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">));</span>
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="p">}</span>
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13"></a>
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14"></a><span class="kt">double</span><span class="w"> </span><span class="nf">randfrom</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">min</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">max</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">min</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">rand</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">RAND_MAX</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">max</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">min</span><span class="p">);</span>
+</span><span id="__span-12-16"><a id="__codelineno-12-16" name="__codelineno-12-16"></a><span class="p">}</span>
+</span><span id="__span-12-17"><a id="__codelineno-12-17" name="__codelineno-12-17"></a>
+</span><span id="__span-12-18"><a id="__codelineno-12-18" name="__codelineno-12-18"></a><span class="kt">void</span><span class="w"> </span><span class="nf">fill_vector</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">point</span><span class="w"> </span><span class="o">**</span><span class="n">points</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-19"><a id="__codelineno-12-19" name="__codelineno-12-19"></a><span class="w">  </span><span class="n">srand</span><span class="p">(</span><span class="mi">1234</span><span class="p">);</span><span class="w"> </span><span class="c1">// χρήση seed για επαναληψιμότητα αποτελεσμάτων</span>
+</span><span id="__span-12-20"><a id="__codelineno-12-20" name="__codelineno-12-20"></a><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-21"><a id="__codelineno-12-21" name="__codelineno-12-21"></a><span class="w">    </span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">point</span><span class="p">));</span>
+</span><span id="__span-12-22"><a id="__codelineno-12-22" name="__codelineno-12-22"></a><span class="w">    </span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">randfrom</span><span class="p">(</span><span class="mi">-100</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span>
+</span><span id="__span-12-23"><a id="__codelineno-12-23" name="__codelineno-12-23"></a><span class="w">    </span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">randfrom</span><span class="p">(</span><span class="mi">-100</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span>
+</span><span id="__span-12-24"><a id="__codelineno-12-24" name="__codelineno-12-24"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-12-25"><a id="__codelineno-12-25" name="__codelineno-12-25"></a><span class="p">}</span>
+</span><span id="__span-12-26"><a id="__codelineno-12-26" name="__codelineno-12-26"></a>
+</span><span id="__span-12-27"><a id="__codelineno-12-27" name="__codelineno-12-27"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-28"><a id="__codelineno-12-28" name="__codelineno-12-28"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">argc</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-29"><a id="__codelineno-12-29" name="__codelineno-12-29"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Usage: %s &lt;number_of_points&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</span><span id="__span-12-30"><a id="__codelineno-12-30" name="__codelineno-12-30"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+</span><span id="__span-12-31"><a id="__codelineno-12-31" name="__codelineno-12-31"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-12-32"><a id="__codelineno-12-32" name="__codelineno-12-32"></a><span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">point</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">};</span>
+</span><span id="__span-12-33"><a id="__codelineno-12-33" name="__codelineno-12-33"></a><span class="w">  </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</span><span id="__span-12-34"><a id="__codelineno-12-34" name="__codelineno-12-34"></a><span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">point</span><span class="w"> </span><span class="o">**</span><span class="n">points</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">malloc</span><span class="p">(</span>
+</span><span id="__span-12-35"><a id="__codelineno-12-35" name="__codelineno-12-35"></a><span class="w">      </span><span class="n">N</span><span class="w"> </span><span class="o">*</span>
+</span><span id="__span-12-36"><a id="__codelineno-12-36" name="__codelineno-12-36"></a><span class="w">      </span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">point</span><span class="p">));</span><span class="w"> </span><span class="c1">// δέσμευση μνήμης για N δείκτες σε struct point</span>
+</span><span id="__span-12-37"><a id="__codelineno-12-37" name="__codelineno-12-37"></a><span class="w">  </span><span class="n">fill_vector</span><span class="p">(</span><span class="n">points</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">);</span>
+</span><span id="__span-12-38"><a id="__codelineno-12-38" name="__codelineno-12-38"></a><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-39"><a id="__codelineno-12-39" name="__codelineno-12-39"></a><span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">distance</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span><span class="o">&amp;</span><span class="n">origin</span><span class="p">);</span>
+</span><span id="__span-12-40"><a id="__codelineno-12-40" name="__codelineno-12-40"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;point%d=(%+06.2f,%+06.2f) distance from origin=%6.2f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span>
+</span><span id="__span-12-41"><a id="__codelineno-12-41" name="__codelineno-12-41"></a><span class="w">           </span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">);</span>
+</span><span id="__span-12-42"><a id="__codelineno-12-42" name="__codelineno-12-42"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-12-43"><a id="__codelineno-12-43" name="__codelineno-12-43"></a><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-44"><a id="__codelineno-12-44" name="__codelineno-12-44"></a><span class="w">    </span><span class="n">free</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span><span id="__span-12-45"><a id="__codelineno-12-45" name="__codelineno-12-45"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-12-46"><a id="__codelineno-12-46" name="__codelineno-12-46"></a><span class="w">  </span><span class="n">free</span><span class="p">(</span><span class="n">points</span><span class="p">);</span>
+</span><span id="__span-12-47"><a id="__codelineno-12-47" name="__codelineno-12-47"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-12-48"><a id="__codelineno-12-48" name="__codelineno-12-48"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Το πρόγραμμα μεταγλωττίζεται με την ακόλουθη εντολή έτσι ώστε να είναι έτοιμο να χρησιμοποιηθεί από το GDB (προσοχή στον διακόπτη <span class="p-style">‐g</span>):</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>gcc ‐g ch15_p5.c ‐o ch15_p5 ‐lm
+</span></code></pre></div>
+<p>Η ενεργοποίηση του GDB γίνεται ως εξής:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>$ gdb ./ch15_p5
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>GNU gdb (Ubuntu 10.2‐0ubuntu1~20.04~1) 10.2
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>Copyright (C) 2021 Free Software Foundation , Inc.
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>This is free software: you are free to change and redistribute it.
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>There is NO WARRANTY , to the extent permitted by law.
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>Type &quot;show copying&quot; and &quot;show warranty&quot; for details.
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>This GDB was configured as &quot;x86_64‐linux‐gnu&quot;.
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>Type &quot;show configuration&quot; for configuration details.
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>For bug reporting instructions , please see:
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>&lt;https://www.gnu.org/software/gdb/bugs/&gt;.
+</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>Find the GDB manual and other documentation resources online at:
+</span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>    &lt;http://www.gnu.org/software/gdb/documentation/&gt;.  
+</span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>
+</span><span id="__span-14-15"><a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>For help, type &quot;help&quot;.
+</span><span id="__span-14-16"><a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>Type &quot;apropos word&quot; to search for commands related to &quot;word&quot;...
+</span><span id="__span-14-17"><a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>Reading symbols from ./ch15_p5...
+</span></code></pre></div>
+<p>Η εκτέλεση του προγράμματος με παράμετρο την τιμή 5 γίνεται με την εντολή <span class="p-style">start</span> η οποία αυτόματα τοποθετεί ένα breakpoint στην αρχή της <span class="p-style">main()</span>. Εναλλακτικά, η εντολή <span class="p-style">run</span> θα εκτελούσε το πρόγραμμα μέχρι το τέλος του προγράμματος.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>(gdb) start 5
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>Temporary breakpoint 1 at 0x1443: file ch15_p5.c, line 29.
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>Starting program: /.../src/ch15_p5 5
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>Temporary breakpoint 1, main (argc=2, argv=0x7fffffffd878) at ch15_p5.c:29
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>29      int main(int argc, char *argv[]) {
+</span></code></pre></div>
+<p>Η εντολή <span class="p-style">info</span> args παρουσιάζει τις τιμές των ορισμάτων γραμμής εντολών (command line arguments) όπως έχουν εισαχθεί από τον χρήστη. Ειδικότερα, εμφανίζεται το πλήθος των ορισμάτων γραμμής εκτέλεσης (<span class="p-style">argc</span>) και η διεύθυνση του πίνακα χαρακτήρων που περιέχει τα επιμέρους ορίσματα (<span class="p-style">argv</span>). Για να φανούν τα περιεχόμενα του πίνακα <span class="p-style">argv</span> μπορεί να χρησιμοποιηθεί η εντολή <span class="p-style">print</span> σε συνδυασμό με το σύμβολο @ όπως στο παράδειγμα που ακολουθεί. Το <span class="p-style">*argv@2</span> σημαίνει ότι θέλουμε να δούμε τα περιεχόμενα του πίνακα <span class="p-style">argv</span> από την αρχή και μέχρι πριν τη θέση 2.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>(gdb) info args
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>argc = 2
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>argv = 0x7fffffffd878
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>(gdb) print *argv@2
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>$1 = {0x7fffffffdb03 &quot;/../src/ch15_p5&quot;, 0x7fffffffdb2f &quot;5&quot;}
+</span></code></pre></div>
+<p>Η εντολή <span class="p-style">next</span> εκτελεί τις εντολές της <span class="p-style">main()</span>, τη μια μετά την άλλη. Φθάνοντας στη γραμμή 37 του κώδικα, μπορούμε να δούμε τις τρέχουσες τιμές των τοπικών μεταβλητών με την εντολή <span class="p-style">info locals</span>. Στη συνέχεια μεταβαίνουμε μέσα στη συνάρτηση <span class="p-style">fill_vector()</span> με την εντολή <span class="p-style">step</span>.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>(gdb) next
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>30        if (argc != 2) {
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>(gdb) next
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>34        const int N = atoi(argv[1]);
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>(gdb) next
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>35        struct point *points[N];
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>(gdb) next
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>36        struct point origin = {0.0, 0.0};
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>(gdb) next
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>37        fill_vector(points, N);
+</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>(gdb) info locals
+</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>N = 5
+</span><span id="__span-17-13"><a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>points = {0x7fffffffd870 , 0x0, 0x0, 0x7ffff7cbf5c4 &lt;__GI_atoi+20&gt;, 0x0}
+</span><span id="__span-17-14"><a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>origin = {x = 0, y = 0}
+</span><span id="__span-17-15"><a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>(gdb) step
+</span><span id="__span-17-16"><a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>fill_vector (points=0x7fffffffd6c0 , N=5) at ch15_p5.c:21
+</span><span id="__span-17-17"><a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a>21        srand(1234); // use seed for getting reproducible results
+</span></code></pre></div>
+<p>Ακολουθεί η εκτέλεση των εντολών της <span class="p-style">fill_vector()</span> με την εντολή <span class="p-style">next</span> και μέχρι να συναντήσουμε την πρώτη κλήση της συνάρτησης <span class="p-style">randfrom()</span>, οπότε και δίνεται ξανά η εντολή <span class="p-style">step</span> για τη μετάβαση εντός της <span class="p-style">randfrom()</span>. Η εντολή where δείχνει τη στοίβα χρόνου εκτέλεσης στην κορυφή της οποίας βρίσκεται η συνάρτηση <span class="p-style">randfrom()</span>, κάτω από αυτή η <span class="p-style">fill_vector()</span> και κάτω από αυτή η <span class="p-style">main()</span>. Με την εντολή <span class="p-style">fin</span> πραγματοποιείται εκτέλεση των υπόλοιπων εντολών της τρέχουσας ενεργής συνάρτησης, δηλαδή της <span class="p-style">randfrom()</span>, ενώ αν δοθεί και δεύτερη φορά η εντολή <span class="p-style">fin</span>, ολοκληρώνεται και η εκτέλεση της συνάρτησης <span class="p-style">fill_vector()</span>.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>(gdb) next
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>22          for (int i = 0; i &lt; N; i++) {
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>(gdb) next
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>23          points[i] = malloc(sizeof(struct point));
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>(gdb) next
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>24          points[i]‐&gt;x = randfrom(‐100, 100);
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>(gdb) step
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>randfrom (min=‐100, max=100) at ch15_p5.c:15
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>15          double range = (max ‐ min);
+</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>(gdb) where
+</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>#0 randfrom (min=‐100, max=100) at ch15_p5.c:15
+</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>#1 0x00005555555553c4 in fill_vector (points=0x7fffffffd6c0 , N=5) at ch15_p5.c:24
+</span><span id="__span-18-13"><a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>#2 0x000055555555557f in main (argc=2, argv=0x7fffffffd878) at ch15_p5.c:37
+</span><span id="__span-18-14"><a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>(gdb) fin
+</span><span id="__span-18-15"><a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>Run till exit from #0 randfrom (min=‐100, max=100) at ch15_p5.c:15
+</span><span id="__span-18-16"><a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a>0x00005555555553c4 in fill_vector (points=0x7fffffffd6c0 , N=5) at ch15_p5.c:24
+</span><span id="__span-18-17"><a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a>24          points[i]‐&gt;x = randfrom(‐100, 100);
+</span><span id="__span-18-18"><a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a>Value returned is $2 = ‐55.376385317824955
+</span><span id="__span-18-19"><a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a>(gdb) fin
+</span><span id="__span-18-20"><a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a>Run till exit from #0 0x00005555555553c4 in fill_vector (points=0x7fffffffd6c0 , N=5)
+</span><span id="__span-18-21"><a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a>    ↪ at ch15_p5.c:24
+</span><span id="__span-18-22"><a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a>main (argc=2, argv=0x7fffffffd878) at ch15_p5.c:38
+</span><span id="__span-18-23"><a id="__codelineno-18-23" name="__codelineno-18-23" href="#__codelineno-18-23"></a>38          for (int i = 0; i &lt; N; i++) {
+</span></code></pre></div>
+<p>Μπορούμε να δούμε τις τιμές των μεταβλητών με τη χρήση της <span class="p-style">print</span> όπως στη συνέχεια. Συνεχίζουμε την εκτέλεση του κώδικα με την εντολή <span class="p-style">next</span> και «μπαίνουμε» με την εντολή <span class="p-style">step</span> μέσα στη συνάρτηση <span class="p-style">distance()</span>. Ολοκληρώνουμε την εκτέλεση της <span class="p-style">distance()</span> με την εντολή <span class="p-style">fin</span>.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>(gdb) print points
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>$3 = {0x5555555592a0 , 0x5555555592c0 , 0x5555555592e0 , 0x555555559300 , 0x555555559320}
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>(gdb) print points[0]
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>$4 = (struct point *) 0x5555555592a0
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>(gdb) print *points[0]
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>$5 = {x = ‐55.376385317824955, y = ‐56.640755830631008}
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>(gdb) next
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>39          double d = distance(points[i], &amp;origin);
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>(gdb) step
+</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>distance (p1=0x5555555592a0 , p2=0x7fffffffd730) at ch15_p5.c:11
+</span><span id="__span-19-11"><a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>11          return sqrt(pow(p1‐&gt;x ‐ p2‐&gt;x, 2) + pow(p1‐&gt;y ‐ p2‐&gt;y, 2));
+</span><span id="__span-19-12"><a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>(gdb) fin
+</span><span id="__span-19-13"><a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>Run till exit from #0 distance (p1=0x5555555592a0 , p2=0x7fffffffd730) at ch15_p5.c:11
+</span><span id="__span-19-14"><a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a>0x00005555555555a5 in main (argc=2, argv=0x7fffffffd878) at ch15_p5.c:39
+</span><span id="__span-19-15"><a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a>39          double d = distance(points[i], &amp;origin);
+</span><span id="__span-19-16"><a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a>Value returned is $6 = 79.21312562911136
+</span></code></pre></div>
+<p>Η εντολή for στη <span class="p-style">main()</span> στη γραμμή 38 θα εκτελεστεί για 4 ακόμα φορές. Για να σταματήσουμε την εκτέλεση στην αρχή της τελευταίας επανάληψης χρησιμοποιούμε την εντολή <span class="p-style">break</span> ορίζοντας τη συνθήκη <span class="p-style">i==4</span> και συνεχίζουμε την εκτέλεση μέχρι το breakpoint με την εντολή <span class="p-style">continue</span>. Η εντολή <span class="p-style">info locals</span> δείχνει ότι πράγματι η εκτέλεση έχει κάνει παύση όταν η μεταβλητή <span class="p-style">i</span> έχει λάβει την τιμή 4.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>(gdb) break 40 if i == 4
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>Breakpoint 2 at 0x5555555555bc: file ch15_p5.c, line 40.
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>(gdb) continue
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>Continuing.
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>point0=(‐55.38,‐56.64) distance from origin= 79.21
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>point1=(‐10.49,‐01.48) distance from origin= 10.59
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>point2=(+13.87,‐05.24) distance from origin= 14.83
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>point3=(‐05.02,‐93.27) distance from origin= 93.40
+</span><span id="__span-20-9"><a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>
+</span><span id="__span-20-10"><a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a>Breakpoint 2, main (argc=2, argv=0x7fffffffd878) at ch15_p5.c:40
+</span><span id="__span-20-11"><a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a>40          printf(&quot;point%d=(%+06.2f,%+06.2f) distance from origin=%6.2f\n&quot;, i,
+</span><span id="__span-20-12"><a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a>(gdb) info locals
+</span><span id="__span-20-13"><a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a>d = 129.0546641270152
+</span><span id="__span-20-14"><a id="__codelineno-20-14" name="__codelineno-20-14" href="#__codelineno-20-14"></a>i = 4
+</span><span id="__span-20-15"><a id="__codelineno-20-15" name="__codelineno-20-15" href="#__codelineno-20-15"></a>N = 5
+</span><span id="__span-20-16"><a id="__codelineno-20-16" name="__codelineno-20-16" href="#__codelineno-20-16"></a>points = {0x5555555592a0 , 0x5555555592c0 , 0x5555555592e0 , 0x555555559300 ,
+</span><span id="__span-20-17"><a id="__codelineno-20-17" name="__codelineno-20-17" href="#__codelineno-20-17"></a>    ↪ 0x555555559320}
+</span><span id="__span-20-18"><a id="__codelineno-20-18" name="__codelineno-20-18" href="#__codelineno-20-18"></a>origin = {x = 0, y = 0}
+</span></code></pre></div>
+<p>Η εκτέλεση του κώδικα ολοκληρώνεται με την εντολή <span class="p-style">continue</span>. Η έξοδος από το GDB γίνεται με την εντολή <span class="p-style">quit</span>.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>(gdb) continue
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>Continuing.
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>point4=(+90.81,+91.70) distance from origin=129.05
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>[Inferior 1 (process 3515) exited normally]
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>(gdb) quit
+</span></code></pre></div>
+<p class="annotate">Αξίζει να σημειωθεί ότι υπάρχει η δυνατότητα να εμφανιστεί ένα «φιλικότερο περιβάλλον» για το GDB με τη χρήση διαφόρων front-ends. Ένα παράδειγμα φαίνεται στο Σχήμα 15.1 όπου το GDB ενεργοποιείται με τον διακόπτη ‐tui. Άλλα front-ends που μπορούν να χρησιμοποιηθούν είναι το cgdb(1) και το gdbgui (2). Επίσης, επεξεργαστές κειμένου όπως το Visual Studio Code και το vim μπορούν να συνδεθούν με το GDB.</p>
+<ol>
+<li><a href="http://cgdb.github.io/" target="_blank">http://cgdb.github.io/</a></li>
+<li><a href="https://www.gdbgui.com/" target="_blank">https://www.gdbgui.com/</a></li>
+</ol>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>$ gdb ‐tui ./ch15_p5
+</span></code></pre></div>
+<p><a class="glightbox" href="../src/images/ch15_p5-tui-cropped-brushed.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="ch15_p5.png" src="../src/images/ch15_p5-tui-cropped-brushed.png" /></a></p>
+<div style="text-align: center;"><b> Σχήμα 15.1: </b><i>TUI (Text User Interface) για το GDB, ενεργοποίηση με τον διακόπτη -tui</i></div>
+
+<h3 id="1542">15.4.2 Ένα μη αναμενόμενο αποτέλεσμα</h3>
+<p>Στο ακόλουθο πρόγραμμα (κώδικας 15.6) πραγματοποιείται κλήση δύο σχεδόν όμοιων συναρτήσεων, της <span class="p-style">fun1()</span> και της <span class="p-style">fun2()</span>. Παρατηρείται η εξής «περίεργη» συμπεριφορά: εμφανίζονται τα αποτελέσματα 5 και 10, με το δεύτερο από αυτά να μην φαίνεται να δικαιολογείται από τον κώδικα. Πραγματοποιώντας αποσφαλμάτωση εντοπίζεται ο λόγος εμφάνισης των συγκεκριμένων αποτελεσμάτων.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 15.6: ch15_p6.c - δύο σχεδόν ίδιες συναρτήσεις, με διαφορετική όμως συμπεριφορά.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-23-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-23-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-23-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-23-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-23-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-23-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-23-10">10</a></span>
+<span class="normal"><a href="#__codelineno-23-11">11</a></span>
+<span class="normal"><a href="#__codelineno-23-12">12</a></span>
+<span class="normal"><a href="#__codelineno-23-13">13</a></span>
+<span class="normal"><a href="#__codelineno-23-14">14</a></span>
+<span class="normal"><a href="#__codelineno-23-15">15</a></span>
+<span class="normal"><a href="#__codelineno-23-16">16</a></span>
+<span class="normal"><a href="#__codelineno-23-17">17</a></span>
+<span class="normal"><a href="#__codelineno-23-18">18</a></span>
+<span class="normal"><a href="#__codelineno-23-19">19</a></span>
+<span class="normal"><a href="#__codelineno-23-20">20</a></span>
+<span class="normal"><a href="#__codelineno-23-21">21</a></span>
+<span class="normal"><a href="#__codelineno-23-22">22</a></span>
+<span class="normal"><a href="#__codelineno-23-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3"></a>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="kt">int</span><span class="w"> </span><span class="nf">fun1</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6"></a><span class="w">  </span><span class="n">x</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+</span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+</span><span id="__span-23-8"><a id="__codelineno-23-8" name="__codelineno-23-8"></a><span class="p">}</span>
+</span><span id="__span-23-9"><a id="__codelineno-23-9" name="__codelineno-23-9"></a>
+</span><span id="__span-23-10"><a id="__codelineno-23-10" name="__codelineno-23-10"></a><span class="kt">int</span><span class="w"> </span><span class="nf">fun2</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-11"><a id="__codelineno-23-11" name="__codelineno-23-11"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+</span><span id="__span-23-12"><a id="__codelineno-23-12" name="__codelineno-23-12"></a><span class="w">  </span><span class="n">y</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+</span><span id="__span-23-13"><a id="__codelineno-23-13" name="__codelineno-23-13"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+</span><span id="__span-23-14"><a id="__codelineno-23-14" name="__codelineno-23-14"></a><span class="p">}</span>
+</span><span id="__span-23-15"><a id="__codelineno-23-15" name="__codelineno-23-15"></a>
+</span><span id="__span-23-16"><a id="__codelineno-23-16" name="__codelineno-23-16"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-17"><a id="__codelineno-23-17" name="__codelineno-23-17"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">z1</span><span class="p">,</span><span class="w"> </span><span class="n">z2</span><span class="p">;</span>
+</span><span id="__span-23-18"><a id="__codelineno-23-18" name="__codelineno-23-18"></a><span class="w">  </span><span class="n">z1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fun1</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</span><span id="__span-23-19"><a id="__codelineno-23-19" name="__codelineno-23-19"></a><span class="w">  </span><span class="n">z2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fun2</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</span><span id="__span-23-20"><a id="__codelineno-23-20" name="__codelineno-23-20"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">z1</span><span class="p">);</span>
+</span><span id="__span-23-21"><a id="__codelineno-23-21" name="__codelineno-23-21"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">z2</span><span class="p">);</span>
+</span><span id="__span-23-22"><a id="__codelineno-23-22" name="__codelineno-23-22"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-23-23"><a id="__codelineno-23-23" name="__codelineno-23-23"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Η μεταγλώττιση του κώδικα γίνεται με την ακόλουθη εντολή:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>$ gcc ‐g ch15_p6.c ‐o ch15_p6
+</span></code></pre></div>
+<p>Ακολουθούμε τα επόμενα βήματα καλώντας το gdb.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>$ gdb ch15_p6
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>GNU gdb (Ubuntu 10.2‐0ubuntu1~20.04~1) 10.2
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>...
+</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>Type &quot;apropos word&quot; to search for commands related to &quot;word&quot;...
+</span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>Reading symbols from ch15_p6...
+</span><span id="__span-25-6"><a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>(gdb) start
+</span><span id="__span-25-7"><a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a>Temporary breakpoint 1 at 0x1188: file ch15_p6.c, line 18.
+</span><span id="__span-25-8"><a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a>Starting program: /.../src/ch15_p6
+</span><span id="__span-25-9"><a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a>
+</span><span id="__span-25-10"><a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a>Temporary breakpoint 1, main () at ch15_p6.c:18
+</span><span id="__span-25-11"><a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a>18          z1 = fun1(5);
+</span><span id="__span-25-12"><a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a>(gdb) step
+</span><span id="__span-25-13"><a id="__codelineno-25-13" name="__codelineno-25-13" href="#__codelineno-25-13"></a>fun1 (a=5) at ch15_p6.c:5
+</span><span id="__span-25-14"><a id="__codelineno-25-14" name="__codelineno-25-14" href="#__codelineno-25-14"></a>5           int x = 0;
+</span><span id="__span-25-15"><a id="__codelineno-25-15" name="__codelineno-25-15" href="#__codelineno-25-15"></a>(gdb) next
+</span><span id="__span-25-16"><a id="__codelineno-25-16" name="__codelineno-25-16" href="#__codelineno-25-16"></a>6           x += a;
+</span><span id="__span-25-17"><a id="__codelineno-25-17" name="__codelineno-25-17" href="#__codelineno-25-17"></a>(gdb) next
+</span><span id="__span-25-18"><a id="__codelineno-25-18" name="__codelineno-25-18" href="#__codelineno-25-18"></a>7           return x;
+</span><span id="__span-25-19"><a id="__codelineno-25-19" name="__codelineno-25-19" href="#__codelineno-25-19"></a>(gdb) print x
+</span><span id="__span-25-20"><a id="__codelineno-25-20" name="__codelineno-25-20" href="#__codelineno-25-20"></a>$1 = 5
+</span><span id="__span-25-21"><a id="__codelineno-25-21" name="__codelineno-25-21" href="#__codelineno-25-21"></a>(gdb) print &amp;x
+</span><span id="__span-25-22"><a id="__codelineno-25-22" name="__codelineno-25-22" href="#__codelineno-25-22"></a>$2 = (int *) 0x7fffffffd75c
+</span><span id="__span-25-23"><a id="__codelineno-25-23" name="__codelineno-25-23" href="#__codelineno-25-23"></a>(gdb) fin
+</span><span id="__span-25-24"><a id="__codelineno-25-24" name="__codelineno-25-24" href="#__codelineno-25-24"></a>Run till exit from #0 fun1 (a=5) at ch15_p6.c:7
+</span><span id="__span-25-25"><a id="__codelineno-25-25" name="__codelineno-25-25" href="#__codelineno-25-25"></a>0x0000555555555192 in main () at ch15_p6.c:18
+</span><span id="__span-25-26"><a id="__codelineno-25-26" name="__codelineno-25-26" href="#__codelineno-25-26"></a>18          z1 = fun1(5);
+</span><span id="__span-25-27"><a id="__codelineno-25-27" name="__codelineno-25-27" href="#__codelineno-25-27"></a>Value returned is $3 = 5
+</span><span id="__span-25-28"><a id="__codelineno-25-28" name="__codelineno-25-28" href="#__codelineno-25-28"></a>(gdb) next
+</span><span id="__span-25-29"><a id="__codelineno-25-29" name="__codelineno-25-29" href="#__codelineno-25-29"></a>19          z2 = fun2(5);
+</span><span id="__span-25-30"><a id="__codelineno-25-30" name="__codelineno-25-30" href="#__codelineno-25-30"></a>(gdb) step
+</span><span id="__span-25-31"><a id="__codelineno-25-31" name="__codelineno-25-31" href="#__codelineno-25-31"></a>fun2 (b=5) at ch15_p6.c:12
+</span><span id="__span-25-32"><a id="__codelineno-25-32" name="__codelineno-25-32" href="#__codelineno-25-32"></a>12          y += b;
+</span><span id="__span-25-33"><a id="__codelineno-25-33" name="__codelineno-25-33" href="#__codelineno-25-33"></a>(gdb) next
+</span><span id="__span-25-34"><a id="__codelineno-25-34" name="__codelineno-25-34" href="#__codelineno-25-34"></a>13          return y;
+</span><span id="__span-25-35"><a id="__codelineno-25-35" name="__codelineno-25-35" href="#__codelineno-25-35"></a>(gdb) print y
+</span><span id="__span-25-36"><a id="__codelineno-25-36" name="__codelineno-25-36" href="#__codelineno-25-36"></a>$4 = 10
+</span><span id="__span-25-37"><a id="__codelineno-25-37" name="__codelineno-25-37" href="#__codelineno-25-37"></a>(gdb) print &amp;y
+</span><span id="__span-25-38"><a id="__codelineno-25-38" name="__codelineno-25-38" href="#__codelineno-25-38"></a>$5 = (int *) 0x7fffffffd75c
+</span><span id="__span-25-39"><a id="__codelineno-25-39" name="__codelineno-25-39" href="#__codelineno-25-39"></a>(gdb) fin
+</span><span id="__span-25-40"><a id="__codelineno-25-40" name="__codelineno-25-40" href="#__codelineno-25-40"></a>Run till exit from #0 fun2 (b=5) at ch15_p6.c:13
+</span><span id="__span-25-41"><a id="__codelineno-25-41" name="__codelineno-25-41" href="#__codelineno-25-41"></a>0x000055555555519f in main () at ch15_p6.c:19
+</span><span id="__span-25-42"><a id="__codelineno-25-42" name="__codelineno-25-42" href="#__codelineno-25-42"></a>19          z2 = fun2(5);
+</span><span id="__span-25-43"><a id="__codelineno-25-43" name="__codelineno-25-43" href="#__codelineno-25-43"></a>Value returned is $6 = 10
+</span><span id="__span-25-44"><a id="__codelineno-25-44" name="__codelineno-25-44" href="#__codelineno-25-44"></a>(gdb) continue
+</span><span id="__span-25-45"><a id="__codelineno-25-45" name="__codelineno-25-45" href="#__codelineno-25-45"></a>Continuing.
+</span><span id="__span-25-46"><a id="__codelineno-25-46" name="__codelineno-25-46" href="#__codelineno-25-46"></a>5
+</span><span id="__span-25-47"><a id="__codelineno-25-47" name="__codelineno-25-47" href="#__codelineno-25-47"></a>10
+</span><span id="__span-25-48"><a id="__codelineno-25-48" name="__codelineno-25-48" href="#__codelineno-25-48"></a>[Inferior 1 (process 3615) exited normally]
+</span><span id="__span-25-49"><a id="__codelineno-25-49" name="__codelineno-25-49" href="#__codelineno-25-49"></a>(gdb) quit
+</span></code></pre></div>
+<p>Διαπιστώνουμε ότι η μεταβλητή <span class="p-style">x</span> στη συνάρτηση <span class="p-style">fun1</span> και η μεταβλητή <span class="p-style">y</span> στη συνάρτηση <span class="p-style">fun2()</span> μοιράζονται την ίδια θέση μνήμης (τη θέση μνήμης <span class="p-style">0x7fffffffd75c</span> στη συγκεκριμένη εκτέλεση του προγράμματος). Εφόσον πρώτα εκτελείται η συνάρτηση <span class="p-style">fun1()</span>, αφήνει στη θέση μνήμης που βρίσκεται η μεταβλητή <span class="p-style">x</span> την τιμή 5, η οποία χρησιμοποιείται ως αρχική τιμή στη συνέχεια για τη μεταβλητή <span class="p-style">y</span> από τη συνάρτηση <span class="p-style">fun2()</span>. Η συμπεριφορά αυτή έχει να κάνει με τον τρόπο με τον οποίο καλούνται οι συναρτήσεις κάνοντας χρήση της στοίβας χρόνου εκτέλεσης. Όταν από τη <span class="p-style">main()</span> κλήθηκε η συνάρτηση <span class="p-style">fun1()</span> δημιουργήθηκε στην κορυφή της στοίβας, πάνω από τον χώρο που καταλάμβανε το πλαίσιο στοίβας (stack frame) της <span class="p-style">main()</span>, ένα νέο πλαίσιο στοίβας για τη συνάρτηση <span class="p-style">fun1()</span>. Το πλαίσιο στοίβας της <span class="p-style">fun1()</span> έγινε το ενεργό πλαίσιο στοίβας και δεσμεύθηκε σε αυτό χώρος μνήμης για τις τοπικές μεταβλητές της <span class="p-style">fun1()</span> (την <span class="p-style">a</span>, την <span class="p-style">x</span> και την τιμή επιστροφής της συνάρτησης). Όταν ολοκληρώθηκε η εκτέλεση της <span class="p-style">fun1()</span>, η θέση του ενεργού πλαισίου στοίβας ενημερώθηκε έτσι ώστε να δείχνει ξανά τη <span class="p-style">main()</span>, αλλά τα περιεχόμενα του πλαισίου στοίβας της <span class="p-style">fun1()</span> δεν άλλαξαν. Αμέσως μετά κλήθηκε η συνάρτηση <span class="p-style">fun2()</span>, που έχει το ίδιο πλήθος και είδος τοπικών μεταβλητών και μάλιστα με την ίδια σειρά με την <span class="p-style">fun1()</span>. Οπότε, στο πλαίσιο στοίβας που δημιουργήθηκε για τη <span class="p-style">fun2()</span> η μεταβλητή της <span class="p-style">y</span> είχε την ίδια θέση με τη θέση που είχε η μεταβλητή <span class="p-style">x</span> της <span class="p-style">fun1()</span>. Καθώς τα δεδομένα της συγκεκριμένης θέσης δεν έχουν αλλάξει ανάμεσα στις δύο κλήσεις των συναρτήσεων η <span class="p-style">fun2()</span> χρησιμοποιεί ως αρχική τιμή την τιμή που έχει αφήσει εκεί η συνάρτηση <span class="p-style">fun1()</span>. Αυτός είναι και ο λόγος για την «περίεργη συμπεριφορά», η οποία εν τέλει οφείλεται στο ότι στη συνάρτηση <span class="p-style">fun2()</span> δεν γίνεται αρχικοποίηση της μεταβλητής <span class="p-style">y</span> πριν χρησιμοποιηθεί.</p>
+<h3 id="1543">15.4.3 Εκτός ορίων</h3>
+<p>Στο ακόλουθο παράδειγμα (κώδικας 15.7) πραγματοποιείται υπολογισμός του αθροίσματος των στοιχείων ενός πίνακα 4 θέσεων που περιέχει την αριθμητική τιμή 1 σε όλα τα στοιχεία του. Ωστόσο, το αποτέλεσμα που προκύπτει είναι 1003 αντί για το αναμενόμενο 4. Αν και είναι σχετικά εύκολο να εντοπίσει κανείς τον λόγο του λανθασμένου αποτελέσματος, το GDB θα μας βοηθήσει να κατανοήσουμε τον λόγο για τον οποίο εμφανίζεται το συγκεκριμένο αποτέλεσμα.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 15.7: ch15_p7.c - κώδικας που παράγει «μη αναμενόμενο» αποτέλεσμα, 1003 έναντι 4.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-26-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-26-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-26-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-26-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-26-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-26-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-26-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-26-10">10</a></span>
+<span class="normal"><a href="#__codelineno-26-11">11</a></span>
+<span class="normal"><a href="#__codelineno-26-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2"></a>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">};</span>
+</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">dummy</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">999</span><span class="p">,</span><span class="w"> </span><span class="mi">999</span><span class="p">,</span><span class="w"> </span><span class="mi">999</span><span class="p">,</span><span class="w"> </span><span class="mi">999</span><span class="p">};</span>
+</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7"></a><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-26-8"><a id="__codelineno-26-8" name="__codelineno-26-8"></a><span class="w">    </span><span class="n">sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span><span id="__span-26-9"><a id="__codelineno-26-9" name="__codelineno-26-9"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-26-10"><a id="__codelineno-26-10" name="__codelineno-26-10"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sum</span><span class="p">);</span>
+</span><span id="__span-26-11"><a id="__codelineno-26-11" name="__codelineno-26-11"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-26-12"><a id="__codelineno-26-12" name="__codelineno-26-12"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Η μεταγλώττιση του κώδικα γίνεται με την ακόλουθη εντολή:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>$ gcc ‐g ch15_p7.c ‐o ch15_p7
+</span></code></pre></div>
+<p>Ακολουθούμε τα επόμενα βήματα καλώντας το GDB:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>$ gdb ./ch15_p7
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>GNU gdb (Ubuntu 10.2‐0ubuntu1~20.04~1) 10.2
+</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>...
+</span><span id="__span-28-4"><a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>Reading symbols from ./ch15_p7...
+</span><span id="__span-28-5"><a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>(gdb) start
+</span><span id="__span-28-6"><a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>Temporary breakpoint 1 at 0x1175: file ch15_p7.c, line 3.
+</span><span id="__span-28-7"><a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a>Starting program: /.../src/ch15_p7
+</span><span id="__span-28-8"><a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a>
+</span><span id="__span-28-9"><a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a>Temporary breakpoint 1, main () at ch15_p7.c:3
+</span><span id="__span-28-10"><a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a>3           int main() {
+</span><span id="__span-28-11"><a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a>(gdb) break 10
+</span><span id="__span-28-12"><a id="__codelineno-28-12" name="__codelineno-28-12" href="#__codelineno-28-12"></a>Breakpoint 2 at 0x5555555551e2: file ch15_p7.c, line 10.
+</span><span id="__span-28-13"><a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a>(gdb) continue
+</span><span id="__span-28-14"><a id="__codelineno-28-14" name="__codelineno-28-14" href="#__codelineno-28-14"></a>Continuing.
+</span><span id="__span-28-15"><a id="__codelineno-28-15" name="__codelineno-28-15" href="#__codelineno-28-15"></a>Breakpoint 2, main () at ch15_p7.c:10
+</span><span id="__span-28-16"><a id="__codelineno-28-16" name="__codelineno-28-16" href="#__codelineno-28-16"></a>10          printf(&quot;%d \n&quot;, sum);
+</span><span id="__span-28-17"><a id="__codelineno-28-17" name="__codelineno-28-17" href="#__codelineno-28-17"></a>(gdb) info locals
+</span><span id="__span-28-18"><a id="__codelineno-28-18" name="__codelineno-28-18" href="#__codelineno-28-18"></a>sum = 1003
+</span><span id="__span-28-19"><a id="__codelineno-28-19" name="__codelineno-28-19" href="#__codelineno-28-19"></a>a = {1, 1, 1, 1}
+</span><span id="__span-28-20"><a id="__codelineno-28-20" name="__codelineno-28-20" href="#__codelineno-28-20"></a>dummy = {999, 999, 999, 999}
+</span><span id="__span-28-21"><a id="__codelineno-28-21" name="__codelineno-28-21" href="#__codelineno-28-21"></a>(gdb) print &amp;a[4]
+</span><span id="__span-28-22"><a id="__codelineno-28-22" name="__codelineno-28-22" href="#__codelineno-28-22"></a>$1 = (int *) 0x7fffffffd760
+</span><span id="__span-28-23"><a id="__codelineno-28-23" name="__codelineno-28-23" href="#__codelineno-28-23"></a>(gdb) print &amp;dummy[0]
+</span><span id="__span-28-24"><a id="__codelineno-28-24" name="__codelineno-28-24" href="#__codelineno-28-24"></a>$2 = (int *) 0x7fffffffd760
+</span><span id="__span-28-25"><a id="__codelineno-28-25" name="__codelineno-28-25" href="#__codelineno-28-25"></a>(gdb) continue
+</span><span id="__span-28-26"><a id="__codelineno-28-26" name="__codelineno-28-26" href="#__codelineno-28-26"></a>Continuing.
+</span><span id="__span-28-27"><a id="__codelineno-28-27" name="__codelineno-28-27" href="#__codelineno-28-27"></a>1003
+</span><span id="__span-28-28"><a id="__codelineno-28-28" name="__codelineno-28-28" href="#__codelineno-28-28"></a>[Inferior 1 (process 24779) exited normally]
+</span><span id="__span-28-29"><a id="__codelineno-28-29" name="__codelineno-28-29" href="#__codelineno-28-29"></a>(gdb) quit
+</span></code></pre></div>
+<p>Το πρόβλημα έχει να κάνει με το ότι η εντολή <span class="p-style">for</span> πραγματοποιεί πρόσβαση εκτός των ορίων του πίνακα <span class="p-style">a</span>, λόγω του ότι χρησιμοποιείται ο τελεστής <span class="p-style">&lt;=</span> αντί για τον τελεστή <span class="p-style">&lt;</span> σε συνδυασμό με το μέγεθος του πίνακα που είναι <span class="p-style">4</span>. Στη μνήμη αμέσως μετά από τον χώρο που καταλαμβάνει ο πίνακας <span class="p-style">a</span>, ακολουθεί ο χώρος που καταλαμβάνει ο πίνακας <span class="p-style">dummy</span>. Άρα η διεύθυνση μνήμης στην οποία βρίσκεται το πρώτο στοιχείο του πίνακα <span class="p-style">dummy</span>, δηλαδή το <span class="p-style">dummy[0]</span>, είναι η ίδια με τη διεύθυνση μνήμης ξεκινώντας από την αρχή του πίνακα <span class="p-style">a</span> και μεταβαίνοντας 5 φορές κατά 4 bytes μπροστά. Την πληροφορία αυτή την αποκαλύπτει ο GDB, που δείχνει ότι η διεύθυνση μνήμης του στοιχείου <span class="p-style">a[4]</span> και του στοιχείου <span class="p-style">dummy[0]</span> είναι οι ίδιες (<span class="p-style">0x7fffffffd760</span> σε αυτήν την εκτέλεση του προγράμματος). Συνεπώς, στο άθροισμα των 4 μονάδων του πίνακα <span class="p-style">a</span>, προστίθεται και η τιμή του πρώτου στοιχείου του πίνακα <span class="p-style">dummy</span> που είναι 999 και προκύπτει το άθροισμα 1003 το οποίο και εμφανίζεται.</p>
+<h2 id="155">15.5 Ασκήσεις</h2>
+<p><strong><em>Άσκηση 1</em></strong><br />
+Δίνεται ο κώδικας 15.8 που αποτελεί μια απόπειρα κώδικα αντιμετάθεσης δύο ακέραιων τιμών. Ωστόσο, δεν έχει ορθή συμπεριφορά. Χρησιμοποιώντας το <span class="p-style">GDB</span> εντοπίστε τον λόγο για τον οποίο δεν πραγματοποιείται σωστά η αντιμετάθεση. Διορθώστε τον κώδικα έτσι ώστε να επιτυγχάνει αντιμετάθεση.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 15.8: ch15_e1.c - συνάρτηση που πραγματοποιεί λανθασμένη αντιμετάθεση ακέραιων μεταβλητών.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-29-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-29-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-29-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-29-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-29-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-29-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-29-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-29-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-29-10">10</a></span>
+<span class="normal"><a href="#__codelineno-29-11">11</a></span>
+<span class="normal"><a href="#__codelineno-29-12">12</a></span>
+<span class="normal"><a href="#__codelineno-29-13">13</a></span>
+<span class="normal"><a href="#__codelineno-29-14">14</a></span>
+<span class="normal"><a href="#__codelineno-29-15">15</a></span>
+<span class="normal"><a href="#__codelineno-29-16">16</a></span>
+<span class="normal"><a href="#__codelineno-29-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2"></a>
+</span><span id="__span-29-3"><a id="__codelineno-29-3" name="__codelineno-29-3"></a><span class="c1">// λανθασμένη υλοποίηση</span>
+</span><span id="__span-29-4"><a id="__codelineno-29-4" name="__codelineno-29-4"></a><span class="kt">void</span><span class="w"> </span><span class="nf">swap</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-29-5"><a id="__codelineno-29-5" name="__codelineno-29-5"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// αποφυγή undefined behavior όταν δείχνουν στην ίδια διεύθυνση</span>
+</span><span id="__span-29-6"><a id="__codelineno-29-6" name="__codelineno-29-6"></a><span class="w">    </span><span class="o">*</span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="o">*</span><span class="n">b</span><span class="p">;</span>
+</span><span id="__span-29-7"><a id="__codelineno-29-7" name="__codelineno-29-7"></a><span class="w">    </span><span class="o">*</span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="o">*</span><span class="n">b</span><span class="p">;</span>
+</span><span id="__span-29-8"><a id="__codelineno-29-8" name="__codelineno-29-8"></a><span class="w">    </span><span class="o">*</span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="o">*</span><span class="n">b</span><span class="p">;</span>
+</span><span id="__span-29-9"><a id="__codelineno-29-9" name="__codelineno-29-9"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-29-10"><a id="__codelineno-29-10" name="__codelineno-29-10"></a><span class="p">}</span>
+</span><span id="__span-29-11"><a id="__codelineno-29-11" name="__codelineno-29-11"></a>
+</span><span id="__span-29-12"><a id="__codelineno-29-12" name="__codelineno-29-12"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-29-13"><a id="__codelineno-29-13" name="__codelineno-29-13"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+</span><span id="__span-29-14"><a id="__codelineno-29-14" name="__codelineno-29-14"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;BEFORE: x = %d, y = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+</span><span id="__span-29-15"><a id="__codelineno-29-15" name="__codelineno-29-15"></a><span class="w">  </span><span class="n">swap</span><span class="p">(</span><span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">y</span><span class="p">);</span>
+</span><span id="__span-29-16"><a id="__codelineno-29-16" name="__codelineno-29-16"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;AFTER: x = %d, y = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+</span><span id="__span-29-17"><a id="__codelineno-29-17" name="__codelineno-29-17"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<details class="tip">
+<summary>Λύση άσκησης 1</summary>
+<div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1"></a>
+</span></code></pre></div></td></tr></table></div>
+</details>
+<p><strong><em>Άσκηση 2</em></strong><br />
+Το πρόγραμμα του κώδικα 15.9 ζητά από τον χρήστη να εισάγει έναν ακέραιο αριθμό. Ωστόσο, όταν ο χρήστης εισάγει μια ακέραια τιμή, προκύπτει σφάλμα κατάτμησης (segmentation fault). Χρησιμοποιήστε το GDB για να εντοπίσετε το σφάλμα στον κώδικα.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 15.9: ch15_e2.c - λανθασμένος τρόπος εισόδου τιμής από τον χρήστη.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1">1</a></span>
+<span class="normal"><a href="#__codelineno-31-2">2</a></span>
+<span class="normal"><a href="#__codelineno-31-3">3</a></span>
+<span class="normal"><a href="#__codelineno-31-4">4</a></span>
+<span class="normal"><a href="#__codelineno-31-5">5</a></span>
+<span class="normal"><a href="#__codelineno-31-6">6</a></span>
+<span class="normal"><a href="#__codelineno-31-7">7</a></span>
+<span class="normal"><a href="#__codelineno-31-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2"></a>
+</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+</span><span id="__span-31-5"><a id="__codelineno-31-5" name="__codelineno-31-5"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Input an integer : &quot;</span><span class="p">);</span>
+</span><span id="__span-31-6"><a id="__codelineno-31-6" name="__codelineno-31-6"></a><span class="w">  </span><span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
+</span><span id="__span-31-7"><a id="__codelineno-31-7" name="__codelineno-31-7"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;You entered : %d </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
+</span><span id="__span-31-8"><a id="__codelineno-31-8" name="__codelineno-31-8"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p><strong><em>Άσκηση 3</em></strong><br />
+Το πρόγραμμα του κώδικα 15.10 αρχικοποιεί στο μηδέν τα στοιχεία ενός πίνακα ακεραίων. Ωστόσο, κατά την εκτέλεσή του προκύπτει σφάλμα κατάτμησης. Χρησιμοποιήστε το GDB για να εντοπίσετε το σφάλμα στον κώδικα.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 15.10: ch15_e3.c - αρχικοποίηση πίνακα που προκαλεί σφάλμα κατάτμησης.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-32-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-32-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-32-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-32-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-32-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-32-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-32-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-32-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-32-10">10</a></span>
+<span class="normal"><a href="#__codelineno-32-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;limits.h&gt;</span>
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3"></a>
+</span><span id="__span-32-4"><a id="__codelineno-32-4" name="__codelineno-32-4"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-32-5"><a id="__codelineno-32-5" name="__codelineno-32-5"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d </span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">INT_MAX</span><span class="p">);</span>
+</span><span id="__span-32-6"><a id="__codelineno-32-6" name="__codelineno-32-6"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">INT_MAX</span><span class="p">;</span>
+</span><span id="__span-32-7"><a id="__codelineno-32-7" name="__codelineno-32-7"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
+</span><span id="__span-32-8"><a id="__codelineno-32-8" name="__codelineno-32-8"></a>
+</span><span id="__span-32-9"><a id="__codelineno-32-9" name="__codelineno-32-9"></a><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span><span id="__span-32-10"><a id="__codelineno-32-10" name="__codelineno-32-10"></a><span class="w">    </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-32-11"><a id="__codelineno-32-11" name="__codelineno-32-11"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p><strong><em>Άσκηση 4</em></strong><br />
+Δίνεται ο κώδικας 15.11. Ο σκοπός του είναι να χρησιμοποιηθεί ο δείκτης <span class="p-style">ptr</span> για να εμφανίσει το πρώτο στοιχείο του πίνακα, μετά ο δείκτης να αυξηθεί κατά ένα (αριθμητική δεικτών) και να χρησιμοποιηθεί για να εμφανίσει το δεύτερο στοιχείο του πίνακα.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 15.11: ch15_e4.c - κώδικας με «μη αναμενόμενη συμπεριφορά», που παράγει warning αν χρησιμοποιηθεί ο διακόπτης -pedantic.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-33-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-33-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-33-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-33-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-33-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-33-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-33-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-33-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-33-10">10</a></span>
+<span class="normal"><a href="#__codelineno-33-11">11</a></span>
+<span class="normal"><a href="#__codelineno-33-12">12</a></span>
+<span class="normal"><a href="#__codelineno-33-13">13</a></span>
+<span class="normal"><a href="#__codelineno-33-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2"></a>
+</span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-33-4"><a id="__codelineno-33-4" name="__codelineno-33-4"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">};</span>
+</span><span id="__span-33-5"><a id="__codelineno-33-5" name="__codelineno-33-5"></a><span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arr</span><span class="p">;</span>
+</span><span id="__span-33-6"><a id="__codelineno-33-6" name="__codelineno-33-6"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;The value that the pointer points to: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="p">((</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">ptr</span><span class="p">));</span>
+</span><span id="__span-33-7"><a id="__codelineno-33-7" name="__codelineno-33-7"></a>
+</span><span id="__span-33-8"><a id="__codelineno-33-8" name="__codelineno-33-8"></a><span class="w">  </span><span class="n">ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ptr</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-33-9"><a id="__codelineno-33-9" name="__codelineno-33-9"></a>
+</span><span id="__span-33-10"><a id="__codelineno-33-10" name="__codelineno-33-10"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;The value that the pointer (after increment by 1) points to: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+</span><span id="__span-33-11"><a id="__codelineno-33-11" name="__codelineno-33-11"></a><span class="w">         </span><span class="o">*</span><span class="p">((</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">ptr</span><span class="p">));</span>
+</span><span id="__span-33-12"><a id="__codelineno-33-12" name="__codelineno-33-12"></a>
+</span><span id="__span-33-13"><a id="__codelineno-33-13" name="__codelineno-33-13"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-33-14"><a id="__codelineno-33-14" name="__codelineno-33-14"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Ωστόσο, τα αποτελέσματα εκτέλεσης δεν είναι τα αναμενόμενα, και επιπλέον, αν χρησιμοποιηθεί ο διακόπτης μεταγλώττισης <span class="p-style">‐pedantic</span>, τότε εμφανίζεται ένα μήνυμα παρόμοιο με το ακόλουθο:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>ch15_e4.c:8:13: warning: arithmetic on a pointer to void is a GNU extension
+</span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>    ↪ [‐Wgnu‐pointer ‐arith]
+</span><span id="__span-34-3"><a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a>  ptr = ptr + 1;
+</span><span id="__span-34-4"><a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a>        ~~~ ^
+</span></code></pre></div>
+<p>Εντοπίστε με το GDB την πηγή του προβλήματος.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>Devon H O’Dell. “The Debugging Mindset: Understanding the psychology of learning strategies leads to effective problem-solving skills.” Στο: <i>Queue</i> 15.1 (2017), σσ. 71–90.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>Julia Evans.<i> A debugging manifesto (zine)</i>. <a href="https://jvns.ca/blog/2022/12/08/a-debugging-manifesto/" target="_blank">https://jvns.ca/blog/2022/12/08/a-debugging-manifesto/</a>. [Online; accessed 2022-May-05].&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p><i>Debugging with GDB: the GNU Source-Level Debugger for GDB (GDB) Version 12.1.90.20221123git.</i> <a href="https://sourceware.org/gdb/onlinedocs/gdb/" target="_blank">https://sourceware.org/gdb/onlinedocs/gdb/</a>. [Online; accessed 2022-May- 05].&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p><i>Beej’s Quick Guide to GDB - Release 2 (2009 Jun 14)</i>. <a href="https://beej.us/guide/bggdb/" target="_blank">https://beej.us/guide/bggdb/</a>. [Online; accessed 2022-May-05].&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Τζάλλας Αλέξανδρος, Γκόγκος Χρήστος, Τσούλος Ιωάννης &copy 2025 - το βιβλίο μεταφέρθηκε στο MkDocs από τον Γιάννη Βούλγαρη 🙏.
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "toc.follow", "navigation.instant.preview", "navigation.sections"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": false, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

@@ -1,0 +1,1515 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../chapter2/">
+      
+      
+      <link rel="icon" href="../src/images/frontcover.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>1. Η πορεία της C μέχρι σήμερα - Μια σύγχρονη προσέγγιση στη γλώσσα C</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/styles.css">
+    
+      <link rel="stylesheet" href="../css/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: none; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-c" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Μια σύγχρονη προσέγγιση στη γλώσσα C" class="md-header__button md-logo" aria-label="Μια σύγχρονη προσέγγιση στη γλώσσα C" data-md-component="logo">
+      
+  <img src="../src/images/frontcover.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Μια σύγχρονη προσέγγιση στη γλώσσα C
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1. Η πορεία της C μέχρι σήμερα
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Μια σύγχρονη προσέγγιση στη γλώσσα C" class="md-nav__button md-logo" aria-label="Μια σύγχρονη προσέγγιση στη γλώσσα C" data-md-component="logo">
+      
+  <img src="../src/images/frontcover.png" alt="logo">
+
+    </a>
+    Μια σύγχρονη προσέγγιση στη γλώσσα C
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Το βιβλίο
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    1. Η πορεία της C μέχρι σήμερα
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Η πορεία της C μέχρι σήμερα
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Πίνακας περιεχομένων">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Πίνακας περιεχομένων
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 Ιστορική αναδρομή στη γλώσσα C
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 Η φιλοσοφία της C
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 Προτυποποίηση της γλώσσας C
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 Υλοποιήσεις της γλώσσας C
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4 Υλοποιήσεις της γλώσσας C">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-gcc" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.1 GCC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-clang" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.2 Clang
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-msvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.3 MSVC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#144-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.4 Άλλοι μεταγλωττιστές της C
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-c-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.5 Η σχέση της C με τη C++
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.6 Συγγραφή μεταγλώττιση και εκτέλεση απλών προγραμμάτων
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.6 Συγγραφή μεταγλώττιση και εκτέλεση απλών προγραμμάτων">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-warnings" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.6.1 Μεταγλώττιση με ενεργοποίηση warnings, διακόπτες μεταγλώττισης
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.7 Πηγές πληροφόρησης για τη C
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.7 Πηγές πληροφόρησης για τη C">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#171" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.7.1 Βιβλία
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#172-accu" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.7.2 Ο οργανισμός ACCU
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#173-wg14" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.7.3 WG14
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#174" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.7.4 Ιστοσελίδες
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#175-blogs" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.7.5 Blogs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.8 Ασκήσεις
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Εισαγωγικές έννοιες στον προγραμματισμό με τη C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Εντολές ελέγχου και επανάληψης
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Συναρτήσεις
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Πίνακες
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Δομές και ενώσεις
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. Δείκτες
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. Αλφαριθμητικά
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9. Διαχείριση μνήμης
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10. Υλοποίηση δομών δεδομένων και αλγορίθμων στη C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Είσοδος/Έξοδος
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12. Ο προεπεξεργαστής της C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13. Διαμέριση κώδικα
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14. Ανάπτυξη οδηγούμενη από ελέγχους
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    15. Αποσφαλμάτωση
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    16. Στατική και δυναμική ανάλυση κώδικα
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    17. Βιβλιοθήκες
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    18. Θέματα στυλ στη C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    19. Γραφικό περιβάλλον διεπαφής
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    20. Αλληλεπίδραση της C με την Python
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Α. Διαμόρφωση περιβάλλοντος ανάπτυξης κώδικα σε C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Β. Μεταγλώττιση και εκτέλεση κώδικα C χρησιμοποιώντας το Docker
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Γ. Λήψη πληροφοριών για το σύστημα και το μεταγλωττιστή
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Πίνακας περιεχομένων">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Πίνακας περιεχομένων
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 Ιστορική αναδρομή στη γλώσσα C
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 Η φιλοσοφία της C
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 Προτυποποίηση της γλώσσας C
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 Υλοποιήσεις της γλώσσας C
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4 Υλοποιήσεις της γλώσσας C">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-gcc" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.1 GCC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-clang" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.2 Clang
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-msvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.3 MSVC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#144-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.4 Άλλοι μεταγλωττιστές της C
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-c-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.5 Η σχέση της C με τη C++
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.6 Συγγραφή μεταγλώττιση και εκτέλεση απλών προγραμμάτων
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.6 Συγγραφή μεταγλώττιση και εκτέλεση απλών προγραμμάτων">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-warnings" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.6.1 Μεταγλώττιση με ενεργοποίηση warnings, διακόπτες μεταγλώττισης
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.7 Πηγές πληροφόρησης για τη C
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.7 Πηγές πληροφόρησης για τη C">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#171" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.7.1 Βιβλία
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#172-accu" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.7.2 Ο οργανισμός ACCU
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#173-wg14" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.7.3 WG14
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#174" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.7.4 Ιστοσελίδες
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#175-blogs" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.7.5 Blogs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.8 Ασκήσεις
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="1-c">1. Η πορεία της C μέχρι σήμερα</h1>
+<h2 id="11-c">1.1 Ιστορική αναδρομή στη γλώσσα C</h2>
+<p>Η γλώσσα C αναπτύχθηκε από τους Dennis Ritchie και Ken Thompson στα Bell Telephone Laboratories. Αποτέλεσε εξέλιξη της γλώσσας Β που είχε αναπτύξει ο Thompson η οποία ήταν μια απλούστερη έκδοση της γλώσσας BCPL (Basic Combined Programming Language) και χρησιμοποιήθηκε στα πλαίσια της ανάπτυξης του λειτουργικού συστήματος MULTICS. Τελικά, η εξέλιξη του MULTICS, το Unix, γράφτηκε στη C το 1972 και έκτοτε η γλώσσα είναι στενά συνδεδεμένη μαζί του καθώς και με το Linux, που επίσης αναπτύχθηκε στη C αρχικά το 1991 από τον Linus Torvalds. Σήμερα αποτελεί μια από τις πλέον δημοφιλείς γλώσσες προγραμματισμού, επιδεικνύοντας αξιοπρόσεκτη αντοχή στον χρόνο ως κυρίαρχη γλώσσα ιδιαίτερα για προγραμματισμό συστημάτων (systems programming) καθώς και για προγραμματισμό ενσωματωμένων συστημάτων (embedded systems) <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>. Αξίζει επίσης να σημειωθεί ότι γλώσσες όπως η C++, η Java, η JavaScript, η Perl και η Python καθώς και διάφορα άλλα λογισμικά που χρήστες υπολογιστικών συστημάτων χρησιμοποιούν σε καθημερινή βάση, έχουν γραφεί στη γλώσσα C.</p>
+<h2 id="12-c">1.2 Η φιλοσοφία της C</h2>
+<p>Η C θεωρείται ότι είναι μια γλώσσα προγραμματισμού σχετικά «χαμηλού επιπέδου». Για παράδειγμα, ο προγραμματιστής στη C είναι υπεύθυνος για τη δέσμευση και την αποδέσμευση μνήμης στον σωρό (heap). Δηλαδή, εφόσον απαιτείται δυναμική δέσμευση μνήμης (π.χ. δέσμευση μνήμης για έναν πίνακα ακεραίων που δεν είναι γνωστό το μέγεθός του κατά τη συγγραφή του προγράμματος, αλλά αυτό προσδιορίζεται κατά τον χρόνο εκτέλεσης) ο προγραμματιστής πρέπει να καλέσει τη συνάρτηση <span class="p-style">malloc()</span> και, όταν η μνήμη που έχει δεσμευθεί δεν είναι πλέον απαραίτητη για την εκτέλεση της λογικής του προγράμματος, ο προγραμματιστής πρέπει να θυμηθεί να την αποδεσμεύσει. Γλώσσες προγραμματισμού υψηλότερου επιπέδου, όπως η Python, διαθέτουν μηχανισμούς συλλογής σκουπιδιών (garbage collection), όπου η δέσμευση και η αποδέσμευση μνήμης γίνονται αυτόματα από την ίδια τη γλώσσα, φροντίζοντας ταυτόχρονα για την αποφυγή κατακερματισμού του χώρου μνήμης του σωρού. Ένα άλλο παράδειγμα είναι ότι γλώσσες υψηλού επιπέδου παρέχουν μηχανισμούς που ελέγχουν αν πραγματοποιείται προσπέλαση εκτός των ορίων ενός πίνακα, ενώ η C δεν προσφέρει, λόγω σχεδιασμού, αυτήν τη δυνατότητα. Στη γλώσσα Java, αν επιχειρηθεί κατά την εκτέλεση πρόσβαση εκτός των ορίων ενός πίνακα, τότε θα προκύψει μια εξαίρεση <span class="p-style">ArrayIndexOutOfBoundsException</span> και το πρόγραμμα θα τερματίσει την εκτέλεσή του. Αν ο κώδικας που προκαλεί την εξαίρεση βρίσκεται μέσα σε <span class="p-style">try...catch</span>, τότε θα εκτελεστεί ο κώδικας που θα έχει ορίσει ο προγραμματιστής για τον χειρισμό της εξαίρεσης και το πρόγραμμα θα συνεχίσει την εκτέλεσή του κανονικά. Στη C δεν υπάρχουν τέτοιοι μηχανισμοί και ο προγραμματιστής είναι υπεύθυνος, έτσι ώστε ο κώδικας που συντάσσει να μην πραγματοποιεί πρόσβαση εκτός των ορίων πινάκων. Συνεπώς, περιπτώσεις προγραμματιστικών λαθών που όντως γίνεται πρόσβαση εκτός των ορίων ενός πίνακα κατά την εκτέλεση του κώδικα, δεν ανιχνεύονται από τη γλώσσα και είτε στην καλύτερη περίπτωση οδηγούν στην κατάρρευση του προγράμματος (λόγω πρόσβασης σε «απαγορευμένες» θέσεις μνήμης) είτε στη χειρότερη περίπτωση προκαλούν αλλοίωση σε χρήσιμα δεδομένα, που είναι δύσκολο να εντοπιστεί και να διορθωθεί στη συνέχεια. Ένα τελευταίο παράδειγμα, από τα πολλά άλλα που θα μπορούσαν να αναφερθούν, που δείχνει τη διαφορά στη φιλοσοφία της C σε σχέση με άλλες γλώσσες υψηλού επιπέδου είναι ο τρόπος με τον οποίο συγκρίνονται δύο λεκτικά για ισότητα. Σε γλώσσες όπως η Python, για τη σύγκριση δύο λεκτικών <span class="p-style">s1</span> και <span class="p-style">s2</span>, αρκεί κανείς να γράψει <span class="p-style">s1 == s2</span> και το αποτέλεσμα θα είναι είτε <span class="p-style">true</span> είτε <span class="p-style">false</span>. Στη C, όμως, θα πρέπει να συμπεριληφθεί το αρχείο επικεφαλίδας <span class="p-style">string.h </span> και, στη συνέχεια να κληθεί η συνάρτηση <span class="p-style">strcmp()</span> με ορίσματα τα δύο λεκτικά και να εξεταστεί το αποτέλεσμα που επιστρέφει, το οποίο, εάν είναι 0, θα σημαίνει ότι τα λεκτικά είναι όμοια μεταξύ τους.</p>
+<p>Από τα παραπάνω προκύπτει ότι η C αντιμετωπίζει τον προγραμματιστή ως κάποιον που γνωρίζει τι πρέπεινα κάνει και δεν του προσφέρει περιττές βοήθειες. Ενθαρρύνει τη συγγραφή κώδικα που αποτελείται από μικρά ανεξάρτητα προγράμματα που το καθένα κάνει ένα πράγμα καλά. Επιβάλλει ελάχιστους περιορισμούς στον προγραμματιστή και δίνει έμφαση στην υψηλή ταχύτητα εκτέλεσης</p>
+<p>Σχετικά με το εάν η C κατατάσσεται στις γλώσσες υψηλού επιπέδου ή στις γλώσσες χαμηλού επιπέδου, η απάντηση είναι ότι η C είναι σαφώς μια γλώσσα υψηλού επιπέδου, αλλά, ταυτόχρονα, έχει και χαρακτηριστικά γλώσσας χαμηλού επιπέδου. Είναι υψηλού επιπέδου, καθώς ο προγραμματιστής δεν χρειάζεται να ασχολείται με τις λεπτομέρειες της αρχιτεκτονικής του υπολογιστή στον οποίο θα εκτελεστεί το πρόγραμμά του και συνεπώς, μπορεί να εστιάζει στην επίλυση του πραγματικού προβλήματος που καλείται να επιλύσει. Εξάλλου ένας από τους βασικούς στόχους της γλώσσας C κατά τη σχεδίασή της ήταν η δυνατότητα ο κώδικας να είναι φορητός από έναν τύπο υπολογιστή και λειτουργικού συστήματος σε άλλους τύπους υπολογιστών και λειτουργικών συστημάτων. Για παράδειγμα, ο προγραμματιστής μπορεί να γράφει ένα πρόγραμμα σε C σε έναν υπολογιστή με λειτουργικό σύστημα Windows και με επεξεργαστή Intel και στη συνέχεια να μεταφέρει τον πηγαίο κώδικα, να τον μεταγλωττίζει και να τον εκτελεί χωρίς προβλήματα σε έναν υπολογιστή με λειτουργικό σύστημα MacOS και επεξεργαστή ARM. Από την άλλη μεριά, η C βρίσκεται πλησιέστερα στο υλικό από ό,τι άλλες γλώσσες προγραμματισμού, όπως αυτές που αναφέρθηκαν στις προηγούμενες παραγράφους, καθώς ο προγραμματιστής έχει σε κάποιον βαθμό απευθείας πρόσβαση στο υλικό (π.χ. σε θέσεις μνήμης) και δεν του δίνεται πρόσβαση στους πόρους του υπολογιστή μέσω μιας εικονικής μηχανής, όπως για παράδειγμα στη Java με το JVM ( Java Virtual Machine). Στο άρθρο <sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup> ο David Chisnall σχολιάζει την εγγύτητα της πραγματικής φυσικής μηχανής που εκτελεί τον κώδικα με την ιδεατή μηχανή εκτέλεσης που ο προγραμματιστής στη C
+θεωρεί ότι εκτελεί τα προγράμματα που συντάσσει. Ο συγγραφέας υποστηρίζει ότι η εξέλιξη στην τεχνολογία των επεξεργαστών και των μεταγλωττιστών έχει προχωρήσει σε τέτοιον βαθμό που η αντιστοίχιση μεταξύ της ιδεατής μηχανής της C και της φυσικής μηχανής είναι απλώς μια ψευδαίσθηση.</p>
+<h2 id="13-c">1.3 Προτυποποίηση της γλώσσας C</h2>
+<p>Μια από τις πρώτες εκδόσεις της γλώσσας έμεινε γνωστή ως K&amp;R C, από τα αρχικά των συγγραφέων του δημοφιλούς βιβλίου <em>“The C Programming Language”</em> των Brian Kernighan και Dennis Ritchie <sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup>, που κυκλοφόρησε στην πρώτη του έκδοση το 1978 και σε δεύτερη έκδοση το 1988. Στη συνέχεια, ακολουθήθηκε
+μια πορεία προτυποποίησης της γλώσσας από την οποία προέκυψε το 1989 η έκδοση ANSI C ή C89. Η ANSI C αποτέλεσε και την πρώτη έκδοση της προτυποποίησης της C από τους οργανισμούς ISO (International Standards Organization) και IEC (International Electrotechnical Commission), με το αναγνωριστικό C90.Η δεύτερη έκδοση της προτυποποίησης της C δημοσιεύθηκε το 1999 και ήταν η C99. Η τρίτη και η τέταρτη έκδοση του προτύπου C ακολούθησαν το 2011 και το 2018 με αναγνωριστικά C11 και C17, αντίστοιχα. Η πέμπτη έκδοση προτυποποίησης της γλώσσας, η C23 (ή C2x), βρίσκεται σε ανάπτυξη από τους ISO/IEC και το 2023 είναι το έτος της αναμενόμενης ανακοίνωσής της. Η ιστοσελίδα <a href="https://en.cppreference.com/w/c/language/history" target="_blank">https://en.cppreference.com/w/c/language/history</a> καταγράφει με λεπτομέρειες τα ορόσημα στην ιστορία της C, από το 1969 μέχρι και σήμερα.</p>
+<h2 id="14-c">1.4 Υλοποιήσεις της γλώσσας C</h2>
+<p>Ο όρος «υλοποίηση της γλώσσας C» αναφέρεται σε υλοποιήσεις μεταγλωττιστών της γλώσσας. Οι διάφοροι μεταγλωττιστές της C μπορούν να υλοποιούν διαφορετικές εκδόσεις των προτύπων της C. Σήμερα, μερικοί από τους πλέον δημοφιλείς μεταγλωττιστές της C είναι o GCC, ο Clang και ο μεταγλωττιστής MSVC από την εταιρεία Microsoft.</p>
+<h3 id="141-gcc">1.4.1 GCC</h3>
+<p>O GCC (GNU Compiler Collection) περιέχει μεταγλωττιστή για τη C καθώς και για άλλες γλώσσες προγραμματισμού (C++, Fortran, Ada). Έχει αναπτυχθεί από το GNU Project και είναι ελεύθερο λογισμικό που διατίθεται μέσω της άδειας χρήσης GPL (General Public License). Αποτελεί την προεπιλογή μεταγλωττιστή C για συστήματα Linux και υπάρχουν εκδόσεις του GCC για Windows, για MacOS και για άλλα λειτουργικά συστήματα. Ο μεταγλωττιστής της C, που περιλαμβάνεται στις νεότερες εκδόσεις του GCC, υποστηρίζει τα πρότυπα C89, C99, C11, C17 και μερικώς το υπό διαμόρφωση νέο πρότυπο C2x. Περισσότερες πληροφορίες για την υποστήριξη προτύπων από το GCC μπορούν να αναζητηθούν στο <a href="https://gcc.gnu.org/onlinedocs/gcc/Standards.html" target="_blank">https://gcc.gnu.org/onlinedocs/gcc/Standards.html</a>. Για τα περισσότερα παραδείγματα κώδικα που θα εξεταστούν στο παρόν σύγγραμμα θα χρησιμοποιηθεί ο μεταγλωττιστής GCC.</p>
+<h3 id="142-clang">1.4.2 Clang</h3>
+<p>Ο Clang είναι ένας μεταγλωττιστής για τη C αλλά και για άλλες γλώσσες προγραμματισμού (C++, Objective C/C++ κ.ά.). Σχεδιάστηκε με στόχο να αντικαταστήσει τον GCC και υποστηρίζει πολλές από τις επιλογές μεταγλώττισης που χρησιμοποιεί και ο GCC. Είναι λογισμικό ανοικτού κώδικα και η ανάπτυξή του υποστηρίζεται από πολλές μεγάλες εταιρείες, συμπεριλαμβανομένων των Apple, Microsoft, Google, Intel και Sony. Ο Clang αποτελεί την προεπιλογή μεταγλωττιστή C για τους υπολογιστές της εταιρείας Apple στο λειτουργικό σύστημα macOS. Ο μεταγλωττιστής της C που περιλαμβάνεται στις νεότερες εκδόσεις του Clang υλοποιεί πλήρως το πρότυπο C89 καθώς και σημαντικά τμήματα των προτύπων C99, C11, C17, ενώ υλοποιεί μερικώς το νέο πρότυπο C2x. Περισσότερες πληροφορίες σχετικά με την υποστήριξη προτύπων από τον Clang μπορούν να εντοπισθούν στο <a href=https://clang.llvm.org/c_status.html target="_blank">https://clang.llvm.org/c_status.html</a>.</p>
+<h3 id="143-msvc">1.4.3 MSVC</h3>
+<p>Ο μεταγλωττιστής MSVC (cl.exe) έχει αναπτυχθεί από την εταιρεία Microsoft για τις γλώσσες C και C++ καθώς και για επεκτάσεις των γλωσσών που καθιστούν εφικτή τη δημιουργία εφαρμογών στις διάφορες εκδόσεις των λειτουργικών συστημάτων Windows. Για μεγάλο χρονικό διάστημα ο MSVC υποστήριζε μόνο το πρότυπο C89. Σταδιακά, από το 2013 και μετά άρχισε να υποστηρίζει τμηματικά το πρότυπο C99 και C11.Τον Σεπτέμβριο του 2020 η εταιρεία ανακοίνωσε την υποστήριξη των προτύπων C11 και C17.</p>
+<h3 id="144-c">1.4.4 Άλλοι μεταγλωττιστές της C</h3>
+<p>Εκτός από τους μεταγλωττιστές που αναφέρθηκαν, υπάρχουν και άλλοι μεταγλωττιστές, τόσο ελεύθερα διαθέσιμοι όσο και εμπορικοί, που σε ορισμένες περιπτώσεις είναι σχεδιασμένοι για συγκεκριμένη υπολογιστική υποδομή. Μερικά παραδείγματα είναι o Intel C/C++ compiler (icc), ο NVIDIA HPC C compiler (nvc), ο Tiny C compiler (tcc), ο Pelles C compiler, o Ch compiler, o OpenWatcom C/C++ compiler κ.ά.</p>
+<h2 id="15-c-c">1.5 Η σχέση της C με τη C++</h2>
+<p>Η C++ αναπτύχθηκε από τον Bjarne Stroustrup στα Bell Laboratories το 1979. Η αρχική της ονομασία ήταν “C with Classes”, αλλά το 1983 μετονομάστηκε σε C++. Ως γλώσσα προγραμματισμού δέχθηκε σημαντική επιρροή από τη γλώσσα προγραμματισμού Simula και ιδιαίτερα στο θέμα της οργάνωσης του κώδικα σε κλάσεις και στην υποστήριξη ιεραρχιών μεταξύ κλάσεων. Οι ιδέες της Simula μεταφέρθηκαν στη νέα γλώσσα, τη C++, η οποία χρησιμοποιούσε το συντακτικό της C αλλά και τον χαρακτήρα της C ως γλώσσα χαμηλού επιπέδου. Έτσι, η C++ επέτρεπε τον προγραμματισμό με κλάσεις, όπως η Simula και, ταυτόχρονα, την εκτέλεση του κώδικα με την ταχύτητα της γλώσσας C. Έκτοτε οι γλώσσες C και C++ ακολούθησαν διαφορετικά μονοπάτια εξέλιξης. Αν και ένα πρόγραμμα σε C++ μπορεί να περιέχει κώδικα C, η συμβατότητα με τη C περιορίζεται μόνο μέχρι το πρότυπο C89. Έτσι, ένα πρόγραμμα σε C που είναι γραμμένο σύμφωνα με το πρότυπο C99 ή κάποιο από τα επόμενα είναι πιθανό να μην μεταγλωττίζεται από μεταγλωττιστές της C++. Είναι λοιπόν, σημαντικό να γίνει κατανοητό ότι η C δεν είναι υποσύνολο της C++ και ότι η C++ δεν είναι μια εξελιγμένη έκδοση της C, αλλά πρόκειται για δύο διαφορετικές γλώσσες προγραμματισμού που έχουν ακολουθήσει ανεξάρτητες πορείες εξέλιξης.</p>
+<p>Η σημαντικότερη διαφορά ανάμεσα στις δύο γλώσσες είναι η διαφορετική προσέγγιση που ακολουθούν στον προγραμματισμό. Η C είναι μια διαδικασιακή
+(procedural) γλώσσα προγραμματισμού, που δίνει έμφαση στο πώς γίνεται κάτι και πώς η εργασία επιμερίζεται σε συναρτήσεις. Από την άλλη μεριά, η C++ είναιμια γλώσσα προγραμματισμού πολλαπλών υποδειγμάτων (multi-paradigm), που υποστηρίζει - επιπλέον του διαδικασιακού προγραμματισμού - τον αντικειμενοστραφή αλλά και άλλους τρόπους προγραμματισμού.</p>
+<h2 id="16">1.6 Συγγραφή μεταγλώττιση και εκτέλεση απλών προγραμμάτων</h2>
+<p>Ένα πρόγραμμα σε C μπορεί να είναι διαμερισμένο σε πολλά αρχεία. Στην απλούστερη περίπτωση ο κώδικας βρίσκεται σε ένα μόνο αρχείο πηγαίου κώδικα, όπως στο ακόλουθο παράδειγμα (κώδικας 1.1), που απλώς εμφανίζει στην οθόνη το κείμενο Hello World!, ως είθισται για εναρκτήριο παράδειγμα στα βιβλία εκμάθησης προγραμματισμού.</p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 1.1: ch1_p1.c - το πρόγραμμα “hello world” στη C.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span>
+<span class="normal"><a href="#__codelineno-0-3">3</a></span>
+<span class="normal"><a href="#__codelineno-0-4">4</a></span>
+<span class="normal"><a href="#__codelineno-0-5">5</a></span>
+<span class="normal"><a href="#__codelineno-0-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello World!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+Ο κώδικας γράφεται σε έναν επεξεργαστή κειμένου, ως ένα αρχείο απλού κειμένου. Οδηγίες για τη ρύθμιση ενός περιβάλλοντος ανάπτυξης προγραμμάτων στην C υπάρχουν στο Παράρτημα Α. Ο κώδικας περιέχει τη συνάρτηση <span class="p-style">main()</span>, που είναι το σημείο έναρξης εκτέλεσης για προγράμματα στη C. Στο συγκεκριμένο παράδειγμα η συνάρτηση <span class="p-style">main()</span> περιέχει μια μόνο εντολή κλήσης της συνάρτησης <span class="p-style">printf()</span>, που εκτυπώνει το κείμενο Hello World! και πραγματοποιεί αλλαγή γραμμής, λόγω της ύπαρξης του <span class="p-style">\n</span> στο τέλος του κειμένου εντός των διπλών εισαγωγικών. Στη συνέχεια το πρόγραμμα τερματίζει τη λειτουργία του. Για να μπορεί να εκτελεστεί, θα πρέπει να προηγηθεί η διαδικασία μεταγλώττισης και σύνδεσης του κώδικα. Αυτό γίνεται με την ακόλουθη εντολή και, εφόσον δεν προκύψουν λάθη, δημιουργείται το εκτελέσιμο αρχείο. Το όνομα του εκτελέσιμου θα είναι <span class="p-style">a.out</span> σε συστήματα Linux ή MacOS και <span class="p-style">a.exe</span> σε συστήματα Windows.</p>
+<p>Μεταγλώττιση και εκτέλεση σε Linux</p>
+<div class="language-text nocopy highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$ gcc ch1_p1.c
+</span></code></pre></div>
+<p>Το εκτελέσιμο εκτελείται με απλή παράθεση του ονόματός του στη γραμμή εντολών. Σε συστήματα Linux ή MacOS πρέπει να προηγηθεί του ονόματος το <span class="p-style">./</span>, που υποδηλώνει τον τρέχοντα φάκελο, έτσι ώστε να εντοπιστεί η σωστή διαδρομή προς το αρχείο.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$ ./a.out
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Hello World!
+</span></code></pre></div>
+<p>Μεταγλώττιση και εκτέλεση σε MacOS</p>
+<div class="language-text nocopy highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>% gcc ch1_p1.c
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>% ./a.out
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>Hello World!
+</span></code></pre></div>
+<p>Μεταγλώττιση και εκτέλεση σε Windows</p>
+<p><div class="language-text nocopy highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>&gt; gcc ch1_p1.c
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>&gt; a.exe
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>Hello World!
+</span></code></pre></div>
+Αν υπάρχει συντακτικό σφάλμα στον κώδικα, τότε ο μεταγλωττιστής θα εμφανίσει μήνυμα σφάλματος και δεν θα δημιουργήσει το εκτελέσιμο. Στο ακόλουθο παράδειγμα (κώδικας 1.2) έχει σκόπιμα παραλειφθεί το δεξί διπλό εισαγωγικό στην <span class="p-style">printf()</span>, με αποτέλεσμα να υπάρχει σφάλμα στον κώδικα.</p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 1.2: ch1_p1_error.c - ένα εσκεμμένο συντακτικό σφάλμα.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
+<span class="normal"><a href="#__codelineno-5-2">2</a></span>
+<span class="normal"><a href="#__codelineno-5-3">3</a></span>
+<span class="normal"><a href="#__codelineno-5-4">4</a></span>
+<span class="normal"><a href="#__codelineno-5-5">5</a></span>
+<span class="normal"><a href="#__codelineno-5-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello World!</span><span class="se">\n</span><span class="s">);</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+Η μεταγλώττιση θα δώσει τα ακόλουθα μηνύματα λάθους που περιγράφουν με ακρίβεια τόσο το σφάλμα <span class="p-style">(warning: missing terminating " character)</span>, όσο και τη θέση του στο πρόγραμμα. Ωστόσο, σε άλλες περιπτώσεις τα μηνύματα λάθους που παράγει ο μεταγλωττιστής μπορεί να μην είναι τόσο σαφή.</p>
+<div class="language-text nocopy highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>$ gcc ch1_p1.c 
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>ch1_p1_error.c: In function &#39;main&#39;:
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>ch1_p1_error.c:5:12: warning: missing terminating &quot; character
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>5 |     printf(&quot;Hello World!\n);
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>|            ^
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>ch1_p1_error.c:5:12: error: missing terminating &quot; character
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>5 |     printf(&quot;Hello World!\n);
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>|            ^~~~~~~~~~~~~~~~~
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>ch1_p1_error.c:6:1: error: expected expression before &#39;}&#39; token
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>6 | }
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>| ^
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>ch1_p1_error.c:5:12: error: expected &#39;;&#39; before &#39;}&#39; token
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>5 |     printf(&quot;Hello World!\n);
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>|            ^
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>|            ;
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>6 | }
+</span></code></pre></div>
+<h3 id="161-warnings">1.6.1 Μεταγλώττιση με ενεργοποίηση warnings, διακόπτες μεταγλώττισης</h3>
+<p>Κατά τη μεταγλώττιση μπορούν να οριστούν διάφορες επιλογές. Για παράδειγμα ο διακόπτης (switch) <span class="p-style">-o</span> επιτρέπει να οριστεί το όνομα του εκτελέσιμου που θα παραχθεί. Ένας άλλος σημαντικός διακόπτης είναι ο διακόπτης <span class="p-style">-Wall</span>, που ενεργοποιεί την εμφάνιση «όλων» των προειδοποιήσεων (warnings) που υποδεικνύουν την πιθανή δημιουργία προβλημάτων. Έτσι αν συμπεριληφθεί στην εντολή μεταγλώττισης ο διακόπτης <span class="p-style">-Wall</span>, τότε η μεταγλώττιση θα παράγει μηνύματα σχετικά με μεταβλητές που δεν έχουν αρχικοποιηθεί, μεταβλητές που δεν χρησιμοποιούνται και άλλα. Επιπλέον warnings μπορούν να ενεργοποιηθούν με τον διακόπτη<br />
+<span class="p-style">-Wextra</span>, ενώ η εμφάνιση μηνυμάτων για παραβίαση των κανόνων που επιβάλλει το πρότυπο της C μπορεί να ενεργοποιηθεί με τον διακόπτη <span class="p-style">‐pedantic</span>. Η εμφάνιση warnings κατά τη μεταγλώττιση δεν εμποδίζει τον μεταγλωττιστή από το να δημιουργήσει το τελικό εκτελέσιμο. Αν, όμως, χρησιμοποιηθεί ο διακόπτης <span class="p-style">‐Werror</span>, τότε τα warnings θεωρούνται ως σφάλματα μεταγλώττισης και δεν παράγεται εκτελέσιμο. Επιπλέον, μπορεί να οριστεί το πρότυπο της γλώσσας που θα χρησιμοποιηθεί για τη μεταγλώττιση με τον διακόπτη ‐std. Οι επιλογές φαίνονται στον Πίνακα 1.1.</p>
+<p>Πίνακας 1.1: <em>Επιλογή προτύπου της γλώσσας με τον διακόπτη μεταγλώττισης -std.</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Πρότυπο (standard)</th>
+<th style="text-align: center;">Τιμή για τον διακόπτη μεταγλώττισης -std</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>ISO C 1990</code></td>
+<td style="text-align: center;">c89 ή c90</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>ISO C 1999</code></td>
+<td style="text-align: center;">c99</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>ISO C 2011</code></td>
+<td style="text-align: center;">c11</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>ISO C 2017</code></td>
+<td style="text-align: center;">c17 ή c18</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>Working Draft for ISO C2x</code></td>
+<td style="text-align: center;">c2x</td>
+</tr>
+</tbody>
+</table>
+<p>Ένα παράδειγμα μεταγλώττισης, που χρησιμοποιεί τους διακόπτες μεταγλώττισης που αναφέρθηκαν, παρουσιάζεται στη συνέχεια και αφορά τον κώδικα 1.3.</p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 1.3: ch1_p2.c - ένας κώδικας με προβλήματα που μπορεί να εντοπίσει ο μεταγλωττιστής εφόσον ενεργοποιηθούν οι κατάλληλοι διακόπτες μεταγλώττισης.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-7-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-7-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-7-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-7-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-7-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-7-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-7-10">10</a></span>
+<span class="normal"><a href="#__codelineno-7-11">11</a></span>
+<span class="normal"><a href="#__codelineno-7-12">12</a></span>
+<span class="normal"><a href="#__codelineno-7-13">13</a></span>
+<span class="normal"><a href="#__codelineno-7-14">14</a></span>
+<span class="normal"><a href="#__codelineno-7-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2"></a>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="kt">int</span><span class="w"> </span><span class="nf">fun</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="w">  </span><span class="c1">// η παράμετρος b δεν χρησιμοποιείται (εντοπίζεται με το -Wextra)</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="p">}</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7"></a>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1729</span><span class="p">;</span><span class="w"> </span><span class="c1">// μεταβλητή που δεν χρησιμοποιείται (εντοπίζεται με το -Wall)</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">z</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span><span class="w"> </span><span class="c1">// πίνακας με μέγεθος μηδέν (εντοπίζεται με το -pedantic)</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12"></a><span class="w">            </span><span class="c1">// ο πίνακας z δεν χρησιμοποιείται (εντοπίζεται με το -Wall)</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;x=%d&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span><span class="w"> </span><span class="c1">// η μεταβλητή x δεν έχει αρχικοποιηθεί (-Wall)</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+Ο μεταγλωττιστής, εφόσον κληθεί όπως στη συνέχεια, δεν θα εντοπίσει κανένα πρόβλημα και θα δημιουργήσει το εκτελέσιμο <span class="p-style">a.out</span>.</p>
+<div class="language-text nocopy highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>$ gcc ch1_p2.c
+</span></code></pre></div>
+<p>Αν, όμως, χρησιμοποιηθεί η ακόλουθη εντολή μεταγλώττισης τότε το εκτελέσιμο θα λάβει το όνομα <span class="p-style">ch1_p2</span>, η μεταγλώττιση θα γίνει σύμφωνα με το πρότυπο C17 και θα εμφανιστούν 5 warnings, που προειδοποιούν για τις επικίνδυνες καταστάσεις που περιγράφονται στα σχόλια του κώδικα.</p>
+<p><div class="language-text nocopy highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>$ gcc ch1_p2.c -o ch1_p2 -std=c17 -Wall -Wextra -pedantic
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>./ch1_p2
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>ch1_p2.c:3:20: warning: unused parameter &#39;b&#39; [-Wunused-parameter]
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>int fun(int a, int b) {
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>                   ^
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>ch1_p2.c:11:9: warning: zero size arrays are an extension [-Wzero-length-array]
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>  int z[0]; // πίνακας με μέγεθος μηδέν (εντοπίζεται με το -pedantic)
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>        ^
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>ch1_p2.c:10:7: warning: unused variable &#39;y&#39; [-Wunused-variable]
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>  int y = 1729; // μεταβλητή που δεν χρησιμοποιείται (εντοπίζεται με το -Wall)
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>      ^
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>ch1_p2.c:11:7: warning: unused variable &#39;z&#39; [-Wunused-variable]
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>  int z[0]; // πίνακας με μέγεθος μηδέν (εντοπίζεται με το -pedantic)
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>      ^
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>ch1_p2.c:13:18: warning: variable &#39;x&#39; is uninitialized when used here [-Wuninitialized]
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>  printf(&quot;x=%d&quot;, x);
+</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>                 ^
+</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>ch1_p2.c:9:8: note: initialize the variable &#39;x&#39; to silence this warning
+</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>  int x; // μεταβλητή που δεν έχει αρχικοποιηθεί (εντοπίζεται με το -Wall)
+</span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>       ^
+</span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>        = 0
+</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>5 warnings generated.
+</span></code></pre></div>
+Aν, επιπλέον, είχε χρησιμοποιηθεί και ο διακόπτης <span class="p-style">‐Werror</span>, τότε ο μεταγλωττιστής θα αντιμετώπιζε τα warnings ως errors, θα εμφάνιζε ότι εντόπισε 5 σφάλματα μεταγλώττισης και δεν θα δημιουργούσε το εκτελέσιμο πρόγραμμα.</p>
+<h2 id="17-c">1.7 Πηγές πληροφόρησης για τη C</h2>
+<p>Οι πηγές πληροφόρησης για τη C είναι πάρα πολλές, σε βαθμό που είναι πραγματικά δύσκολο να εντοπιστούν αυτές που θα έδιναν το καλύτερο δυνατό αποτέλεσμα σε οποιονδήποτε επιθυμεί να μάθει τη γλώσσα. Η κατάσταση περιπλέκεται, καθώς η αποτελεσματικότητα του υλικού εξαρτάται από τις προσωπικές προτιμήσεις
+του κάθε μαθητευόμενου. Το τελευταίο διάστημα δημοφιλής γίνεται η υποβοηθούμενη εκμάθηση από LLMs (Large Language Models), όπως το chatGPT της OpenAI, όπου μπορεί κανείς να θέσει ερωτήσεις προγραμματισμού και να λάβει απαντήσεις σε κώδικα C (ή σε κώδικα άλλων γλωσσών προγραμματισμού) μαζί με την επεξήγησή του. Επίσης, πλατφόρμες όπως το Discord, φιλοξενούν ενεργές κοινότητες για προγραμματισμό με τη C (π.χ. Together C &amp; C++), ενώ πολλοί επιλέγουν να μάθουν μια γλώσσα προγραμματισμού, όπως η C, μέσα από βίντεο κυρίως στο YouTube αλλά και από άλλες πλατφόρμες, όπως το Twitch. Μαζικά online μαθήματα προσφέρουν διαδρομές εκμάθησης που προσομοιάζουν παραδοσιακά ακαδημαϊκά μαθήματα και που συνδυάζουν παρακολούθηση μαθημάτων, μελέτη εκπαιδευτικού υλικού, υποβολή προγραμματιστικών εργασιών, κουίζ κ.ά. (π.χ. CS50: Introduction to Computer Science on EdX). Σημαντική είναι η βοήθεια που μπορούν να προσφέρουν έμπειροι προγραμματιστές και με τις συμβουλές τους να επιταχύνουν τη διαδικασία μετατροπής αρχάριων προγραμματιστών σε επαγγελματίες προγραμματιστές C. Πέρα από ό,τι ήδη αναφέρθηκε, οι πηγές πληροφόρησης που αναφέρονται στις ακόλουθες παραγράφους μπορούν να βοηθήσουν στην εκμάθηση της γλώσσας C, αλλά και στην υιοθέτηση κουλτούρας καλλιέργειας ενδιαφέροντος για την ποιότητα του λογισμικού που παράγεται αλλά και συνεχούς επικαιροποίησης και βελτίωσης των γνώσεων για τη γλώσσα C.</p>
+<h3 id="171">1.7.1 Βιβλία</h3>
+<p>Το κλασικό βιβλίο εκμάθησης της γλώσσας αναφέρθηκε ήδη και είναι το “The C Programming Language”<sup id="fnref2:3"><a class="footnote-ref" href="#fn:3">3</a></sup>, ενώ ένα ακόμα εξαιρετικό βιβλίο είναι το “Expert C Programming: deep C secrets” από τον Peter van der Linden <sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup>. Επίσης, το βιβλίο “C: A reference manual” των Samuel Harbison και Guy Steele <sup id="fnref:5"><a class="footnote-ref" href="#fn:5">5</a></sup> αποτελεί μια πολύ καλή πηγή για τη βιβλιοθήκη της γλώσσας. Μερικά νεότερα βιβλία που περιγράφουν και τα νέα χαρακτηριστικά της C, όπως αυτή έχει εξελιχθεί είναι το “21st century C: C tips from the new school” <sup id="fnref:6"><a class="footnote-ref" href="#fn:6">6</a></sup> από τον Ben Klemens, το “Effective C: An Introduction to Professional C Programming” του Robert Seacord <sup id="fnref:7"><a class="footnote-ref" href="#fn:7">7</a></sup> και το “Modern C” του Jens Gustedt <sup id="fnref:8"><a class="footnote-ref" href="#fn:8">8</a></sup> που είναι για προχωρημένους.</p>
+<h3 id="172-accu">1.7.2 Ο οργανισμός ACCU</h3>
+<p>Ο οργανισμός ACCU (Association of C and C++ Users) έχει ιδρυθεί το 1987, αρχικά, ως ομάδα χρηστών με ενδιαφέρον στην ποιοτική ανάπτυξη κώδικα. Διοργανώνει το ετήσιο συνέδριο ACCU και εκδίδει δύο περιοδικά, το Overload και το CVu, που περιέχουν πληθώρα άρθρων σχετικών με τη C και, κυρίως, τη C++. Το Overload διατίθεται δωρεάν, όπως δωρεάν είναι και η πρόσβαση σε φόρουμς (π.χ. accu-general). Το CVu έχει διάφορες στήλες που παρουσιάζουν κώδικα σε C ή C++ μαζί με σχολιασμό. </p>
+<h3 id="173-wg14">1.7.3 WG14</h3>
+<p>H ISO/IEC JTC1/SC22/WG14 είναι η διεθνής ομάδα εργασίας προτυποποίησης της C. Η σελίδα της ομάδας εργασίας, όπου δημοσιεύεται οτιδήποτε σχετικό με την πορεία προτυποποίησης, είναι η <a href="https://www.open-std.org/JTC1/SC22/wg14/" target="_blank">https://www.open‐std.org/JTC1/SC22/wg14/</a>. Εκεί μπορεί κανείς να εντοπίσει χρήσιμες πληροφορίες αλλά και λεπτομέρειες για τα πρότυπα της γλώσσας C.</p>
+<h3 id="174">1.7.4 Ιστοσελίδες</h3>
+<p>Το stackoverflow έχει δικαίως αποκτήσει τη φήμη της κοινότητας στην οποία οι προγραμματιστές μπορούν να αναζητούν απαντήσεις υψηλής ποιότητας σε δικά τους ερωτήματα ή σε ερωτήματα άλλων ακόμα και για τα πλέον απαιτητικά θέματα τεχνολογίας. Μάλιστα, η stackoverflow ιστοσελίδα <a href="https://stackoverflow.com/tags/c/info/" target="_blank">https://stackoverflow.com/tags/c/info </a>αφορά ερωτήσεις αποκλειστικά για τη C. Ενδιαφέρουσες συζητήσεις για τη C διεξάγονται στο φόρουμ <a href="https://groups.google.com/g/comp.lang.c" target="_blank">https://groups.google.com/g/comp.lang.c</a>, ενώ απαντήσεις σε συχνές ερωτήσεις για τη C μπορούν να εντοπιστούν στο <a href="https://c‐faq.com/" target="_blank">https://c‐faq.com/</a>. To reddit έχει, επίσης, κοινότητες αφιερωμένες στη C, όπως την <a href="https://www.reddit.com/r/C_Programming/" target="_blank">https://www.reddit.com/r/C_Programming/</a>, που αξίζει κανείς να επισκεφτεί. Μια ακόμα χρήσιμη ιστοσελίδα είναι η <a href="https://en.cppreference.com/w/c" target="_blank">https://en.cppreference.com/w/c</a>, που αποτελεί σημείο αναφοράς για την πρότυπη βιβλιοθήκη της C και τις δυνατότητές της. Τέλος, αξίζει να αναφερθεί η εξαιρετική προσπάθεια του Brian Hall τόσο στο “Beej’s Guide to C Programming” <a href="https://beej.us/guide/bgc/" target="_blank">(https://beej.us/guide/bgc/)</a>όσο και στο “Beej’s Guide to C Programming—Library Reference” <a href="https://beej.us/guide/bgclr/" target="_blank">(https://beej.us/guide/bgclr/)</a>, που περιγράφει τόσο τη γλώσσα C όσο και την πρότυπη βιβλιοθήκη της.</p>
+<h3 id="175-blogs">1.7.5 Blogs</h3>
+<p>Χρήσιμες και ενδιαφέρουσες είναι και οι τακτικές δημοσιεύσεις σε blogs με θέμα τη C, που γίνονται από τους Chris Wellons στο <a href="https://nullprogram.com/" target="_blank">https://nullprogram.com/</a>, Jens Gustedt στο <a href="https://gustedt.wordpress.com/" target="_blank">https://gustedt.wordpress.com/</a>, JeanHeyd Meneide στο <a href="https://thephd.dev/" target="_blank">https://thephd.dev/</a>, Jakub Łukasiewicz στο <a href="https://jorengarenar.github.io/#blog" target="_blank">https://jorengarenar.github.io/#blog</a>, Dan Gookin στο <a href="https://c-for-dummies.com/blog/" target="_blank">https://c‐for‐dummies.com/blog/</a> και άλλους.</p>
+<h2 id="18">1.8 Ασκήσεις</h2>
+<p><strong><em>Άσκηση 1</em></strong><br />
+Γράψτε πρόγραμμα που να εμφανίζει σε διαδοχικές γραμμές το όνομά σας και τη διεύθυνσή σας. Μεταγλωττίστε και εκτελέστε το πρόγραμμα. Εξετάστε τα μεγέθη σε bytes του αρχείου πηγαίου κώδικα και του αρχείου εκτελέσιμου κώδικα. </p>
+<ul>
+<li>Τι παρατηρείτε;</li>
+</ul>
+<p><strong><em>Άσκηση 2</em></strong><br />
+Μεταγλωττίστε και εκτελέστε τον κώδικα της παραγράφου 1.6. Δοκιμάστε να εισαγάγετε ένα προς ένα τα ακόλουθα λάθη στον κώδικα:</p>
+<ul>
+<li>Διαγραφή μιας από τις δύο αγκύλες του κώδικα.</li>
+<li>Διαγραφή μιας από τις δύο παρενθέσεις της printf.</li>
+<li>Διαγραφή της γραμμής που περιέχει το #include.</li>
+<li>Εισαγωγή τυπογραφικού σφάλματος στη γραφή του main (π.χ. εισάγετε mian).</li>
+<li>Εισαγωγή τυπογραφικού σφάλματος στη γραφή του printf.</li>
+<li>Διαγραφή του ερωτηματικού στο τέλος της εντολής printf</li>
+</ul>
+<p>Παρατηρήστε τα μηνύματα που εμφανίζει ο μεταγλωττιστής. Καταγράψτε ποια από αυτά, κατά τη γνώμη σας, περιγράφουν με σαφήνεια την πηγή του λάθους και ποια είναι δυσνόητα ή ακόμα και παραπλανητικά.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>Stephen Kell. “Some were meant for C: the endurance of an unmanageable language”. Στο: <i>Proceedings of the 2017 ACM SIGPLAN International Symposium on New Ideas, New Paradigms, and Reflections on Programming and Software.</i> 2017, σσ. 229–245.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>David Chisnall. “C is not a low-level language”. Στο: <i>Communications of the ACM</i> 61.7 (2018), σσ. 44–48.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>D.M. Ritchie και B.W. Kernighan. <i>The C programming language, 2nd edition</i>. Pearson, 1988.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p>Peter Van der Linden. <i>Expert C programming: deep C secrets.</i> Prentice Hall Professional, 1994.&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:5">
+<p>Samuel P Harbison και Guy L Steele.<i> C: A reference manual.</i> Prentice Hall PTR, 2002.&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:6">
+<p>Ben Klemens.<i> 21st century C: C tips from the new school. ”</i> O’Reilly Media, Inc.”, 2014.&#160;<a class="footnote-backref" href="#fnref:6" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:7">
+<p>Robert C Seacord.<i> Effective C: An Introduction to Professional C Programming.</i> No Starch Press, 2020.&#160;<a class="footnote-backref" href="#fnref:7" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:8">
+<p>Jens Gustedt.<i> Modern C.</i> Manning, 2019.&#160;<a class="footnote-backref" href="#fnref:8" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Τζάλλας Αλέξανδρος, Γκόγκος Χρήστος, Τσούλος Ιωάννης &copy 2025 - το βιβλίο μεταφέρθηκε στο MkDocs από τον Γιάννη Βούλγαρη 🙏.
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "toc.follow", "navigation.instant.preview", "navigation.sections"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": false, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

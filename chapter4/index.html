@@ -1,0 +1,2160 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../chapter3/">
+      
+      
+        <link rel="next" href="../chapter5/">
+      
+      
+      <link rel="icon" href="../src/images/frontcover.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>4. Συναρτήσεις - Μια σύγχρονη προσέγγιση στη γλώσσα C</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/styles.css">
+    
+      <link rel="stylesheet" href="../css/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: none; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#4" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Μια σύγχρονη προσέγγιση στη γλώσσα C" class="md-header__button md-logo" aria-label="Μια σύγχρονη προσέγγιση στη γλώσσα C" data-md-component="logo">
+      
+  <img src="../src/images/frontcover.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Μια σύγχρονη προσέγγιση στη γλώσσα C
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              4. Συναρτήσεις
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Μια σύγχρονη προσέγγιση στη γλώσσα C" class="md-nav__button md-logo" aria-label="Μια σύγχρονη προσέγγιση στη γλώσσα C" data-md-component="logo">
+      
+  <img src="../src/images/frontcover.png" alt="logo">
+
+    </a>
+    Μια σύγχρονη προσέγγιση στη γλώσσα C
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Το βιβλίο
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Η πορεία της C μέχρι σήμερα
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Εισαγωγικές έννοιες στον προγραμματισμό με τη C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Εντολές ελέγχου και επανάληψης
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    4. Συναρτήσεις
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Συναρτήσεις
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Πίνακας περιεχομένων">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Πίνακας περιεχομένων
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 Εισαγωγή στις συναρτήσεις
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 Ορισμοί και κλήσεις συναρτήσεων
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 Κατηγορίες αποθήκευσης
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3 Κατηγορίες αποθήκευσης">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#431" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3.1 Τοπικές και καθολικές μεταβλητές
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4 Αναδρομικές συναρτήσεις
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#45" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.5 Η στοίβα κλήσεων
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.5 Η στοίβα κλήσεων">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#451" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.5.1 Υπερχείλιση στοίβας
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#46-setjmp-longjmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.6 Οι συναρτήσεις setjmp(), longjmp()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#47" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.7 Συναρτήσεις με μεταβλητό πλήθος ορισμάτων
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#48" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.8 Επιπλέον θέματα σχετικά με συναρτήσεις
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#49" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.9 Ασκήσεις
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Πίνακες
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Δομές και ενώσεις
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. Δείκτες
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. Αλφαριθμητικά
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9. Διαχείριση μνήμης
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10. Υλοποίηση δομών δεδομένων και αλγορίθμων στη C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Είσοδος/Έξοδος
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12. Ο προεπεξεργαστής της C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13. Διαμέριση κώδικα
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14. Ανάπτυξη οδηγούμενη από ελέγχους
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    15. Αποσφαλμάτωση
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    16. Στατική και δυναμική ανάλυση κώδικα
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    17. Βιβλιοθήκες
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    18. Θέματα στυλ στη C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    19. Γραφικό περιβάλλον διεπαφής
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    20. Αλληλεπίδραση της C με την Python
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Α. Διαμόρφωση περιβάλλοντος ανάπτυξης κώδικα σε C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Β. Μεταγλώττιση και εκτέλεση κώδικα C χρησιμοποιώντας το Docker
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Γ. Λήψη πληροφοριών για το σύστημα και το μεταγλωττιστή
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Πίνακας περιεχομένων">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Πίνακας περιεχομένων
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 Εισαγωγή στις συναρτήσεις
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 Ορισμοί και κλήσεις συναρτήσεων
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 Κατηγορίες αποθήκευσης
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3 Κατηγορίες αποθήκευσης">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#431" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3.1 Τοπικές και καθολικές μεταβλητές
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4 Αναδρομικές συναρτήσεις
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#45" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.5 Η στοίβα κλήσεων
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.5 Η στοίβα κλήσεων">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#451" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.5.1 Υπερχείλιση στοίβας
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#46-setjmp-longjmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.6 Οι συναρτήσεις setjmp(), longjmp()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#47" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.7 Συναρτήσεις με μεταβλητό πλήθος ορισμάτων
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#48" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.8 Επιπλέον θέματα σχετικά με συναρτήσεις
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#49" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.9 Ασκήσεις
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="4">4. Συναρτήσεις</h1>
+<p><i>Σύνοψη </i> Συναρτήσεις, δήλωση συνάρτησης, ορισμός συνάρτησης, κλήση συνάρτησης, κατηγορίες αποθήκευσης (<span class="p-style">auto, extern, static, register</span>), τοπικές μεταβλητές, καθολικές μεταβλητές, στοίβα κλήσεων, αναδρομικές συναρτήσεις, υπερχείλιση στοίβας, οι συναρτήσεις <span class="p-style">setjmp()</span> και <span class="p-style">longjmp()</span>, συναρτήσεις με μεταβλητό πλήθος ορισμάτων.</p>
+<p><i>Προαπαιτούμενη γνώση</i> Τύποι δεδομένων, είσοδος/έξοδος, δομές επιλογής και επανάληψης.</p>
+<h2 id="41">4.1 Εισαγωγή στις συναρτήσεις</h2>
+<p>Μια συνάρτηση είναι ένα αυτάρκες τμήμα κώδικα που επιτελεί μια συγκεκριμένη εργασία. Αποτελεί θεμελιώδες δομικό στοιχείο του τμηματικού ή αρθρωτού προγραμματισμού (modular programming) και βοηθά
+στην οργάνωση κώδικα μέσω της διάσπασής του σε μικρότερες και ευκολότερα διαχειρίσιμες μονάδες. Οι συναρτήσεις επιτρέπουν επαναχρησιμοποίηση του κώδικα, βελτιώνουν την αναγνωσιμότητα και δίνουν τη
+δυνατότητα καλύτερης οργάνωσης και ευκολότερης συντήρησης του κώδικα. Βασικές έννοιες σχετικές με τις συναρτήσεις είναι οι ακόλουθες.</p>
+<ul>
+<li>Δήλωση συνάρτησης: Καθορίζει το όνομα της συνάρτησης, τον τύπο επιστροφής (αν δεν υπάρχει χρησιμοποιείται ο προσδιοριστής void) και τους τύπους των παραμέτρων (αν υπάρχουν) που δέχεται η
+συνάρτηση. Ο τύπος επιστροφής καθορίζει τον τύπο της τιμής που επιστρέφει η συνάρτηση, ενώ οι παράμετροι παρέχουν εισόδους που η συνάρτηση χρησιμοποιεί στην επεξεργασία που επιτελεί.</li>
+<li>Ορισμός συνάρτησης: Περιέχει την υλοποίηση της συνάρτησης, δηλαδή τον κώδικα που καθορίζει το τι θα κάνει η συνάρτηση όταν καλείται.</li>
+<li>Κλήση συνάρτησης: Αναφέρεται στα σημεία του κώδικα όπου η συνάρτηση καλείται, προκαλώντας τη μεταβίβαση του ελέγχου από το σημείο του κώδικα που γίνεται η κλήση της συνάρτησης στη συνάρτηση που καλείται.</li>
+</ul>
+<p>Ακολουθεί ένα παράδειγμα (κώδικας 4.1) με μια απλή συνάρτηση με δύο παραμέτρους που υπολογίζει και επιστρέφει το άθροισμά τους. Μέσα στον κώδικα υπάρχουν σχόλια για τα σημεία στα οποία γίνεται η δήλωση της συνάρτησης, ο ορισμός της και η κλήση της.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 4.1: ch4_p1.c - παράδειγμα με δήλωση, ορισμό και κλήση μιας απλής συνάρτησης.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span>
+<span class="normal"><a href="#__codelineno-0-12">12</a></span>
+<span class="normal"><a href="#__codelineno-0-13">13</a></span>
+<span class="normal"><a href="#__codelineno-0-14">14</a></span>
+<span class="normal"><a href="#__codelineno-0-15">15</a></span>
+<span class="normal"><a href="#__codelineno-0-16">16</a></span>
+<span class="normal"><a href="#__codelineno-0-17">17</a></span>
+<span class="normal"><a href="#__codelineno-0-18">18</a></span>
+<span class="normal"><a href="#__codelineno-0-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="c1">// δήλωση συνάρτησης</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="kt">int</span><span class="w"> </span><span class="nf">add_numbers</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">num1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">num2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8"></a>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="w">  </span><span class="c1">// κλήση συνάρτησης</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">add_numbers</span><span class="p">(</span><span class="n">num1</span><span class="p">,</span><span class="w"> </span><span class="n">num2</span><span class="p">);</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;The sum is: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="p">}</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14"></a>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="c1">// ορισμός συνάρτησης</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="kt">int</span><span class="w"> </span><span class="nf">add_numbers</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">sum</span><span class="p">;</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Το αποτέλεσμα της εκτέλεσης του προγράμματος θα είναι η εμφάνιση του μηνύματος<br />
+<span class="p-style">The sum is: 12</span>.<br />
+H κλήση της συνάρτησης <span class="p-style">add_numbers()</span> και της συνάρτησης <span class="p-style">printf()</span> από το κύριο πρόγραμμα φαίνεται στο σχήμα 4.1. Τα βέλη δείχνουν ότι κατά την κλήση της συνάρτησης ο έλεγχος μεταβιβάζεται στη συνάρτηση που καλείται, ενώ όταν ολοκληρωθεί η εκτέλεση της συνάρτησης, ο έλεγχος επιστρέφει στην αμέσως επόμενη εντολή μετά την κλήση της συνάρτησης.</p>
+<p><a class="glightbox" href="../src/images/ch4_p1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img align="center" alt="ch4_p1.png" src="../src/images/ch4_p1.png" /></a></p>
+<div style="text-align: center;"><b>Σχήμα 4.1:</b><i> Κλήση συνάρτησης χρήστη και κλήση της συνάρτησης printf() της πρότυπης βιβλιοθήκης.</i></div>
+
+<p>Οι συναρτήσεις στη C κατηγοριοποιούνται στις ακόλουθες βασικές κατηγορίες.  </p>
+<ol>
+<li>Συναρτήσεις της πρότυπης βιβλιοθήκης. Οι συναρτήσεις αυτές εξυπηρετούν διάφορους σκοπούς και παρέχουν λειτουργικότητα για εργασίες όπως είσοδο/έξοδο, μαθηματικούς υπολογισμούς, χειρισμό λεκτικών, διαχείριση μνήμης και άλλα. Έτσι, για παράδειγμα, συναρτήσεις της πρότυπης βιβλιοθήκης είναι η <span class="p-style">printf()</span>, η <span class="p-style">scanf()</span>, η <span class="p-style">sqrt()</span> και άλλες.</li>
+<li>Συναρτήσεις εξωτερικών βιβλιοθηκών. Πρόκειται για συναρτήσεις που παρέχονται από εξωτερικές βιβλιοθήκες, που ο προγραμματιστής πρέπει να εγκαταστήσει πρώτα στο σύστημά του, προκειμένου να μπορεί να τις χρησιμοποιήσει. Οι εξωτερικές βιβλιοθήκες αναπτύσσονται από άλλους προγραμματιστές ή οργανισμούς και καλύπτουν συγκεκριμένες ανάγκες όπως εφαρμογές γραφικών, θέματα δικτύωσης, πρόσβαση σε βάσεις δεδομένων, κρυπτογράφηση και άλλα. Παραδείγματα τέτοιων βιβλιοθηκών είναι οι GTK+, libcurl, SQLITE και OpenSSL.</li>
+<li>Συναρτήσεις ορισμένες από τον χρήστη. Πρόκειται για συναρτήσεις που γράφει ο προγραμματιστής έτσι ώστε να καλύψει συγκεκριμένες απαιτήσεις του προγράμματος. Οι συναρτήσεις αυτές ενθυλακώνουν ένα σύνολο λειτουργιών σε μια μονάδα που μπορεί να κληθεί από διάφορα σημεία του προγράμ-
+ματος. Οι συναρτήσεις του χρήστη δηλώνονται, ορίζονται και καλούνται από τον προγραμματιστή με βάση τη λογική του προγράμματος έτσι ώστε να καλύπτονται οι ζητούμενες προδιαγραφές. </li>
+<li>Συναρτήσεις κλήσεων συστήματος (system call functions): Οι συναρτήσεις αυτές χρησιμοποιούνται για να ζητήσουν υπηρεσίες από το λειτουργικό σύστημα. Παραδείγματα τέτοιων συναρτήσεων είναι η <span class="p-style">fork()</span> για τη δημιουργία μιας νέας διεργασίας, η <span class="p-style">exec()</span> για την εκτέλεση ενός νέου προγράμματος, οι <span class="p-style">read()</span> και <span class="p-style">write()</span> για είσοδο/έξοδο αρχείων και συσκευών, η <span class="p-style">socket()</span> για δικτυακές λειτουργίες, και πολλές άλλες.</li>
+</ol>
+<h2 id="42">4.2 Ορισμοί και κλήσεις συναρτήσεων</h2>
+<p>Η γενική σύνταξη ορισμού συναρτήσεων είναι η ακόλουθη.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>τύπος_επιστροφής όνομα_συνάρτησης(λίστα_παραμέτρων) {
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>σώμα_συνάρτησης
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>}
+</span></code></pre></div></p>
+<p>Ο τύπος_επιστροφής καθορίζει τον τύπο δεδομένων του αποτελέσματος που υπολογίζει και επιστρέφει η συνάρτηση. Αν η συνάρτηση δεν επιστρέφει κάποια τιμή τότε ο τύπος επιστροφής είναι <span class="p-style">void</span>. Το όνομα_συνάρτησης ακολουθεί τους κανόνες ονομάτων της C (ξεκινά με γράμμα αγγλικού αλφαβήτου ή κάτω παύλα, δεν έχει κενά, περιέχει μόνο γράμματα, ψηφία και την κάτω παύλα, δεν είναι δεσμευμένη λέξη). Η λίστα_παραμέτρων είναι μια λίστα μεταβλητών που χωρίζονται μεταξύ τους με κόμματα και λειτουργούν ως είσοδος τιμών για τη συνάρτηση. Συνεπώς, οι παράμετροι εξυπηρετούν το πέρασμα τιμών από τη συνάρτηση που καλεί προς τη συνάρτηση που καλείται. Για κάθε παράμετρο ορίζεται ο τύπος της και το όνομά της και αποτελεί τοπική μεταβλητή της συνάρτησης (δηλαδή υπάρχει μόνο κατά την κλήση της συνάρτησης και μετά «καταστρέφεται»). Αν δεν υπάρχουν παράμετροι αυτό υποδηλώνεται με τον τύπο void ή με κενό ανάμεσα στις παρενθέσεις μετά το όνομα της συνάρτησης. Το σώμα_συνάρτησης περικλείεται σε άγκιστρα και είναι οι εντολές που υλοποιούν τη λειτουργικότητα της συνάρτησης. Σε όποιο σημείο του σώματος της συνάρτησης υπάρχει η εντολή <span class="p-style">return</span> προκαλεί την έξοδο από τη συνάρτηση και την επιστροφή του ελέγχου στην αμέσως επόμενη εντολή μετά την κλήση της συνάρτησης. Μια συνάρτηση, αν είναι <span class="p-style">void</span>, δεν είναι απαραίτητο να έχει <span class="p-style">return</span>. Σε αυτήν την περίπτωση ο έλεγχος μεταβιβάζεται στην καλούσα συνάρτηση όταν εκτελεστεί και η τελευταία εντολή της συνάρτησης που εκτελείται.<br />
+Η πρώτη γραμμή μιας συνάρτησης που περιλαμβάνει τον τύπο επιστροφής, το όνομα της συνάρτησης και τη λίστα παραμέτρων, συμπληρωμένη με ένα ερωτηματικό στο τέλος αποτελεί το λεγόμενο πρωτότυπο της συνάρτησης. Το πρωτότυπο δεν ορίζει τη λειτουργία μιας συνάρτησης και έχει σκοπό να ενημερώσει τον
+μεταγλωττιστή για την ύπαρξη της συνάρτησης και τον τρόπο που θα πρέπει να καλείται. Η συγγραφή ενός πρωτοτύπου γίνεται με την ακόλουθη σύνταξη.</p>
+<p><span class="p-style">τύπος_επιστροφής όνομα_συνάρτησης(λίστα_παραμέτρων);</span></p>
+<p>Αν έχει οριστεί μια συνάρτηση ή αν υπάρχει το πρωτότυπό της, τότε στη συνέχεια του κώδικα η συνάρτηση μπορεί να κληθεί ως εξής:</p>
+<p><span class="p-style">όνομα_συνάρτησης(λίστα_ορισμάτων);</span></p>
+<p class="annotate">Δηλαδή η κλήση μιας συνάρτησης γίνεται απλά με την παράθεση του ονόματός της ακολουθούμενη από τα λεγόμενα ορίσματα (arguments) της συνάρτησης χωρισμένα μεταξύ τους με κόμματα. Τα ορίσματα μπορούν να είναι απλές μεταβλητές ή σταθερές ή γενικότερα εκφράσεις. Η αντιστοίχιση των ορισμάτων με τις παραμέτρους της συνάρτησης γίνεται με βάση τη σειρά εμφάνισής τους στη λίστα. Για παράδειγμα, μια συνάρτηση που έχει οριστεί έχοντας 3 παραμέτρους με ονόματα <span class="p-style">x, y, z</span> και καλείται με ορίσματα <span class="p-style">a, b, c</span> σημαίνει ότι θα γίνει το πέρασμα του ορίσματος <span class="p-style">a</span> στην παράμετρο <span class="p-style">x</span>, του <span class="p-style">b</span> στη <span class="p-style">y</span> και του <span class="p-style">c</span> στη <span class="p-style">z</span>. Προφανώς πρέπει να υπάρχει συμφωνία (ή δυνατότητα αυτόματης μετατροπής) στον τύπο ορισμάτων και των αντίστοιχων παραμέτρων έτσι ώστε να μην προκληθεί συντακτικό σφάλμα.<br />
+Στο ακόλουθο παράδειγμα (κώδικας 4.2) χρησιμοποιούνται δύο συναρτήσεις, η <span class="p-style">fun1()</span> και η <span class="p-style">fun2()</span>. Για τη <span class="p-style">fun1()</span> δίνεται αρχικά το πρωτότυπό της και ορίζεται στο τέλος του κώδικα (1), ενώ η <span class="p-style">fun2()</span> δηλώνεται και ορίζεται απευθείας. Επίσης, η fun1<span class="p-style">()</span> δέχεται μια ακέραια παράμετρο και επιστρέφει μια ακέραια τιμή, ενώ η <span class="p-style">fun2()</span> δέχεται δύο παραμέτρους και δεν επιστρέφει κάποια τιμή. Η κλήση και των δύο συναρτήσεων γίνεται από τη <span class="p-style">main()</span>.</p>
+<ol>
+<li>Αυτός ο τρόπος αρχικής δήλωσης της συνάρτησης και εν συνεχεία ορισμού της ονομάζεται εμπρόσθια δήλωση (forward declaration).  </li>
+</ol>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 4.2: ch4_p2.c - παράδειγμα διαφορετικών τρόπων δήλωσης και ορισμού συναρτήσεων.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span>
+<span class="normal"><a href="#__codelineno-2-13">13</a></span>
+<span class="normal"><a href="#__codelineno-2-14">14</a></span>
+<span class="normal"><a href="#__codelineno-2-15">15</a></span>
+<span class="normal"><a href="#__codelineno-2-16">16</a></span>
+<span class="normal"><a href="#__codelineno-2-17">17</a></span>
+<span class="normal"><a href="#__codelineno-2-18">18</a></span>
+<span class="normal"><a href="#__codelineno-2-19">19</a></span>
+<span class="normal"><a href="#__codelineno-2-20">20</a></span>
+<span class="normal"><a href="#__codelineno-2-21">21</a></span>
+<span class="normal"><a href="#__codelineno-2-22">22</a></span>
+<span class="normal"><a href="#__codelineno-2-23">23</a></span>
+<span class="normal"><a href="#__codelineno-2-24">24</a></span>
+<span class="normal"><a href="#__codelineno-2-25">25</a></span>
+<span class="normal"><a href="#__codelineno-2-26">26</a></span>
+<span class="normal"><a href="#__codelineno-2-27">27</a></span>
+<span class="normal"><a href="#__codelineno-2-28">28</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="c1">// πρωτότυπο fun1</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="kt">int</span><span class="w"> </span><span class="nf">fun1</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">);</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5"></a>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="c1">// ορισμός fun2</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="kt">void</span><span class="w"> </span><span class="nf">fun2</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;fun2: a=%d, b=%.2lf, temp=%.2lf</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="p">);</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="p">}</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11"></a>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.73</span><span class="p">;</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15"></a>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16"></a><span class="w">  </span><span class="c1">// κλήση fun1</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fun1</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18"></a><span class="w">  </span><span class="c1">// κλήση fun2</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19"></a><span class="w">  </span><span class="n">fun2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;main: x=%d, y=%.2lf, z=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">);</span>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22"></a><span class="p">}</span>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23"></a>
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24"></a><span class="c1">// ορισμός fun1</span>
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25"></a><span class="kt">int</span><span class="w"> </span><span class="nf">fun1</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;fun1: a=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">);</span>
+</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+Ακολουθεί το αποτέλεσμα εκτέλεσης του κώδικα.</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>fun1: a=5
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>fun2: a=5, b=2.73, temp=13.65
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>main: x=5, y=2.73, z=6
+</span></code></pre></div>
+Αν η γραμμή 4 με το πρωτότυπο της συνάρτησης <span class="p-style">fun1()</span> τοποθετηθεί σε σχόλια, τότε το σφάλμα που θα εντοπίσει ο μεταγλωττιστής θα είναι:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>ch4_p2.c:17:11: error: call to undeclared function &#39;fun1&#39;; ISO C99 and later do not
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    ↪ support implicit function declarations [‐Wimplicit ‐function ‐declaration]
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  int z = fun1(x);
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>          ^
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>ch4_p2.c:17:11: note: did you mean &#39;fun2&#39;?
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>ch4_p2.c:7:6: note: &#39;fun2&#39; declared here
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>void fun2(int a, double b) {
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>     ^
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>1 error generated.
+</span></code></pre></div>
+<p>Το σφάλμα αναφέρει ότι ο μεταγλωττιστής δεν μπόρεσε να βρει πριν την κλήση της συνάρτησης <span class="p-style">fun1()</span>, τη δήλωσή της. Από την άλλη μεριά, αν αφαιρεθούν τα σχόλια από τη γραμμή 4 και τοποθετηθεί σε σχόλια ο ορισμός της συνάρτησης <span class="p-style">fun1()</span> στις γραμμές 24-27, τότε θα προκύψει το ακόλουθο σφάλμα κατά τη σύνδεση του προγράμματος.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Undefined symbols for architecture arm64:
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  &quot;_fun1&quot;, referenced from:
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>      _main in ch4_p2 ‐724b97.o
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>ld: symbol(s) not found for architecture arm64
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>clang: error: linker command failed with exit code 1 (use ‐v to see invocation)
+</span></code></pre></div>
+<p>Το μήνυμα πληροφορεί ότι ο συνδέτης (linker) δεν ήταν σε θέση να εντοπίσει μια μεταγλωττισμένη έκδοση της συνάρτησης <span class="p-style">fun1()</span> έτσι ώστε να δημιουργήσει το τελικό εκτελέσιμο.</p>
+<h2 id="43">4.3 Κατηγορίες αποθήκευσης</h2>
+<p>Η C διαθέτει τις δεσμευμένες λέξεις <span class="p-style">auto, extern, static</span> και <span class="p-style">register</span> που καθορίζουν την κατηγορία αποθήκευσης (storage class) των μεταβλητών. Η κατηγορία αποθήκευσης προσδιορίζει τη θέση αποθήκευσης, την εμβέλεια (scope), τη διάρκεια ζωής (life cycle) και την αρχική τιμή που λαμβάνουν οι μεταβλητές όπως φαίνεται στον Πίνακα 4.1.</p>
+<div style="text-align: center;"><b>Πίνακας 4.1:</b><i> Κατηγορίες αποθήκευσης (storage classes).</i></div>
+
+<table>
+<thead>
+<tr>
+<th>Κατηγορία αποθήκευσης</th>
+<th>Αποθήκευση</th>
+<th>Αρχική τιμή</th>
+<th>Εμβέλεια</th>
+<th>Διάρκεια ζωής</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="p-style"> auto </span></td>
+<td>Στοίβα</td>
+<td>Απροσδιόριστη</td>
+<td>Εντός του μπλοκ</td>
+<td>Τέλος του μπλοκ</td>
+</tr>
+<tr>
+<td><span class="p-style">extern </span></td>
+<td>Τμήμα δεδομένων</td>
+<td>Μηδέν</td>
+<td>Καθολική (Πολλαπλά αρχεία)</td>
+<td>Τέλος προγράμματος</td>
+</tr>
+<tr>
+<td><span class="p-style">static </span></td>
+<td>Τμήμα δεδομένων</td>
+<td>Μηδέν</td>
+<td>Εντός του μπλοκ</td>
+<td>Τέλος προγράμματος</td>
+</tr>
+<tr>
+<td><span class="p-style">register </span></td>
+<td>Καταχωρητές ΚΜΕ</td>
+<td>Απροσδιόριστη</td>
+<td>Εντός του μπλοκ</td>
+<td>Τέλος του μπλοκ</td>
+</tr>
+</tbody>
+</table>
+<p>Η θέση αποθήκευσης αφορά τη θέση στη μνήμη ή τους καταχωρητές όπου πρόκειται να αποθηκευτούν τα δεδομένα. Το Σχήμα 4.2 δίνει μια απλοποιημένη εικόνα της διάταξης μνήμης. Το τμήμα δεδομένων (data segment) βρίσκεται σε χαμηλές διευθύνσεις της μνήμης και ό,τι αποθηκεύεται εκεί δεσμεύει μνήμη μέχρι το τέλος
+του προγράμματος, πρόκειται δηλαδή για ένα τμήμα μνήμης στατικό. Η στοίβα από την άλλη μεριά αυξάνεται και μειώνεται κατά την εκτέλεση του προγράμματος, οπότε είναι ένα τμήμα μνήμης που είναι δυναμικό. Αν μια μεταβλητή δεσμεύσει θέσεις μνήμης στη στοίβα και δεν αρχικοποιηθεί, τότε θα περιέχει απροσδιόριστες
+τιμές ή τιμές «σκουπίδια» όπως συχνά αναφέρονται (δηλαδή τιμές χωρίς νόημα), ενώ αν καταλάβει θέσεις μνήμης στο τμήμα δεδομένων και δεν αρχικοποιηθεί, θα λάβει αυτόματα την τιμή μηδέν. Η εμβέλεια έχει να κάνει με την ορατότητα των μεταβλητών στα διάφορα τμήματα του προγράμματος. Τοπική εμβέλεια (local scope) σημαίνει ότι μια μεταβλητή ορίζεται σε μια συνάρτηση ή σε ένα μπλοκ και μπορεί να χρησιμοποιηθεί μόνο εντός αυτού. Καθολική εμβέλεια (global scope) σημαίνει ότι η μεταβλητή ορίζεται έξω από συναρτήσεις και είναι ορατή σε όλες τις συναρτήσεις του προγράμματος. Τέλος η διάρκεια ζωής έχει να κάνει με το πότε η μεταβλητή ξεκινά να υφίσταται και πότε παύει να υπάρχει.</p>
+<p><a class="glightbox" href="../src/images/ch4_memory_layout.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="ch4_memory_layout.png" class="center" src="../src/images/ch4_memory_layout.png" /></a></p>
+<div style="text-align: center;"><b>Σχήμα 4.2:</b><i> Διάταξη μνήμης (memory layout).</i></div>
+
+<div style="text-align: center;">Στη συνέχεια περιγράφονται οι κατηγορίες αποθήκευσης μαζί με παραδείγματα κώδικα για την καθεμία.</div>
+
+<p><span class="p-style"><i>auto</i></span> Η δεσμευμένη λέξη <span class="p-style">auto</span> αποτελεί την προκαθορισμένη κατηγορία αποθήκευσης για μεταβλητές που δηλώνονται σε ένα μπλοκ ή σε μια συνάρτηση. Σημαίνει ότι η μεταβλητή έχει αυτόματη διάρκεια αποθήκευσης, δηλαδή ότι δημιουργείται όταν πραγματοποιείται εισαγωγή στο μπλοκ ή στη συνάρτηση και καταστρέφεται όταν γίνεται έξοδος από το μπλοκ ή τη συνάρτηση. Οι μεταβλητές <span class="p-style">auto</span> συνήθως χρησιμοποιούνται ως προσωρινές ή τοπικές μεταβλητές και κατά τη δήλωσή τους λαμβάνουν ως τιμές «σκουπίδια», οπότε πρέπει να αρχικοποιούνται σε τιμές που έχουν νόημα για το πρόγραμμα. Στο παράδειγμα που ακολουθεί στον κώδικα 4.3 ορίζονται 4 μεταβλητές με κατηγορία αποθήκευσης <span class="p-style">auto</span>. Η λέξη <span class="p-style">auto</span>, όπως συνηθίζεται, θα μπορούσε να παραλειφθεί από όλα τα σημεία όπου χρησιμοποιείται, καθώς πρόκειται για την προκαθορισμένη κατηγορία αποθήκευσης. Να σημειωθεί ότι η δήλωση <span class="p-style">auto</span> υπονοείται στις παραμέτρους συναρτήσεων και δεν αναγράφεται. Η μεταβλητή x που δηλώνεται και ορίζεται στη γραμμή 9, μπορεί να χρησιμοποιηθεί σε οποιοδήποτε σημείο της main(). Η μεταβλητή y δηλώνεται στη γραμμή 12 μέσα σε ένα μπλοκ κώδικα και δεν αρχικοποιείται, άρα περιέχει τιμή χωρίς νόημα, ενώ παύει να υπάρχει στη γραμμή 14 που κλείνει το μπλοκ. Τέλος, οι μεταβλητές a και b είναι τοπικές και έχουν διάρκεια ζωής το διάστημα που εκτελείται η συνάρτηση <span class="p-style">fun()</span>.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 4.3: ch4_p3.c - μεταβλητές auto.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-6-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-6-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-6-10">10</a></span>
+<span class="normal"><a href="#__codelineno-6-11">11</a></span>
+<span class="normal"><a href="#__codelineno-6-12">12</a></span>
+<span class="normal"><a href="#__codelineno-6-13">13</a></span>
+<span class="normal"><a href="#__codelineno-6-14">14</a></span>
+<span class="normal"><a href="#__codelineno-6-15">15</a></span>
+<span class="normal"><a href="#__codelineno-6-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2"></a>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="kt">void</span><span class="w"> </span><span class="nf">fun</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;fun: a=%d b=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="p">}</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7"></a>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="w">  </span><span class="n">fun</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="w">  </span><span class="p">{</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"> </span><span class="c1">// η μεταβλητή y περιέχει &quot;σκουπίδια&quot;</span>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;main: x=%d y=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Ακολουθεί το αποτέλεσμα της εκτέλεσης.</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>fun: a=42 b=7
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>main: x=42 y=1
+</span></code></pre></div>
+<span class="p-style"><i>extern</i></span> Η δεσμευμένη λέξη <span class="p-style">extern</span> χρησιμοποιείται συνήθως για να δηλωθεί μια μεταβλητή που ορίζεται σε ένα άλλο αρχείο. Όταν δηλωθεί μια μεταβλητή ως extern αυτό σημαίνει ότι ορίζεται κάπου εξωτερικά του σημείου δήλωσης και ο χώρος αποθήκευσής της υπάρχει κάπου αλλού, όχι με τις μεταβλητές που είναι ορισμένες στο τρέχον τμήμα κώδικα. Στο ακόλουθο παράδειγμα (κώδικες 4.4 και 4.5) ορίζεται στο αρχείο ch4_p4_help.c η μεταβλητή <span class="p-style">a</span> και η συνάρτηση <span class="p-style">foo()</span>. Το αρχείο ch4_p4_main.c χρησιμοποιεί τη μεταβλητή <span class="p-style">a</span> δηλώνοντάς την ως <span class="p-style">extern</span>. To ίδιο συμβαίνει και με τη συνάρτηση <span class="p-style">foo()</span> καθώς και οι συναρτήσεις μπορούν να δηλωθούν ως <span class="p-style">extern</span>.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 4.4: ch4_p4_help.c - μεταβλητές extern.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
+<span class="normal"><a href="#__codelineno-8-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="kt">void</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">a</span><span class="o">++</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 4.5: ch4_p4_main.c - μεταβλητές extern.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-9-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-9-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-9-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-9-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-9-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-9-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-9-10">10</a></span>
+<span class="normal"><a href="#__codelineno-9-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2"></a>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="k">extern</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="k">extern</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5"></a>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="w">    </span><span class="n">foo</span><span class="p">();</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;a=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">);</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Η μεταγλώττιση και σύνδεση του κώδικα πρέπει να συμπεριλάβει και τα δύο αρχεία το ch4_p4_help.c και το ch4_p4_main.c όπως στη συνέχεια.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>$ gcc ‐o ch4_p4 ch4_p4_help.c ch4_p4_main.c ‐Wall ‐Werror ‐pedantic
+</span></code></pre></div>
+<p>Ακολουθεί το αποτέλεσμα της εκτέλεσης.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>a=43
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>a=44
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>a=45
+</span></code></pre></div>
+<p><span class="p-style"><i>static</i></span> Όταν μια μεταβλητή δηλωθεί ως <span class="p-style">static</span> μέσα σε μια συνάρτηση (ή σε ένα μπλοκ), τότε αρχικοποιείται μόνο μια φορά κατά την πρώτη κλήση της συνάρτησης και η τιμή της διατηρείται σε διαδοχικές κλήσεις της. Αν η μεταβλητή δεν αρχικοποιείται με μια εντολή ανάθεσης τιμής, τότε λαμβάνει την τιμή μηδέν. Η μεταβλητή παραμένει τοπική, δηλαδή μπορεί να χρησιμοποιηθεί μόνο μέσα στις εντολές του σώματος της συνάρτησης (ή του μπλοκ) όπου ορίστηκε. Στο ακόλουθο παράδειγμα (κώδικας 4.6) η συνάρτηση <span class="p-style">fun()</span> καλείται στη <span class="p-style">main()</span> 3 φορές. Στην πρώτη κλήση της η <span class="p-style">static</span> μεταβλητή <span class="p-style">a</span> λαμβάνει την τιμή 100 και οι μετέπειτα κλήσεις της <span class="p-style">fun()</span> χρησιμοποιούν την ίδια μεταβλητή χωρίς να έχει καταστραφεί ενδιάμεσα όπως θα συνέβαινε αν είχε δηλωθεί ως <span class="p-style">auto</span>
+. Το ίδιο συμβαίνει και με τη static μεταβλητή <span class="p-style">a</span> στη <span class="p-style">main()</span> (έχει ίδιο όνομα με τη μεταβλητή <span class="p-style">a</span> της <span class="p-style">fun()</span> αλλά πρόκειται για διαφορετικές μεταβλητές). Καθώς δηλώνεται μέσα σε ένα μπλοκ της <span class="p-style">main()</span> και δεν αρχικοποιείται με εντολή ανάθεσης τιμής, η στατική μεταβλητή αρχικοποιείται στην τιμή 0.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 4.6: ch4_p5.c - μεταβλητές static.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-12-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-12-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-12-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-12-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-12-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-12-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-12-10">10</a></span>
+<span class="normal"><a href="#__codelineno-12-11">11</a></span>
+<span class="normal"><a href="#__codelineno-12-12">12</a></span>
+<span class="normal"><a href="#__codelineno-12-13">13</a></span>
+<span class="normal"><a href="#__codelineno-12-14">14</a></span>
+<span class="normal"><a href="#__codelineno-12-15">15</a></span>
+<span class="normal"><a href="#__codelineno-12-16">16</a></span>
+<span class="normal"><a href="#__codelineno-12-17">17</a></span>
+<span class="normal"><a href="#__codelineno-12-18">18</a></span>
+<span class="normal"><a href="#__codelineno-12-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2"></a>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="kt">void</span><span class="w"> </span><span class="nf">fun</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;fun: a=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">);</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="w">  </span><span class="n">a</span><span class="o">++</span><span class="p">;</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="p">}</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8"></a>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="w">  </span><span class="n">fun</span><span class="p">();</span>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="w">  </span><span class="n">fun</span><span class="p">();</span>
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="w">  </span><span class="n">fun</span><span class="p">();</span>
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14"></a><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w"> </span><span class="c1">// αρχικοποιείται στο μηδέν</span>
+</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;main: a=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">);</span>
+</span><span id="__span-12-16"><a id="__codelineno-12-16" name="__codelineno-12-16"></a><span class="w">    </span><span class="n">a</span><span class="o">++</span><span class="p">;</span>
+</span><span id="__span-12-17"><a id="__codelineno-12-17" name="__codelineno-12-17"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-12-18"><a id="__codelineno-12-18" name="__codelineno-12-18"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-12-19"><a id="__codelineno-12-19" name="__codelineno-12-19"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Το αποτέλεσμα της εκτέλεσης του κώδικα είναι το ακόλουθο.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>fun: a=100
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>fun: a=101
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>fun: a=102
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>main: a=0
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>main: a=1
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>main: a=2
+</span></code></pre></div>
+<p><span class="p-style"><i>register</i></span> Παρόμοια με την auto είναι και η <span class="p-style">register</span>. Η βασική διαφορά είναι ότι ο μεταγλωττιστής λαμβάνει την οδηγία (που μπορεί ωστόσο να αγνοήσει) να αποθηκεύσει μεταβλητές με προσδιοριστή <span class="p-style">register</span> σε καταχωρητές της Κεντρικής Μονάδας Επεξεργασίας (KME), εφόσον υπάρχουν διαθέσιμοι. Οι πράξεις με μεταβλητές σε καταχωρητές είναι πολύ ταχύτερες συγκριτικά με μεταβλητές που αποθηκεύονται στη μνήμη. Μια ακόμη διαφορά των <span class="p-style">register</span> μεταβλητών από τις άλλες κατηγορίες είναι ότι δεν μπορεί να ληφθεί η διεύθυνση μιας <span class="p-style">register</span> μεταβλητής όπως θα γινόταν για παράδειγμα με μια auto μεταβλητή με τον τελεστή <span class="p-style">&amp;</span>. Θα πρέπει να σημειωθεί ότι η δεσμευμένη λέξη <span class="p-style">register</span> έχει αποσυρθεί (έχει γίνει deprecate) από τη γλώσσα C από το στάνταρντ C99 και μετά. Συνεπώς, οι μεταγλωττιστές αγνοούν τη χρήση από τον προγραμματιστή του <span class="p-style">register</span> και βελτιστοποιούν αυτόματα τη χρήση των καταχωρητών της KME.</p>
+<h3 id="431">4.3.1 Τοπικές και καθολικές μεταβλητές</h3>
+<p>Οι τοπικές μεταβλητές έχουν εμβέλεια το μπλοκ κώδικα μέσα στο οποίο ορίζονται, ενώ οι καθολικές μεταβλητές ορίζονται εκτός συναρτήσεων και έχουν εμβέλεια όλο το πρόγραμμα. To ακόλουθο παράδειγμα (κώδικας 4.7) χρησιμοποιεί μια καθολική μεταβλητή (ορατή παντού) με όνομα <span class="p-style">global_var</span> και δύο τοπικές μεταβλητές, με το ίδιο όνομα (<span class="p-style">local_var</span>), αλλά διαφορετικές μεταξύ τους καθώς η μια ορίζεται στη συνάρτηση <span class="p-style">fun()</span> και η άλλη στη συνάρτηση <span class="p-style">main()</span>.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 4.7: ch4_p6.c - παράδειγμα με τοπικές μεταβλητές και καθολική μεταβλητή.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-14-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-14-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-14-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-14-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-14-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-14-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-14-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-14-10">10</a></span>
+<span class="normal"><a href="#__codelineno-14-11">11</a></span>
+<span class="normal"><a href="#__codelineno-14-12">12</a></span>
+<span class="normal"><a href="#__codelineno-14-13">13</a></span>
+<span class="normal"><a href="#__codelineno-14-14">14</a></span>
+<span class="normal"><a href="#__codelineno-14-15">15</a></span>
+<span class="normal"><a href="#__codelineno-14-16">16</a></span>
+<span class="normal"><a href="#__codelineno-14-17">17</a></span>
+<span class="normal"><a href="#__codelineno-14-18">18</a></span>
+<span class="normal"><a href="#__codelineno-14-19">19</a></span>
+<span class="normal"><a href="#__codelineno-14-20">20</a></span>
+<span class="normal"><a href="#__codelineno-14-21">21</a></span>
+<span class="normal"><a href="#__codelineno-14-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2"></a>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="kt">int</span><span class="w"> </span><span class="n">global_var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4"></a>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="kt">void</span><span class="w"> </span><span class="nf">fun</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">local_var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;fun: local_var=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">local_var</span><span class="p">);</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;fun: global_var=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">global_var</span><span class="p">);</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9"></a><span class="w">  </span><span class="n">global_var</span><span class="o">++</span><span class="p">;</span>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10"></a><span class="w">  </span><span class="n">local_var</span><span class="o">++</span><span class="p">;</span>
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11"></a><span class="p">}</span>
+</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12"></a>
+</span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">local_var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span>
+</span><span id="__span-14-15"><a id="__codelineno-14-15" name="__codelineno-14-15"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;main: local_var=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">local_var</span><span class="p">);</span>
+</span><span id="__span-14-16"><a id="__codelineno-14-16" name="__codelineno-14-16"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;main: global_var=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">global_var</span><span class="p">);</span>
+</span><span id="__span-14-17"><a id="__codelineno-14-17" name="__codelineno-14-17"></a><span class="w">  </span><span class="n">fun</span><span class="p">();</span>
+</span><span id="__span-14-18"><a id="__codelineno-14-18" name="__codelineno-14-18"></a><span class="w">  </span><span class="n">global_var</span><span class="o">++</span><span class="p">;</span>
+</span><span id="__span-14-19"><a id="__codelineno-14-19" name="__codelineno-14-19"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;main: local_var=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">local_var</span><span class="p">);</span>
+</span><span id="__span-14-20"><a id="__codelineno-14-20" name="__codelineno-14-20"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;main: global_var=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">global_var</span><span class="p">);</span>
+</span><span id="__span-14-21"><a id="__codelineno-14-21" name="__codelineno-14-21"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-14-22"><a id="__codelineno-14-22" name="__codelineno-14-22"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Ακολουθεί το αποτέλεσμα της εκτέλεσης του κώδικα.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>main: local_var=7
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>main: global_var=10
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>fun: local_var=5
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>fun: global_var=10
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>main: local_var=7
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>main: global_var=12
+</span></code></pre></div>
+<p>Αν και οι καθολικές μεταβλητές μπορούν να χρησιμοποιηθούν για την ανταλλαγή τιμών ανάμεσα σε συναρτήσεις, αυτό δεν θεωρείται καλή πρακτική καθώς οδηγεί σε προγράμματα δύσκολα στην κατανόηση και διόρθωση.</p>
+<h2 id="44">4.4 Αναδρομικές συναρτήσεις</h2>
+<p>Οι αναδρομικές συναρτήσεις είναι συναρτήσεις που κατά την εκτέλεσή τους καλούν τους εαυτούς τους, είτε άμεσα είτε έμμεσα. Η αναδρομή (recursion) είναι ένας ισχυρός μηχανισμός για την επίλυση προβλημάτων που μπορούν να διαιρεθούν σε μικρότερα προβλήματα της ίδιας μορφής. Οι αναδρομικές συναρτήσεις έχουν δύο τμήματα, τη βασική περίπτωση (base case) και την αναδρομική περίπτωση (recursive case). Η βασική περίπτωση καθορίζει τη συνθήκη που τερματίζει τις αναδρομικές κλήσεις, ενώ η αναδρομική περίπτωση καθορίζει τη λογική που διασπά το πρόβλημα σε μικρότερα υποπροβλήματα. Το κλασικό παράδειγμα αναδρομής είναι ο υπολογισμός του παραγοντικού ενός μη αρνητικού ακεραίου αριθμού n που ορίζεται ως 1 αν το n είναι ένα ή μηδέν και ως 1 * 2 * 3 ... * n για n &gt; 1. Το ίδιο μπορεί να περιγραφεί κομψά με τον ακόλουθο μαθηματικό ορισμό:</p>
+<div class="arithmatex">\[
+\text{παραγοντικό}(n) =
+\begin{cases} 
+1, &amp; \text{Αν } n = 0 \text{ ή } n = 1 \\
+n \times \text{παραγοντικό}(n-1) &amp; \text{αλλιώς}
+\end{cases}
+\]</div>
+<p>Η αναδρομική υλοποίηση του κώδικα που ακολουθεί στον κώδικα 4.8 βρίσκεται σε ευθεία αντιστοίχιση με τον μαθηματικό ορισμό.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 4.8: ch4_p7.c - αναδρομική συνάρτηση υπολογισμού παραγοντικού.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-16-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-16-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-16-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-16-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-16-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-16-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-16-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-16-10">10</a></span>
+<span class="normal"><a href="#__codelineno-16-11">11</a></span>
+<span class="normal"><a href="#__codelineno-16-12">12</a></span>
+<span class="normal"><a href="#__codelineno-16-13">13</a></span>
+<span class="normal"><a href="#__codelineno-16-14">14</a></span>
+<span class="normal"><a href="#__codelineno-16-15">15</a></span>
+<span class="normal"><a href="#__codelineno-16-16">16</a></span>
+<span class="normal"><a href="#__codelineno-16-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2"></a>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">factorial</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="w">  </span><span class="c1">// Βασική περίπτωση: το παραγοντικό του 0 και του 1 είναι 1</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8"></a><span class="w">  </span><span class="c1">// Αναδρομική περίπτωση: n! = n * (n-1)!</span>
+</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+</span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10"></a><span class="p">}</span>
+</span><span id="__span-16-11"><a id="__codelineno-16-11" name="__codelineno-16-11"></a>
+</span><span id="__span-16-12"><a id="__codelineno-16-12" name="__codelineno-16-12"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-16-13"><a id="__codelineno-16-13" name="__codelineno-16-13"></a><span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+</span><span id="__span-16-14"><a id="__codelineno-16-14" name="__codelineno-16-14"></a><span class="w">  </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factorial</span><span class="p">(</span><span class="n">num</span><span class="p">);</span>
+</span><span id="__span-16-15"><a id="__codelineno-16-15" name="__codelineno-16-15"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Factorial of %u is %u</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">num</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+</span><span id="__span-16-16"><a id="__codelineno-16-16" name="__codelineno-16-16"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-16-17"><a id="__codelineno-16-17" name="__codelineno-16-17"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Όταν ο κώδικας εκτελεστεί θα προκληθεί η ακόλουθη σειρά κλήσεων της συνάρτησης <span class="p-style">factorial()</span>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>          factorial(5)
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>          |
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>          V
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>5 * factorial(4) = 5 * 24 = 120
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>          |
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>          V
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>4 * factorial(3) = 4 * 6 = 24
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>          |
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>          V
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>3 * factorial(2) = 3 * 2 = 6
+</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>          |
+</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>          V
+</span><span id="__span-17-13"><a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>2 * factorial(1) = 2 * 1 = 2
+</span><span id="__span-17-14"><a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>          |
+</span><span id="__span-17-15"><a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>          V
+</span><span id="__span-17-16"><a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>    factorial(1) = 1 (βασική περίπτωση)
+</span></code></pre></div>
+<p>Φθάνοντας στη βασική περίπτωση όταν το <span class="p-style">n</span> είναι 0 ή 1, η αναδρομή σταματά, και τα αποτελέσματα μεταδίδονται «προς τα πάνω», και εν τέλει επιστρέφεται το αποτέλεσμα στη συνάρτηση <span class="p-style">main()</span> προκειμένου να εμφανιστεί το μήνυμα <span class="p-style">Factorial of 5 is 120</span>. <br />
+Στο προηγούμενο παράδειγμα κώδικα η υλοποίηση της συνάρτησης <span class="p-style">factorial()</span> μπορεί να γίνει εύκολα και με συνάρτηση που υλοποιεί επαναληπτικά τη λύση. Μια υλοποίηση της συνάρτησης είναι η ακόλουθη.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>unsigned int factorial(unsigned int n) {
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>unsigned int result = 1;
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>while (n &gt; 1) {
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>result *= n;
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>n‐‐;
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>}
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>return result;
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>}
+</span></code></pre></div>
+<p>Υπάρχουν όμως προβλήματα που η αναδρομική λύση είναι πραγματικά απλούστερη. Ένα τέτοιο παράδειγμα είναι το πρόβλημα των πύργων του Ανόι όπου η αναδρομική λύση είναι ιδιαίτερα περιεκτική. Στο πρόβλημα αυτό υπάρχουν 3 στύλοι (Α, Β και C) και ο πρώτος στύλος αρχικά περιέχει έναν αριθμό από δίσκους διαφορετικής διαμέτρου τοποθετημένους από τον μεγαλύτερο προς τον μικρότερο, από κάτω προς τα πάνω. Το ζητούμενο είναι να μεταφερθούν όλοι οι δίσκοι στον στύλο C μετακινώντας έναν δίσκο τη φορά και αποφεύγοντας την τοποθέτηση μεγαλύτερου δίσκου πάνω από μικρότερο. Το αναδρομικό πρόγραμμα που επιλύει το πρόβλημα παρουσιάζεται στη συνέχεια στον κώδικα 4.9. Μια καλή περιγραφή της διαίσθησης που απαιτεί η συγγραφή του αναδρομικού κώδικα για το πρόβλημα βρίσκεται στο <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 4.9: ch4_p8.c - πύργοι του Ανόι.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-19-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-19-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-19-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-19-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-19-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-19-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-19-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-19-10">10</a></span>
+<span class="normal"><a href="#__codelineno-19-11">11</a></span>
+<span class="normal"><a href="#__codelineno-19-12">12</a></span>
+<span class="normal"><a href="#__codelineno-19-13">13</a></span>
+<span class="normal"><a href="#__codelineno-19-14">14</a></span>
+<span class="normal"><a href="#__codelineno-19-15">15</a></span>
+<span class="normal"><a href="#__codelineno-19-16">16</a></span>
+<span class="normal"><a href="#__codelineno-19-17">17</a></span>
+<span class="normal"><a href="#__codelineno-19-18">18</a></span>
+<span class="normal"><a href="#__codelineno-19-19">19</a></span>
+<span class="normal"><a href="#__codelineno-19-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2"></a>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="kt">void</span><span class="w"> </span><span class="nf">tower_of_hanoi</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">source</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">destination</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">aux</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Move disk 1 from %c to %c</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">source</span><span class="p">,</span><span class="w"> </span><span class="n">destination</span><span class="p">);</span>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6"></a><span class="w">    </span><span class="k">return</span><span class="p">;</span>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8"></a><span class="w">  </span><span class="n">tower_of_hanoi</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">source</span><span class="p">,</span><span class="w"> </span><span class="n">aux</span><span class="p">,</span><span class="w"> </span><span class="n">destination</span><span class="p">);</span>
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Move disk %d from %c to %c</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">source</span><span class="p">,</span><span class="w"> </span><span class="n">destination</span><span class="p">);</span>
+</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10"></a><span class="w">  </span><span class="n">tower_of_hanoi</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">aux</span><span class="p">,</span><span class="w"> </span><span class="n">destination</span><span class="p">,</span><span class="w"> </span><span class="n">source</span><span class="p">);</span>
+</span><span id="__span-19-11"><a id="__codelineno-19-11" name="__codelineno-19-11"></a><span class="p">}</span>
+</span><span id="__span-19-12"><a id="__codelineno-19-12" name="__codelineno-19-12"></a>
+</span><span id="__span-19-13"><a id="__codelineno-19-13" name="__codelineno-19-13"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-14"><a id="__codelineno-19-14" name="__codelineno-19-14"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">num_disks</span><span class="p">;</span>
+</span><span id="__span-19-15"><a id="__codelineno-19-15" name="__codelineno-19-15"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Enter the number of disks: &quot;</span><span class="p">);</span>
+</span><span id="__span-19-16"><a id="__codelineno-19-16" name="__codelineno-19-16"></a><span class="w">  </span><span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">num_disks</span><span class="p">);</span>
+</span><span id="__span-19-17"><a id="__codelineno-19-17" name="__codelineno-19-17"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Solution:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-19-18"><a id="__codelineno-19-18" name="__codelineno-19-18"></a><span class="w">  </span><span class="n">tower_of_hanoi</span><span class="p">(</span><span class="n">num_disks</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;C&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;B&#39;</span><span class="p">);</span>
+</span><span id="__span-19-19"><a id="__codelineno-19-19" name="__codelineno-19-19"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-19-20"><a id="__codelineno-19-20" name="__codelineno-19-20"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Ακολουθεί ένα παράδειγμα εκτέλεσης του προγράμματος και η σχηματική αναπαράσταση της πορείας της λύσης (Σχήμα 4.3).</p>
+<div class="grid">
+<div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>Enter the number of disks: 3
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>Solution:
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>Move disk 1 from A to C
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>Move disk 2 from A to B
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>Move disk 1 from C to B
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>Move disk 3 from A to C
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>Move disk 1 from B to A
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>Move disk 2 from B to C
+</span><span id="__span-20-9"><a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>Move disk 1 from A to C
+</span></code></pre></div>
+<p><a class="glightbox" href="../src/images/ch4_hanoi3.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="ch4_hanoi3.png" src="../src/images/ch4_hanoi3.png" /></a>  </p>
+</div>
+<div style="text-align: center;"><b>Σχήμα 4.3:</b><i> Βήματα επίλυσης του προβλήματος των πύργων του Ανόι με 3 δίσκους.</i></div>
+
+<p>Μερικές ενδιαφέρουσες και απροσδόκητες ιδιότητες του προβλήματος των πύργων του Ανόι μπορούν να εντοπιστούν στο <sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>.</p>
+<h2 id="45">4.5 Η στοίβα κλήσεων</h2>
+<p>Η στοίβα κλήσεων (call stack) είναι μια δομή που διατηρεί τις κλήσεις των συναρτήσεων και τα σχετικά δεδομένα τους κατά την εκτέλεση του προγράμματος. Πρόκειται για μια δομή στοίβας όπου κάθε κλήση συνάρτησης αναπαρίσταται από ένα πλαίσιο στοίβας (stack-frame). Η στοίβα κλήσεων έχει κρίσιμο ρόλο στη διαχείριση της ροής εκτέλεσης του προγράμματος, συμπεριλαμβανομένων των κλήσεων συναρτήσεων, των τοπικών μεταβλητών και των διευθύνσεων επιστροφής.<br />
+Όταν καλείται μια συνάρτηση, δημιουργείται ένα νέο stack-frame και ωθείται στη στοίβα κλήσεων. Το stack-frame περιέχει πληροφορίες όπως η διεύθυνση επιστροφής της συνάρτησης, παραμέτρους, τοπικές μεταβλητές και άλλα. Η συνάρτηση ξεκινά να εκτελείται και μπορεί να κάνει νέες κλήσεις συναρτήσεων ωθώντας νέα stack-frames στη στοίβα. Καθώς κάθε συνάρτηση ολοκληρώνει την εκτέλεσή της, το stack-frame της απωθείται από τη στοίβα και ο έλεγχος μεταβιβάζεται στη συνάρτηση που την κάλεσε.
+Στο ακόλουθο παράδειγμα (κώδικας 4.10) η <span class="p-style">main()</span> καλεί τη συνάρτηση <span class="p-style">foo()</span> που καλεί τη συνάρτηση <span class="p-style">bar()</span> που καλεί τη συνάρτηση <span class="p-style">baz()</span>. Εκείνη τη στιγμή στη στοίβα κλήσεων υπάρχουν τα stack-frames των 4 συναρτήσεων με τη σειρά <span class="p-style">main(), foo(), bar(), baz(),</span> από κάτω προς τα πάνω. Όταν ολοκληρωθεί η εκτέλεση της <span class="p-style">baz()</span> το stack-frame της απωθείται από τη στοίβα που πλέον περιέχει τα stack-frames <span class="p-style">main(), foo(), bar()</span>. Ομοίως, με την ολοκλήρωση της <span class="p-style">bar()</span> και της <span class="p-style">foo()</span> η στοίβα γίνεται <span class="p-style">main(), foo()</span> και <span class="p-style">main()</span> αντίστοιχα, ενώ όταν ολοκληρωθεί η εκτέλεση της <span class="p-style">main()</span>, η στοίβα αδειάζει και το πρόγραμμα τερματίζει την εκτέλεσή του.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 4.10: ch4_p9.c - στοίβα κλήσεων.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-21-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-21-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-21-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-21-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-21-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-21-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-21-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-21-10">10</a></span>
+<span class="normal"><a href="#__codelineno-21-11">11</a></span>
+<span class="normal"><a href="#__codelineno-21-12">12</a></span>
+<span class="normal"><a href="#__codelineno-21-13">13</a></span>
+<span class="normal"><a href="#__codelineno-21-14">14</a></span>
+<span class="normal"><a href="#__codelineno-21-15">15</a></span>
+<span class="normal"><a href="#__codelineno-21-16">16</a></span>
+<span class="normal"><a href="#__codelineno-21-17">17</a></span>
+<span class="normal"><a href="#__codelineno-21-18">18</a></span>
+<span class="normal"><a href="#__codelineno-21-19">19</a></span>
+<span class="normal"><a href="#__codelineno-21-20">20</a></span>
+<span class="normal"><a href="#__codelineno-21-21">21</a></span>
+<span class="normal"><a href="#__codelineno-21-22">22</a></span>
+<span class="normal"><a href="#__codelineno-21-23">23</a></span>
+<span class="normal"><a href="#__codelineno-21-24">24</a></span>
+<span class="normal"><a href="#__codelineno-21-25">25</a></span>
+<span class="normal"><a href="#__codelineno-21-26">26</a></span>
+<span class="normal"><a href="#__codelineno-21-27">27</a></span>
+<span class="normal"><a href="#__codelineno-21-28">28</a></span>
+<span class="normal"><a href="#__codelineno-21-29">29</a></span>
+<span class="normal"><a href="#__codelineno-21-30">30</a></span>
+<span class="normal"><a href="#__codelineno-21-31">31</a></span>
+<span class="normal"><a href="#__codelineno-21-32">32</a></span>
+<span class="normal"><a href="#__codelineno-21-33">33</a></span>
+<span class="normal"><a href="#__codelineno-21-34">34</a></span>
+<span class="normal"><a href="#__codelineno-21-35">35</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2"></a>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="kt">void</span><span class="w"> </span><span class="nf">bar</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span><span class="w">     </span><span class="c1">// εμπρόσθια δήλωση (forward declaration)</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="kt">int</span><span class="w"> </span><span class="nf">baz</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">);</span><span class="w"> </span><span class="c1">// εμπρόσθια δήλωση</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5"></a>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="kt">void</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;foo(%p) pushed in the call stack</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">__builtin_frame_address</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9"></a><span class="w">  </span><span class="n">bar</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+</span><span id="__span-21-10"><a id="__codelineno-21-10" name="__codelineno-21-10"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;foo: a(%p)=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">);</span>
+</span><span id="__span-21-11"><a id="__codelineno-21-11" name="__codelineno-21-11"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;foo popped from the call stack</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-21-12"><a id="__codelineno-21-12" name="__codelineno-21-12"></a><span class="p">}</span>
+</span><span id="__span-21-13"><a id="__codelineno-21-13" name="__codelineno-21-13"></a>
+</span><span id="__span-21-14"><a id="__codelineno-21-14" name="__codelineno-21-14"></a><span class="kt">void</span><span class="w"> </span><span class="nf">bar</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-21-15"><a id="__codelineno-21-15" name="__codelineno-21-15"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;bar(%p) pushed in the call stack</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">__builtin_frame_address</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+</span><span id="__span-21-16"><a id="__codelineno-21-16" name="__codelineno-21-16"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+</span><span id="__span-21-17"><a id="__codelineno-21-17" name="__codelineno-21-17"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">baz</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">);</span>
+</span><span id="__span-21-18"><a id="__codelineno-21-18" name="__codelineno-21-18"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;bar: b(%p)=%d c(%p)=%d, d(%p)=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">,</span>
+</span><span id="__span-21-19"><a id="__codelineno-21-19" name="__codelineno-21-19"></a><span class="w">         </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">);</span>
+</span><span id="__span-21-20"><a id="__codelineno-21-20" name="__codelineno-21-20"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;bar popped from the call stack</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-21-21"><a id="__codelineno-21-21" name="__codelineno-21-21"></a><span class="p">}</span>
+</span><span id="__span-21-22"><a id="__codelineno-21-22" name="__codelineno-21-22"></a>
+</span><span id="__span-21-23"><a id="__codelineno-21-23" name="__codelineno-21-23"></a><span class="kt">int</span><span class="w"> </span><span class="nf">baz</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">f</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-21-24"><a id="__codelineno-21-24" name="__codelineno-21-24"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;baz(%p) pushed in the call stack</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">__builtin_frame_address</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+</span><span id="__span-21-25"><a id="__codelineno-21-25" name="__codelineno-21-25"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;baz: e(%p)=%d f(%p)=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">);</span>
+</span><span id="__span-21-26"><a id="__codelineno-21-26" name="__codelineno-21-26"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;baz popped from the call stack</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-21-27"><a id="__codelineno-21-27" name="__codelineno-21-27"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">f</span><span class="p">;</span>
+</span><span id="__span-21-28"><a id="__codelineno-21-28" name="__codelineno-21-28"></a><span class="p">}</span>
+</span><span id="__span-21-29"><a id="__codelineno-21-29" name="__codelineno-21-29"></a>
+</span><span id="__span-21-30"><a id="__codelineno-21-30" name="__codelineno-21-30"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-21-31"><a id="__codelineno-21-31" name="__codelineno-21-31"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;main(%p) pushed in the call stack</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">__builtin_frame_address</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+</span><span id="__span-21-32"><a id="__codelineno-21-32" name="__codelineno-21-32"></a><span class="w">  </span><span class="n">foo</span><span class="p">();</span>
+</span><span id="__span-21-33"><a id="__codelineno-21-33" name="__codelineno-21-33"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;main popped from the call stack</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-21-34"><a id="__codelineno-21-34" name="__codelineno-21-34"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-21-35"><a id="__codelineno-21-35" name="__codelineno-21-35"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Ακολουθεί το αποτέλεσμα εκτέλεσης.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>main(0x16fba2f00) pushed in the call stack
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>  foo(0x16fba2ee0) pushed in the call stack
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>    bar(0x16fba2eb0) pushed in the call stack
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>      baz(0x16fba2e50) pushed in the call stack
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>      baz: e(0x16fba2e4c)=1 f(0x16fba2e48)=2
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>      baz popped from the call stack
+</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>    bar: b(0x16fba2eac)=1 c(0x16fba2ea8)=2, d(0x16fba2ea4)=3
+</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>    bar popped from the call stack
+</span><span id="__span-22-9"><a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>  foo: a(0x16fba2edc)=1
+</span><span id="__span-22-10"><a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>  foo popped from the call stack
+</span><span id="__span-22-11"><a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>main popped from the call stack
+</span></code></pre></div></p>
+<p>Η συνάρτηση <span class="p-style">__builtin_frame_address()</span> επιστρέφει τη διεύθυνση μνήμης του stack-frame στη στοίβα κλήσεων (υποστηρίζεται από το gcc και το clang). Παρατηρώντας κανείς τις διευθύνσεις διαπιστώνει ότι η στοίβα κλήσεων βρίσκεται σε υψηλές διευθύνσεις του χώρου μνήμης και ότι αναπτύσσεται προς χαμηλότερες
+διευθύνσεις καθώς προστίθενται νέα stack-frames.</p>
+<h3 id="451">4.5.1 Υπερχείλιση στοίβας</h3>
+<p>Αν κατά την εκτέλεση ενός προγράμματος η στοίβα κλήσεων ξεπεράσει σε μέγεθος τον χώρο που διατίθεται για τη στοίβα από το σύστημα, τότε δημιουργείται πρόβλημα υπερχείλισης στοίβας (stack overflow problem) και το πρόγραμμα τερματίζει την εκτέλεσή του. Για να συμβεί αυτό είτε θα πρέπει να υπάρχει μια αλυσίδα από κλήσεις συναρτήσεων με τοπικές μεταβλητές μεγάλου μεγέθους ή μια αναδρομική συνάρτηση που καλεί τον εαυτό της πολλές φορές δημιουργώντας μια μακριά ακολουθία από stack-frames στη στοίβα κλήσεων. Στην πράξη, το πρόβλημα εμφανίζεται συχνά όταν μια αναδρομική συνάρτηση έχει γραφεί λανθασμένα και καλείται συνεχώς η αναδρομική περίπτωση, αντί να τερματίζει κάποια στιγμή με τη βασική περίπτωση. Ακολουθεί ένα παράδειγμα κώδικα (κώδικας 4.11) που η αναδρομική συνάρτηση recursive_function απλά καλεί τον εαυτό της χωρίς κανέναν έλεγχο για τερματισμό της αναδρομής.</p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 4.11: ch4_p10.c - αναδρομική κλήση συνάρτησης που προκαλεί υπερχείλιση στοίβας.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-23-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-23-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-23-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-23-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-23-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-23-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-23-10">10</a></span>
+<span class="normal"><a href="#__codelineno-23-11">11</a></span>
+<span class="normal"><a href="#__codelineno-23-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2"></a>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3"></a><span class="kt">void</span><span class="w"> </span><span class="nf">recursive_function</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Call %d, frame address = %p</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">++</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">__builtin_frame_address</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6"></a><span class="w">  </span><span class="n">recursive_function</span><span class="p">();</span>
+</span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7"></a><span class="p">}</span>
+</span><span id="__span-23-8"><a id="__codelineno-23-8" name="__codelineno-23-8"></a>
+</span><span id="__span-23-9"><a id="__codelineno-23-9" name="__codelineno-23-9"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-23-10"><a id="__codelineno-23-10" name="__codelineno-23-10"></a><span class="w">  </span><span class="n">recursive_function</span><span class="p">();</span>
+</span><span id="__span-23-11"><a id="__codelineno-23-11" name="__codelineno-23-11"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-23-12"><a id="__codelineno-23-12" name="__codelineno-23-12"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+Η εκτέλεση του προγράμματος θα προκαλέσει segmentation fault, καθώς μετά από έναν μεγάλο αριθμό αναδρομικών κλήσεων της recursive_function η διαθέσιμη μνήμη θα εξαντληθεί.
+<div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>...
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>Call 261452, frame address = 0x16f124580
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>Call 261453, frame address = 0x16f124560
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>Call 261454, frame address = 0x16f124540
+</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>Call 261455, frame address = 0x16f124520
+</span><span id="__span-24-6"><a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a>zsh: segmentation fault ch4_p10
+</span></code></pre></div></p>
+<h2 id="46-setjmp-longjmp">4.6 Οι συναρτήσεις setjmp(), longjmp()</h2>
+<p>Οι συναρτήσεις <span class="p-style">setjmp()</span> και <span class="p-style">longjmp()</span> επιτρέπουν τη μετάβαση από μια συνάρτηση σε μια άλλη παρακάμπτοντας την προκαθορισμένη ροή εκτέλεσης. Λειτουργούν με παρόμοιο τρόπο με την εντολή goto χωρίς όμως τον περιορισμό της goto που επιτρέπει τη μεταβίβαση της ροής εκτέλεσης σε άλλο σημείο μόνο της ίδιας συνάρτησης όπου βρίσκεται και η ίδια. Οι <span class="p-style">setjmp()</span> και <span class="p-style">longjmp()</span> χρησιμοποιούνται για χειρισμό σφαλμάτων ειδικά όταν το σφάλμα συμβαίνει «βαθιά» σε συναρτήσεις που καλούν άλλες συναρτήσεις και είναι επιθυμητό ο χειρισμός του σφάλματος να γίνεται στο επίπεδο κλήσης της πρώτης συνάρτησης. Η <span class="p-style">setjmp()</span> καλείται πρώτη και αποθηκεύει ένα αντίγραφο της θέσης που βρίσκεται έτσι ώστε η εκτέλεση του κώδικα να μπορεί να επανέλθει εκεί. Στη συνέχεια, όταν κληθεί η <span class="p-style">longjmp()</span> η εκτέλεση επιστρέφει στο σημείο του κώδικα που έχει αποθηκευτεί και η κατάσταση του προγράμματος επανέρχεται στην κατάσταση που υπήρχε όταν είχε κληθεί η <span class="p-style">setjmp()</span>, σε μια διαδικασία που είναι γνωστή ως “unwinding the stack”. Οι δύο αυτές συναρτήσεις χρησιμοποιούν μια κοινή μεταβλητή τύπου <span class="p-style">jmp_buf</span> που διατηρεί τη θέση επιστροφής. Το αρχείο επικεφαλίδας <span class="p-style">setjmp.h</span> πρέπει να εισαχθεί προκειμένου να χρησιμοποιηθούν οι <span class="p-style">setjmp()</span> και <span class="p-style">longjmp()</span>. Στο παράδειγμα του κώδικα 4.12 η συνάρτηση <span class="p-style">main()</span> αρχικά δημιουργεί ένα σημείο επιστροφής με την κλήση της <span class="p-style">setjmp()</span> και στη συνέχεια καλεί τη συνάρτηση <span class="p-style">foo()</span> που με τη σειρά του καλεί τη συνάρτηση <span class="p-style">bar()</span>. Η συνάρτηση <span class="p-style">bar()</span> ζητά από τον χρήστη να εισαγάγει μια τιμή και αν η τιμή αυτή είναι -99, τότε η εκτέλεση συνεχίζεται στο σημείο επιστροφής αφαιρώντας παράλληλα από τη στοίβα κλήσεων τα stack-frames των <span class="p-style">bar()</span> και <span class="p-style">foo()</span>.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 4.12: ch4_p11.c - κλήσεις main() -> foo() -> bar(), αλλά επιστροφή απευθείας από τη bar() στη main().</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-25-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-25-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-25-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-25-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-25-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-25-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-25-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-25-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-25-10">10</a></span>
+<span class="normal"><a href="#__codelineno-25-11">11</a></span>
+<span class="normal"><a href="#__codelineno-25-12">12</a></span>
+<span class="normal"><a href="#__codelineno-25-13">13</a></span>
+<span class="normal"><a href="#__codelineno-25-14">14</a></span>
+<span class="normal"><a href="#__codelineno-25-15">15</a></span>
+<span class="normal"><a href="#__codelineno-25-16">16</a></span>
+<span class="normal"><a href="#__codelineno-25-17">17</a></span>
+<span class="normal"><a href="#__codelineno-25-18">18</a></span>
+<span class="normal"><a href="#__codelineno-25-19">19</a></span>
+<span class="normal"><a href="#__codelineno-25-20">20</a></span>
+<span class="normal"><a href="#__codelineno-25-21">21</a></span>
+<span class="normal"><a href="#__codelineno-25-22">22</a></span>
+<span class="normal"><a href="#__codelineno-25-23">23</a></span>
+<span class="normal"><a href="#__codelineno-25-24">24</a></span>
+<span class="normal"><a href="#__codelineno-25-25">25</a></span>
+<span class="normal"><a href="#__codelineno-25-26">26</a></span>
+<span class="normal"><a href="#__codelineno-25-27">27</a></span>
+<span class="normal"><a href="#__codelineno-25-28">28</a></span>
+<span class="normal"><a href="#__codelineno-25-29">29</a></span>
+<span class="normal"><a href="#__codelineno-25-30">30</a></span>
+<span class="normal"><a href="#__codelineno-25-31">31</a></span>
+<span class="normal"><a href="#__codelineno-25-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;setjmp.h&gt;</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3"></a>
+</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4"></a><span class="kt">jmp_buf</span><span class="w"> </span><span class="n">buf</span><span class="p">;</span>
+</span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5"></a>
+</span><span id="__span-25-6"><a id="__codelineno-25-6" name="__codelineno-25-6"></a><span class="kt">void</span><span class="w"> </span><span class="nf">bar</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-25-7"><a id="__codelineno-25-7" name="__codelineno-25-7"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+</span><span id="__span-25-8"><a id="__codelineno-25-8" name="__codelineno-25-8"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;1: bar</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-25-9"><a id="__codelineno-25-9" name="__codelineno-25-9"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Input value -99 to go back to main() and end program: &quot;</span><span class="p">);</span>
+</span><span id="__span-25-10"><a id="__codelineno-25-10" name="__codelineno-25-10"></a><span class="w">  </span><span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">);</span>
+</span><span id="__span-25-11"><a id="__codelineno-25-11" name="__codelineno-25-11"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">-99</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-25-12"><a id="__codelineno-25-12" name="__codelineno-25-12"></a><span class="w">    </span><span class="n">longjmp</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+</span><span id="__span-25-13"><a id="__codelineno-25-13" name="__codelineno-25-13"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-25-14"><a id="__codelineno-25-14" name="__codelineno-25-14"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;2: bar</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-25-15"><a id="__codelineno-25-15" name="__codelineno-25-15"></a><span class="p">}</span>
+</span><span id="__span-25-16"><a id="__codelineno-25-16" name="__codelineno-25-16"></a>
+</span><span id="__span-25-17"><a id="__codelineno-25-17" name="__codelineno-25-17"></a><span class="kt">void</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-25-18"><a id="__codelineno-25-18" name="__codelineno-25-18"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;1: foo</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-25-19"><a id="__codelineno-25-19" name="__codelineno-25-19"></a><span class="w">  </span><span class="n">bar</span><span class="p">();</span>
+</span><span id="__span-25-20"><a id="__codelineno-25-20" name="__codelineno-25-20"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;2: foo</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-25-21"><a id="__codelineno-25-21" name="__codelineno-25-21"></a><span class="p">}</span>
+</span><span id="__span-25-22"><a id="__codelineno-25-22" name="__codelineno-25-22"></a>
+</span><span id="__span-25-23"><a id="__codelineno-25-23" name="__codelineno-25-23"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-25-24"><a id="__codelineno-25-24" name="__codelineno-25-24"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;1: main</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-25-25"><a id="__codelineno-25-25" name="__codelineno-25-25"></a><span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">setjmp</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-25-26"><a id="__codelineno-25-26" name="__codelineno-25-26"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;2: main</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-25-27"><a id="__codelineno-25-27" name="__codelineno-25-27"></a><span class="w">    </span><span class="n">foo</span><span class="p">();</span>
+</span><span id="__span-25-28"><a id="__codelineno-25-28" name="__codelineno-25-28"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;3: main</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-25-29"><a id="__codelineno-25-29" name="__codelineno-25-29"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-25-30"><a id="__codelineno-25-30" name="__codelineno-25-30"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Returning directly to main()</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-25-31"><a id="__codelineno-25-31" name="__codelineno-25-31"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-25-32"><a id="__codelineno-25-32" name="__codelineno-25-32"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Η εκτέλεση του κώδικα για διαδοχικές τιμές εισόδου από τον χρήστη, 42 και -99 δίνει τα ακόλουθα αποτελέσματα:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>1: main
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>2: main
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>1: foo
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>1: bar
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>Input value ‐99 to go back to main() and end program: 42
+</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>2: bar
+</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>2: foo
+</span><span id="__span-26-8"><a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a>3: main
+</span><span id="__span-26-9"><a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a>2: main
+</span><span id="__span-26-10"><a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a>1: foo
+</span><span id="__span-26-11"><a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a>1: bar
+</span><span id="__span-26-12"><a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a>Input value ‐99 to go back to main() and end program: ‐99
+</span><span id="__span-26-13"><a id="__codelineno-26-13" name="__codelineno-26-13" href="#__codelineno-26-13"></a>Returning directly to main()
+</span></code></pre></div>
+<p>Η τιμή 42 προκαλεί την αναμενόμενη σειρά εμφανίσεων μηνυμάτων, Ωστόσο, όταν ο χρήστης εισάγει την τιμή -99, αυτόματα προκαλείται επιστροφή στη γραμμή 25 και αφαίρεση των <span class="p-style">bar()</span> και <span class="p-style">foo()</span> από τη στοίβα κλήσεων. Αυτός είναι ο λόγος που δεν εμφανίζονται τα μηνύματα <span class="p-style">“2: bar”</span> και <span class="p-style">“2: foo”</span> πριν τον τερματισμό του προγράμματος.</p>
+<h2 id="47">4.7 Συναρτήσεις με μεταβλητό πλήθος ορισμάτων</h2>
+<p>H γλώσσα C επιτρέπει τη συγγραφή συναρτήσεων που δέχονται μεταβλητό πλήθος ορισμάτων. Αυτές οι συναρτήσεις ονομάζονται variadic και υποδηλώνονται κατά τον ορισμό τους με την τοποθέτηση τριών τελειών (γνωστών ως ellipsis) στο τέλος της λίστας των παραμέτρων τους. Πλεονέκτημα των variadic συναρτήσεων είναι η ευελιξία και το δημοφιλέστερο παράδειγμα τέτοιας συνάρτησης είναι η <span class="p-style">printf()</span>. Για να ορίσει ο προγραμματιστής τη δική του variadic συνάρτηση πρέπει αρχικά να συμπεριλάβει την επικεφαλίδα <span class="p-style">stdarg.h</span> που περιέχει ορισμούς μακροεντολών (βλέπε Κεφάλαιο 12), απαραίτητων για τον σκοπό αυτό.<br />
+Μια variadic συνάρτηση έχει δύο ειδών ορισμάτων, τα υποχρεωτικά και τα προαιρετικά. Τα υποχρεωτικά ορίσματα πρέπει να είναι τουλάχιστον ένα και τα προαιρετικά ορίσματα ακολουθούν τα υποχρεωτικά. Μια συνηθισμένη πρακτική είναι να χρησιμοποιείται ένα από τα υποχρεωτικά ορίσματα (συχνά το μοναδικό) για να υποδηλώνει το πλήθος των προαιρετικών ορισμάτων που ακολουθούν. Στο σώμα της variadic συνάρτησης, μια μεταβλητή που δηλώνεται ως τύπου <span class="p-style">va_list</span> αναπαριστά τη λίστα των προαιρετικών ορισμάτων. Στη συνέχεια καλείται το <span class="p-style">va_start()</span> με δύο ορίσματα, πρώτο τη λίστα που έχει οριστεί με το <span class="p-style">va_list</span> και δεύτερο το τελευταίο στη σειρά από τα υποχρεωτικά ορίσματα. Μετά καλείται η <span class="p-style">va_arg()</span> που δέχεται ως ορίσματα τη λίστα των προαιρετικών ορισμάτων και τον τύπο δεδομένων που έχει το επόμενο προαιρετικό όρισμα. Διαδοχικές κλήσεις της <span class="p-style">va_arg()</span> επιτρέπουν το «πέρασμα» από όλες τις προαιρετικές παραμέτρους. Πριν το κλείσιμο της συνάρτησης πρέπει να κληθεί η <span class="p-style">va_end()</span> που εκτελεί εργασίες «τακτοποίησης» απαραίτητες για την ορθή λειτουργία της συνάρτησης.<br />
+Στον κώδικα 4.13 παρουσιάζεται μια variadic συνάρτηση με όνομα average που δέχεται ως πρώτο όρισμα το πλήθος προαιρετικών ορισμάτων τύπου double για τις οποίες υπολογίζεται ο μέσος όρος.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 4.13: ch4_p12.c - συνάρτηση με μεταβλητό πλήθος ορισμάτων</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-27-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-27-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-27-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-27-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-27-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-27-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-27-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-27-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-27-10">10</a></span>
+<span class="normal"><a href="#__codelineno-27-11">11</a></span>
+<span class="normal"><a href="#__codelineno-27-12">12</a></span>
+<span class="normal"><a href="#__codelineno-27-13">13</a></span>
+<span class="normal"><a href="#__codelineno-27-14">14</a></span>
+<span class="normal"><a href="#__codelineno-27-15">15</a></span>
+<span class="normal"><a href="#__codelineno-27-16">16</a></span>
+<span class="normal"><a href="#__codelineno-27-17">17</a></span>
+<span class="normal"><a href="#__codelineno-27-18">18</a></span>
+<span class="normal"><a href="#__codelineno-27-19">19</a></span>
+<span class="normal"><a href="#__codelineno-27-20">20</a></span>
+<span class="normal"><a href="#__codelineno-27-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdarg.h&gt;</span>
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3"></a>
+</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4"></a><span class="kt">double</span><span class="w"> </span><span class="nf">average</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="p">...)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5"></a><span class="w">  </span><span class="kt">va_list</span><span class="w"> </span><span class="n">args</span><span class="p">;</span>
+</span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6"></a><span class="w">  </span><span class="n">va_start</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+</span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7"></a><span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-27-8"><a id="__codelineno-27-8" name="__codelineno-27-8"></a><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-27-9"><a id="__codelineno-27-9" name="__codelineno-27-9"></a><span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">va_arg</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="p">);</span>
+</span><span id="__span-27-10"><a id="__codelineno-27-10" name="__codelineno-27-10"></a><span class="w">    </span><span class="n">sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+</span><span id="__span-27-11"><a id="__codelineno-27-11" name="__codelineno-27-11"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-27-12"><a id="__codelineno-27-12" name="__codelineno-27-12"></a><span class="w">  </span><span class="n">va_end</span><span class="p">(</span><span class="n">args</span><span class="p">);</span>
+</span><span id="__span-27-13"><a id="__codelineno-27-13" name="__codelineno-27-13"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
+</span><span id="__span-27-14"><a id="__codelineno-27-14" name="__codelineno-27-14"></a><span class="p">}</span>
+</span><span id="__span-27-15"><a id="__codelineno-27-15" name="__codelineno-27-15"></a>
+</span><span id="__span-27-16"><a id="__codelineno-27-16" name="__codelineno-27-16"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-27-17"><a id="__codelineno-27-17" name="__codelineno-27-17"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Average: %.2f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">average</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="mf">2.7</span><span class="p">,</span><span class="w"> </span><span class="mf">3.9</span><span class="p">));</span>
+</span><span id="__span-27-18"><a id="__codelineno-27-18" name="__codelineno-27-18"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Average: %.2f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">average</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="mf">2.7</span><span class="p">,</span><span class="w"> </span><span class="mf">3.9</span><span class="p">,</span><span class="w"> </span><span class="mf">4.5</span><span class="p">));</span>
+</span><span id="__span-27-19"><a id="__codelineno-27-19" name="__codelineno-27-19"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Average: %.2f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">average</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="mf">2.7</span><span class="p">,</span><span class="w"> </span><span class="mf">3.9</span><span class="p">,</span><span class="w"> </span><span class="mf">4.5</span><span class="p">,</span><span class="w"> </span><span class="mf">6.3</span><span class="p">));</span>
+</span><span id="__span-27-20"><a id="__codelineno-27-20" name="__codelineno-27-20"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-27-21"><a id="__codelineno-27-21" name="__codelineno-27-21"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Η εκτέλεση του προγράμματος θα δώσει τα ακόλουθα αποτελέσματα:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>Average: 2.70
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>Average: 3.15
+</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>Average: 3.78
+</span></code></pre></div>
+<h2 id="48">4.8 Επιπλέον θέματα σχετικά με συναρτήσεις</h2>
+<p>Στα επόμενα κεφάλαια καθώς θα παρουσιάζονται νέες έννοιες, εμβόλιμα θα αναλύονται επιπλέον θέματα που έχουν να κάνουν με τις συναρτήσεις. Έτσι, στο επόμενο κεφάλαιο, που αφορά τους πίνακες, θα παρουσιαστούν συναρτήσεις που δέχονται ως παραμέτρους πίνακες. Το ίδιο θα συμβεί με το κεφάλαιο 6 (Δομές και ενώσεις)
+και με το κεφάλαιο 7 (Δείκτες) όπου θα αναλυθεί το σημαντικό θέμα της κλήσης κατ’ αξία και της κλήσης κατά αναφορά που έχει να κάνει με το πώς μεταβιβάζονται τα ορίσματα στις συναρτήσεις ανάλογα με το εάν είναι επιθυμητό αλλαγές που συμβαίνουν στις παραμέτρους να αντικατοπτρίζονται στα ορίσματα ή όχι.</p>
+<h2 id="49">4.9 Ασκήσεις</h2>
+<p><strong><em>Άσκηση 1</em></strong><br />
+Nα γράψετε μια συνάρτηση που πραγματοποιεί μετατροπές θερμοκρασίας από βαθμούς Κελσίου σε βαθμούς Φάρεναϊτ και αντίστροφα. Η συνάρτηση να δέχεται δύο παραμέτρους, τη θερμοκρασία και την κλίμακά της, C για Κελσίου ή F για Φάρεναϊτ και να επιστρέφει τη θερμοκρασία στην άλλη κλίμακα. Ο τύπος μετατροπής από βαθμούς Κελσίου σε βαθμούς Φαρενάιτ είναι </p>
+<div class="arithmatex">\[
+F = C \times \frac{9}{5} + 32
+\]</div>
+<details class="tip">
+<summary>Λύση άσκησης 1</summary>
+<div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-29-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-29-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-29-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-29-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-29-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-29-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-29-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-29-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-29-10">10</a></span>
+<span class="normal"><a href="#__codelineno-29-11">11</a></span>
+<span class="normal"><a href="#__codelineno-29-12">12</a></span>
+<span class="normal"><a href="#__codelineno-29-13">13</a></span>
+<span class="normal"><a href="#__codelineno-29-14">14</a></span>
+<span class="normal"><a href="#__codelineno-29-15">15</a></span>
+<span class="normal"><a href="#__codelineno-29-16">16</a></span>
+<span class="normal"><a href="#__codelineno-29-17">17</a></span>
+<span class="normal"><a href="#__codelineno-29-18">18</a></span>
+<span class="normal"><a href="#__codelineno-29-19">19</a></span>
+<span class="normal"><a href="#__codelineno-29-20">20</a></span>
+<span class="normal"><a href="#__codelineno-29-21">21</a></span>
+<span class="normal"><a href="#__codelineno-29-22">22</a></span>
+<span class="normal"><a href="#__codelineno-29-23">23</a></span>
+<span class="normal"><a href="#__codelineno-29-24">24</a></span>
+<span class="normal"><a href="#__codelineno-29-25">25</a></span>
+<span class="normal"><a href="#__codelineno-29-26">26</a></span>
+<span class="normal"><a href="#__codelineno-29-27">27</a></span>
+<span class="normal"><a href="#__codelineno-29-28">28</a></span>
+<span class="normal"><a href="#__codelineno-29-29">29</a></span>
+<span class="normal"><a href="#__codelineno-29-30">30</a></span>
+<span class="normal"><a href="#__codelineno-29-31">31</a></span>
+<span class="normal"><a href="#__codelineno-29-32">32</a></span>
+<span class="normal"><a href="#__codelineno-29-33">33</a></span>
+<span class="normal"><a href="#__codelineno-29-34">34</a></span>
+<span class="normal"><a href="#__codelineno-29-35">35</a></span>
+<span class="normal"><a href="#__codelineno-29-36">36</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2"></a>
+</span><span id="__span-29-3"><a id="__codelineno-29-3" name="__codelineno-29-3"></a><span class="kt">double</span><span class="w"> </span><span class="nf">temperature_conversion</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">temperature</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">scale</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-29-4"><a id="__codelineno-29-4" name="__codelineno-29-4"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">scale</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">&#39;C&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">&#39;c&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-29-5"><a id="__codelineno-29-5" name="__codelineno-29-5"></a><span class="w">        </span><span class="c1">// Μετατροπή από Κελσίου σε Φάρεναϊτ</span>
+</span><span id="__span-29-6"><a id="__codelineno-29-6" name="__codelineno-29-6"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">temperature</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">9.0</span><span class="o">/</span><span class="mf">5.0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">32</span><span class="p">;</span>
+</span><span id="__span-29-7"><a id="__codelineno-29-7" name="__codelineno-29-7"></a><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">scale</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">&#39;F&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">&#39;f&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-29-8"><a id="__codelineno-29-8" name="__codelineno-29-8"></a><span class="w">        </span><span class="c1">// Μετατροπή από Φάρεναϊτ σε Κελσίου</span>
+</span><span id="__span-29-9"><a id="__codelineno-29-9" name="__codelineno-29-9"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">temperature</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">32</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">5.0</span><span class="o">/</span><span class="mf">9.0</span><span class="p">;</span>
+</span><span id="__span-29-10"><a id="__codelineno-29-10" name="__codelineno-29-10"></a><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-29-11"><a id="__codelineno-29-11" name="__codelineno-29-11"></a><span class="w">        </span><span class="c1">// Λάθος κλίμακα</span>
+</span><span id="__span-29-12"><a id="__codelineno-29-12" name="__codelineno-29-12"></a><span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Λάθος κλίμακα. Παρακαλώ εισάγετε &#39;C&#39; ή &#39;F&#39;.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-29-13"><a id="__codelineno-29-13" name="__codelineno-29-13"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+</span><span id="__span-29-14"><a id="__codelineno-29-14" name="__codelineno-29-14"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-29-15"><a id="__codelineno-29-15" name="__codelineno-29-15"></a><span class="p">}</span>
+</span><span id="__span-29-16"><a id="__codelineno-29-16" name="__codelineno-29-16"></a>
+</span><span id="__span-29-17"><a id="__codelineno-29-17" name="__codelineno-29-17"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-29-18"><a id="__codelineno-29-18" name="__codelineno-29-18"></a><span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">temp</span><span class="p">;</span>
+</span><span id="__span-29-19"><a id="__codelineno-29-19" name="__codelineno-29-19"></a><span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">scale</span><span class="p">;</span>
+</span><span id="__span-29-20"><a id="__codelineno-29-20" name="__codelineno-29-20"></a>
+</span><span id="__span-29-21"><a id="__codelineno-29-21" name="__codelineno-29-21"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Παρακαλώ εισάγετε τη θερμοκρασία: &quot;</span><span class="p">);</span>
+</span><span id="__span-29-22"><a id="__codelineno-29-22" name="__codelineno-29-22"></a><span class="w">    </span><span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%lf&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">temp</span><span class="p">);</span>
+</span><span id="__span-29-23"><a id="__codelineno-29-23" name="__codelineno-29-23"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Εισάγετε την κλίμακα (C/F): &quot;</span><span class="p">);</span>
+</span><span id="__span-29-24"><a id="__codelineno-29-24" name="__codelineno-29-24"></a><span class="w">    </span><span class="n">scanf</span><span class="p">(</span><span class="s">&quot; %c&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">scale</span><span class="p">);</span><span class="w"> </span><span class="c1">// Προσοχή στο κενό πριν το %c για να προσπεράσει το newline</span>
+</span><span id="__span-29-25"><a id="__codelineno-29-25" name="__codelineno-29-25"></a>
+</span><span id="__span-29-26"><a id="__codelineno-29-26" name="__codelineno-29-26"></a><span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">converted_temp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temperature_conversion</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="p">);</span>
+</span><span id="__span-29-27"><a id="__codelineno-29-27" name="__codelineno-29-27"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">converted_temp</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">-1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-29-28"><a id="__codelineno-29-28" name="__codelineno-29-28"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">scale</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">&#39;C&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">&#39;c&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-29-29"><a id="__codelineno-29-29" name="__codelineno-29-29"></a><span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%.2lf°C αντιστοιχούν σε %.2lf°F</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">converted_temp</span><span class="p">);</span>
+</span><span id="__span-29-30"><a id="__codelineno-29-30" name="__codelineno-29-30"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-29-31"><a id="__codelineno-29-31" name="__codelineno-29-31"></a><span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%.2lf°F αντιστοιχούν σε %.2lf°C</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">converted_temp</span><span class="p">);</span>
+</span><span id="__span-29-32"><a id="__codelineno-29-32" name="__codelineno-29-32"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-29-33"><a id="__codelineno-29-33" name="__codelineno-29-33"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-29-34"><a id="__codelineno-29-34" name="__codelineno-29-34"></a>
+</span><span id="__span-29-35"><a id="__codelineno-29-35" name="__codelineno-29-35"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-29-36"><a id="__codelineno-29-36" name="__codelineno-29-36"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+</details>
+<p><strong><em>Άσκηση 2</em></strong><br />
+Γράψτε μια συνάρτηση που να δέχεται ως είσοδο έναν θετικό ακέραιο αριθμό και αν είναι πρώτος να επιστρέφει 1, αλλιώς να επιστρέφει 0. Πρώτος είναι ένας θετικός ακέραιος αριθμός που διαιρείται ακριβώς μόνο με τον εαυτό του και τη μονάδα. Χρησιμοποιήστε τη συνάρτηση για να υπολογίσετε το πλήθος των πρώτων αριθμών από το 1000 μέχρι το 2000.</p>
+<details class="tip">
+<summary>Λύση άσκησης 2</summary>
+<div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-30-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-30-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-30-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-30-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-30-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-30-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-30-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-30-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-30-10">10</a></span>
+<span class="normal"><a href="#__codelineno-30-11">11</a></span>
+<span class="normal"><a href="#__codelineno-30-12">12</a></span>
+<span class="normal"><a href="#__codelineno-30-13">13</a></span>
+<span class="normal"><a href="#__codelineno-30-14">14</a></span>
+<span class="normal"><a href="#__codelineno-30-15">15</a></span>
+<span class="normal"><a href="#__codelineno-30-16">16</a></span>
+<span class="normal"><a href="#__codelineno-30-17">17</a></span>
+<span class="normal"><a href="#__codelineno-30-18">18</a></span>
+<span class="normal"><a href="#__codelineno-30-19">19</a></span>
+<span class="normal"><a href="#__codelineno-30-20">20</a></span>
+<span class="normal"><a href="#__codelineno-30-21">21</a></span>
+<span class="normal"><a href="#__codelineno-30-22">22</a></span>
+<span class="normal"><a href="#__codelineno-30-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2"></a>
+</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="kt">int</span><span class="w"> </span><span class="nf">is_prime</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+</span><span id="__span-30-5"><a id="__codelineno-30-5" name="__codelineno-30-5"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-30-6"><a id="__codelineno-30-6" name="__codelineno-30-6"></a>
+</span><span id="__span-30-7"><a id="__codelineno-30-7" name="__codelineno-30-7"></a><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-30-8"><a id="__codelineno-30-8" name="__codelineno-30-8"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-30-9"><a id="__codelineno-30-9" name="__codelineno-30-9"></a><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-30-10"><a id="__codelineno-30-10" name="__codelineno-30-10"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-30-11"><a id="__codelineno-30-11" name="__codelineno-30-11"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-30-12"><a id="__codelineno-30-12" name="__codelineno-30-12"></a><span class="p">}</span>
+</span><span id="__span-30-13"><a id="__codelineno-30-13" name="__codelineno-30-13"></a>
+</span><span id="__span-30-14"><a id="__codelineno-30-14" name="__codelineno-30-14"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-30-15"><a id="__codelineno-30-15" name="__codelineno-30-15"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-30-16"><a id="__codelineno-30-16" name="__codelineno-30-16"></a><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">2000</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-30-17"><a id="__codelineno-30-17" name="__codelineno-30-17"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">is_prime</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-30-18"><a id="__codelineno-30-18" name="__codelineno-30-18"></a><span class="w">      </span><span class="n">c</span><span class="o">++</span><span class="p">;</span>
+</span><span id="__span-30-19"><a id="__codelineno-30-19" name="__codelineno-30-19"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-30-20"><a id="__codelineno-30-20" name="__codelineno-30-20"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-30-21"><a id="__codelineno-30-21" name="__codelineno-30-21"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;The number of primes in [1000,2000] are %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">);</span>
+</span><span id="__span-30-22"><a id="__codelineno-30-22" name="__codelineno-30-22"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-30-23"><a id="__codelineno-30-23" name="__codelineno-30-23"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+</details>
+<p><strong><em>Άσκηση 3</em></strong><br />
+Γράψτε μια συνάρτηση που να δέχεται ως είσοδο έναν θετικό ακέραιο αριθμό και να επιστρέφει 1 αν ο αριθμός είναι παλινδρομικός ή 0, αν δεν είναι. Ένας αριθμός είναι παλινδρομικός αν διαβάζεται ο ίδιος από αριστερά προς τα δεξιά και από δεξιά προς τα αριστερά (π.χ. παλινδρομικός είναι ο αριθμός 12321).</p>
+<details class="tip">
+<summary>Λύση άσκησης 3</summary>
+<div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-31-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-31-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-31-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-31-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-31-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-31-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-31-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-31-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-31-10">10</a></span>
+<span class="normal"><a href="#__codelineno-31-11">11</a></span>
+<span class="normal"><a href="#__codelineno-31-12">12</a></span>
+<span class="normal"><a href="#__codelineno-31-13">13</a></span>
+<span class="normal"><a href="#__codelineno-31-14">14</a></span>
+<span class="normal"><a href="#__codelineno-31-15">15</a></span>
+<span class="normal"><a href="#__codelineno-31-16">16</a></span>
+<span class="normal"><a href="#__codelineno-31-17">17</a></span>
+<span class="normal"><a href="#__codelineno-31-18">18</a></span>
+<span class="normal"><a href="#__codelineno-31-19">19</a></span>
+<span class="normal"><a href="#__codelineno-31-20">20</a></span>
+<span class="normal"><a href="#__codelineno-31-21">21</a></span>
+<span class="normal"><a href="#__codelineno-31-22">22</a></span>
+<span class="normal"><a href="#__codelineno-31-23">23</a></span>
+<span class="normal"><a href="#__codelineno-31-24">24</a></span>
+<span class="normal"><a href="#__codelineno-31-25">25</a></span>
+<span class="normal"><a href="#__codelineno-31-26">26</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2"></a>
+</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3"></a><span class="kt">int</span><span class="w"> </span><span class="nf">is_palindromic</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">number</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">reversed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-31-5"><a id="__codelineno-31-5" name="__codelineno-31-5"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">original</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">number</span><span class="p">;</span><span class="w"> </span><span class="c1">// Αποθηκεύστε τον αρχικό αριθμό για τον έλεγχο</span>
+</span><span id="__span-31-6"><a id="__codelineno-31-6" name="__codelineno-31-6"></a>
+</span><span id="__span-31-7"><a id="__codelineno-31-7" name="__codelineno-31-7"></a><span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">number</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-31-8"><a id="__codelineno-31-8" name="__codelineno-31-8"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">digit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+</span><span id="__span-31-9"><a id="__codelineno-31-9" name="__codelineno-31-9"></a><span class="w">    </span><span class="n">reversed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reversed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">digit</span><span class="p">;</span>
+</span><span id="__span-31-10"><a id="__codelineno-31-10" name="__codelineno-31-10"></a><span class="w">    </span><span class="n">number</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+</span><span id="__span-31-11"><a id="__codelineno-31-11" name="__codelineno-31-11"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-31-12"><a id="__codelineno-31-12" name="__codelineno-31-12"></a>
+</span><span id="__span-31-13"><a id="__codelineno-31-13" name="__codelineno-31-13"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">original</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">reversed</span><span class="p">;</span>
+</span><span id="__span-31-14"><a id="__codelineno-31-14" name="__codelineno-31-14"></a><span class="p">}</span>
+</span><span id="__span-31-15"><a id="__codelineno-31-15" name="__codelineno-31-15"></a>
+</span><span id="__span-31-16"><a id="__codelineno-31-16" name="__codelineno-31-16"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-31-17"><a id="__codelineno-31-17" name="__codelineno-31-17"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="p">;</span>
+</span><span id="__span-31-18"><a id="__codelineno-31-18" name="__codelineno-31-18"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Εισάγετε έναν αριθμό: &quot;</span><span class="p">);</span>
+</span><span id="__span-31-19"><a id="__codelineno-31-19" name="__codelineno-31-19"></a><span class="w">  </span><span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">num</span><span class="p">);</span>
+</span><span id="__span-31-20"><a id="__codelineno-31-20" name="__codelineno-31-20"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">is_palindromic</span><span class="p">(</span><span class="n">num</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-31-21"><a id="__codelineno-31-21" name="__codelineno-31-21"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Ο αριθμός %d είναι παλινδρομικός.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">num</span><span class="p">);</span>
+</span><span id="__span-31-22"><a id="__codelineno-31-22" name="__codelineno-31-22"></a><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-31-23"><a id="__codelineno-31-23" name="__codelineno-31-23"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Ο αριθμός %d δεν είναι παλινδρομικός.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">num</span><span class="p">);</span>
+</span><span id="__span-31-24"><a id="__codelineno-31-24" name="__codelineno-31-24"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-31-25"><a id="__codelineno-31-25" name="__codelineno-31-25"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-31-26"><a id="__codelineno-31-26" name="__codelineno-31-26"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+</details>
+<p><strong><em>Άσκηση 4</em></strong><br />
+Γράψτε μια αναδρομική συνάρτηση που δέχεται ως είσοδο έναν θετικό ακέραιο αριθμό και επιστρέφει το άθροισμα των ψηφίων του. Για παράδειγμα για είσοδο 12345, η έξοδος θα πρέπει να είναι 1 + 2 + 3 + 4 + 5 = 15.</p>
+<details class="tip">
+<summary>Λύση άσκησης 4</summary>
+<div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-32-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-32-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-32-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-32-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-32-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-32-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-32-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-32-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-32-10">10</a></span>
+<span class="normal"><a href="#__codelineno-32-11">11</a></span>
+<span class="normal"><a href="#__codelineno-32-12">12</a></span>
+<span class="normal"><a href="#__codelineno-32-13">13</a></span>
+<span class="normal"><a href="#__codelineno-32-14">14</a></span>
+<span class="normal"><a href="#__codelineno-32-15">15</a></span>
+<span class="normal"><a href="#__codelineno-32-16">16</a></span>
+<span class="normal"><a href="#__codelineno-32-17">17</a></span>
+<span class="normal"><a href="#__codelineno-32-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2"></a>
+</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3"></a><span class="kt">int</span><span class="w"> </span><span class="nf">sum_of_digits</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-32-4"><a id="__codelineno-32-4" name="__codelineno-32-4"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-32-5"><a id="__codelineno-32-5" name="__codelineno-32-5"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">n</span><span class="p">;</span>
+</span><span id="__span-32-6"><a id="__codelineno-32-6" name="__codelineno-32-6"></a><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-32-7"><a id="__codelineno-32-7" name="__codelineno-32-7"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sum_of_digits</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+</span><span id="__span-32-8"><a id="__codelineno-32-8" name="__codelineno-32-8"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-32-9"><a id="__codelineno-32-9" name="__codelineno-32-9"></a><span class="p">}</span>
+</span><span id="__span-32-10"><a id="__codelineno-32-10" name="__codelineno-32-10"></a>
+</span><span id="__span-32-11"><a id="__codelineno-32-11" name="__codelineno-32-11"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-32-12"><a id="__codelineno-32-12" name="__codelineno-32-12"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">number</span><span class="p">;</span>
+</span><span id="__span-32-13"><a id="__codelineno-32-13" name="__codelineno-32-13"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Enter a positive integer: &quot;</span><span class="p">);</span>
+</span><span id="__span-32-14"><a id="__codelineno-32-14" name="__codelineno-32-14"></a><span class="w">  </span><span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">number</span><span class="p">);</span>
+</span><span id="__span-32-15"><a id="__codelineno-32-15" name="__codelineno-32-15"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum_of_digits</span><span class="p">(</span><span class="n">number</span><span class="p">);</span>
+</span><span id="__span-32-16"><a id="__codelineno-32-16" name="__codelineno-32-16"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Sum of digits: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+</span><span id="__span-32-17"><a id="__codelineno-32-17" name="__codelineno-32-17"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-32-18"><a id="__codelineno-32-18" name="__codelineno-32-18"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+</details>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>Carl Burch. <i>Writing a Towers of Hanoi program.</i> <a href="http://www.cs.cmu.edu/~cburch/survey/recurse/hanoiimpl.html" target="_blank">http://www.cs.cmu.edu/~cburch/survey/recurse/hanoiimpl.html</a>. Accessed: 2023-06-01.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>Eric W Weisstein. “Tower of Hanoi”. Στο: <a href="https://mathworld.wolfram.com/TowerofHanoi.html" target="_blank">https://mathworld.wolfram.com/TowerofHanoi.html</a> (2003).&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Τζάλλας Αλέξανδρος, Γκόγκος Χρήστος, Τσούλος Ιωάννης &copy 2025 - το βιβλίο μεταφέρθηκε στο MkDocs από τον Γιάννη Βούλγαρη 🙏.
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "toc.follow", "navigation.instant.preview", "navigation.sections"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": false, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

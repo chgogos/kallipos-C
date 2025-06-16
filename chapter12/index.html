@@ -1,0 +1,1924 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../chapter11/">
+      
+      
+        <link rel="next" href="../chapter13/">
+      
+      
+      <link rel="icon" href="../src/images/frontcover.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>12. Ο προεπεξεργαστής της C - Μια σύγχρονη προσέγγιση στη γλώσσα C</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/styles.css">
+    
+      <link rel="stylesheet" href="../css/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: none; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#12-c" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Μια σύγχρονη προσέγγιση στη γλώσσα C" class="md-header__button md-logo" aria-label="Μια σύγχρονη προσέγγιση στη γλώσσα C" data-md-component="logo">
+      
+  <img src="../src/images/frontcover.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Μια σύγχρονη προσέγγιση στη γλώσσα C
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              12. Ο προεπεξεργαστής της C
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Μια σύγχρονη προσέγγιση στη γλώσσα C" class="md-nav__button md-logo" aria-label="Μια σύγχρονη προσέγγιση στη γλώσσα C" data-md-component="logo">
+      
+  <img src="../src/images/frontcover.png" alt="logo">
+
+    </a>
+    Μια σύγχρονη προσέγγιση στη γλώσσα C
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Το βιβλίο
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Η πορεία της C μέχρι σήμερα
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Εισαγωγικές έννοιες στον προγραμματισμό με τη C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Εντολές ελέγχου και επανάληψης
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Συναρτήσεις
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Πίνακες
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Δομές και ενώσεις
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. Δείκτες
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. Αλφαριθμητικά
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9. Διαχείριση μνήμης
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10. Υλοποίηση δομών δεδομένων και αλγορίθμων στη C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Είσοδος/Έξοδος
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    12. Ο προεπεξεργαστής της C
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    12. Ο προεπεξεργαστής της C
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Πίνακας περιεχομένων">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Πίνακας περιεχομένων
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#121-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.1 Ο προεπεξεργαστής της C
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#122-include" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.2 Η οδηγία include
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#123-define-undef" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.3 Η οδηγία define και η οδηγία undef
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12.3 Η οδηγία define και η οδηγία undef">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1231-define" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.3.1 Ο ρόλος των συμβόλων # και ## στο κείμενο αντικατάστασης των οδηγιών define
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1232" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.3.2 Μακροεντολές με μεταβλητό πλήθος ορισμάτων
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#124" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.4 Προκαθορισμένες μακροεντολές
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#125" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.5 Οδηγίες υπό συνθήκη
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12.5 Οδηγίες υπό συνθήκη">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1251-include" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.5.1 Φρουροί include
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1252-if-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.5.2 Κώδικας σε σχόλια με #if 0
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#126" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.6 Άλλες οδηγίες
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12.6 Άλλες οδηγίες">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1261-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.6.1 Η οδηγία #error
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1262-pragma" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.6.2 Η οδηγία #pragma
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1263-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.6.3 Η οδηγία #line
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#127-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.7 Είναι τελικά χρήσιμος ο προεπεξεργαστής της C;
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#128" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.8 Ασκήσεις
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13. Διαμέριση κώδικα
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14. Ανάπτυξη οδηγούμενη από ελέγχους
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    15. Αποσφαλμάτωση
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    16. Στατική και δυναμική ανάλυση κώδικα
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    17. Βιβλιοθήκες
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    18. Θέματα στυλ στη C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    19. Γραφικό περιβάλλον διεπαφής
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    20. Αλληλεπίδραση της C με την Python
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Α. Διαμόρφωση περιβάλλοντος ανάπτυξης κώδικα σε C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Β. Μεταγλώττιση και εκτέλεση κώδικα C χρησιμοποιώντας το Docker
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Γ. Λήψη πληροφοριών για το σύστημα και το μεταγλωττιστή
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Πίνακας περιεχομένων">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Πίνακας περιεχομένων
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#121-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.1 Ο προεπεξεργαστής της C
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#122-include" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.2 Η οδηγία include
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#123-define-undef" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.3 Η οδηγία define και η οδηγία undef
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12.3 Η οδηγία define και η οδηγία undef">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1231-define" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.3.1 Ο ρόλος των συμβόλων # και ## στο κείμενο αντικατάστασης των οδηγιών define
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1232" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.3.2 Μακροεντολές με μεταβλητό πλήθος ορισμάτων
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#124" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.4 Προκαθορισμένες μακροεντολές
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#125" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.5 Οδηγίες υπό συνθήκη
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12.5 Οδηγίες υπό συνθήκη">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1251-include" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.5.1 Φρουροί include
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1252-if-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.5.2 Κώδικας σε σχόλια με #if 0
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#126" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.6 Άλλες οδηγίες
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12.6 Άλλες οδηγίες">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1261-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.6.1 Η οδηγία #error
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1262-pragma" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.6.2 Η οδηγία #pragma
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1263-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.6.3 Η οδηγία #line
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#127-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.7 Είναι τελικά χρήσιμος ο προεπεξεργαστής της C;
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#128" class="md-nav__link">
+    <span class="md-ellipsis">
+      12.8 Ασκήσεις
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="12-c">12. Ο προεπεξεργαστής της C</h1>
+<p><i>Σύνοψη</i> Ο ρόλος του προεπεξεργαστή της C, οδηγίες προεπεξεργαστή, μακροεντολές, μακροεντολές με μεταβλητό πλήθος ορισμάτων, stringification, προκαθορισμένες μακροεντολές (<span class="p-style">__DATE__, __ΤΙΜΕ__</span> κ.ά.), οδηγίες υπό συνθήκη, φρουροί include,<br />
+το <span class="p-style">#if 0</span>, οι οδηγίες <span class="p-style">#error, #pragma, #line</span>.  </p>
+<p><i>Προαπαιτούμενη γνώση</i> Τύποι δεδομένων, συναρτήσεις, πίνακες, δομές, δείκτες, είσοδος/έξοδος.</p>
+<h2 id="121-c">12.1 Ο προεπεξεργαστής της C</h2>
+<p>Η C σε αντίθεση με τις περισσότερες γλώσσες προγραμματισμού διαθέτει προεπεξεργαστή (preprocessor). Ο προεπεξεργαστής της C είναι ένα πρόγραμμα που εκτελείται πριν τη μεταγλώττιση και αναλαμβάνει να επεξεργαστεί ειδικές εντολές που έχουν τη μορφή οδηγιών (directives) και που ξεκινούν με τον χαρακτήρα # στον πηγαίο κώδικα. Ο προεπεξεργαστής μετασχηματίζει τον πηγαίο κώδικα σε μια νέα μορφή κάνοντας αντικαταστάσεις τμημάτων του πηγαίου κώδικα. Αυτή η νέα μορφή κώδικα στη συνέχεια δίνεται στον μεταγλωττιστή που το μετατρέπει σε γλώσσα μηχανής, ακολουθώντας μια σειρά βημάτων.<br />
+Οι οδηγίες του προεπεξεργαστή της C ξεκινούν με το σύμβολο <span class="p-style">#</span> που είναι γνωστό ως δίεση ή pound ή hash ή octothorpe. Οι κύριες οδηγίες είναι το <span class="p-style">#include</span> και το <span class="p-style">#define</span>, ενώ συχνά χρησιμοποιούνται και οι οδηγίες υπό συνθήκη <span class="p-style">#if</span>, <span class="p-style">#else</span>, <span class="p-style">#elif</span> και <span class="p-style">#endif</span>. Μια αναλυτική περι γραφή των δυνατοτήτων του προεπεξεργαστή της C για τον GCC υπάρχει στο “The C Preprocessor” από τους Richard M. Stallman και Zachary Weinberg <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>.<br />
+Υπάρχουν και άλλες γλώσσες προγραμματισμού που διαθέτουν προεπεξεργαστή όπως η C++, η PL/I και η PHP, ενώ ορισμένες γλώσσες προγραμματισμού όπως η JavaScript χρησιμοποιούν προεπεξεργαστές για να προσθέσουν επιπλέον χαρακτηριστικά στη γλώσσα (π.χ. TypeScript). Στα συστήματα Linux/UNIX υπάρχει η γλώσσα προγραμματισμού M4 που ανήκει στο πρότυπο POSIX και αποτελεί έναν επεξεργαστή μακροεντολών γενικού σκοπού που επιτρέπει την απλοποίηση επαναλαμβανόμενων εργασιών. Η M4 χρησιμοποιείται εκτεταμένα στο build σύστημα GNU Autotools και βοηθά στον εντοπισμό των κατάλληλων ρυθμίσεων που επιτρέπουν την ορθή παραγωγή κώδικα σε συστήματα Linux/UNIX.</p>
+<h2 id="122-include">12.2 Η οδηγία include</h2>
+<p>Η οδηγία <span class="p-style">#include</span> επιτρέπει τη συμπερίληψη των περιεχομένων ενός αρχείου κώδικα σε ένα άλλο αρχείο κώδικα στο οποίο έχει τοποθετηθεί η οδηγία <span class="p-style">include</span>. Είναι συνηθισμένο να γίνονται <span class="p-style">include</span> αρχεία επικεφαλίδων συστήματος όπως για παράδειγμα συμβαίνει με την οδηγία <span class="p-style">#include <stdio.h></span>, οπότε και δίνεται η δυνατότητα χρήσης συναρτήσεων που δηλώνονται στο αρχείο επικεφαλίδας <span class="p-style">stdio.h</span> όπως η συνάρτηση <span class="p-style">printf()</span>. Κάθε οδηγία <span class="p-style">include</span> ακολουθείται από ένα όνομα αρχείου και είτε χρησιμοποιούνται τα σύμβολα <span class="p-style">&lt;</span> και <span class="p-style">&gt;</span> για να το περικλείουν είτε τα διπλά εισαγωγικά <span class="p-style">"</span>. Στην πρώτη περίπτωση το αρχείο αναζητείται σε καταλόγους που η εγκατάσταση της C έχει ορίσει ως καταλόγους συστήματος. Στη λίστα των καταλόγων συστήματος μπορούν να προστεθούν επιπλέον κατάλογοι με την επιλογή <span class="p-style">‐I</span> κατά τη μεταγλώττιση του πηγαίου κώδικα. Στην περίπτωση που το όνομα του αρχείου που πρόκειται να συμπεριληφθεί βρίσκεται μέσα σε διπλά εισαγωγικά τότε το αρχείο αναζητείται στον τρέχοντα κατάλογο. Στο παράδειγμα που ακολουθεί το αρχείο <span class="p-style">ch12_p1.h</span> (κώδικας 12.1) περιέχει τη δήλωση της συνάρτησης <span class="p-style">foo()</span>. To αρχείο αυτό γίνεται <span class="p-style">include</span> στο αρχείο <span class="p-style">ch12_p1.c</span> (κώδικας 12.2), οπότε τα περιεχόμενά του συμπεριλαμβάνονται στη θέση στην οποία υπάρχει η εντολή <span class="p-style">#include "ch12_p1.h"</span>.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 12.1: ch12_p1.h - αρχείο επικεφαλίδας που περιέχει τη δήλωση της συνάρτηση foo().</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">);</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 12.2: ch12_p1.c - ο πηγαίος κώδικας που ορίζει τη συνάρτηση foo() και περιέχει τη main().</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span>
+<span class="normal"><a href="#__codelineno-1-3">3</a></span>
+<span class="normal"><a href="#__codelineno-1-4">4</a></span>
+<span class="normal"><a href="#__codelineno-1-5">5</a></span>
+<span class="normal"><a href="#__codelineno-1-6">6</a></span>
+<span class="normal"><a href="#__codelineno-1-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;ch12_p1.h&quot;</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">foo</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6"></a>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="kt">void</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;foo function called with argument %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Η μεταγλώττιση και εκτέλεση δίνουν το ακόλουθο αποτέλεσμα:</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$ gcc ch12_p1.c ‐o ch12_p1
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>$ ./ch12_p1
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>foo function called with argument 42
+</span></code></pre></div>
+Αν στην οδηγία <span class="p-style">include</span> έχουν συμπεριληφθεί και πληροφορίες υποκαταλόγων, όπως για παράδειγμα στο <span class="p-style">#include "myheaders/myheader.h"</span> τότε το αρχείο <span class="p-style">myheader.h</span> θα αναζητηθεί στον υποκατάλογο <span class="p-style">myheaders</span> κάτω από τον τρέχοντα κατάλογο προκειμένου τα περιεχόμενά του να συμπεριληφθούν στο σημείο που γίνεται το <span class="p-style">include</span>.</p>
+<h2 id="123-define-undef">12.3 Η οδηγία define και η οδηγία undef</h2>
+<p>Η οδηγία <span class="p-style">define</span> επιτρέπει τον ορισμό μακροεντολών που αντικαθιστούν λεκτικά σύμβολα με τμήματα κειμένου στον πηγαίο κώδικα. Η αντικατάσταση γίνεται χωρίς να ελέγχεται η ορθότητα του κώδικα που προκύπτει, οπότε αν ο κώδικας που προκύπτει δεν είναι ορθός συντακτικά, αυτό ελέγχεται από τον μεταγλωττιστή στη συνέχεια. Η γενική μορφή μιας οδηγίας <span class="p-style">define</span> είναι η ακόλουθη.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>#define λεκτικό_σύμβολο κείμενο_αντικατάστασης
+</span></code></pre></div>
+<p>Αν το κείμενο αντικατάστασης καταλαμβάνει περισσότερες από μία γραμμές τότε τοποθετείται το σύμβολο backslash <span class="p-style">\</span> στο τέλος κάθε γραμμής που συνεχίζεται σε επόμενη γραμμή. Οι μακροεντολές χωρίζονται στις μακροεντολές τύπου αντικειμένου και στις μακροεντολές τύπου συνάρτησης. Οι πρώτες αντικαθιστούν απλά το λεκτικό σύμβολο με το κείμενο αντικατάστασης σε όλες τις εμφανίσεις του συμβόλου. Εξαιρούνται εμφανίσεις του συμβόλου μέσα σε διπλά εισαγωγικά, καθώς και εμφανίσεις του συμβόλου ως υποσυμβολοσειρά σε άλλο λεκτικό σύμβολο. Συνεπώς, στον κώδικα 12.3 που ακολουθεί γίνονται μόνο δύο αντικαταστάσεις του λεκτικού συμβόλου <span class="p-style">FOO</span>, παρά το ότι η ακολουθία χαρακτήρων <span class="p-style">FOO</span> υπάρχει τέσσερις φορές στον κώδικα.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 12.3: ch12_p2.c - δύο αντικαταστάσεις του λεκτικού συμβόλου FOO από τον προεπεξεργαστή.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span>
+<span class="normal"><a href="#__codelineno-4-3">3</a></span>
+<span class="normal"><a href="#__codelineno-4-4">4</a></span>
+<span class="normal"><a href="#__codelineno-4-5">5</a></span>
+<span class="normal"><a href="#__codelineno-4-6">6</a></span>
+<span class="normal"><a href="#__codelineno-4-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="cp">#define FOO 1729</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">foo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FOO</span><span class="p">;</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">FOOBAR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FOO</span><span class="p">;</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">bar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;FOO and BAR are placeholder names in computer programming&quot;</span><span class="p">;</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Χρησιμοποιώντας τον διακόπτη <span class="p-style">‐E</span> ο μεταγλωττιστής gcc (και ο clang) επιστρέφει τον πηγαίο κώδικα μετά την εφαρμογή των αντικαταστάσεων που προκαλεί ο προεπεξεργαστής.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>$ gcc ‐E ch12_p2.c
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>int main(){
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    int foo = 1729;
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    int FOOBAR = 1729;
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    char* bar = &quot;FOO and BAR are placeholder names in computer programming&quot;;
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>}
+</span></code></pre></div>
+<p>Οι μακροεντολές τύπου συνάρτησης δέχονται ορίσματα με συνέπεια το κείμενο αντικατάστασης να αλλάζει ανάλογα με την κάθε εφαρμογή της μακροεντολής στα διάφορα σημεία του κώδικα. Στο παράδειγμα που ακολουθεί στον κώδικα 12.4 ορίζεται μια μακροεντολή με όνομα <span class="p-style">SQUARE</span> που μπορεί να χρησιμοποιηθεί για τον υπολογισμό του τετραγώνου της παραμέτρου της. Παρατηρήστε τις επιπλέον παρενθέσεις γύρω από κάθε εμφάνιση της παραμέτρου <span class="p-style">x</span>, καθώς και τις παρενθέσεις στο σύνολο του κειμένου αντικατάστασης. Η χρήση αυτών των παρενθέσεων είναι καλή πρακτική έτσι ώστε η σειρά των πράξεων να είναι η αναμενόμενη. Για παράδειγμα αν δεν υπήρχαν οι παρενθέσεις γύρω από κάθε εμφάνιση του <span class="p-style">x</span>, τότε η αντικατάσταση της μακροεντολής στο <span class="p-style">SQUARE(1+2)</span> θα έδινε το <span class="p-style">1+2*1+2</span> που υπολογίζεται σε 5 και όχι στο τετράγωνο του 3, δηλαδή το 9, που είναι η ορθή τιμή αποτελέσματος.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 12.4: ch12_p3.c - παράδειγμα μακροεντολής που δέχεται όρισμα.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
+<span class="normal"><a href="#__codelineno-6-2">2</a></span>
+<span class="normal"><a href="#__codelineno-6-3">3</a></span>
+<span class="normal"><a href="#__codelineno-6-4">4</a></span>
+<span class="normal"><a href="#__codelineno-6-5">5</a></span>
+<span class="normal"><a href="#__codelineno-6-6">6</a></span>
+<span class="normal"><a href="#__codelineno-6-7">7</a></span>
+<span class="normal"><a href="#__codelineno-6-8">8</a></span>
+<span class="normal"><a href="#__codelineno-6-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2"></a>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="cp">#define SQUARE(x) ((x) * (x))</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4"></a>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">SQUARE</span><span class="p">(</span><span class="n">a</span><span class="p">));</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">SQUARE</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>$ gcc ch12_p3.c ‐o ch12_p3
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>$ ./ch12_p3
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>49
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>64
+</span></code></pre></div>
+<p>Μια ιδιαιτερότητα της χρήσης μακροεντολών τύπου συναρτήσεων είναι ότι σε περιπτώσεις που ένα όρισμα είναι έκφραση και εντοπίζεται στο κείμενο αντικατάστασης περισσότερες από μία φορές, η έκφραση θα αποτιμηθεί και αυτή περισσότερες από μία φορές. Έτσι στο παράδειγμα με την μακροεντολή <span class="p-style">SQUARE</span>, αν το όρισμα είναι <span class="p-style">a+1</span>, τότε η αποτίμηση του αποτελέσματος γίνεται δύο φορές. Αυτό μπορεί σε κάποιες περιπτώσεις να εισάγει περιττούς υπολογισμούς, αλλά συνήθως είναι ένα θέμα που οι μεταγλωττιστές μπορούν να χειριστούν έτσι ώστε να μην παρατηρείται υποβάθμιση της απόδοσης του προγράμματος. Σημαντικότερο είναι το πρόβλημα που δημιουργείται όταν η έκφραση προκαλεί παρενέργειες (side-effects), όπως για παράδειγμα στην περίπτωση του <span class="p-style">SQUARE(a++)</span>. Λόγω του ότι η παράμετρος <span class="p-style">x</span> χρησιμοποιείται 2 φορές στο κείμενο αντικατάστασης θα προκύψει το κείμενο αντικατάστασης <span class="p-style">(a++) * (a++)</span> και συνεπώς η τιμή του ορίσματος <span class="p-style">a</span> θα αυξηθεί 2 φορές κατά ένα, κάτι το οποίο δεν είναι προφανές σε κάποιον που δεν γνωρίζει την υλοποίηση της μακροεντολής. Για να αποφευχθεί αυτή η συμπεριφορά μπορεί η μακροεντολή να γραφεί μέσα σε ένα μπλοκ κώδικα όπως συμβαίνει στον κώδικα 12.5.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 12.5: ch12_p3b.c - αποφυγή πολλαπλής αποτίμησης ορίσματος σε μακροεντολή.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span>
+<span class="normal"><a href="#__codelineno-8-11">11</a></span>
+<span class="normal"><a href="#__codelineno-8-12">12</a></span>
+<span class="normal"><a href="#__codelineno-8-13">13</a></span>
+<span class="normal"><a href="#__codelineno-8-14">14</a></span>
+<span class="normal"><a href="#__codelineno-8-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2"></a>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="cp">#define SQUARE(x)                                                              \</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="cp">  ({                                                                           \</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="cp">    typeof(x) _x = (x);                                                        \</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="cp">    _x *_x;                                                                    \</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="cp">  })</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8"></a>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">SQUARE</span><span class="p">(</span><span class="n">a</span><span class="p">));</span>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">SQUARE</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">SQUARE</span><span class="p">(</span><span class="n">a</span><span class="o">++</span><span class="p">));</span>
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">);</span>
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Η εμβέλεια ενός ονόματος λεκτικού συμβόλου που ορίζεται με την <span class="p-style">define</span> είναι από το σημείο ορισμού της μέχρι το τέλος του αρχείου στο οποίο ορίζεται. Ωστόσο, η χρήση της οδηγίας <span class="p-style">undef</span> ακολουθούμενης από το όνομα του λεκτικού συμβόλου ακυρώνει νωρίτερα τον ορισμό του ονόματος.<br />
+Αξίζει να αναφερθεί ότι η οδηγία <span class="p-style">define</span> μπορεί μόνο να ορίζει ένα όνομα λεκτικού συμβόλου χωρίς να διαθέτει κείμενο αντικατάστασης. Μια εφαρμογή αυτής της δυνατότητας παρουσιάζεται στην παράγραφο 12.5.</p>
+<h3 id="1231-define">12.3.1 Ο ρόλος των συμβόλων # και ## στο κείμενο αντικατάστασης των οδηγιών define</h3>
+<p>Τα ορίσματα μιας μακροεντολής μπορούν να μετατραπούν σε συμβολοσειρές τοποθετώντας το σύμβολο <span class="p-style">#</span> πριν το όνομά τους στο κείμενο αντικατάστασης. Η μετατροπή ορισμάτων στα λεκτικά των ονομάτων τους, στις μακροεντολές, ονομάζεται stringification. Ένα σχετικό παράδειγμα παρουσιάζεται στον κώδικα 12.6.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 12.6: ch12_p4.c - παράδειγμα μακροεντολής που εκτελεί stringification.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-9-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-9-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-9-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-9-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-9-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-9-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-9-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2"></a>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="cp">#define STRINGIZE_INT(x) printf(#x &quot; = %d\n&quot;, x)</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4"></a>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7"></a>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="w">  </span><span class="n">STRINGIZE_INT</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="w">  </span><span class="n">STRINGIZE_INT</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Η μεταγλώττιση του κώδικα και η εκτέλεσή του δίνουν τα ακόλουθα αποτελέσματα:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>$ gcc ch12_p4.c ‐o ch12_p4
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>$ ./ch12_p4
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>a = 42
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>a+1 = 43
+</span></code></pre></div>
+<p class="annotate">Παρατηρήστε ότι στον κώδικα 12.6, στη δήλωση της μακροεντολής, χρησιμοποιείται το τέχνασμα συνένωσης δύο συμβολοσειρών που βρίσκονται η μια δίπλα στην άλλη (του <span class="p-style">#x</span> και του <span class="p-style">" = %d\n"</span>). Ισχύει δηλαδή ότι για τη C, το <span class="p-style">"HELLO" "WORLD"</span> είναι ισοδύναμο με το <span class="p-style">"HELLOWORLD"</span>.<br />
+Ειδικό ρόλο έχουν και τα δύο συνεχόμενα σύμβολα δίεσης <span class="p-style">##</span> καθώς μπορούν να χρησιμοποιηθούν για το λεγόμενο pasting ή concatenation. Όταν αντικαθίσταται μια μακροεντολή που έχει στο κείμενο αντικατάστασής της το <span class="p-style">##</span> τότε τα δύο σύμβολα που βρίσκονται αριστερά και δεξιά από τα <span class="p-style">##</span> συνδυάζονται σε ένα σύμβολο. Στο παράδειγμα του κώδικα 12.7 ορίζεται η μακροεντολή <span class="p-style">CAT</span> που συνενώνει τα δύο ορίσματά της και χρησιμοποιείται τόσο για τον ορισμό ονομάτων μεταβλητών όσο και για τη δημιουργία αριθμητικών τιμών με επιστημονικό συμβολισμό (1) (π.χ. 2e6).<br /></p>
+<ol>
+<li><a href="https://science.howstuffworks.com/math-concepts/scientific-notation.htm" target="_blank">https://science.howstuffworks.com/math-concepts/scientific-notation.htm</a></li>
+</ol>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 12.7: ch12_p5.c - παράδειγμα μακροεντολής που συνενώνει τα ορίσματά της.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-11-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-11-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-11-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-11-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-11-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-11-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-11-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2"></a>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="cp">#define CAT(x, y) x##y</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4"></a>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">CAT</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CAT</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">e6</span><span class="p">);</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">CAT</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="mi">99</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CAT</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">e6</span><span class="p">);</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x0</span><span class="p">);</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">z99</span><span class="p">);</span>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Η εκτέλεση του κώδικα θα δώσει τα ακόλουθα αποτελέσματα:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>$ gcc ch12_p5.c ‐o ch12_p5
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>$ ./ch12_p5
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>1000000
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>2000000.000000
+</span></code></pre></div>
+<p>Μια πρακτική χρήση του <span class="p-style">##</span> παρουσιάζεται στον κώδικα 12.8 όπου η μακροεντολή <span class="p-style">DECLARE_WITH_COPY</span> δηλώνει και ορίζει μια μεταβλητή και ταυτόχρονα δηλώνει και ορίζει ένα αντίγραφό της με το ίδιο όνομα αλλά με την προσθήκη του <span class="p-style">_copy</span> στο τέλος του ονόματός της.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 12.8: ch12_p5b.c παράδειγμα μακροεντολής που δηλώνει και ορίζει μια μεταβλητή καθώς και ένα αντίγραφό της.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-13-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-13-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-13-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-13-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-13-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-13-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-13-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-13-10">10</a></span>
+<span class="normal"><a href="#__codelineno-13-11">11</a></span>
+<span class="normal"><a href="#__codelineno-13-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2"></a>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="cp">#define DECLARE_WITH_COPY(type, name, value)                                   \</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="cp">  type name = value;                                                           \</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5"></a><span class="cp">  type name##_copy = name;</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6"></a>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8"></a><span class="w">  </span><span class="n">DECLARE_WITH_COPY</span><span class="p">(</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="n">speed</span><span class="p">,</span><span class="w"> </span><span class="mi">60</span><span class="p">);</span>
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9"></a><span class="w">  </span><span class="n">speed</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mf">1.2</span><span class="p">;</span>
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;SPEED = %.2f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">speed</span><span class="p">);</span>
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;SPEED (original) = %.2f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">speed_copy</span><span class="p">);</span>
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Η εκτέλεση του κώδικα εμφανίζει τα ακόλουθα αποτελέσματα:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>$ gcc ch12_p5b.c ‐o ch12_p5b
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>$ ./ch12_p5b
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>SPEED = 72.00
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>SPEED (original) = 60.00
+</span></code></pre></div>
+<h3 id="1232">12.3.2 Μακροεντολές με μεταβλητό πλήθος ορισμάτων</h3>
+<p>Υπάρχει η δυνατότητα ορισμού μακροεντολής που θα χρησιμοποιεί μεταβλητό πλήθος ορισμάτων. Αυτό γίνεται με τη χρήση των 3 τελειών ως τελευταίο όρισμα της μακροεντολής και του συμβόλου <span class="p-style">__VA_ARGS__</span> στο κείμενο αντικατάστασης. Ο κώδικας 12.9 αποτελεί ένα παράδειγμα χρήσης μεταβλητού πλήθους ορισμάτων σε μακροεντολή.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 12.9: ch12_p6.c - μακροεντολή που δέχεται μεταβλητό πλήθος ορισμάτων.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
+<span class="normal"><a href="#__codelineno-15-2">2</a></span>
+<span class="normal"><a href="#__codelineno-15-3">3</a></span>
+<span class="normal"><a href="#__codelineno-15-4">4</a></span>
+<span class="normal"><a href="#__codelineno-15-5">5</a></span>
+<span class="normal"><a href="#__codelineno-15-6">6</a></span>
+<span class="normal"><a href="#__codelineno-15-7">7</a></span>
+<span class="normal"><a href="#__codelineno-15-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2"></a>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="cp">#define MACRO_VA_ARGS(x, ...) (x), __VA_ARGS__</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4"></a>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;arg0=%d, arg1=%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">MACRO_VA_ARGS</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;foo&quot;</span><span class="p">));</span>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;arg0=%d, arg1=%s, arg2=%f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">MACRO_VA_ARGS</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;foo&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">3.141592</span><span class="p">));</span>
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Η εκτέλεση του κώδικα θα δώσει τα ακόλουθα αποτελέσματα:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>$ gcc ch12_p6.c ‐o ch12_p6
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>$ ./ch12_p6
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>arg0=42, arg1=foo
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>arg0=42, arg1=foo, arg2=3.141592
+</span></code></pre></div>
+<h2 id="124">12.4 Προκαθορισμένες μακροεντολές</h2>
+<p>Το πρότυπο της C ορίζει ένα σύνολο από προκαθορισμένες (built-in) μακροεντολές που μπορούν να χρησιμοποιηθούν απευθείας. Ορισμένες από αυτές είναι οι ακόλουθες. </p>
+<ul>
+<li><span class="p-style">__DATE__</span>, τρέχουσα ημερομηνία σε μορφή μήνας, ημέρα μήνα με 2 ψηφία, έτος με τέσσερα ψηφία (<span class="p-style">M dd yyyy</span>).</li>
+<li><span class="p-style">__TIME__</span>, τρέχουσα ώρα.</li>
+<li><span class="p-style">__FILE__</span>, όνομα αρχείου στο οποίο βρίσκεται η μακρονεντολή.</li>
+<li><span class="p-style">__LINE__</span>, αριθμός γραμμής που βρίσκεται η μακροεντολή.</li>
+<li><span class="p-style">__STDC__</span>, τιμή 1 αν ο μεταγλωττιστής συμμορφώνεται με το ISO standard της C, αλλιώς τιμή 0.</li>
+<li><span class="p-style">__STDC_VERSION__</span>, μια long ακέραια τιμή της μορφής <span class="p-style">yyyymmL</span>, όπου <span class="p-style">yyyy</span></span> και <span class="p-style">mm</span> είναι το έτος και ο μήνας της έκδοσης του standard που υποστηρίζεται. Για παράδειγμα η τιμή <span class="p-style">201710L</span> υποδηλώνει την αναθεώρηση του 2017 του C standard. Οι νεότερες εκδόσεις είναι πάντα μεγαλύτεροι αριθμοί σε σχέση με τις παλαιότερες, (π.χ. <span class="p-style">201710L &gt; 201112L</span>).  </li>
+</ul>
+<p>Ο κώδικας 12.10 περιέχει εντολές εκτύπωσης τιμών για τις παραπάνω προκαθορισμένες μακροεντολές.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 12.10: ch12_p7.c - εκτύπωση τιμών με προκαθορισμένες μακροεντολές.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-17-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-17-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-17-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-17-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-17-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-17-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-17-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-17-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-17-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2"></a>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Macro __DATE__: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">__DATE__</span><span class="p">);</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Macro __TIME__: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">__TIME__</span><span class="p">);</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Macro __FILE__: %s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">__FILE__</span><span class="p">);</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Macro __LINE__: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">__LINE__</span><span class="p">);</span>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Macro __STDC__: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">__STDC__</span><span class="p">);</span>
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Macro __STDC_VERSION__: %ld</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">__STDC_VERSION__</span><span class="p">);</span>
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Η εκτέλεση του κώδικα εμφανίζει τα ακόλουθα αποτελέσματα.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>$ gcc ch12_p7.c ‐o ch12_p7
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>$ ./ch12_p7
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>Macro __DATE__: Apr 20 2023
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>Macro __TIME__: 13:26:29
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>Macro __FILE__: ch12_p7.c
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>Macro __LINE__: 7
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>Macro __STDC__: 1
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>Macro __STDC_VERSION__: 201710
+</span></code></pre></div>
+<h2 id="125">12.5 Οδηγίες υπό συνθήκη</h2>
+<p>Μια οδηγία υπό συνθήκη δίνει τη δυνατότητα επιλογής σχετικά με το εάν ένα τμήμα κώδικα θα παραμείνει ή όχι στον κώδικα που θα περάσει στον μεταγλωττιστή. Έτσι μπορεί να επιτευχθεί επιλεκτική συμπερίληψη κώδικα σύμφωνα με συνθήκες που οι τιμές τους υπολογίζονται κατά την προεπεξεργασία. Η οδηγία <span class="p-style">#if</span> ακολουθείται από μια παράσταση που εάν η τιμή της είναι μη μηδενική, θα συμπεριλάβει στον κώδικα όλες τις εντολές που ακολουθούν μέχρι το επόμενο <span class="p-style">#endif</span>, <span class="p-style">#elif</span> ή <span class="p-style">#else</span>. Μια συχνή χρήση των οδηγιών προεπεξεργαστή υπό συνθήκη είναι όταν ένας κώδικας πρέπει να διαφοροποιείται ανάλογα με το λειτουργικό σύστημα ή την αρχιτεκτονική του υπολογιστή που θα εκτελεστεί. Στο ακόλουθο παράδειγμα, στον κώδικα 12.11, πραγματοποιείται καθαρισμός της οθόνης με διαφορετική εντολή ανάλογα με το εάν πρόκειται για Windows ή για Linux/UNIX ή MacOS λειτουργικό σύστημα.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 12.11: ch12_p8.c - «εκκαθάριση» οθόνης και εμφάνιση του ονόματος του λειτουργικού συστήματος στο οποίο εκτελείται το πρόγραμμα.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-19-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-19-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-19-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-19-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-19-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-19-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-19-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-19-10">10</a></span>
+<span class="normal"><a href="#__codelineno-19-11">11</a></span>
+<span class="normal"><a href="#__codelineno-19-12">12</a></span>
+<span class="normal"><a href="#__codelineno-19-13">13</a></span>
+<span class="normal"><a href="#__codelineno-19-14">14</a></span>
+<span class="normal"><a href="#__codelineno-19-15">15</a></span>
+<span class="normal"><a href="#__codelineno-19-16">16</a></span>
+<span class="normal"><a href="#__codelineno-19-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3"></a>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="cp">#if defined(_WIN32)</span>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6"></a><span class="w">  </span><span class="n">system</span><span class="p">(</span><span class="s">&quot;cls&quot;</span><span class="p">);</span>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Windows</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8"></a><span class="cp">#elif defined(___APPLE__)</span>
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9"></a><span class="w">  </span><span class="n">system</span><span class="p">(</span><span class="s">&quot;clear&quot;</span><span class="p">);</span>
+</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Apple OS</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-19-11"><a id="__codelineno-19-11" name="__codelineno-19-11"></a><span class="cp">#elif defined(__linux__)</span>
+</span><span id="__span-19-12"><a id="__codelineno-19-12" name="__codelineno-19-12"></a><span class="w">  </span><span class="n">system</span><span class="p">(</span><span class="s">&quot;clear&quot;</span><span class="p">);</span>
+</span><span id="__span-19-13"><a id="__codelineno-19-13" name="__codelineno-19-13"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Linux OS</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-19-14"><a id="__codelineno-19-14" name="__codelineno-19-14"></a><span class="cp">#else</span>
+</span><span id="__span-19-15"><a id="__codelineno-19-15" name="__codelineno-19-15"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Unknown OS</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-19-16"><a id="__codelineno-19-16" name="__codelineno-19-16"></a><span class="cp">#endif</span>
+</span><span id="__span-19-17"><a id="__codelineno-19-17" name="__codelineno-19-17"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Αν για παράδειγμα ο παραπάνω κώδικας εκτελεστεί σε υπολογιστή με Windows, θα «καθαρίσει» την οθόνη και θα εμφανίσει το κείμενο Windows. Παρατηρήστε ότι στον κώδικα χρησιμοποιήθηκε δεξιά από το <span class="p-style">#if</span> το <span class="p-style">defined</span> που αν το λεκτικό σύμβολο που το ακολουθεί έχει οριστεί επιστρέφει την τιμή 1, αλλιώς επιστρέφει την τιμή 0.  </p>
+<p>Μια άλλη χρήση των οδηγιών υπό συνθήκη είναι για να διαχωρίσουν κώδικα που χρησιμοποιείται για αποσφαλμάτωση, έτσι ώστε να ενεργοποιείται όταν ο προγραμματιστής επιλέξει ότι επιθυμεί την εμφάνιση πληροφοριών αποσφαλμάτωσης κατά την εκτέλεση του προγράμματος. Ο κώδικας 12.12 παρουσιάζει ένα σχετικό παράδειγμα.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 12.12: ch12_p9.c - επιλεκτική συμπερίληψη τμημάτων κώδικα για μεταγλώττιση.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-20-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-20-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-20-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-20-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-20-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-20-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-20-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-20-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-20-10">10</a></span>
+<span class="normal"><a href="#__codelineno-20-11">11</a></span>
+<span class="normal"><a href="#__codelineno-20-12">12</a></span>
+<span class="normal"><a href="#__codelineno-20-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3"></a>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="cp">#define DEBUG 1</span>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5"></a>
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">++</span><span class="n">x</span><span class="p">;</span>
+</span><span id="__span-20-9"><a id="__codelineno-20-9" name="__codelineno-20-9"></a><span class="cp">#if DEBUG</span>
+</span><span id="__span-20-10"><a id="__codelineno-20-10" name="__codelineno-20-10"></a><span class="w">  </span><span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;DEBUG: x=%d, y=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+</span><span id="__span-20-11"><a id="__codelineno-20-11" name="__codelineno-20-11"></a><span class="cp">#endif</span>
+</span><span id="__span-20-12"><a id="__codelineno-20-12" name="__codelineno-20-12"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;bye&quot;</span><span class="p">);</span>
+</span><span id="__span-20-13"><a id="__codelineno-20-13" name="__codelineno-20-13"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Η εκτέλεση του παραπάνω κώδικα θα εμφανίσει.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>$ gcc ch12_p9.c ‐o ch12_p9
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>$ ./ch12_p9
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>DEBUG: x=1, y=1
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>bye
+</span></code></pre></div>
+<p>Αν όμως στη γραμμή 4 η εντολή γίνει <span class="p-style">#define DEBUG 0</span> τότε κατά την εκτέλεση θα εμφανιστεί μόνο το κείμενο bye. Επίσης, αν διαγραφεί η εντολή στη γραμμή 4, τότε το λεκτικό σύμβολο <span class="p-style">DEBUG</span> μπορεί να ορίζεται κατά τη μεταγλώττιση με τον διακόπτη ‐D όπως στη συνέχεια.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>$ gcc ch12_p9.c ‐DDEBUG=1 ‐o ch12_p9
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>$ ./ch12_p9
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>DEBUG: x=1, y=1
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>bye
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>$ gcc ch12_p9.c ‐DDEBUG=0 ‐o ch12_p9
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>$ ./ch12_p9
+</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>bye
+</span></code></pre></div>
+<p>Ισοδύναμος κώδικας με το <span class="p-style">#if defined(FOO)</span> είναι ο <span class="p-style">#if defined FOO</span> και ο <span class="p-style">#ifdef FOO</span>. Επίσης, υπάρχει η δυνατότητα να χρησιμοποιηθεί το <span class="p-style">#ifndef FOO</span> που είναι ισοδύναμο με το <span class="p-style">#if !defined(FOO)</span> και σημαίνει ότι θα συμπεριληφθούν οι εντολές που ακολουθούν μέχρι το <span class="p-style">#endif</span> αν το λεκτικό σύμβολο <span class="p-style">FOO</span> δεν έχει οριστεί στον κώδικα που έχει προηγηθεί.</p>
+<h3 id="1251-include">12.5.1 Φρουροί include</h3>
+<p>Μια άλλη χρήση των οδηγιών υπό συνθήκη είναι στους λεγόμενους φρουρούς include (include guards). Συνήθως οι δηλώσεις ενός κώδικα απομονώνονται σε ένα αρχείο επικεφαλίδων με κατάληξη <span class="p-style">.h</span> (π.χ. <span class="p-style">utility.h</span>) και η υλοποίηση σε άλλο αρχείο με το ίδιο όνομα με κατάληξη <span class="p-style">.c</span> (π.χ. <span class="p-style">utility.c</span>). Το πρόγραμμα οδηγός (π.χ. <span class="p-style">main.c</span>) ή οποιοσδήποτε άλλος κώδικας απαιτεί γνώση των δηλώσεων που περιέχει το <span class="p-style">utility.h</span>, θα πρέπει να το κάνει <span class="p-style">include</span> (ή να κάνει <span class="p-style">include</span> ένα άλλο αρχείο που με τη σειρά του κάνει <span class="p-style">include</span> το <span class="p-style">utility.h</span>). Στο απλό παράδειγμα που ακολουθεί χρησιμοποιούνται 3 αρχεία, το <span class="p-style">ch12_p10_utility.h</span> (κώδικας 12.13), το <span class="p-style">ch12_p10_utility.c</span> (κώδικας 12.14) και το <span class="p-style">ch12_p10_main.c</span> (κώδικας 12.15). Στο πρώτο αρχείο δηλώνεται η συνάρτηση <span class="p-style">add_numbers</span>, στο δεύτερο αρχείο ορίζεται η συνάρτηση και στο τελευταίο η συνάρτηση καλείται από τη <span class="p-style">main()</span>.</p>
+<p><div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 12.13: ch12_p10_utility.h - αρχείο επικεφαλίδας με δήλωση συνάρτησης και include guards.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1">1</a></span>
+<span class="normal"><a href="#__codelineno-23-2">2</a></span>
+<span class="normal"><a href="#__codelineno-23-3">3</a></span>
+<span class="normal"><a href="#__codelineno-23-4">4</a></span>
+<span class="normal"><a href="#__codelineno-23-5">5</a></span>
+<span class="normal"><a href="#__codelineno-23-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="cp">#ifndef CH12_P10_UTILITY_H</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2"></a><span class="cp">#define CH12_P10_UTILITY_H</span>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3"></a>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="kt">int</span><span class="w"> </span><span class="nf">add_numbers</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5"></a>
+</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6"></a><span class="cp">#endif</span>
+</span></code></pre></div></td></tr></table></div>
+Στο αρχείο επικεφαλίδας παρατηρείται το μοτίβο.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>#ifndef CH12_P10_UTILITY_H
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>#define CH12_P10_UTILITY_H
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>...
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>#endif
+</span></code></pre></div>
+<p>Αυτό σημαίνει ότι την πρώτη και μόνο την πρώτη φορά που το αρχείο <span class="p-style">ch12_p10_utility.h</span> γίνεται include, ορίζεται το λεκτικό σύμβολο <span class="p-style">CH12_P10_UTILITY_H</span> και συμπεριλαμβάνονται στον κώδικα που θα μεταγλωττιστεί οι εντολές που ακολουθούν μέχρι το <span class="p-style">#endif</span>. Έτσι αποφεύγεται το πρόβλημα της διπλής δήλωσης συνάρτησης (αλλά και γενικότερα αναγνωριστικών), που θα συνέβαινε στην περίπτωση που το αρχείο επικεφαλίδων γινόταν <span class="p-style">include</span> πολλές φορές.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 12.14: ch12_p10_utility.c - αρχείο πηγαίου κώδικα με τον ορισμό της συνάρτησης add_numbers().</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1">1</a></span>
+<span class="normal"><a href="#__codelineno-25-2">2</a></span>
+<span class="normal"><a href="#__codelineno-25-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;ch12_p10_utility.h&quot;</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2"></a>
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3"></a><span class="kt">int</span><span class="w"> </span><span class="nf">add_numbers</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 12.15: ch12_p10_main.c - αρχείο πηγαίου κώδικα που περιέχει τη main() και χρησιμοποιεί τη συνάρτηση add_numbers() που δηλώνεται στο αρχείο επικεφαλίδας ch2_p10_utility.h</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1">1</a></span>
+<span class="normal"><a href="#__codelineno-26-2">2</a></span>
+<span class="normal"><a href="#__codelineno-26-3">3</a></span>
+<span class="normal"><a href="#__codelineno-26-4">4</a></span>
+<span class="normal"><a href="#__codelineno-26-5">5</a></span>
+<span class="normal"><a href="#__codelineno-26-6">6</a></span>
+<span class="normal"><a href="#__codelineno-26-7">7</a></span>
+<span class="normal"><a href="#__codelineno-26-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;ch12_p10_utility.h&quot;</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3"></a>
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">add_numbers</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
+</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;The result is %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-26-8"><a id="__codelineno-26-8" name="__codelineno-26-8"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Η μεταγλώττιση των δύο αρχείων πηγαίου κώδικα και η εκτέλεση του εκτελέσιμου που προκύπτει γίνεται όπως στη συνέχεια.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>$ gcc ch12_p10_utility.c ch12_p10_main.c ‐o ch12_p10_main
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>$ ./ch12_p10_main
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>The result is 5
+</span></code></pre></div>
+<h3 id="1252-if-0">12.5.2 Κώδικας σε σχόλια με #if 0</h3>
+<p>Για να τοποθετηθούν σε σχόλια πολλές συνεχόμενες γραμμές κώδικα στη C, χρησιμοποιείται ο συνδυασμός συμβόλων <span class="p-style">/*</span> και <span class="p-style">*/</span> που σηματοδοτούν την αρχή και το τέλος των γραμμών που θα αποτελέσουν σχόλια. Όμως, αυτός ο τρόπος δεν επιτρέπει εμφωλευμένα σχόλια, δηλαδή να τοποθετηθεί σε σχόλια ένας κώδικας που περιέχει ήδη σχόλια. Δηλαδή δεν επιτρέπεται κάτι όπως το ακόλουθο:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>/*
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>...
+</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>        /*
+</span><span id="__span-28-4"><a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>        ...
+</span><span id="__span-28-5"><a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>        */
+</span><span id="__span-28-6"><a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>...
+</span><span id="__span-28-7"><a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a>*/
+</span></code></pre></div>
+<p>Ωστόσο, μπορεί να χρησιμοποιηθεί η οδηγία υπό συνθήκη <span class="p-style">#if 0</span> έτσι ώστε να απενεργοποιηθεί ένα τμήμα κώδικα και να επιτευχθεί επί της ουσίας το επιθυμητό αποτέλεσμα του σχολιασμού κώδικα που περιέχει μέσα του σχόλια <span class="p-style">/*</span> ... <span class="p-style">*/</span>. Ένα σχετικό παράδειγμα παρουσιάζεται στον κώδικα 12.16.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 12.16: ch12_p11.c - χρήση της #if 0 για να οριστεί ένα εξωτερικό επίπεδο σχολίων μέσα στο οποίο μπορεί να υπάρχουν εμφωλευμένα σχόλια της μορφής /* ... */.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-29-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-29-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-29-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-29-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-29-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-29-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-29-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-29-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-29-10">10</a></span>
+<span class="normal"><a href="#__codelineno-29-11">11</a></span>
+<span class="normal"><a href="#__codelineno-29-12">12</a></span>
+<span class="normal"><a href="#__codelineno-29-13">13</a></span>
+<span class="normal"><a href="#__codelineno-29-14">14</a></span>
+<span class="normal"><a href="#__codelineno-29-15">15</a></span>
+<span class="normal"><a href="#__codelineno-29-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2"></a>
+</span><span id="__span-29-3"><a id="__codelineno-29-3" name="__codelineno-29-3"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-29-4"><a id="__codelineno-29-4" name="__codelineno-29-4"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+</span><span id="__span-29-5"><a id="__codelineno-29-5" name="__codelineno-29-5"></a>
+</span><span id="__span-29-6"><a id="__codelineno-29-6" name="__codelineno-29-6"></a><span class="cp">#if 0</span>
+</span><span id="__span-29-7"><a id="__codelineno-29-7" name="__codelineno-29-7"></a><span class="c">    printf(&quot;Swap&quot;)</span>
+</span><span id="__span-29-8"><a id="__codelineno-29-8" name="__codelineno-29-8"></a><span class="c">    /*</span>
+</span><span id="__span-29-9"><a id="__codelineno-29-9" name="__codelineno-29-9"></a><span class="c">    a ^= b;</span>
+</span><span id="__span-29-10"><a id="__codelineno-29-10" name="__codelineno-29-10"></a><span class="c">    b ^= a;</span>
+</span><span id="__span-29-11"><a id="__codelineno-29-11" name="__codelineno-29-11"></a><span class="c">    a ^= b;</span>
+</span><span id="__span-29-12"><a id="__codelineno-29-12" name="__codelineno-29-12"></a><span class="c">    */</span>
+</span><span id="__span-29-13"><a id="__codelineno-29-13" name="__codelineno-29-13"></a><span class="cp">#endif</span>
+</span><span id="__span-29-14"><a id="__codelineno-29-14" name="__codelineno-29-14"></a>
+</span><span id="__span-29-15"><a id="__codelineno-29-15" name="__codelineno-29-15"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;a=%d, b=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+</span><span id="__span-29-16"><a id="__codelineno-29-16" name="__codelineno-29-16"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p class="annotate">Η εκτέλεση του προγράμματος δεν πρόκειται να εμφανίσει το μήνυμα <span class="p-style">Swap</span>, ούτε και να εκτελέσει τις εντολές από τη γραμμή 9 μέχρι και τη γραμμή 11 (1) που έτσι και αλλιώς βρίσκονται μέσα σε σχόλια. Αν στη γραμμή 6 αντικατασταθεί το 0 με 1, τότε πλέον κατά την εκτέλεση θα εμφανίζεται το μήνυμα <span class="p-style">Swap</span>, αλλά πάλι δεν θα εκτελούνται οι εντολές από τη γραμμή 9 μέχρι και γραμμή 11, καθώς θα βρίσκονται εντός σχολίων.</p>
+<ol>
+<li>Οι εντολές αυτές πραγματοποιούν αντιμετάθεση των ακεραίων μεταβλητών a και b, με χρήση του τελεστή αποκλειστικής διάζευξης <span class="p-style">^</span> </li>
+</ol>
+<h2 id="126">12.6 Άλλες οδηγίες</h2>
+<p>Πέρα από τις οδηγίες που αναφέρθηκαν υπάρχουν και άλλες οδηγίες όπως η <span class="p-style">#error</span>, η <span class="p-style">#pragma</span> και η <span class="p-style">#line</span>, ενώ υπάρχουν και άλλες οδηγίες που δεν ανήκουν στο standard της C και που υποστηρίζονται από συγκεκριμένους μεταγλωττιστές και μόνο.</p>
+<h3 id="1261-error">12.6.1 Η οδηγία #error</h3>
+<p>Η οδηγία <span class="p-style">#error</span> προκαλεί την εμφάνιση ενός λάθους και τον τερματισμό της μεταγλώττισης. Στον κώδικα 12.17 προκαλείται σφάλμα μεταγλώττισης σε περίπτωση που η μεταγλώττιση γίνεται σε λειτουργικό σύστημα που δεν είναι Linux/UNIX.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 12.17: ch12_p12.c - πρόκληση σφάλματος μεταγλώττισης αν το σύστημα στο οποίο γίνεται η μεταγλώττιση δεν είναι Linux/UNIX.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1">1</a></span>
+<span class="normal"><a href="#__codelineno-30-2">2</a></span>
+<span class="normal"><a href="#__codelineno-30-3">3</a></span>
+<span class="normal"><a href="#__codelineno-30-4">4</a></span>
+<span class="normal"><a href="#__codelineno-30-5">5</a></span>
+<span class="normal"><a href="#__codelineno-30-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2"></a><span class="cp">#ifndef __linux__</span>
+</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="cp">#error &quot;works only in linux!&quot;</span>
+</span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4"></a><span class="cp">#endif</span>
+</span><span id="__span-30-5"><a id="__codelineno-30-5" name="__codelineno-30-5"></a>
+</span><span id="__span-30-6"><a id="__codelineno-30-6" name="__codelineno-30-6"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;This message should appear in Linux only&quot;</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Αν επιχειρηθεί μεταγλώττιση σε Windows υπολογιστή τότε εμφανίζεται το ακόλουθο σφάλμα μεταγλώττισης:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>$ gcc ch12_p12.c ‐o ch12_p12
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>ch12_p12.c:3:2: error: #error &quot;works only in linux!&quot;
+</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>    3 | #error &quot;works only in linux!&quot;
+</span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>      | ^~~~~
+</span></code></pre></div>
+<h3 id="1262-pragma">12.6.2 Η οδηγία #pragma</h3>
+<p class="annotate">Η οδηγία <span class="p-style">#pragma</span> συνήθως χρησιμοποιείται σύμφωνα με τις προδιαγραφές που ορίζουν εξωτερικές βιβλιοθήκες. Για παράδειγμα η βιβλιοθήκη OpenMP (1) ορίζει ότι ένας βρόχος επανάληψης θα εκτελεστεί παράλληλα με οδηγίες <span class="p-style">pragma</span> τοποθετημένες σε κατά τα άλλα συνηθισμένο κώδικα C. Ο κώδικας 12.18 που ακολουθεί ορίζει ότι ο βρόχος επανάληψης της εντολής <span class="p-style">for</span> θα εκτελεστεί από 2 νήματα (threads) παράλληλα, οπότε οι μισές επαναλήψεις θα γίνουν από το κάθε νήμα.</p>
+<ol>
+<li><a href="https://www.openmp.org/" target="_blank">https://www.openmp.org/</a></li>
+</ol>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 12.18: ch12_p13.c - κώδικας που χρησιμοποιεί 2 νήματα, με χρήση της βιβλιοθήκης OpenMP.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1">1</a></span>
+<span class="normal"><a href="#__codelineno-32-2">2</a></span>
+<span class="normal"><a href="#__codelineno-32-3">3</a></span>
+<span class="normal"><a href="#__codelineno-32-4">4</a></span>
+<span class="normal"><a href="#__codelineno-32-5">5</a></span>
+<span class="normal"><a href="#__codelineno-32-6">6</a></span>
+<span class="normal"><a href="#__codelineno-32-7">7</a></span>
+<span class="normal"><a href="#__codelineno-32-8">8</a></span>
+<span class="normal"><a href="#__codelineno-32-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;omp.h&gt;</span>
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3"></a>
+</span><span id="__span-32-4"><a id="__codelineno-32-4" name="__codelineno-32-4"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-32-5"><a id="__codelineno-32-5" name="__codelineno-32-5"></a><span class="cp">#pragma omp parallel for num_threads(2)</span>
+</span><span id="__span-32-6"><a id="__codelineno-32-6" name="__codelineno-32-6"></a><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-32-7"><a id="__codelineno-32-7" name="__codelineno-32-7"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;i = %d, thread %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">omp_get_thread_num</span><span class="p">());</span>
+</span><span id="__span-32-8"><a id="__codelineno-32-8" name="__codelineno-32-8"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-32-9"><a id="__codelineno-32-9" name="__codelineno-32-9"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Για να μπορεί να δημιουργηθεί το εκτελέσιμο πρόγραμμα για τον παραπάνω κώδικα θα πρέπει ο μεταγλωττιστής να υποστηρίζει το OpenMP και η μεταγλώττιση να γίνει χρησιμοποιώντας τον διακόπτη <span class="p-style">‐fopenmp</span>.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>$ gcc ch12_p13.c ‐o ch12_p13 ‐fopenmp
+</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>$ ./ch12_p13
+</span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>i = 0, thread 0
+</span><span id="__span-33-4"><a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a>i = 1, thread 0
+</span><span id="__span-33-5"><a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a>i = 2, thread 0
+</span><span id="__span-33-6"><a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a>i = 3, thread 1
+</span><span id="__span-33-7"><a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a>i = 4, thread 1
+</span><span id="__span-33-8"><a id="__codelineno-33-8" name="__codelineno-33-8" href="#__codelineno-33-8"></a>i = 5, thread 1
+</span></code></pre></div>
+<p>Μια κοινή χρήση της οδηγίας <span class="p-style">pragma</span> είναι το <span class="p-style">#pragma once</span> που δεν ανήκει μεν στο standard της C, αλλά υποστηρίζεται από τους πλέον διαδεδομένους μεταγλωττιστές της C (gcc, clang κ.ά.) και που μπορεί να χρησιμοποιηθεί ως εναλλακτική υλοποίηση για τους φρουρούς <span class="p-style">include</span> που αναφέρθηκαν στην παράγραφο 12.5.1. Έτσι αντί να υπάρχει στην αρχή και στο τέλος του κάθε αρχείου επικεφαλίδων όπως το <span class="p-style">hdr.h</span> το </p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>#ifndef HDR_H
+</span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>#define HDR_H
+</span><span id="__span-34-3"><a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a>...
+</span><span id="__span-34-4"><a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a>#endif
+</span></code></pre></div>
+αρκεί να υπάρχει στην αρχή του μόνο το <span class="p-style">#pragma once</span>.</p>
+<h3 id="1263-line">12.6.3 Η οδηγία #line</h3>
+<p>Η οδηγία <span class="p-style">#line</span> επιτρέπει την αλλαγή των τιμών που αναφέρει ο μεταγλωττιστής σχετικά με τον αριθμό γραμμής και το όνομα του αρχείου πηγαίου κώδικα που εκτελείται. Πρόκειται για τις τιμές που μπορούν να εμφανίζονται σε διαγνωστικά μηνύματα με τις μακροεντολές <span class="p-style">__FILE__</span> και <span class="p-style">__LINE__</span>. Στη συνέχεια παρατίθεται ένα παράδειγμα χρήσης της <span class="p-style">#line</span> στον κώδικα 12.19, όπου σε συγκεκριμένες θέσεις του κώδικα επαναορίζεται ο αριθμός γραμμής του κώδικα ή και το όνομα του αρχείου.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας 12.19: ch12_p14.c - χρήση του #line για επανορισμό αριθμού γραμμών κώδικα και ονόματος αρχείου πηγαίου κώδικα κατά την εκτέλεση του προγράμματος.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-1">1</a></span>
+<span class="normal"><a href="#__codelineno-35-2">2</a></span>
+<span class="normal"><a href="#__codelineno-35-3">3</a></span>
+<span class="normal"><a href="#__codelineno-35-4">4</a></span>
+<span class="normal"><a href="#__codelineno-35-5">5</a></span>
+<span class="normal"><a href="#__codelineno-35-6">6</a></span>
+<span class="normal"><a href="#__codelineno-35-7">7</a></span>
+<span class="normal"><a href="#__codelineno-35-8">8</a></span>
+<span class="normal"><a href="#__codelineno-35-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2"></a>
+</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-35-4"><a id="__codelineno-35-4" name="__codelineno-35-4"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Tracing file %s at line %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">__FILE__</span><span class="p">,</span><span class="w"> </span><span class="n">__LINE__</span><span class="p">);</span>
+</span><span id="__span-35-5"><a id="__codelineno-35-5" name="__codelineno-35-5"></a><span class="cp">#line 100</span>
+</span><span id="__span-35-6"><a id="__codelineno-35-6" name="__codelineno-35-6"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Tracing file %s at line %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">__FILE__</span><span class="p">,</span><span class="w"> </span><span class="n">__LINE__</span><span class="p">);</span>
+</span><span id="__span-35-7"><a id="__codelineno-35-7" name="__codelineno-35-7"></a><span class="cp">#line 1 &quot;dummy.c&quot;</span>
+</span><span id="__span-35-8"><a id="__codelineno-35-8" name="__codelineno-35-8"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Tracing file %s at line %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">__FILE__</span><span class="p">,</span><span class="w"> </span><span class="n">__LINE__</span><span class="p">);</span>
+</span><span id="__span-35-9"><a id="__codelineno-35-9" name="__codelineno-35-9"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Η εκτέλεση του κώδικα θα δώσει τα ακόλουθα αποτελέσματα:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>$ gcc ch12_p14.c ‐o ch12_p14
+</span><span id="__span-36-2"><a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>$ ./ch12_p14
+</span><span id="__span-36-3"><a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a>Tracing file ch12_p14.c at line 4
+</span><span id="__span-36-4"><a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a>Tracing file ch12_p14.c at line 100
+</span><span id="__span-36-5"><a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a>Tracing file dummy.c at line 1
+</span></code></pre></div>
+<h2 id="127-c">12.7 Είναι τελικά χρήσιμος ο προεπεξεργαστής της C;</h2>
+<p>O προεπεξεργαστής της C μπορεί να είναι η αιτία πρόκλησης προβλημάτων με τα οποία έρχονται αντιμέτωποι οι προγραμματιστές <sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>. Τέτοια προβλήματα είναι η πιθανότητα εισαγωγής σφαλμάτων στον κώδικα, η δημιουργία παραπλανητικού ή δυσνόητου κώδικα που μειώνει την αναγνωσιμότητά του και προκαλούνται σε μεγάλο βαθμό από την έλλειψη αντίληψης της σημασιολογίας της γλώσσας C από τον προεπεξεργαστή.
+Ωστόσο, οι προγραμματιστές της C, εμπιστεύονται και χρησιμοποιούν τον προεπεξεργαστή καθώς επιτελεί αποτελεσματικά το έργο για το οποίο είναι υπεύθυνος. Για να αποφευχθούν προβλήματα συχνά ακολουθούνται κατευθυντήριες γραμμές (guidelines) στο πνεύμα των αρχών που έχει αποτυπώσει ο David Kieras στο “C Header File Guidelines” <sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup>.</p>
+<h2 id="128">12.8 Ασκήσεις</h2>
+<p><strong><em>Άσκηση 1</em></strong> Γράψτε μακροεντολή με όνομα <span class="p-style">SWAP</span> που να πραγματοποιεί αντιμετάθεση τιμών στα δύο ορίσματα που θα δέχεται. Εφαρμόστε τη μακροεντολή για αντιμετάθεση δύο ακεραίων τύπου <span class="p-style">int</span>.</p>
+<details class="note tip">
+<summary>Λύση άσκησης 1</summary>
+<div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-1">1</a></span>
+<span class="normal"><a href="#__codelineno-37-2">2</a></span>
+<span class="normal"><a href="#__codelineno-37-3">3</a></span>
+<span class="normal"><a href="#__codelineno-37-4">4</a></span>
+<span class="normal"><a href="#__codelineno-37-5">5</a></span>
+<span class="normal"><a href="#__codelineno-37-6">6</a></span>
+<span class="normal"><a href="#__codelineno-37-7">7</a></span>
+<span class="normal"><a href="#__codelineno-37-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-37-2"><a id="__codelineno-37-2" name="__codelineno-37-2"></a><span class="cp">#define SWAP(a,b)({a ^= b; b ^= a; a ^= b;})</span>
+</span><span id="__span-37-3"><a id="__codelineno-37-3" name="__codelineno-37-3"></a>
+</span><span id="__span-37-4"><a id="__codelineno-37-4" name="__codelineno-37-4"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-37-5"><a id="__codelineno-37-5" name="__codelineno-37-5"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+</span><span id="__span-37-6"><a id="__codelineno-37-6" name="__codelineno-37-6"></a><span class="w">  </span><span class="n">SWAP</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+</span><span id="__span-37-7"><a id="__codelineno-37-7" name="__codelineno-37-7"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;x=%d, y=%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+</span><span id="__span-37-8"><a id="__codelineno-37-8" name="__codelineno-37-8"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+</details>
+<p><strong><em>Άσκηση 2</em></strong><br />
+Γράψτε μακροεντολή με όνομα <span class="p-style">FOREVER</span> που να υλοποιεί έναν άπειρο βρόχο. Καλέστε την μακροεντολή από κύριο πρόγραμμα.</p>
+<details class="tip">
+<summary>Λύση άσκησης 2</summary>
+<div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-38-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-38-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-38-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-38-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-38-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-38-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-38-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-38-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-38-10">10</a></span>
+<span class="normal"><a href="#__codelineno-38-11">11</a></span>
+<span class="normal"><a href="#__codelineno-38-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-38-2"><a id="__codelineno-38-2" name="__codelineno-38-2"></a><span class="cp">#define FOREVER for (;;)</span>
+</span><span id="__span-38-3"><a id="__codelineno-38-3" name="__codelineno-38-3"></a>
+</span><span id="__span-38-4"><a id="__codelineno-38-4" name="__codelineno-38-4"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-38-5"><a id="__codelineno-38-5" name="__codelineno-38-5"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-38-6"><a id="__codelineno-38-6" name="__codelineno-38-6"></a><span class="w">  </span><span class="n">FOREVER</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-38-7"><a id="__codelineno-38-7" name="__codelineno-38-7"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Loop!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-38-8"><a id="__codelineno-38-8" name="__codelineno-38-8"></a><span class="w">    </span><span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span><span id="__span-38-9"><a id="__codelineno-38-9" name="__codelineno-38-9"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span>
+</span><span id="__span-38-10"><a id="__codelineno-38-10" name="__codelineno-38-10"></a><span class="w">      </span><span class="k">break</span><span class="p">;</span>
+</span><span id="__span-38-11"><a id="__codelineno-38-11" name="__codelineno-38-11"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-38-12"><a id="__codelineno-38-12" name="__codelineno-38-12"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+</details>
+<p><strong><em>Άσκηση 3</em></strong><br />
+Γράψτε μακροεντολή με όνομα <span class="p-style">MALLOC</span> που να δέχεται 2 ορίσματα <span class="p-style">t</span> και <span class="p-style">n</span> και να δεσμεύει <span class="p-style">n</span> θέσεις τύπου <span class="p-style">t</span> και να επιστρέφει έναν δείκτη τύπου <span class="p-style">t</span> προς τις θέσεις μνήμης που δεσμεύτηκαν. Αν η δέσμευση μνήμης αποτυγχάνει να εμφανίζει μήνυμα σφάλματος.</p>
+<details class="tip">
+<summary>Λύση άσκησης 3</summary>
+<div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-39-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-39-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-39-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-39-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-39-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-39-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-39-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-39-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-39-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+</span><span id="__span-39-2"><a id="__codelineno-39-2" name="__codelineno-39-2"></a>
+</span><span id="__span-39-3"><a id="__codelineno-39-3" name="__codelineno-39-3"></a><span class="cp">#define MALLOC(p, t, n) (t *)malloc(sizeof(t) * n);</span>
+</span><span id="__span-39-4"><a id="__codelineno-39-4" name="__codelineno-39-4"></a>
+</span><span id="__span-39-5"><a id="__codelineno-39-5" name="__codelineno-39-5"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-39-6"><a id="__codelineno-39-6" name="__codelineno-39-6"></a><span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MALLOC</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+</span><span id="__span-39-7"><a id="__codelineno-39-7" name="__codelineno-39-7"></a><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span><span id="__span-39-8"><a id="__codelineno-39-8" name="__codelineno-39-8"></a><span class="w">    </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span id="__span-39-9"><a id="__codelineno-39-9" name="__codelineno-39-9"></a><span class="w">  </span><span class="n">free</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+</span><span id="__span-39-10"><a id="__codelineno-39-10" name="__codelineno-39-10"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+</details>
+<p><strong><em>Άσκηση 4</em></strong><br />
+Γράψτε μια μακροεντολή με όνομα <span class="p-style">FOPEN</span> που να δέχεται 2 ορίσματα <span class="p-style">fn, m</span> και να ανοίγει ένα αρχείο με όνομα την τιμή του <span class="-style">fn</span> σε κατάσταση ανάγνωσης ή εγγραφής, σύμφωνα με την τιμή του <span class="p-style">m</span> (<span class="p-style">'r'</span> ή <span class="p-style">'w'</span>) και να πραγματοποιεί έλεγχο σφαλμάτων. Γράψτε πρόγραμμα που με τη χρήση της <span class="p-style">FOPEN</span> να διαβάζει να αρχείο κειμένου (π.χ. <span class="p-style">quotes.txt</span>) και να εμφανίζει τα περιεχόμενά του στη γραμμή εντολών.</p>
+<details class="tip">
+<summary>Λύση άσκησης 4</summary>
+<div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-40-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-40-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-40-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-40-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-40-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-40-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-40-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-40-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-40-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-40-10">10</a></span>
+<span class="normal"><a href="#__codelineno-40-11">11</a></span>
+<span class="normal"><a href="#__codelineno-40-12">12</a></span>
+<span class="normal"><a href="#__codelineno-40-13">13</a></span>
+<span class="normal"><a href="#__codelineno-40-14">14</a></span>
+<span class="normal"><a href="#__codelineno-40-15">15</a></span>
+<span class="normal"><a href="#__codelineno-40-16">16</a></span>
+<span class="normal"><a href="#__codelineno-40-17">17</a></span>
+<span class="normal"><a href="#__codelineno-40-18">18</a></span>
+<span class="normal"><a href="#__codelineno-40-19">19</a></span>
+<span class="normal"><a href="#__codelineno-40-20">20</a></span>
+<span class="normal"><a href="#__codelineno-40-21">21</a></span>
+<span class="normal"><a href="#__codelineno-40-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-40-2"><a id="__codelineno-40-2" name="__codelineno-40-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+</span><span id="__span-40-3"><a id="__codelineno-40-3" name="__codelineno-40-3"></a>
+</span><span id="__span-40-4"><a id="__codelineno-40-4" name="__codelineno-40-4"></a><span class="cp">#define FOPEN(filename, mode)                                                  \</span>
+</span><span id="__span-40-5"><a id="__codelineno-40-5" name="__codelineno-40-5"></a><span class="cp">  ({                                                                           \</span>
+</span><span id="__span-40-6"><a id="__codelineno-40-6" name="__codelineno-40-6"></a><span class="cp">    FILE *file = fopen(filename, mode);                                        \</span>
+</span><span id="__span-40-7"><a id="__codelineno-40-7" name="__codelineno-40-7"></a><span class="cp">    if (file == NULL) {                                                        \</span>
+</span><span id="__span-40-8"><a id="__codelineno-40-8" name="__codelineno-40-8"></a><span class="cp">      fprintf(stderr, &quot;Error opening file %s\n&quot;, filename);                    \</span>
+</span><span id="__span-40-9"><a id="__codelineno-40-9" name="__codelineno-40-9"></a><span class="cp">      exit(EXIT_FAILURE);                                                      \</span>
+</span><span id="__span-40-10"><a id="__codelineno-40-10" name="__codelineno-40-10"></a><span class="cp">    }                                                                          \</span>
+</span><span id="__span-40-11"><a id="__codelineno-40-11" name="__codelineno-40-11"></a><span class="cp">    file;                                                                      \</span>
+</span><span id="__span-40-12"><a id="__codelineno-40-12" name="__codelineno-40-12"></a><span class="cp">  })</span>
+</span><span id="__span-40-13"><a id="__codelineno-40-13" name="__codelineno-40-13"></a>
+</span><span id="__span-40-14"><a id="__codelineno-40-14" name="__codelineno-40-14"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-40-15"><a id="__codelineno-40-15" name="__codelineno-40-15"></a><span class="w">  </span><span class="kt">FILE</span><span class="w"> </span><span class="o">*</span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FOPEN</span><span class="p">(</span><span class="s">&quot;quotes.txt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;r&quot;</span><span class="p">);</span>
+</span><span id="__span-40-16"><a id="__codelineno-40-16" name="__codelineno-40-16"></a><span class="w">  </span><span class="kt">char</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">1024</span><span class="p">];</span>
+</span><span id="__span-40-17"><a id="__codelineno-40-17" name="__codelineno-40-17"></a><span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">fgets</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">),</span><span class="w"> </span><span class="n">file</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-40-18"><a id="__codelineno-40-18" name="__codelineno-40-18"></a><span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">buffer</span><span class="p">);</span>
+</span><span id="__span-40-19"><a id="__codelineno-40-19" name="__codelineno-40-19"></a><span class="w">  </span><span class="p">}</span>
+</span><span id="__span-40-20"><a id="__codelineno-40-20" name="__codelineno-40-20"></a><span class="w">  </span><span class="n">fclose</span><span class="p">(</span><span class="n">file</span><span class="p">);</span>
+</span><span id="__span-40-21"><a id="__codelineno-40-21" name="__codelineno-40-21"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-40-22"><a id="__codelineno-40-22" name="__codelineno-40-22"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+</details>
+<p><strong><em>Άσκηση 5</em></strong><br />
+Γράψτε μια μακροεντολή με όνομα <span class="p-style">IS_GCC</span> που να μπορεί να χρησιμοποιηθεί για να εξεταστεί αν ο μεταγλωττιστής είναι ο GCC. Λάβετε υπόψη ότι ο GCC ορίζει το σύμβολο <span class="p-style">__GNUC__</span>, αλλά το ίδιο σύμβολο ορίζεται και από τον μεταγλωττιστή clang που όμως ορίζει επιπλέον το σύμβολο <span class="p-style">__clang__</span>.</p>
+<details class="tip">
+<summary>Λύση άσκησης 5</summary>
+<div class="language-c highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-41-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-41-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-41-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-41-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-41-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-41-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-41-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-41-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-41-10">10</a></span>
+<span class="normal"><a href="#__codelineno-41-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-41-1"><a id="__codelineno-41-1" name="__codelineno-41-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-41-2"><a id="__codelineno-41-2" name="__codelineno-41-2"></a>
+</span><span id="__span-41-3"><a id="__codelineno-41-3" name="__codelineno-41-3"></a><span class="cp">#define IS_GCC (defined(__GNUC__) &amp;&amp; !defined(__clang__))</span>
+</span><span id="__span-41-4"><a id="__codelineno-41-4" name="__codelineno-41-4"></a>
+</span><span id="__span-41-5"><a id="__codelineno-41-5" name="__codelineno-41-5"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-41-6"><a id="__codelineno-41-6" name="__codelineno-41-6"></a><span class="cp">#if IS_GCC</span>
+</span><span id="__span-41-7"><a id="__codelineno-41-7" name="__codelineno-41-7"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;GCC detected&quot;</span><span class="p">);</span>
+</span><span id="__span-41-8"><a id="__codelineno-41-8" name="__codelineno-41-8"></a><span class="cp">#else</span>
+</span><span id="__span-41-9"><a id="__codelineno-41-9" name="__codelineno-41-9"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;GCC is not detected&quot;</span><span class="p">);</span>
+</span><span id="__span-41-10"><a id="__codelineno-41-10" name="__codelineno-41-10"></a><span class="cp">#endif</span>
+</span><span id="__span-41-11"><a id="__codelineno-41-11" name="__codelineno-41-11"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+</details>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>Richard M Stallman και Zachary Weinberg. “The C preprocessor: For GCC version 14.0.0 (prerelease)”. Στο: <i>Free Software Foundation</i> (2023). [Online; accessed 2022-05-05], σ. 86.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>Flávio Medeiros, Christian Kästner, Márcio Ribeiro, Sarah Nadi και Rohit Gheyi. “The love/hate relationship with the C preprocessor: An interview study”. Στο: <i>29th European Conference on Object-Oriented Programming (ECOOP 2015)</i>. Schloss Dagstuhl-Leibniz-Zentrum fuer Informatik. 2015.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>David Kieras. <i>C Header File Guidelines.</i> <a href="https://websites.umich.edu/~eecs381/handouts/CHeaderFileGuidelines.pdf" target="_blank">https://websites.umich.edu/~eecs381/handouts/CHeaderFileGuidelines.pdf</a>. [Online; accessed 2022-05-05]. EECS Dept., University of Michigan, 2012.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Τζάλλας Αλέξανδρος, Γκόγκος Χρήστος, Τσούλος Ιωάννης &copy 2025 - το βιβλίο μεταφέρθηκε στο MkDocs από τον Γιάννη Βούλγαρη 🙏.
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "toc.follow", "navigation.instant.preview", "navigation.sections"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": false, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

@@ -1,0 +1,1302 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../chapter20/">
+      
+      
+        <link rel="next" href="../appendix2/">
+      
+      
+      <link rel="icon" href="../src/images/frontcover.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Α. Διαμόρφωση περιβάλλοντος ανάπτυξης κώδικα σε C - Μια σύγχρονη προσέγγιση στη γλώσσα C</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/styles.css">
+    
+      <link rel="stylesheet" href="../css/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: none; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#c" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Μια σύγχρονη προσέγγιση στη γλώσσα C" class="md-header__button md-logo" aria-label="Μια σύγχρονη προσέγγιση στη γλώσσα C" data-md-component="logo">
+      
+  <img src="../src/images/frontcover.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Μια σύγχρονη προσέγγιση στη γλώσσα C
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Α. Διαμόρφωση περιβάλλοντος ανάπτυξης κώδικα σε C
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Μια σύγχρονη προσέγγιση στη γλώσσα C" class="md-nav__button md-logo" aria-label="Μια σύγχρονη προσέγγιση στη γλώσσα C" data-md-component="logo">
+      
+  <img src="../src/images/frontcover.png" alt="logo">
+
+    </a>
+    Μια σύγχρονη προσέγγιση στη γλώσσα C
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Το βιβλίο
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Η πορεία της C μέχρι σήμερα
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Εισαγωγικές έννοιες στον προγραμματισμό με τη C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. Εντολές ελέγχου και επανάληψης
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Συναρτήσεις
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Πίνακες
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    6. Δομές και ενώσεις
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    7. Δείκτες
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    8. Αλφαριθμητικά
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    9. Διαχείριση μνήμης
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    10. Υλοποίηση δομών δεδομένων και αλγορίθμων στη C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    11. Είσοδος/Έξοδος
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    12. Ο προεπεξεργαστής της C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    13. Διαμέριση κώδικα
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    14. Ανάπτυξη οδηγούμενη από ελέγχους
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    15. Αποσφαλμάτωση
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    16. Στατική και δυναμική ανάλυση κώδικα
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    17. Βιβλιοθήκες
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    18. Θέματα στυλ στη C
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    19. Γραφικό περιβάλλον διεπαφής
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    20. Αλληλεπίδραση της C με την Python
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Α. Διαμόρφωση περιβάλλοντος ανάπτυξης κώδικα σε C
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Α. Διαμόρφωση περιβάλλοντος ανάπτυξης κώδικα σε C
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Πίνακας περιεχομένων">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Πίνακας περιεχομένων
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a1-c-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.1 Δημιουργία περιβάλλοντος ανάπτυξης προγραμμάτων C στα Windows
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A.1 Δημιουργία περιβάλλοντος ανάπτυξης προγραμμάτων C στα Windows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a11-wsl-gcc-vscode" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.1.1 WSL &amp; GCC &amp; VSCode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a12-chocolatey-mingw-make-vscode" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.1.2 Chocolatey &amp; MinGW &amp; make &amp; VSCode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a13-visual-studio-community-edition" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.1.3 Visual Studio Community Edition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a14-w64devkit" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.1.4 w64devkit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a15-installcorg" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.1.5 installc.org
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a2-c-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.2 Δημιουργία περιβάλλοντος ανάπτυξης προγραμμάτων C σε Linux
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a3-c-macos" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.3 Δημιουργία περιβάλλοντος ανάπτυξης προγραμμάτων C σε MacOS
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Β. Μεταγλώττιση και εκτέλεση κώδικα C χρησιμοποιώντας το Docker
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Γ. Λήψη πληροφοριών για το σύστημα και το μεταγλωττιστή
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="Πίνακας περιεχομένων">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Πίνακας περιεχομένων
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a1-c-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.1 Δημιουργία περιβάλλοντος ανάπτυξης προγραμμάτων C στα Windows
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A.1 Δημιουργία περιβάλλοντος ανάπτυξης προγραμμάτων C στα Windows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a11-wsl-gcc-vscode" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.1.1 WSL &amp; GCC &amp; VSCode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a12-chocolatey-mingw-make-vscode" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.1.2 Chocolatey &amp; MinGW &amp; make &amp; VSCode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a13-visual-studio-community-edition" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.1.3 Visual Studio Community Edition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a14-w64devkit" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.1.4 w64devkit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a15-installcorg" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.1.5 installc.org
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a2-c-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.2 Δημιουργία περιβάλλοντος ανάπτυξης προγραμμάτων C σε Linux
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a3-c-macos" class="md-nav__link">
+    <span class="md-ellipsis">
+      A.3 Δημιουργία περιβάλλοντος ανάπτυξης προγραμμάτων C σε MacOS
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="c">Α. Διαμόρφωση περιβάλλοντος ανάπτυξης κώδικα σε C</h1>
+<p>Για να γράψει, να μεταγλωττίσει και να εκτελέσει κανείς προγράμματα σε C θα πρέπει να έχει πρόσβαση σε κάποιο υπολογιστικό σύστημα εφοδιασμένο με το κατάλληλο λογισμικό. Στη συνέχεια θα παρουσιαστούν ορισμένες διαμορφώσεις υπολογιστικών συστημάτων (Windows, Linux, MacOS) για τον σκοπό αυτό. Στις περισσότερες περιπτώσεις θα προταθεί ως επεξεργαστής κειμένου το Microsoft Visual Studio Code (VS-Code) που είναι ιδιαίτερα δημοφιλές τον τελευταίο καιρό ως περιβάλλον ανάπτυξης προγραμμάτων για πολλές και διαφορετικές γλώσσες προγραμματισμού. Ωστόσο, στη θέση του μπορεί να χρησιμοποιηθεί κάποιος άλλος επεξεργαστής κειμένου (π.χ. notepad++, TextMate, emacs, vim, κ.λπ.).</p>
+<h2 id="a1-c-windows">A.1 Δημιουργία περιβάλλοντος ανάπτυξης προγραμμάτων C στα Windows</h2>
+<p>Υπάρχουν πολλοί τρόποι με τους οποίους μπορεί να δημιουργηθεί ένα περιβάλλον ανάπτυξης κώδικα σε C σταWindows. Στη συνέχεια θα παρουσιαστούν οι ακόλουθες διαμορφώσεις:</p>
+<ol>
+<li>
+<p>Υποσύστημα Linux μέσα από τα Windows (WSL) &amp; μεταγλωττιστής GCC &amp; επεξεργαστής κειμένου VSCode.</p>
+</li>
+<li>
+<p>Σύστημα διαχείρισης πακέτων για τα Windows chocolatey &amp; μεταγλωττιστής MinGW &amp; make &amp; επεξεργαστής κειμένου VSCode.</p>
+</li>
+<li>
+<p>Microsoft Visual Studio Community Edition.</p>
+</li>
+<li>
+<p>Χρήση της έτοιμης λύσης του w64devkit.</p>
+</li>
+<li>
+<p>Χρήση της έτοιμης λύσης του installc.org.</p>
+</li>
+</ol>
+<h3 id="a11-wsl-gcc-vscode">A.1.1 WSL &amp; GCC &amp; VSCode</h3>
+<p>Τα βήματα δημιουργίας ενός περιβάλλοντος ανάπτυξης προγραμμάτων σε C που επιτρέπει τη συγγραφή προγραμμάτων στα Windows και τη μεταγλώττιση και εκτέλεση σε Linux παρουσιάζονται στη συνέχεια. </p>
+<p><i>1. Εγκατάσταση WSL</i> Αρχικά, θα χρειαστεί να ενεργοποιηθεί το WSL (Windows Subsystem for Linux), που απαιτεί κατ’ ελάχιστον την έκδοση Windows 10 (Build 19041). Οδηγίες για να συμβεί αυτό μπορούν να βρεθούν στην επίσημη σελίδα της Microsoft στο <a href="https://learn.microsoft.com/en-us/windows/wsl/install" target="_blank">https://learn.microsoft.com/en-us/windows/wsl/install</a>.  </p>
+<p><i>2. Εγκατάσταση διανομής Linux στο WSL</i> Το WSL υποστηρίζει πολλές διανομές Linux (π.χ. Ubuntu, openSUSE Leap, Kali Linux κ.ά.) και η εγκατάστασή τους γίνεται από το Microsoft Store. Από το Microsoft Store, αλλά και με άλλους τρόπους, μπορεί να γίνει και η εγκατάσταση του Windows Terminal (<a href="https://github.com/microsoft/terminal" target="_blank">https://github.com/microsoft/terminal</a>), που επιτρέπει εύκολη χρήση πολλαπλών παραθύρων εντολών.  </p>
+<p><i>3. Εγκατάσταση GCC στη διανομή Linux.</i> Η εκκίνηση της διανομής Linux που εγκαταστάθηκε στο προηγούμενο βήμα εμφανίζει ένα παράθυρο γραμμής εντολών. Αν για παράδειγμα η διανομή Linux που έχει εγκατασταθεί είναι η Ubuntu, τότε η εγκατάσταση του GCC, γίνεται με την πληκτρολόγηση των ακόλουθων εντολών στη γραμμή εντολών:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$ sudo apt update
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>$ sudo apt install build‐essential
+</span></code></pre></div>
+<p class="annotate"><i>4. Εγκατάσταση VSCode και επεκτάσεων</i> Η εγκατάσταση του VSCode γίνεται στα Windows και όχι μέσα από το WSL. Επιπλέον, πρέπει να εγκατασταθούν οι επεκτάσεις (extensions) WSL(1) και C/C++(2).</p>
+<ol>
+<li>Η επέκταση WSL για το VSCode έχει αναγνωριστικό το uid:ms-vscode-remote.remote-wsl.</li>
+<li>Η επέκταση C/C++ για το VSCode έχει αναγνωριστικό το uid:ms-vscode.cpptools.</li>
+</ol>
+<p><i>Παράδειγμα μεταγλώττισης και εκτέλεσης απλού προγράμματος</i> Με την παραπάνω διαμόρφωση του συστήματος είναι εύκολη η συγγραφή προγραμμάτων C στο VSCode στα Windows, η αποθήκευσή τους σε φακέλους των Windows και η εκτέλεση εντολών μεταγλώττισης και εκτέλεσης από τη γραμμή εντολών της διανομής Linux. Έτσι αν υπάρχει ένας φάκελος με διαδρομή <span class="p-style">c:\cprojects\prj1</span> τότε η πρόσβαση σε αυτό τον φάκελο μέσα από το WSL γίνεται με την ακόλουθη εντολή:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$ cd /mnt/c/cprojects/prj1
+</span></code></pre></div>
+<p>H ενεργοποίηση του Visual Studio Code μέσα από το WSL έτσι ώστε ο γονικός φάκελος να είναι ο <span class="p-style">prj1</span> γίνεται, εφόσον έχει προηγηθεί η προηγούμενη εντολή, πληκτρολογώντας την εντολή:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$ code .
+</span></code></pre></div>
+<p>To VSCode μπορεί να χρησιμοποιηθεί για να δημιουργηθούν νέα αρχεία ή να ενημερωθούν ήδη υπάρχοντα. Αν λοιπόν δημιουργηθεί ένα νέο αρχείο, έστω με όνομα <span class="p-style">check_wsl.c</span> (κώδικας Α.1), τότε η μεταγλώττιση και εκτέλεσή του γίνεται με τις ακόλουθες εντολές από τη γραμμή εντολών.</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας Α.1: check_wsl.c - ανίχνευση ορθής εγκατάστασης WSL-Linux-GCC.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#__codelineno-3-11">11</a></span>
+<span class="normal"><a href="#__codelineno-3-12">12</a></span>
+<span class="normal"><a href="#__codelineno-3-13">13</a></span>
+<span class="normal"><a href="#__codelineno-3-14">14</a></span>
+<span class="normal"><a href="#__codelineno-3-15">15</a></span>
+<span class="normal"><a href="#__codelineno-3-16">16</a></span>
+<span class="normal"><a href="#__codelineno-3-17">17</a></span>
+<span class="normal"><a href="#__codelineno-3-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2"></a>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="cp">#ifdef __linux__</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Linux system detected</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="cp">#else</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Non Linux system detected</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="cp">#endif</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="cp">#ifdef __GNUC__</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;GCC %d.%d.%d detected</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">__GNUC__</span><span class="p">,</span><span class="w"> </span><span class="n">__GNUC_MINOR__</span><span class="p">,</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="w">         </span><span class="n">__GNUC_PATCHLEVEL__</span><span class="p">);</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="cp">#elif __clang__</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;clang %d.%d.%d detected</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">__clang_major__</span><span class="p">,</span><span class="w"> </span><span class="n">__clang_minor__</span><span class="p">,</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="w">         </span><span class="n">__clang_patchlevel__</span><span class="p">);</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="cp">#else</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Other compiler than GCC or clang detected</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17"></a><span class="cp">#endif</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>Ένα παράδειγμα μεταγλώττισης και εκτέλεσης του παραπάνω κώδικα δίνει τα ακόλουθα αποτελέσματα:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>$ gcc check_wsl.c ‐o check_wsl
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>$ ./check_wsl
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>Linux system detected
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>GCC 11.3.0 detected
+</span></code></pre></div>
+<h3 id="a12-chocolatey-mingw-make-vscode">A.1.2 Chocolatey &amp; MinGW &amp; make &amp; VSCode</h3>
+<p>Από την πλευρά του προγραμματιστή είναι βολικό να υπάρχει κάποιο λογισμικό διαχείρισης πακέτων λογισμικού όπως είναι για παράδειγμα το apt (Advanced Package Tool) στα Debian Linux συστήματα, καθώς καθιστά εύκολη την εγκατάσταση, ενημέρωση και απεγκατάσταση λογισμικών. Στα Windows παραδοσιακά οι εφαρμογές εγκαθίστανται εκτελώντας ένα αρχείο εγκατάστασης και μέσω του πίνακα ελέγχου δίνεται η δυνατότητα απεγκατάστασης εφαρμογών. Ωστόσο, υπάρχει το λογισμικό ανοικτού κώδικα Chocolatey (<a href="https://chocolatey.org/" target="_blank">https://chocolatey.org/</a>) που προσφέρει και στα Windows τη δυνατότητα παρόμοιας εμπειρίας χρήσης με το apt. Με αυτό θα εγκαταστήσουμε τον μεταγλωττιστή GCC και το εργαλείο make. Τα βήματα εγκατάστασης είναι τα ακόλουθα:  </p>
+<p><i>1. Εγκατάσταση Chocolatey</i> Οι οδηγίες εγκατάστασης του Chocolatey βρίσκονται στη σελίδα <a href="https://chocolatey.org/install" target="_blank">https://chocolatey.org/install</a>. Η εγκατάσταση γίνεται αντιγράφοντας ορισμένες εντολές από την ιστοσελίδα και εκτελώντας τις σε ένα παράθυρο γραμμών εντολών του PowerShell που θα έχει εκκινηθεί με δικαιώματα διαχειριστή (Administrative Privileges). Συνίσταται η επιλογή Individual για την  εγκατάσταση. Μετά την εγκατάσταση μπορεί να γίνει έλεγχος για το αν έχει ολοκληρωθεί σωστά δίνοντας στη γραμμή εντολών την εντολή choco.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>&gt; choco
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>Chocolatey v2.0.0
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>Please run &#39;choco ‐?&#39; or &#39;choco &lt;command &gt; ‐?&#39; for help menu.
+</span></code></pre></div>
+<p><i>2. Εγκατάσταση MinGW</i> Το MinGW είναι μια μεταφορά (port) του GCC στα Windows. Εγκαθίσταται μέσω του chocolatey με την εντολή <span class="p-style">choco install mingw</span>. Ο έλεγχος της ορθής εγκατάστασης γίνεται με την εντολή <span class="p-style">gcc ‐‐version</span>.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>&gt; choco install mingw
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>Chocolatey v2.0.0
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>Installing the following packages:
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>mingw
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>...
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>&gt; gcc ‐‐version
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>gcc.exe (x86_64‐posix‐seh‐rev2, Built by MinGW‐W64 project) 12.2.0
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>Copyright (C) 2022 Free Software Foundation , Inc.
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>This is free software; see the source for copying conditions. There is NO
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE
+</span></code></pre></div>
+<p><i>3. Εγκατάσταση του make</i> Ομοίως γίνεται και η εγκατάσταση του make. Αρκεί να δοθεί σε ένα παράθυρο γραμμής εντολών PowerShell με δικαιώματα διαχειριστή η εντολή choco install make.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>&gt; choco install make
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>...
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>&gt; make‐‐version
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>GNU Make 4.4.1
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>Built for Windows32
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>Copyright (C) 1988‐2023 Free Software Foundation , Inc.
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>License GPLv3+: GNU GPL version 3 or later &lt;https://gnu.org/licenses/gpl.html&gt;
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>This is free software: you are free to change and redistribute it.
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>There is NO WARRANTY , to the extent permitted by law.
+</span></code></pre></div>
+<p><i>4. Εγκατάσταση του VSCode</i> Η εγκατάσταση του VSCode μπορεί να γίνει με τον κλασικό τρόπο (δηλαδή μεταφόρτωση του αρχείου εγκατάστασης από τη σελίδα του VSCode και εκτέλεση του αρχείου εγκατάστασης) ή με το chocolatey με την εντολή <span class="p-style">choco install vscode</span>.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>&gt; choco install vscode
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>...
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>&gt; code ‐‐version
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>1.79.2
+</span></code></pre></div>
+<p>Για προγραμματισμό στη C με το VSCode θα πρέπει να εγκατασταθεί μέσα από το VSCode η επέκταση C/C++.</p>
+<h3 id="a13-visual-studio-community-edition">A.1.3 Visual Studio Community Edition</h3>
+<p>Το Visual Studio είναι το IDE (Integrated Development Environment) της Microsoft για την ανάπτυξη εφαρμογών σε C#, VB.NET, F# και άλλες γλώσσες προγραμματισμού. Εκτελείται μόνο σε Windows συστήματα και είναι διαφορετικό και «βαρύτερο» από το VSCode. Ωστόσο, μπορεί να χρησιμοποιηθεί και για ανάπτυξη προγραμμάτων σε C καθώς διαθέτει τον μεταγλωττιστή MSVC.<br />
+Η έκδοση Visual Studio Community (<a href="https://visualstudio.microsoft.com/vs/community/" target="_blank">https://visualstudio.microsoft.com/vs/community/</a>) διατίθεται δωρεάν από τη Microsoft. Η διαδικασία εγκατάστασής του είναι απλή και για να χρησιμοποιη-
+θεί για την συγγραφή και εκτέλεση προγραμμάτων σε C θα πρέπει να συμπεριληφθεί η επιλογή “Desktop development with C++”.<br />
+Στο Visual Studio προκειμένου να γραφεί και να εκτελεστεί ένα πρόγραμμα θα πρέπει ο κώδικάς του να ενταχθεί σε ένα project. Τα βήματα που μπορούν να ακολουθηθούν για τη δημιουργία ενός απλού project που να εμφανίζει ένα μήνυμα κατά την εκτέλεσή του είναι τα ακόλουθα: Αρχικά θα πρέπει να δημιουργηθεί ένα κενό project (Empty Project). Μετά θα πρέπει να καθοριστούν οι θέσεις που θα βρίσκονται τα αρχεία του project. Οι οθόνες που χρησιμοποιούνται για να γίνουν τα βήματα αυτά παρουσιάζονται στο Σχήμα Α.1.</p>
+<p><a class="glightbox" href="../src/images/AppendixA.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="AppendixA.png" src="../src/images/AppendixA.png" width="800" /></a></p>
+<div style="text-align: center;"><b> Σχήμα A.1: </b><i>Δημιουργία ενός κενού project στο Visual Studio.</i></div>
+
+<p>Στη συνέχεια θα πρέπει να προστεθεί στο project το αρχείο πηγαίου κώδικα (π.χ. έστω με όνομα <span class="p-style">main.cpp</span>). Αυτό γίνεται με την επιλογή μενού Project-&gt;Add new Item. Εδώ θα πρέπει να εισαχθεί το όνομα του αρχείου πηγαίου κώδικα και θα πρέπει να γίνει αλλαγή στην επέκταση του αρχείου από <span class="p-style">.cpp</span> σε <span class="p-style">.c</span>, έτσι ώστε να «αντιληφθεί» το IDE ότι πρόκειται για κώδικα C. Στη συνέχεια συμπληρώνεται ο κώδικας C που φαίνεται στο Σχήμα Α.2</p>
+<p><a class="glightbox" href="../src/images/AppendixA_2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="AppendixA_2.png" src="../src/images/AppendixA_2.png" width="800" /></a></p>
+<div style="text-align: center;"><b> Σχήμα A.2: </b><i>Το περιβάλλον συγγραφής και εκτέλεσης κώδικα του Visual Studio.</i></div>
+
+<p>Η εκτέλεση του προγράμματος γίνεται από την επιλογή μενού Debug-&gt;Start Debugging. Τα αποτελέσματα εμφανίζονται σε παράθυρο γραμμής εντολών (Σχήμα Α.3) που εμφανίζεται κατά την εκτέλεση.  </p>
+<p><a class="glightbox" href="../src/images/VisualStudio_step5.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="VisualStudio_step5.png" src="../src/images/VisualStudio_step5.png" width="800" /></a></p>
+<div style="text-align: center;"><b> Σχήμα A.3: </b><i>Το αποτέλεσμα εκτέλεσης, ο χρήστης μπορεί να πατήσει ένα οποιοδήποτε πλήκτρο για το κλείσιμο του παραθύρου.</i></div>
+
+<h3 id="a14-w64devkit">A.1.4 w64devkit</h3>
+<p class="annotate">Το w64devkit είναι ένας απλός τρόπος εγκατάστασης όλων των εργαλείων που απαιτούνται για τη μεταγλώττιση, εκτέλεση και αποσφαλμάτωση κώδικα C σε περιβάλλον Windows. Αρχικά, πρέπει να μεταφορτωθεί το συμπιεσμένο αρχείο της μορφής w64devkit-x.y.z.zip (όπου x.y.z είναι η έκδοση του λογισμικού) από τα releases(1) του GitHub αποθετηρίου skeeto/w64devkit. Το συμπιεσμένο αρχείο μπορεί να αποσυμπιεστεί σε οποιαδήποτε θέση αυτό είναι βολικό (π.χ. C:\w64devkit).</p>
+<ol>
+<li><a href="https://github.com/skeeto/w64devkit/releases" target="_blank">https://github.com/skeeto/w64devkit/releases</a></li>
+</ol>
+<p>Εκτελώντας το w64devkit.exe από τον w64devkit κατάλογο ξεκινά ένα παράθυρο γραμμής εντολών (Bourne shell) παρόμοιο με αυτό του Σχήματος Α.4. Στο παράθυρο αυτό μπορούν να δοθούν εντολές πλοήγησης σε φακέλους (π.χ. cd, ls, pwd, mkdir, rmdir) αλλά και να κληθεί ο μεταγλωττιστής της C πληκτρολογώντας gcc ή cc. Επίσης, υπάρχουν ήδη εγκατεστημένα προγράμματα όπως τα gdb (debugger), make, cppcheck(εργαλείο στατικής ανάλυσης κώδικα), nasm (συμβολομεταφραστής x86), vim (επεξεργαστής κειμένου), gvim (παραθυρική έκδοση του επεξεργαστή κειμένου vim) και άλλα προγράμματα σε πρόσφατες ενημερωμένες εκδόσεις τους.</p>
+<p><a class="glightbox" href="../src/images/w64devkit.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="w64devkit.png" src="../src/images/w64devkit.png" width="800" /></a></p>
+<div style="text-align: center;"><b> Σχήμα A.4: </b><i>Το παράθυρο γραμμής εντολών του w64devkit.</i></div>
+
+<p>Η συγγραφή του προγράμματος μπορεί να γίνει με το vim ή το gvim, αλλά μπορεί να χρησιμοποιηθεί και το VSCode, εφόσον πρώτα εγκατασταθεί, καλώντας το από τον τρέχοντα φάκελο με την εντολή:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>$ code .
+</span></code></pre></div>
+<p>Το σύστημα αρχείων που «βλέπει» τον w64devkit είναι το ίδιο με το σύστημα αρχείων των Windows και συνεπώς μπορούν να χρησιμοποιηθούν όλα τα εργαλεία των Windows (π.χ. File Explorer), ενώ ο γονικός φάκελος κατά την έναρξη του w64devkit είναι ο C:\Users\&lt;username&gt; όπου &lt;username&gt; το όνομα του χρήστη.<br />
+Για παράδειγμα, μπορεί να χρησιμοποιηθεί το makefile του κώδικα Α.2 και ο κώδικας Α.3 προκειμένου να επιτευχθεί μεταγλώττιση και εκτέλεση από τη γραμμή εντολών του w64devkit όπως στη συνέχεια:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>$ make
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>gcc ‐Wall ‐Wextra ‐Og ‐g3 ‐o hello.exe hello.c
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>$ hello.exe
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>Hello World!
+</span></code></pre></div>
+<p>Ακολουθεί το makefile:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας Α.2: appendix1/Makefile, ένα απλό makefile για την επίδειξη λειτουργίας του w64devkit</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
+<span class="normal"><a href="#__codelineno-11-2">2</a></span>
+<span class="normal"><a href="#__codelineno-11-3">3</a></span>
+<span class="normal"><a href="#__codelineno-11-4">4</a></span>
+<span class="normal"><a href="#__codelineno-11-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1"></a>CC = gcc
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2"></a>CFLAGS = -Wall -Wextra
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3"></a>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4"></a>hello.exe: hello.c
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5"></a>    $(CC) $(CFLAGS) -o hello.exe hello.c
+</span></code></pre></div></td></tr></table></div>
+<p>και ο κώδικας που μεταγλωττίζεται:</p>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Κώδικας Α.3: appendix1/hello.c - ένα απλό πρόγραμμα για το παράδειγμα μεταγλώττισης με το make.</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
+<span class="normal"><a href="#__codelineno-12-2">2</a></span>
+<span class="normal"><a href="#__codelineno-12-3">3</a></span>
+<span class="normal"><a href="#__codelineno-12-4">4</a></span>
+<span class="normal"><a href="#__codelineno-12-5">5</a></span>
+<span class="normal"><a href="#__codelineno-12-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2"></a>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello world!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p class="annotate">Περισσότερες πληροφορίες για το w64devkit μπορούν να εντοπιστούν στο αποθετήριο του στο GitHub (1) και στο <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>.</p>
+<ol>
+<li><a href="https://github.com/skeeto/w64devkit" target="_blank">https://github.com/skeeto/w64devkit</a></li>
+</ol>
+<h3 id="a15-installcorg">A.1.5 installc.org</h3>
+<p>Ένας ακόμα τρόπος δημιουργίας ενός περιβάλλοντος ανάπτυξης προγραμμάτων σε C είναι η χρήση του installc (<a href="https://installc.org/" target="_blank">https://installc.org/</a>). Παρουσιάζει ομοιότητες με το w64devkit και δίνει τη δυνατότητα χρήσης πρόσφατων εκδόσεων του GCC στα Windows, καθώς και αυτοματοποιημένης εγκατάστασης συνοδευτικών λογισμικών (make, GDB κ.λπ.).</p>
+<h2 id="a2-c-linux">A.2 Δημιουργία περιβάλλοντος ανάπτυξης προγραμμάτων C σε Linux</h2>
+<p>Η δημιουργία περιβάλλοντος ανάπτυξης προγραμμάτων C σε Linux είναι μια αρκετά απλή υπόθεση. Στο Ubuntu 22.04LTS για παράδειγμα αρκεί να πληκτρολογηθούν οι εντολές:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>$ sudo apt update
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>$ sudo apt install build‐essential
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>$ sudo apt install make
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>$ sudo apt install gdb
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>$ sudo apt install cppcheck
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>$ sudo apt install pkg‐config
+</span></code></pre></div>
+<p>Ο έλεγχος ορθής εγκατάστασης των παραπάνω λογισμικών θα δώσει το αποτέλεσμα που φαίνεται στο Σχήμα Α.5.</p>
+<p><a class="glightbox" href="../src/images/ubuntu2204lts.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="ubuntu2204lts.png" src="../src/images/ubuntu2204lts.png" width="800" /></a></p>
+<div style="text-align: center;"><b> Σχήμα A.5: </b><i>Γραμμή εντολών Ubuntu 22.04LTS, έλεγχος ορθής εγκατάστασης προγραμμάτων.</i></div>
+
+<p>Η συγγραφή προγραμμάτων μπορεί να γίνει με κάποιον από τους επεξεργαστές κειμένου που διαθέτει το σύστημα (π.χ. nano, vi, vim, gvim, emacs, gedit) ή και με το VSCode εφόσον πρώτα εγκατασταθεί.</p>
+<h2 id="a3-c-macos">A.3 Δημιουργία περιβάλλοντος ανάπτυξης προγραμμάτων C σε MacOS</h2>
+<p>Εξίσου απλή με την περίπτωση του Linux είναι και η δημιουργία ενός περιβάλλοντος ανάπτυξης προγραμμάτων C στο MacOS. Ο μεταγλωττιστής για τη C και C++ που χρησιμοποιεί το MacOS είναι ο clang, ενώ μπορεί να εγκατασταθεί και ο gcc. Η εγκατάσταση του clang γίνεται από τη γραμμή εντολών με την εντολή:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>$ xcode‐select –‐install
+</span></code></pre></div>
+<p class="annotate">Στο MacOS προκαθορισμένος debugger είναι ο LLDB(1), το make είναι προεγκατεστημένο και μετά την εγκατάσταση του clang, η εντολή gcc είναι ψευδώνυμο για το clang.</p>
+<ol>
+<li><a href="https://lldb.llvm.org/" target="_blank">https://lldb.llvm.org/</a>  </li>
+</ol>
+<p class="annotate">Η εγκατάσταση των υπόλοιπων λογισμικών γίνεται εύκολα εφόσον προηγηθεί η εγκατάσταση του homebrew(1), που αποτελεί έναν διαχειριστή εγκαταστάσεων λογισμικού για το λειτουργικό σύστημα της Apple. Εφόσον το homebrew εγκατασταθεί, οι ακόλουθες εντολές εγκαθιστούν τα λογισμικά που απαιτούνται.</p>
+<ol>
+<li><a href="https://brew.sh/" target="_blank">https://brew.sh/</a></li>
+</ol>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>$ brew update
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>$ brew install gcc
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>$ brew install cppcheck
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>$ brew install pkg‐config
+</span></code></pre></div>
+<p>Μια ενδεικτική εικόνα των μηνυμάτων που εμφανίζονται στον έλεγχο ορθής εγκατάστασης των παραπάνω λογισμικών φαίνεται στο Σχήμα Α.6.</p>
+<p><a class="glightbox" href="../src/images/macOS.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="macOS.png" src="../src/images/macOS.png" width="800" /></a></p>
+<div style="text-align: center;"><b> Σχήμα A.6: </b><i>Γραμμή εντολών (τερματικό zsh) για το MacOS, έλεγχος ορθής εγκατάστασης προγραμμάτων.</i></div>
+
+<p>Η συγγραφή προγραμμάτων C μπορεί να γίνει σε οποιονδήποτε επεξεργαστή κειμένου (π.χ. TextEdit, TextMate) αλλά και για το MacOS μια πολύ καλή επιλογή αποτελεί το VSCode που μπορεί να εγκατασταθεί ως εξής:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>$ brew install ‐‐cask visual‐studio‐code
+</span></code></pre></div>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>Wellons Chris. <i>A guide to Windows application development using w64devkit.</i> <a href="https://nullprogram.com/blog/2021/03/11/" target="_blank">https://nullprogram.com/blog/2021/03/11/</a>. Accessed: 2023-06-01. 2021.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Τζάλλας Αλέξανδρος, Γκόγκος Χρήστος, Τσούλος Ιωάννης &copy 2025 - το βιβλίο μεταφέρθηκε στο MkDocs από τον Γιάννη Βούλγαρη 🙏.
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "toc.follow", "navigation.instant.preview", "navigation.sections"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": false, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>
