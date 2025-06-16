@@ -21,4 +21,6 @@ jobs:
       - run: pip install mkdocs-material
       - run: pip install pillow cairosvg
       - run: pip install mkdocs-awesome-pages-plugin
+      - run: pip install mkdocs-glightbox
+      - run: pip install markdown-grid-tables
       - run: mkdocs gh-deploy --force
